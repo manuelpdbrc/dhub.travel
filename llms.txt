@@ -39,10 +39,12 @@ Estructuramos experiencias transformadoras de alto valor (*Yield*) sobre **Comun
 - Proyectos de Conservación, Parques & Áreas Naturales
 - Destinos, Municipios, Entes de Turismo & Cámaras Empresariales
 
-## Contacto Oficial
+## Contacto Oficial & Versiones Multilingües (ES · EN · PT)
 
-- **Sitio Web**: [https://dhub.travel/](https://dhub.travel/)
+- **Sitio Web (Español)**: [https://dhub.travel/](https://dhub.travel/)
+- **English Version**: [https://dhub.travel/en/](https://dhub.travel/en/)
+- **Versão em Português**: [https://dhub.travel/pt/](https://dhub.travel/pt/)
 - **Contexto Extendido para IA**: [https://dhub.travel/llms-full.txt](https://dhub.travel/llms-full.txt)
 - **Email Corporativo**: mailto:hola@dhub.travel
 - **Agenda de Diagnóstico (30 min)**: [https://calendly.com/dhub-travel](https://calendly.com/dhub-travel)
-- **Ubicación Base**: Patagonia, Argentina (Alcance regional en Patagonia Argentina y Chilena, y mercados emisores globales).
+- **Ubicación Base**: Patagonia, Argentina (Alcance regional en Patagonia Argentina y Chilena, Brasil y mercados emisores globales).

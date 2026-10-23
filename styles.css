@@ -1799,3 +1799,71 @@ textarea:focus-visible {
 .font-switcher[hidden] {
     display: none !important;
 }
+
+/* 21. Minimalist Editorial Language Switcher (ES · EN · PT) */
+.header-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+@media (min-width: 960px) {
+    .header-right {
+        gap: 1.35rem;
+    }
+}
+
+.lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.28rem 0.55rem;
+    border: 1px solid var(--line-subtle);
+    border-radius: 999px;
+    background-color: rgba(246, 245, 240, 0.65);
+}
+
+.lang-btn {
+    color: var(--text-ceniza);
+    padding: 0.12rem 0.28rem;
+    border-radius: 999px;
+    transition: color 0.25s ease, background-color 0.25s ease;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.lang-btn:hover {
+    color: var(--color-lenga);
+}
+
+.lang-btn.is-active {
+    color: var(--color-terracota);
+    font-weight: 500;
+}
+
+.lang-sep {
+    color: var(--line-medium);
+    font-size: 0.6rem;
+    user-select: none;
+}
+
+.mobile-lang-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line-subtle);
+}
+
+.mobile-lang-label {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-ceniza);
+}

@@ -414,14 +414,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             window.scrollTo(0, 0);
 
+            let handoffDone = false;
+            function completeHandoff() {
+                if (handoffDone) return;
+                handoffDone = true;
+
+                // 1) Mostrar primero el logo real del header al 100% (con 0ms de transición) mientras la brújula viajera sigue encima
+                headerIsotipo.classList.remove('is-waiting-intro');
+
+                // 2) En el frame siguiente (cuando el navegador ya pintó el logo del header), retirar la brújula viajera y oscilar la aguja
+                requestAnimationFrame(() => {
+                    introLoader.classList.add('is-done');
+                    impulseNeedle(11);
+                });
+            }
+
+            introCompassWrap.addEventListener('transitionend', (e) => {
+                if (e.propertyName === 'transform') {
+                    completeHandoff();
+                }
+            });
+
             // Esperar al primer frame pintado (doble rAF) para iniciar el giro sin tirones ni FOUC
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                     // Paso 1 (0ms): Arranca el giro rápido en el centro exacto de la pantalla
                     introLoader.classList.add('is-spinning');
 
-                    // Paso 2 (850ms): Mide coordenadas del logo fijo, vuela hacia él, abre el telón y lanza los reveals del Hero
+                    // Paso 2 (850ms): Libera scroll, mide coordenadas exactas del logo fijo, vuela hacia él y lanza los reveals del Hero
                     setTimeout(() => {
+                        document.documentElement.classList.remove('is-intro-locked');
+
                         const startRect = introCompassWrap.getBoundingClientRect();
                         const targetRect = headerIsotipo.getBoundingClientRect();
 
@@ -430,19 +453,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         const scale = targetRect.width / startRect.width;
 
                         introLoader.classList.add('is-docking');
-                        introCompassWrap.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
+                        introCompassWrap.style.transform = `translate3d(${dx.toFixed(2)}px, ${dy.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`;
 
-                        // Liberar el scroll e iniciar la entrada suave de textos e imágenes del Hero justo al abrirse el telón
-                        document.documentElement.classList.remove('is-intro-locked');
                         initScrollReveals();
                     }, 850);
 
-                    // Paso 3 (1570ms): Encastre final en el logo del header + oscilación magnética de bienvenida
-                    setTimeout(() => {
-                        headerIsotipo.classList.remove('is-waiting-intro');
-                        introLoader.classList.add('is-done');
-                        impulseNeedle(11);
-                    }, 1570);
+                    // Respaldo exacto por si transitionend no dispara
+                    setTimeout(completeHandoff, 1590);
                 });
             });
 

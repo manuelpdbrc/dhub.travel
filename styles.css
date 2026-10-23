@@ -49,6 +49,7 @@ html {
     font-size: 16px;
     max-width: 100%;
     overflow-x: clip;
+    scrollbar-gutter: stable;
 }
 
 body {
@@ -385,7 +386,6 @@ html[data-font="outfit"] .h2-editorial em {
 .brand-isotipo {
     width: 2.4rem;
     height: 2.4rem;
-    transition: opacity 0.15s ease;
 }
 
 .brand-isotipo.is-waiting-intro {

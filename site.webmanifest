@@ -1,0 +1,33 @@
+{
+  "name": "Destination Hub (dhub.travel) — Consultoría Estratégica, Comercial y Regenerativa en Patagonia",
+  "short_name": "Destination Hub",
+  "description": "Consultora de negocios, comercialización B2B, inteligencia de mercados y sustentabilidad desde la Patagonia para hoteles, operadores, inversores y destinos.",
+  "lang": "es-AR",
+  "dir": "ltr",
+  "start_url": "/?utm_source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F6F5F0",
+  "theme_color": "#183028",
+  "categories": ["business", "consulting", "travel", "hospitality"],
+  "icons": [
+    {
+      "src": "destination-hub-isotipo-c.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "img/web/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "img/web/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

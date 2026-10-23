@@ -1545,3 +1545,257 @@ html[data-font="outfit"] .h2-editorial em {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* 17. Accessibility Skip Link & Focus States */
+.skip-link {
+    position: fixed;
+    top: -100px;
+    left: 1rem;
+    z-index: 3000;
+    background-color: var(--color-lenga);
+    color: var(--bg-nieve);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.65rem 1.1rem;
+    border-radius: 4px;
+    border: 1px solid var(--color-coiron);
+    transition: top 0.25s ease;
+}
+
+.skip-link:focus {
+    top: 0.85rem;
+    outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 1.5px solid var(--color-terracota);
+    outline-offset: 3px;
+}
+
+/* 18. Contextual Practice Card CTA */
+.practice-cta {
+    margin-top: 1.35rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: var(--color-terracota);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    transition: color 0.3s ease;
+}
+
+.practice-cta-arrow {
+    transition: transform 0.35s var(--ease-out-expo);
+}
+
+.practice-card:hover .practice-cta {
+    color: var(--color-lenga);
+}
+
+.practice-card:hover .practice-cta-arrow {
+    transform: translateX(4px);
+}
+
+/* 19. Editorial FAQ Accordion (DEO / AEO / Rich Snippets) */
+.faq-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+@media (min-width: 960px) {
+    .faq-layout {
+        grid-template-columns: 5fr 7fr;
+        gap: 5rem;
+    }
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line-subtle);
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--line-subtle);
+}
+
+.faq-question {
+    list-style: none;
+    cursor: pointer;
+    padding-block: 1.45rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    font-family: var(--font-serif);
+    font-weight: var(--h-weight, 400);
+    font-size: clamp(1.2rem, 1.8vw, 1.48rem);
+    color: var(--color-lenga);
+    line-height: 1.25;
+    transition: color 0.3s ease;
+}
+
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-question:hover {
+    color: var(--color-glaciar);
+}
+
+.faq-icon {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-terracota);
+    flex-shrink: 0;
+    transition: transform 0.35s var(--ease-out-expo);
+}
+
+.faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    padding-bottom: 1.5rem;
+    font-size: 0.92rem;
+    color: var(--text-ceniza);
+    line-height: 1.72;
+    max-width: 62ch;
+}
+
+.faq-answer strong {
+    color: var(--color-lenga);
+    font-weight: 500;
+}
+
+/* 20. Interactive Project Brief & Lead Qualification Box */
+.brief-box {
+    margin-top: 3.5rem;
+    padding: clamp(1.75rem, 3.5vw, 2.75rem);
+    background-color: var(--bg-piedra);
+    border: 1px solid var(--line-subtle);
+    border-radius: 2px;
+}
+
+.brief-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem 1.5rem;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.75rem;
+    border-bottom: 1px solid var(--line-subtle);
+}
+
+.brief-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.35rem, 2vw, 1.75rem);
+    font-weight: var(--h-weight, 400);
+    color: var(--color-lenga);
+}
+
+.brief-sub {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: var(--color-glaciar);
+}
+
+.brief-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 680px) {
+    .brief-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .brief-field-wide {
+        grid-column: span 3;
+    }
+}
+
+.brief-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: var(--text-ceniza);
+    margin-bottom: 0.45rem;
+}
+
+.brief-input,
+.brief-select {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--color-lenga);
+    background-color: var(--bg-nieve);
+    border: 1px solid var(--line-medium);
+    border-radius: 2px;
+    transition: border-color 0.25s ease;
+}
+
+.brief-input::placeholder {
+    color: var(--text-ceniza);
+    opacity: 0.65;
+}
+
+.brief-input:focus,
+.brief-select:focus {
+    border-color: var(--color-glaciar);
+}
+
+.brief-footer {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.brief-note {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    color: var(--text-ceniza);
+}
+
+.brief-feedback {
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-lenga);
+    color: var(--bg-nieve);
+    border-left: 3px solid var(--color-terracota);
+    font-size: 0.86rem;
+    display: none;
+}
+
+.brief-feedback.is-visible {
+    display: block;
+}
+
+.font-switcher[hidden] {
+    display: none !important;
+}

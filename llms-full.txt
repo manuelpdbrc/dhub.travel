@@ -1,0 +1,67 @@
+# Destination Hub (dhub.travel) — Guía Completa de Identidad, Metodología y Servicios
+
+> Documento técnico de contexto completo para motores de búsqueda generativos (GEO), motores de respuesta (AEO) y sistemas de descubrimiento (DEO).
+
+---
+
+## 1. Resumen Ejecutivo
+
+**Destination Hub (`dhub.travel`)** es una consultora estratégica, comercial, de inteligencia de datos y sustentabilidad especializada en la industria del turismo, la hospitalidad y el desarrollo territorial desde la **Patagonia**.
+
+A diferencia de la consultoría tradicional que entrega informes teóricos sin ejecución, **Destination Hub actúa como una extensión directa del equipo del cliente**, co-ejecutando planes de negocio, representación comercial B2B, campañas de marketing, tableros de inteligencia de mercado y programas de turismo regenerativo. Opera tanto bajo modalidad **llave en mano** (proyectos integrales de punta a punta) como **módulos a la carta** (intervenciones específicas de alto impacto).
+
+---
+
+## 2. El Cambio de Paradigma: De DMO a DSO (Destination Stewardship)
+
+El mercado global de viajes atraviesa una transformación estructural: el viajero evolucionó de un "Turista Consumidor" pasivo hacia un **Participante con Propósito** que demanda autenticidad, naturaleza prístina, trazabilidad y conexión real con los anfitriones locales.
+
+| Eje Estratégico | Consultoría / Modelo Tradicional (DMO) | Enfoque Destination Hub (DSO / Regenerativo) |
+| :--- | :--- | :--- |
+| **Foco de Gestión** | Diagnósticos teóricos extensos y promoción aislada sin considerar capacidad de carga. | Co-ejecución real junto al equipo, integrando estrategia comercial, datos y cuidado del territorio. |
+| **Objetivo Comercial** | Volumen bruto de arribos y competencia por precio que desgasta el destino. | **Valor sobre volumen (*Yield*)**: mayor gasto promedio, estadías más largas y desestacionalización. |
+| **Rol de la Comunidad** | Espectadores pasivos que sufren la saturación de infraestructura. | **Cimiento estructural**: la comunidad local y los productores son co-creadores y ancla de autenticidad. |
+| **Métricas de Éxito (KPIs)** | Cantidad de tickets vendidos o llegadas totales sin medir retorno neto. | **ROI comercial, calidad de vida local**, distribución geográfica (N-S-E-O) y huella ecológica controlada. |
+
+---
+
+## 3. Áreas de Práctica y los 6 Módulos de Servicio
+
+### Práctica 01 · Estrategia, Datos & Planes de Negocio (Datos & ROI)
+- **Módulo 1: Análisis e Inteligencia de Mercados**: Captura y procesamiento de datos, Big Data e IA aplicada al turismo; benchmarking competitivo, mapeo de flujos de visitantes, evaluación de capacidad de carga e identificación de nichos de alto valor (*Yield*).
+- **Módulo 2: Desarrollo de Planes de Negocios y Factibilidad**: Modelado económico-financiero, proyecciones de flujo de caja, cálculo de ROI, estructuración para inversores y conceptualización de nuevos hoteles, lodges, estancias, productos de naturaleza o reconversión de negocios existentes.
+
+### Práctica 02 · Marketing & Representación Comercial (B2B & Marca)
+- **Módulo 3: Planes y Campañas de Marketing**: Estrategia de posicionamiento de marca territorial y corporativa, marketing digital de performance enfocado en conversión directa, narrativa editorial y desestacionalización de la demanda.
+- **Módulo 4: Representación Comercial B2B**: Brazo comercial externo para conectar hoteles, lodges, experiencias y destinos patagónicos con operadores mayoristas, DMCs, consorcios de viajes de lujo y mercados emisores nacionales e internacionales.
+
+### Práctica 03 · Sustentabilidad, Regeneración & Capacitación (Cultura & Gestión)
+- **Módulo 5: Implementación de Políticas de Sustentabilidad**: Diseño operativo de programas regenerativos, medición y mitigación de huella ambiental, articulación con productores locales (agroecología) y preparación para certificaciones internacionales de turismo sustentable.
+- **Módulo 6: Capacitación y Entrenamiento de Equipos**: Profesionalización de mandos medios y equipos operativos de hospitalidad bajo la filosofía *"Contratá la actitud, entrená la habilidad"*, elevando los estándares de servicio y anfitrionía patagónica.
+
+---
+
+## 4. Arquitectura de una Propuesta de Alto Valor
+
+Toda experiencia o destino diseñado por Destination Hub se estructura como una arquitectura sostenible:
+- **Techo de Valor**: Experiencias Transformadoras de Alto Valor (*Yield*).
+- **Pilar 01 — Agroecología**: Producción local, trazabilidad e identidad gastronómica conectada con la tierra patagónica.
+- **Pilar 02 — Cultura Viva**: Patrimonio territorial, saber local y narrativas genuinas contadas por sus protagonistas.
+- **Pilar 03 — Naturaleza**: Conservación activa de la biodiversidad e inmersión contemplativa de bajo impacto.
+- **Cimiento Estructural**: **Comunidad Local** — El ancla del producto turístico y la hospitalidad.
+
+---
+
+## 5. Preguntas Frecuentes (FAQ)
+
+### ¿Qué tipo de organizaciones contratan a Destination Hub?
+Acompañamos a cinco perfiles principales en Patagonia y Sudamérica: (1) Hoteles, lodges, estancias y alojamientos de experiencia; (2) Operadores receptivos (DMCs) y prestadores de turismo activo/naturaleza; (3) Inversores y desarrolladores de nuevos proyectos turísticos o inmobiliarios; (4) Proyectos de conservación y parques; y (5) Destinos turísticos, municipios, entes mixtos y cámaras empresariales.
+
+### ¿Cómo es la modalidad de trabajo: proyecto integral o por servicio específico?
+Ofrecemos ambas modalidades. Podemos liderar un desarrollo integral **llave en mano** (desde el estudio de mercado y el plan de negocios hasta la puesta en marcha comercial y el entrenamiento del personal) o integrarnos mediante **módulos a la carta** (por ejemplo, representación comercial B2B continua o auditoría de sustentabilidad).
+
+### ¿Qué significa priorizar el Yield sobre el volumen en turismo?
+Significa enfocar la estrategia comercial y el diseño de producto en atraer al *Participante con Propósito*: un segmento de viajeros que valora la exclusividad natural, la gastronomía de origen y la autenticidad cultural, generando un mayor ingreso neto por visitante y estadías más prolongadas con una menor presión ecológica sobre el territorio.
+
+### ¿Cómo iniciar una consulta o diagnóstico con Destination Hub?
+Se puede agendar directamente una videollamada exploratoria de 30 minutos en `https://calendly.com/dhub-travel`, escribir por correo electrónico a `hola@dhub.travel` o iniciar una conversación directa por WhatsApp con un Socio Director desde `https://dhub.travel/#contacto`.

@@ -1,11 +1,74 @@
 <!DOCTYPE html>
-<html lang="es" data-font="cormorant" class="is-intro-locked">
+<html lang="es-AR" data-font="cormorant" class="is-intro-locked" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- =====================================================================
+         SEO TÉCNICO, SEMÁNTICO & DIRECTIVAS DE INDEXACIÓN (GOOGLE & BING)
+    ====================================================================== -->
     <title>Destination Hub (dhub.travel) — Consultoría Estratégica, Comercial y Regenerativa en Patagonia</title>
-    <meta name="description" content="Consultora de negocios, comercialización, inteligencia de mercados y sustentabilidad desde la Patagonia. Acompañamos a hoteles, operadores, inversores, proyectos y destinos.">
+    <meta name="description" content="Consultora de negocios turísticos, representación comercial B2B, inteligencia de datos y sustentabilidad desde la Patagonia. Acompañamos a hoteles, lodges, operadores, inversores y destinos.">
+    <meta name="keywords" content="consultoría turística Patagonia, desarrollo de hoteles y lodges Patagonia, representación comercial B2B turismo, turismo regenerativo, modelo DSO, Destination Stewardship, inteligencia de mercados turísticos, planes de negocio hotelería, marketing turístico Argentina Chile, dhub.travel">
+    <meta name="author" content="Destination Hub (dhub.travel)">
+    <meta name="publisher" content="Destination Hub">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#183028">
+    <meta name="color-scheme" content="light">
+
+    <!-- Canonical & Hreflang Regional (Patagonia / Latinoamérica / Global) -->
+    <link rel="canonical" href="https://dhub.travel/">
+    <link rel="alternate" hreflang="es" href="https://dhub.travel/">
+    <link rel="alternate" hreflang="es-AR" href="https://dhub.travel/">
+    <link rel="alternate" hreflang="es-CL" href="https://dhub.travel/">
+    <link rel="alternate" hreflang="x-default" href="https://dhub.travel/">
+
+    <!-- DEO / GEO / AEO: Descubrimiento para Motores de IA Generativa (llms.txt) -->
+    <link rel="alternate" type="text/markdown" href="https://dhub.travel/llms.txt" title="Destination Hub — Resumen Estructurado para IA (llms.txt)">
+    <link rel="alternate" type="text/markdown" href="https://dhub.travel/llms-full.txt" title="Destination Hub — Guía Completa para Motores Generativos (llms-full.txt)">
+
+    <!-- Geolocalización Territorial (Patagonia, Argentina) -->
+    <meta name="geo.region" content="AR-R">
+    <meta name="geo.placename" content="Patagonia, Argentina">
+    <meta name="geo.position" content="-41.1335;-71.3103">
+    <meta name="ICBM" content="-41.1335, -71.3103">
+
+    <!-- =====================================================================
+         OPEN GRAPH (LINKEDIN, WHATSAPP, META, SLACK) & TWITTER / X CARDS
+    ====================================================================== -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Destination Hub · dhub.travel">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:locale:alternate" content="es_ES">
+    <meta property="og:locale:alternate" content="es_CL">
+    <meta property="og:url" content="https://dhub.travel/">
+    <meta property="og:title" content="Destination Hub (dhub.travel) — Consultoría Estratégica, Comercial y Regenerativa en Patagonia">
+    <meta property="og:description" content="Transformamos el potencial del territorio en negocios y destinos regenerativos. Estrategia, datos, representación comercial B2B y sustentabilidad junto a tu equipo.">
+    <meta property="og:image" content="https://dhub.travel/img/web/og-cover.jpg">
+    <meta property="og:image:secure_url" content="https://dhub.travel/img/web/og-cover.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Destination Hub (dhub.travel) — Consultoría Estratégica, Comercial y Regenerativa en Patagonia">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://dhub.travel/">
+    <meta name="twitter:title" content="Destination Hub (dhub.travel) — Consultoría Estratégica, Comercial y Regenerativa en Patagonia">
+    <meta name="twitter:description" content="Actuamos como extensión directa de tu equipo para diseñar y ejecutar planes de negocio, comercialización B2B, inteligencia de datos y sustentabilidad en Patagonia.">
+    <meta name="twitter:image" content="https://dhub.travel/img/web/og-cover.jpg">
+    <meta name="twitter:image:alt" content="Destination Hub (dhub.travel) — Patagonia">
+
+    <!-- Favicons, Apple Touch Icon & Web App Manifest -->
     <link rel="icon" type="image/svg+xml" href="destination-hub-isotipo-c.svg">
+    <link rel="icon" type="image/png" sizes="192x192" href="img/web/icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/web/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <!-- Preload Critical LCP Hero Image -->
+    <link rel="preload" as="image" href="img/web/hero-patagonia.jpg" fetchpriority="high">
 
     <!-- Critical First-Paint CSS: Guarantees the opening curtain covers 100% at 0ms before external CSS loads -->
     <style>
@@ -15,15 +78,221 @@
         .intro-compass-wrap { position: relative; z-index: 2; width: clamp(130px, 34vw, 185px); height: clamp(130px, 34vw, 185px); margin: auto; }
     </style>
 
-    <!-- Google Fonts: Curated Options for Live Typography Preview + Plus Jakarta Sans & JetBrains Mono -->
+    <!-- Fallback para Crawlers sin JS o Usuarios con JS Desactivado -->
+    <noscript>
+        <style>
+            .intro-loader { display: none !important; }
+            html.is-intro-locked, html.is-intro-locked body { overflow: auto !important; }
+            [data-reveal], .hairline-divider, .brand-isotipo.is-waiting-intro, .scrub-word {
+                opacity: 1 !important;
+                transform: none !important;
+                clip-path: none !important;
+            }
+        </style>
+    </noscript>
+
+    <!-- Google Fonts: Carga Prioritaria de la Tipografía Principal (Cormorant Garamond, Plus Jakarta Sans, JetBrains Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;1,400&family=Outfit:wght@200;300;400&family=Playfair+Display:ital,wght@0,400;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Pure Lightweight Stylesheet -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- =====================================================================
+         DATOS ESTRUCTURADOS SCHEMA.ORG (JSON-LD GRAPH PARA SEO, DEO & AEO)
+    ====================================================================== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["ProfessionalService", "ConsultingFirm", "Organization"],
+          "@id": "https://dhub.travel/#organization",
+          "name": "Destination Hub",
+          "alternateName": ["dhub.travel", "Destination Hub Patagonia"],
+          "url": "https://dhub.travel/",
+          "logo": {
+            "@type": "ImageObject",
+            "@id": "https://dhub.travel/#logo",
+            "url": "https://dhub.travel/destination-hub-isotipo-c.svg",
+            "contentUrl": "https://dhub.travel/destination-hub-isotipo-c.svg",
+            "width": 200,
+            "height": 200,
+            "caption": "Destination Hub — Brújula de Ciclo Regenerativo"
+          },
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://dhub.travel/img/web/og-cover.jpg",
+            "width": 1200,
+            "height": 630
+          },
+          "description": "Consultora estratégica, comercial, de inteligencia de mercados y sustentabilidad desde la Patagonia. Actuamos como extensión directa del equipo de hoteles, lodges, operadores, inversores y destinos para desarrollar negocios rentables (Yield) y regenerativos (modelo DSO).",
+          "slogan": "Transformamos el potencial del territorio en negocios y destinos regenerativos.",
+          "email": "hola@dhub.travel",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Patagonia",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -41.1335,
+            "longitude": -71.3103
+          },
+          "areaServed": [
+            { "@type": "Place", "name": "Patagonia, Argentina" },
+            { "@type": "Place", "name": "Patagonia, Chile" },
+            { "@type": "Country", "name": "Argentina" },
+            { "@type": "Country", "name": "Chile" },
+            { "@type": "Place", "name": "Sudamérica" }
+          ],
+          "knowsAbout": [
+            "Consultoría Estratégica en Turismo y Hospitalidad",
+            "Desarrollo de Hoteles, Lodges y Glampings en Patagonia",
+            "Representación Comercial Turística B2B",
+            "Inteligencia de Mercados y Datos Turísticos",
+            "Turismo Regenerativo y Sustentabilidad",
+            "Destination Stewardship Organization (DSO)",
+            "Revenue y Yield Management Turístico",
+            "Agroecología y Desarrollo Territorial"
+          ],
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "email": "hola@dhub.travel",
+              "url": "https://dhub.travel/#contacto",
+              "availableLanguage": ["Spanish", "English"],
+              "areaServed": ["AR", "CL", "UY", "BR", "US", "ES"]
+            }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Áreas de Práctica y Servicios de Consultoría Turística",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "@id": "https://dhub.travel/#practica-estrategia-datos",
+                  "name": "Estrategia, Datos & Planes de Negocio",
+                  "description": "Inteligencia de mercado, planes de negocio, factibilidad económico-financiera y estrategia de Yield para hoteles, lodges, inversores y destinos.",
+                  "provider": { "@id": "https://dhub.travel/#organization" },
+                  "serviceType": "Consultoría Estratégica y Financiera en Turismo"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "@id": "https://dhub.travel/#practica-marketing-comercial",
+                  "name": "Marketing & Representación Comercial B2B",
+                  "description": "Representación comercial B2B ante operadores y agencias, campañas de conversión, posicionamiento de marca y desestacionalización.",
+                  "provider": { "@id": "https://dhub.travel/#organization" },
+                  "serviceType": "Representación Comercial y Marketing Turístico"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "@id": "https://dhub.travel/#practica-sustentabilidad-equipos",
+                  "name": "Sustentabilidad, Regeneración & Capacitación",
+                  "description": "Implementación operativa de políticas regenerativas, modelo DSO, gobernanza local y entrenamiento de equipos de hospitalidad de alto rendimiento.",
+                  "provider": { "@id": "https://dhub.travel/#organization" },
+                  "serviceType": "Consultoría en Sustentabilidad y Capacitación Hotelera"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://dhub.travel/#website",
+          "url": "https://dhub.travel/",
+          "name": "Destination Hub (dhub.travel)",
+          "description": "Consultoría Estratégica, Comercial y Regenerativa en Patagonia",
+          "inLanguage": "es-AR",
+          "publisher": { "@id": "https://dhub.travel/#organization" }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://dhub.travel/#webpage",
+          "url": "https://dhub.travel/",
+          "name": "Destination Hub (dhub.travel) — Consultoría Estratégica, Comercial y Regenerativa en Patagonia",
+          "isPartOf": { "@id": "https://dhub.travel/#website" },
+          "about": { "@id": "https://dhub.travel/#organization" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://dhub.travel/img/web/hero-patagonia.jpg",
+            "width": 1600,
+            "height": 1067
+          },
+          "inLanguage": "es-AR",
+          "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".h1-display", ".hero .lead", ".manifesto-quote", ".faq-answer"]
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://dhub.travel/#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://dhub.travel/#inicio" },
+            { "@type": "ListItem", "position": 2, "name": "Nuestro Enfoque", "item": "https://dhub.travel/#enfoque" },
+            { "@type": "ListItem", "position": 3, "name": "Áreas de Práctica", "item": "https://dhub.travel/#servicios" },
+            { "@type": "ListItem", "position": 4, "name": "Arquitectura Regenerativa", "item": "https://dhub.travel/#arquitectura" },
+            { "@type": "ListItem", "position": 5, "name": "Preguntas Frecuentes", "item": "https://dhub.travel/#preguntas" },
+            { "@type": "ListItem", "position": 6, "name": "Contacto Directo", "item": "https://dhub.travel/#contacto" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://dhub.travel/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿A qué tipo de empresas, proyectos y destinos acompaña Destination Hub en Patagonia?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Acompañamos a cinco perfiles principales en la Patagonia y Sudamérica: (1) Hoteles, lodges de montaña, estancias y glampings; (2) Operadores receptivos (DMCs) y agencias de experiencias; (3) Inversores y desarrolladores de nuevos proyectos turísticos o inmobiliarios; (4) Proyectos de conservación y parques naturales; y (5) Destinos turísticos, municipios, entes mixtos y cámaras empresariales."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo es la modalidad de trabajo: proyecto llave en mano o módulos a la carta?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Trabajamos bajo ambas modalidades adaptadas a la necesidad de cada organización. Podemos liderar un proyecto integral llave en mano (desde el estudio de mercado, plan de negocio y factibilidad hasta la puesta en marcha comercial y el entrenamiento del equipo) o integrarnos mediante módulos específicos a la carta donde tu equipo necesite acelerar resultados."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué diferencia al enfoque DSO (Destination Stewardship) de la consultoría turística tradicional?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Mientras la consultoría tradicional suele limitarse a informes teóricos y a promover volumen masivo de visitantes, en Destination Hub co-ejecutamos junto a tu equipo priorizando el Yield (valor económico neto por visitante sobre volumen), decisiones basadas en datos de mercado y una arquitectura regenerativa sostenida por la agroecología, la cultura viva, la naturaleza y la comunidad local."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿En qué consiste el servicio de Representación Comercial B2B y Marketing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Actuamos como tu brazo comercial externo en el mercado. Conectamos directamente tu hotel, lodge, experiencia o destino con operadores mayoristas, DMCs, agencias especializadas y mercados emisores clave, complementando la gestión relacional B2B con campañas digitales orientadas a conversión directa y desestacionalización."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
+    <!-- Enlace de salto directo para accesibilidad de teclado y lectores de pantalla -->
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
     <!-- =====================================================================
          ANIMACIÓN DE APERTURA (INTRO BRÚJULA → VUELO AL LOGO PRINCIPAL)
     ====================================================================== -->
@@ -93,25 +362,26 @@
                 <a href="#enfoque" class="nav-link">Enfoque</a>
                 <a href="#servicios" class="nav-link">Prácticas</a>
                 <a href="#arquitectura" class="nav-link">Arquitectura</a>
+                <a href="#preguntas" class="nav-link">Preguntas</a>
                 <a href="#contacto" class="nav-link">Contacto</a>
             </nav>
 
             <!-- Desktop CTA -->
             <div class="header-cta">
-                <a href="#contacto" class="btn btn-primary btn-header" data-magnetic="0.22">
+                <a href="#contacto" class="btn btn-primary btn-header" data-magnetic="0.22" data-track-cta="header_conversar">
                     <span>Conversar</span>
-                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                     </svg>
                 </a>
             </div>
 
             <!-- Mobile Menu Toggle -->
-            <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
-                <svg id="icon-menu-open" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-drawer">
+                <svg id="icon-menu-open" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 8h16M4 16h16"/>
                 </svg>
-                <svg id="icon-menu-close" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="display: none;">
+                <svg id="icon-menu-close" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="display: none;" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
             </button>
@@ -123,19 +393,20 @@
                 <a href="#enfoque" class="mobile-nav-link">01 · Nuestro Enfoque</a>
                 <a href="#servicios" class="mobile-nav-link">02 · Áreas de Práctica</a>
                 <a href="#arquitectura" class="mobile-nav-link">03 · Arquitectura Regenerativa</a>
-                <a href="#contacto" class="mobile-nav-link">04 · Contacto Directo</a>
+                <a href="#preguntas" class="mobile-nav-link">04 · Preguntas Frecuentes</a>
+                <a href="#contacto" class="mobile-nav-link">05 · Contacto Directo</a>
             </nav>
-            <a href="#contacto" class="btn btn-primary" style="width: 100%;">
+            <a href="#contacto" class="btn btn-primary" style="width: 100%;" data-track-cta="mobile_drawer_conversar">
                 <span>Iniciar Conversación</span>
             </a>
         </div>
     </header>
 
-    <main>
+    <main id="contenido-principal">
         <!-- =================================================================
              1. HERO + CLIENTES + 3 DIFERENCIALES
         ================================================================== -->
-        <section id="inicio" class="hero">
+        <section id="inicio" class="hero" aria-label="Presentación de Destination Hub Patagonia">
             <div class="container">
                 
                 <div class="hero-grid">
@@ -154,13 +425,13 @@
                         </p>
 
                         <div class="hero-actions">
-                            <a href="#contacto" class="btn btn-primary" data-magnetic="0.2">
+                            <a href="#contacto" class="btn btn-primary" data-magnetic="0.2" data-track-cta="hero_impulsemos">
                                 <span>Impulsemos tu proyecto</span>
-                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                                 </svg>
                             </a>
-                            <a href="#servicios" class="btn btn-ghost" data-magnetic="0.18">
+                            <a href="#servicios" class="btn btn-ghost" data-magnetic="0.18" data-track-cta="hero_practicas">
                                 <span>Áreas de práctica</span>
                             </a>
                         </div>
@@ -191,12 +462,12 @@
 
                         <!-- Main Landscape Photo -->
                         <div class="media-frame hero-main-photo" data-reveal="image" data-caption="PATAGONIA · 41°08'S 71°18'W">
-                            <img src="img/web/hero-patagonia.jpg" data-parallax="16" alt="Lago glaciar y cordillera en Patagonia enmarcados por bosque nativo" fetchpriority="high">
+                            <img src="img/web/hero-patagonia.jpg" width="1600" height="1067" data-parallax="16" alt="Lago glaciar y cordillera en Patagonia enmarcados por bosque nativo" fetchpriority="high" decoding="async">
                         </div>
 
                         <!-- Overlapping Portrait Inset Photo -->
                         <div class="media-frame hero-inset-photo" data-reveal="image" data-caption="LAGO MASCARDI · AGUAS GLACIARES" style="--delay: 0.2s;">
-                            <img src="img/web/emerald-lake.jpg" data-parallax="-12" alt="Aguas cristalinas de deshielo en Lago Mascardi, Patagonia">
+                            <img src="img/web/emerald-lake.jpg" width="1067" height="1600" data-parallax="-12" alt="Aguas cristalinas de deshielo en Lago Mascardi, Patagonia" decoding="async">
                         </div>
 
                     </div>
@@ -243,12 +514,12 @@
         <!-- =================================================================
              2. EL CAMBIO DE PARADIGMA (CONTRASTE MINIMALISTA + FOTO EDITORIAL)
         ================================================================== -->
-        <section id="enfoque" class="section">
+        <section id="enfoque" class="section" aria-labelledby="heading-enfoque">
             <div class="container">
                 
                 <div class="section-meta" data-reveal="up">
                     <span class="eyebrow">Nuestro Enfoque</span>
-                    <span class="section-index">01 / 04</span>
+                    <span class="section-index">01 / 05</span>
                 </div>
 
                 <div class="paradigm-layout">
@@ -256,7 +527,7 @@
                     <!-- Left: Sticky Editorial Portrait Photo (Split-Screen Scrollytelling) -->
                     <div class="paradigm-sticky-col" data-reveal="image">
                         <div class="media-frame paradigm-photo" data-caption="PROPÓSITO · VALOR SOBRE VOLUMEN">
-                            <img src="img/web/purpose-traveler.jpg" data-parallax="14" loading="lazy" decoding="async" alt="Viajera contemplando el lago y la montaña desde un deck de madera en Patagonia">
+                            <img src="img/web/purpose-traveler.jpg" width="1600" height="1068" data-parallax="14" loading="lazy" decoding="async" alt="Viajera contemplando el lago y la montaña desde un deck de madera en Patagonia">
                         </div>
                         <div class="media-caption">
                             <span>El Participante con Propósito</span>
@@ -266,7 +537,7 @@
 
                     <!-- Right: Airy Narrative + 2-Column Minimal Contrast -->
                     <div data-reveal="up" style="--delay: 0.15s;">
-                        <h2 class="h2-editorial">
+                        <h2 id="heading-enfoque" class="h2-editorial">
                             Del diagnóstico teórico a la <em>gestión con retorno real.</em>
                         </h2>
                         <p class="lead" style="margin-top: 1.5rem;">
@@ -278,21 +549,21 @@
                             <div class="contrast-old">
                                 <span class="contrast-box-title">Consultoría Tradicional</span>
                                 <ul class="contrast-lines">
-                                    <li><span>—</span> Informes extensos sin ejecución real</li>
-                                    <li><span>—</span> Promoción aislada de volumen masivo</li>
-                                    <li><span>—</span> Competencia por precio y desgaste local</li>
-                                    <li><span>—</span> Métricas basadas solo en arribos</li>
+                                    <li><span aria-hidden="true">—</span> Informes extensos sin ejecución real</li>
+                                    <li><span aria-hidden="true">—</span> Promoción aislada de volumen masivo</li>
+                                    <li><span aria-hidden="true">—</span> Competencia por precio y desgaste local</li>
+                                    <li><span aria-hidden="true">—</span> Métricas basadas solo en arribos</li>
                                 </ul>
                             </div>
 
                             <!-- Destination Hub -->
                             <div class="contrast-new">
-                                <span class="contrast-box-title">Enfoque Destination Hub</span>
+                                <span class="contrast-box-title">Enfoque Destination Hub (DSO)</span>
                                 <ul class="contrast-lines">
-                                    <li><span>+</span> Co-ejecución junto a tu equipo</li>
-                                    <li><span>+</span> Estrategia comercial enfocada en Yield</li>
-                                    <li><span>+</span> Decisiones guiadas por datos de mercado</li>
-                                    <li><span>+</span> ROI comercial e impacto regenerativo</li>
+                                    <li><span aria-hidden="true">+</span> Co-ejecución junto a tu equipo</li>
+                                    <li><span aria-hidden="true">+</span> Estrategia comercial enfocada en Yield</li>
+                                    <li><span aria-hidden="true">+</span> Decisiones guiadas por datos de mercado</li>
+                                    <li><span aria-hidden="true">+</span> ROI comercial e impacto regenerativo</li>
                                 </ul>
                             </div>
                         </div>
@@ -308,16 +579,16 @@
         <!-- =================================================================
              3. QUÉ HACEMOS: 3 GRANDES ÁREAS DE PRÁCTICA
         ================================================================== -->
-        <section id="servicios" class="section">
+        <section id="servicios" class="section" aria-labelledby="heading-servicios">
             <div class="container">
                 
                 <div class="section-meta" data-reveal="up">
                     <span class="eyebrow">Qué Hacemos · Áreas de Práctica</span>
-                    <span class="section-index">02 / 04</span>
+                    <span class="section-index">02 / 05</span>
                 </div>
 
                 <div class="practices-header" data-reveal="up">
-                    <h2 class="h2-editorial">
+                    <h2 id="heading-servicios" class="h2-editorial">
                         Soluciones integrales o <em>módulos a la carta.</em>
                     </h2>
                     <p class="lead" style="max-width: 38ch; font-size: 0.95rem;">
@@ -331,7 +602,7 @@
                     <!-- Practice 01 -->
                     <article class="practice-card" data-reveal="up" style="--delay: 0.05s;">
                         <div class="media-frame practice-photo" data-reveal="image" data-caption="PRÁCTICA 01 · DATOS &amp; ROI">
-                            <img src="img/web/lodge-territory.jpg" loading="lazy" decoding="async" alt="Lodge de montaña integrado en el bosque y lago patagónico">
+                            <img src="img/web/lodge-territory.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Lodge de montaña integrado en el bosque y lago patagónico">
                         </div>
                         <div class="practice-top-row">
                             <span class="practice-idx">Práctica 01</span>
@@ -346,12 +617,16 @@
                             <span class="practice-tag">Planes de negocio</span>
                             <span class="practice-tag">Factibilidad &amp; Yield</span>
                         </div>
+                        <a href="#contacto" class="practice-cta" data-select-practice="Estrategia, Datos & Planes de Negocio" data-track-cta="practice_01_estrategia">
+                            <span>Consultar por esta práctica</span>
+                            <span class="practice-cta-arrow" aria-hidden="true">→</span>
+                        </a>
                     </article>
 
                     <!-- Practice 02 -->
                     <article class="practice-card" data-reveal="up" style="--delay: 0.15s;">
                         <div class="media-frame practice-photo" data-reveal="image" data-caption="PRÁCTICA 02 · MERCADOS B2B" style="--delay: 0.1s;">
-                            <img src="img/web/kayak-golden.jpg" loading="lazy" decoding="async" alt="Experiencia de kayak al atardecer en aguas patagónicas">
+                            <img src="img/web/kayak-golden.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Experiencia de kayak al atardecer en aguas patagónicas">
                         </div>
                         <div class="practice-top-row">
                             <span class="practice-idx">Práctica 02</span>
@@ -366,12 +641,16 @@
                             <span class="practice-tag">Campañas &amp; Conversión</span>
                             <span class="practice-tag">Desestacionalización</span>
                         </div>
+                        <a href="#contacto" class="practice-cta" data-select-practice="Marketing & Representación Comercial B2B" data-track-cta="practice_02_comercial">
+                            <span>Consultar por esta práctica</span>
+                            <span class="practice-cta-arrow" aria-hidden="true">→</span>
+                        </a>
                     </article>
 
                     <!-- Practice 03 -->
                     <article class="practice-card" data-reveal="up" style="--delay: 0.25s;">
                         <div class="media-frame practice-photo" data-reveal="image" data-caption="PRÁCTICA 03 · GESTIÓN &amp; EQUIPOS" style="--delay: 0.2s;">
-                            <img src="img/web/cultura-hospitalidad.jpg" loading="lazy" decoding="async" alt="Terraza de madera con hospitalidad frente al lago en Patagonia">
+                            <img src="img/web/cultura-hospitalidad.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Terraza de madera con hospitalidad frente al lago en Patagonia">
                         </div>
                         <div class="practice-top-row">
                             <span class="practice-idx">Práctica 03</span>
@@ -386,6 +665,10 @@
                             <span class="practice-tag">Entrenamiento de equipos</span>
                             <span class="practice-tag">Gobernanza local</span>
                         </div>
+                        <a href="#contacto" class="practice-cta" data-select-practice="Sustentabilidad, Regeneración & Capacitación" data-track-cta="practice_03_sustentabilidad">
+                            <span>Consultar por esta práctica</span>
+                            <span class="practice-cta-arrow" aria-hidden="true">→</span>
+                        </a>
                     </article>
 
                 </div>
@@ -396,16 +679,16 @@
         <!-- =================================================================
              4. ARQUITECTURA DEL PRODUCTO REGENERATIVO (ATMÓSFERA FOREST DUSK)
         ================================================================== -->
-        <section id="arquitectura" class="section section-dusk">
+        <section id="arquitectura" class="section section-dusk" aria-labelledby="heading-arquitectura">
             <div class="container">
                 
                 <div class="section-meta" data-reveal="up">
                     <span class="eyebrow">Diseño de Producto</span>
-                    <span class="section-index">03 / 04</span>
+                    <span class="section-index">03 / 05</span>
                 </div>
 
                 <div class="arch-header" data-reveal="up">
-                    <h2 class="h2-editorial">
+                    <h2 id="heading-arquitectura" class="h2-editorial">
                         La arquitectura de una propuesta <em>de alto valor.</em>
                     </h2>
                     <p class="lead" style="margin-top: 1.25rem;">
@@ -424,7 +707,7 @@
                     
                     <div class="arch-pillar-card" data-reveal="up" style="--delay: 0.05s;">
                         <div class="media-frame arch-item-photo" data-reveal="image" data-caption="PILAR 01 · AGROECOLOGÍA">
-                            <img src="img/web/agroecologia.jpg" loading="lazy" decoding="async" alt="Gastronomía patagónica con hongos morillas e ingredientes de la tierra">
+                            <img src="img/web/agroecologia.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Gastronomía patagónica con hongos morillas e ingredientes de la tierra">
                         </div>
                         <div class="arch-item-head">
                             <span class="arch-item-num">01</span>
@@ -437,7 +720,7 @@
 
                     <div class="arch-pillar-card" data-reveal="up" style="--delay: 0.15s;">
                         <div class="media-frame arch-item-photo" data-reveal="image" data-caption="PILAR 02 · CULTURA VIVA" style="--delay: 0.1s;">
-                            <img src="img/web/cultura-viva.jpg" loading="lazy" decoding="async" alt="Anfitriones y caminantes recorriendo senderos del bosque patagónico">
+                            <img src="img/web/cultura-viva.jpg" width="1400" height="942" loading="lazy" decoding="async" alt="Anfitriones y caminantes recorriendo senderos del bosque patagónico">
                         </div>
                         <div class="arch-item-head">
                             <span class="arch-item-num">02</span>
@@ -450,7 +733,7 @@
 
                     <div class="arch-pillar-card" data-reveal="up" style="--delay: 0.25s;">
                         <div class="media-frame arch-item-photo" data-reveal="image" data-caption="PILAR 03 · NATURALEZA" style="--delay: 0.2s;">
-                            <img src="img/web/naturaleza-bosque.jpg" loading="lazy" decoding="async" alt="Arroyo cristalino en medio del bosque nativo patagónico">
+                            <img src="img/web/naturaleza-bosque.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Arroyo cristalino en medio del bosque nativo patagónico">
                         </div>
                         <div class="arch-item-head">
                             <span class="arch-item-num">03</span>
@@ -473,23 +756,92 @@
         </section>
 
         <!-- =================================================================
-             5. MANIFIESTO PANORÁMICO (SCROLL TEXT SCRUBBING) & CONTACTO DIRECTO
+             5. PREGUNTAS FRECUENTES (FAQ EDITORIAL PARA DEO / AEO / RICH SNIPPETS)
         ================================================================== -->
-        <section id="contacto" class="section">
+        <section id="preguntas" class="section" aria-labelledby="heading-preguntas">
+            <div class="container">
+
+                <div class="section-meta" data-reveal="up">
+                    <span class="eyebrow">Claridad Estratégica · FAQ</span>
+                    <span class="section-index">04 / 05</span>
+                </div>
+
+                <div class="faq-layout">
+                    <div data-reveal="up">
+                        <h2 id="heading-preguntas" class="h2-editorial">
+                            Respuestas claras para <em>decisiones ágiles.</em>
+                        </h2>
+                        <p class="lead" style="margin-top: 1.25rem; font-size: 0.95rem;">
+                            Cómo nos integramos con hoteles, operadores, inversores y destinos en Patagonia para acelerar su posicionamiento y retorno.
+                        </p>
+                    </div>
+
+                    <div class="faq-list" data-reveal="up" style="--delay: 0.1s;">
+                        <details class="faq-item" data-faq="perfiles_clientes">
+                            <summary class="faq-question">
+                                <span>¿A qué tipo de empresas, proyectos y destinos acompañamos en Patagonia?</span>
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="faq-answer">
+                                Trabajamos junto a cinco perfiles principales en toda la región patagónica y Sudamérica: <strong>hoteles, lodges, estancias y glampings</strong>; <strong>operadores receptivos (DMCs) y prestadores de experiencias</strong>; <strong>inversores y desarrolladores</strong> de nuevos proyectos turísticos; <strong>iniciativas de conservación y parques</strong>; y <strong>destinos, municipios o cámaras empresariales</strong> que buscan profesionalizar su gestión.
+                            </div>
+                        </details>
+
+                        <details class="faq-item" data-faq="modalidad_trabajo">
+                            <summary class="faq-question">
+                                <span>¿Podemos contratar un servicio puntual a la carta o un proyecto llave en mano?</span>
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="faq-answer">
+                                Ambas opciones están disponibles. Podemos liderar un desarrollo integral <strong>llave en mano</strong> —desde el estudio de mercado, plan de negocio y factibilidad hasta la puesta en marcha comercial y el entrenamiento del personal— o sumarnos mediante <strong>módulos a la carta</strong> donde tu equipo necesite capacidad ejecutiva inmediata.
+                            </div>
+                        </details>
+
+                        <details class="faq-item" data-faq="enfoque_dso_yield">
+                            <summary class="faq-question">
+                                <span>¿Qué diferencia al enfoque DSO (Destination Stewardship) de la consultoría tradicional?</span>
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="faq-answer">
+                                La consultoría convencional suele entregar diagnósticos extensos sin ejecución y promover volumen masivo. En <strong>Destination Hub</strong> co-ejecutamos junto a tu equipo priorizando el <strong>Yield (valor neto por visitante sobre volumen)</strong>, decisiones respaldadas por inteligencia de datos y una propuesta regenerativa anclada en la agroecología, la cultura viva, la naturaleza y la comunidad local.
+                            </div>
+                        </details>
+
+                        <details class="faq-item" data-faq="representacion_b2b">
+                            <summary class="faq-question">
+                                <span>¿En qué consiste el servicio de Representación Comercial B2B y Marketing?</span>
+                                <span class="faq-icon" aria-hidden="true">+</span>
+                            </summary>
+                            <div class="faq-answer">
+                                Actuamos como tu <strong>brazo comercial externo</strong>. Conectamos tu hotel, lodge, experiencia o destino con operadores mayoristas, DMCs, consorcios de viajes y mercados emisores clave, articulando acuerdos comerciales B2B con campañas digitales orientadas a conversión directa y desestacionalización de la demanda.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="container"><div class="hairline-divider"></div></div>
+
+        <!-- =================================================================
+             6. MANIFIESTO PANORÁMICO (SCROLL TEXT SCRUBBING) & CONTACTO DIRECTO
+        ================================================================== -->
+        <section id="contacto" class="section" aria-labelledby="heading-contacto">
             <div class="container">
                 
                 <div class="section-meta" data-reveal="up">
                     <span class="eyebrow">Contacto Directo</span>
-                    <span class="section-index">04 / 04</span>
+                    <span class="section-index">05 / 05</span>
                 </div>
 
                 <!-- Panoramic Mirror Lake Visual -->
                 <div class="media-frame manifesto-panorama" data-reveal="image" data-caption="VISIÓN COMPARTIDA · PATAGONIA">
-                    <img src="img/web/manifesto-mirror.jpg" data-parallax="18" loading="lazy" decoding="async" alt="Reflejo especular de la cordillera nevada y kayak en lago patagónico">
+                    <img src="img/web/manifesto-mirror.jpg" width="1600" height="737" data-parallax="18" loading="lazy" decoding="async" alt="Reflejo especular de la cordillera nevada y kayak en lago patagónico">
                 </div>
 
                 <!-- Airy Manifesto Quote with Progressive Scroll Text Scrubbing -->
-                <blockquote class="manifesto-quote" data-scrub-text>
+                <blockquote class="manifesto-quote" data-scrub-text aria-label="Tu negocio y el territorio necesitan líderes, no solo gestores. Gestionar hoy es diseñar el futuro de la Patagonia.">
                     “Tu negocio y el territorio necesitan líderes, no solo gestores. Gestionar hoy es diseñar el futuro de la Patagonia.”
                 </blockquote>
 
@@ -497,7 +849,7 @@
                 <div class="contact-grid" data-reveal="up" style="--delay: 0.1s;">
                     
                     <div>
-                        <h2 class="h2-editorial" style="font-size: clamp(1.5rem, 2.4vw, 2.1rem);">
+                        <h2 id="heading-contacto" class="h2-editorial" style="font-size: clamp(1.5rem, 2.4vw, 2.1rem);">
                             Iniciemos una conversación.
                         </h2>
                         <p class="lead" style="margin-top: 0.85rem; font-size: 0.95rem;">
@@ -507,7 +859,7 @@
 
                     <div class="contact-channels">
                         
-                        <a href="https://wa.me/5492944000000" data-contact="whatsapp" target="_blank" rel="noopener noreferrer" class="channel-row">
+                        <a href="https://wa.me/5492944000000" data-contact="whatsapp" data-track-channel="whatsapp" target="_blank" rel="noopener noreferrer" class="channel-row">
                             <div>
                                 <span class="channel-label">WhatsApp Directo</span>
                                 <span class="channel-value">Escribir a un Socio Director</span>
@@ -518,7 +870,7 @@
                             </span>
                         </a>
 
-                        <a href="https://calendly.com/dhub-travel" data-contact="calendar" target="_blank" rel="noopener noreferrer" class="channel-row">
+                        <a href="https://calendly.com/dhub-travel" data-contact="calendar" data-track-channel="calendar" target="_blank" rel="noopener noreferrer" class="channel-row">
                             <div>
                                 <span class="channel-label">Reunión Online · 30 min</span>
                                 <span class="channel-value">Agendar Videollamada de Diagnóstico</span>
@@ -529,7 +881,7 @@
                             </span>
                         </a>
 
-                        <a href="mailto:hola@dhub.travel" data-contact="email" class="channel-row">
+                        <a href="mailto:hola@dhub.travel" data-contact="email" data-track-channel="email" class="channel-row">
                             <div>
                                 <span class="channel-label">Correo Electrónico</span>
                                 <span class="channel-value">hola@dhub.travel</span>
@@ -544,6 +896,65 @@
 
                 </div>
 
+                <!-- Interactive Quick Brief / Lead Qualification Tool -->
+                <div class="brief-box" data-reveal="up" style="--delay: 0.18s;">
+                    <div class="brief-header">
+                        <h3 class="brief-title">Brief rápido de proyecto</h3>
+                        <span class="brief-sub">Diagnóstico personalizado · Respuesta en &lt; 24 hs</span>
+                    </div>
+
+                    <form id="lead-brief-form" novalidate>
+                        <div class="brief-grid">
+                            <div>
+                                <label for="brief-name" class="brief-label">Nombre y Organización *</label>
+                                <input type="text" id="brief-name" name="name" class="brief-input" required placeholder="Ej. Martín Gómez · Lodge Patagonia" autocomplete="name">
+                            </div>
+
+                            <div>
+                                <label for="brief-profile" class="brief-label">Perfil de Organización</label>
+                                <select id="brief-profile" name="profile" class="brief-select">
+                                    <option value="Hotel / Lodge / Estancia">Hotel / Lodge / Estancia</option>
+                                    <option value="Operador / DMC / Experiencias">Operador / DMC / Experiencias</option>
+                                    <option value="Inversor / Nuevo Proyecto">Inversor / Nuevo Proyecto</option>
+                                    <option value="Conservación / Área Natural">Conservación / Área Natural</option>
+                                    <option value="Destino / Municipio / Cámara">Destino / Municipio / Cámara</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="brief-practice" class="brief-label">Área de Interés Principal</label>
+                                <select id="brief-practice" name="practice" class="brief-select">
+                                    <option value="Proyecto Integral (Llave en Mano)">Proyecto Integral (Llave en Mano)</option>
+                                    <option value="Estrategia, Datos & Planes de Negocio">Estrategia, Datos &amp; Planes de Negocio</option>
+                                    <option value="Marketing & Representación Comercial B2B">Marketing &amp; Representación Comercial B2B</option>
+                                    <option value="Sustentabilidad, Regeneración & Capacitación">Sustentabilidad, Regeneración &amp; Capacitación</option>
+                                </select>
+                            </div>
+
+                            <div class="brief-field-wide">
+                                <label for="brief-goal" class="brief-label">Desafío u Objetivo en Patagonia (Opcional)</label>
+                                <input type="text" id="brief-goal" name="goal" class="brief-input" placeholder="Contanos en una línea qué buscás destrabar, posicionar o desarrollar...">
+                            </div>
+                        </div>
+
+                        <div class="brief-footer">
+                            <span class="brief-note">Enviá tu consulta estructurada directo por WhatsApp o Correo Corporativo.</span>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.65rem;">
+                                <button type="submit" data-submit-channel="whatsapp" class="btn btn-primary" style="padding: 0.7rem 1.35rem; font-size: 0.82rem;">
+                                    <span>Enviar Brief por WhatsApp</span>
+                                    <span aria-hidden="true">↗</span>
+                                </button>
+                                <button type="submit" data-submit-channel="email" class="btn btn-ghost" style="padding: 0.7rem 1.35rem; font-size: 0.82rem;">
+                                    <span>Enviar por Email</span>
+                                    <span aria-hidden="true">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="brief-feedback" class="brief-feedback" role="status" aria-live="polite"></div>
+                    </form>
+                </div>
+
             </div>
         </section>
     </main>
@@ -553,10 +964,10 @@
     ====================================================================== -->
     <footer class="site-footer">
         <div class="container footer-inner">
-            <div>
+            <address style="font-style: normal;">
                 <span class="serif" style="color: var(--color-lenga); font-size: 1rem;">Destination Hub</span>
-                <span> · dhub.travel — Patagonia, Argentina</span>
-            </div>
+                <span> · <a href="https://dhub.travel/">dhub.travel</a> — Patagonia, Argentina</span>
+            </address>
             <div class="footer-meta">
                 Innovación · Comunidad · Regeneración
             </div>
@@ -572,9 +983,9 @@
     </div>
 
     <!-- =====================================================================
-         PROBADOR DE TIPOGRAFÍAS EN VIVO (TEMPORAL PARA ELEGIR OPCIÓN)
+         PROBADOR DE TIPOGRAFÍAS EN VIVO (OCULTO EN PRODUCCIÓN · ACTIVABLE CON ?fonts=1 O ALT+T)
     ====================================================================== -->
-    <aside class="font-switcher" id="font-switcher" aria-label="Selector de Tipografía en Vivo">
+    <aside class="font-switcher" id="font-switcher" aria-label="Selector de Tipografía en Vivo" hidden>
         <div class="font-switcher-header">
             <span class="font-switcher-label">Tipografía de Títulos · Probador en vivo</span>
             <button type="button" class="font-switcher-toggle" id="font-switcher-minimize" title="Minimizar selector">—</button>
@@ -608,7 +1019,7 @@
         </div>
     </aside>
 
-    <!-- Minimal Vanilla JS -->
-    <script src="main.js"></script>
+    <!-- Minimal Vanilla JS + Marketing & Attribution Engine -->
+    <script src="main.js" defer></script>
 </body>
 </html>

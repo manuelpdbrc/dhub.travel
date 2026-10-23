@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://dhub.travel/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://dhub.travel/" />
+    <xhtml:link rel="alternate" hreflang="es-AR" href="https://dhub.travel/" />
+    <xhtml:link rel="alternate" hreflang="es-CL" href="https://dhub.travel/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://dhub.travel/" />
+
+    <image:image>
+      <image:loc>https://dhub.travel/img/web/og-cover.jpg</image:loc>
+      <image:title>Destination Hub (dhub.travel) — Consultoría Estratégica, Comercial y Regenerativa en Patagonia</image:title>
+      <image:caption>Transformamos el potencial del territorio en negocios y destinos turísticos regenerativos en Patagonia.</image:caption>
+      <image:geo_location>Patagonia, Argentina</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://dhub.travel/img/web/hero-patagonia.jpg</image:loc>
+      <image:title>Desarrollo de Negocios y Destinos Turísticos en Patagonia — Destination Hub</image:title>
+      <image:caption>Lago glaciar y cordillera en Patagonia enmarcados por bosque nativo.</image:caption>
+      <image:geo_location>Lago Mascardi, Río Negro, Patagonia, Argentina</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://dhub.travel/img/web/emerald-lake.jpg</image:loc>
+      <image:title>Aguas glaciares en Lago Mascardi, Patagonia</image:title>
+      <image:caption>Aguas cristalinas de deshielo en Lago Mascardi, territorio patagónico.</image:caption>
+      <image:geo_location>Lago Mascardi, Patagonia, Argentina</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://dhub.travel/img/web/purpose-traveler.jpg</image:loc>
+      <image:title>El Participante con Propósito — Turismo de Alto Valor (Yield) en Patagonia</image:title>
+      <image:caption>Viajera contemplando el lago y la montaña desde un deck de madera en Patagonia.</image:caption>
+      <image:geo_location>Patagonia, Argentina</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://dhub.travel/img/web/lodge-territory.jpg</image:loc>
+      <image:title>Estrategia, Datos y Planes de Negocio para Hoteles y Lodges en Patagonia</image:title>
+      <image:caption>Lodge de montaña integrado en el bosque y lago patagónico.</image:caption>
+      <image:geo_location>Patagonia, Argentina</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://dhub.travel/img/web/kayak-golden.jpg</image:loc>
+      <image:title>Marketing Turístico y Representación Comercial B2B en Patagonia</image:title>
+      <image:caption>Experiencia de kayak al atardecer en aguas patagónicas.</image:caption>
+      <image:geo_location>Patagonia, Argentina</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://dhub.travel/img/web/cultura-hospitalidad.jpg</image:loc>
+      <image:title>Sustentabilidad, Gobernanza y Capacitación en Hospitalidad Patagónica</image:title>
+      <image:caption>Terraza de madera con hospitalidad frente al lago en Patagonia.</image:caption>
+      <image:geo_location>Patagonia, Argentina</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://dhub.travel/img/web/agroecologia.jpg</image:loc>
+      <image:title>Pilar 01: Agroecología y Trazabilidad Gastronómica en Patagonia</image:title>
+      <image:caption>Gastronomía patagónica con hongos morillas e ingredientes de la tierra.</image:caption>
+      <image:geo_location>Patagonia, Argentina</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://dhub.travel/img/web/cultura-viva.jpg</image:loc>
+      <image:title>Pilar 02: Cultura Viva y Anfitriones Locales en Patagonia</image:title>
+      <image:caption>Anfitriones y caminantes recorriendo senderos del bosque patagónico.</image:caption>
+      <image:geo_location>Patagonia, Argentina</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://dhub.travel/img/web/naturaleza-bosque.jpg</image:loc>
+      <image:title>Pilar 03: Naturaleza y Conservación Activa de la Biodiversidad</image:title>
+      <image:caption>Arroyo cristalino en medio del bosque nativo patagónico.</image:caption>
+      <image:geo_location>Patagonia, Argentina</image:geo_location>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://dhub.travel/img/web/manifesto-mirror.jpg</image:loc>
+      <image:title>Liderazgo Territorial y Turismo Regenerativo en Patagonia — Destination Hub</image:title>
+      <image:caption>Reflejo especular de la cordillera nevada y kayak en lago patagónico.</image:caption>
+      <image:geo_location>Patagonia, Argentina</image:geo_location>
+    </image:image>
+  </url>
+</urlset>

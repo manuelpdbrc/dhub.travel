@@ -1,0 +1,48 @@
+# Destination Hub (dhub.travel)
+
+> Consultora estratégica, comercial, de inteligencia de mercados y sustentabilidad regenerativa desde la Patagonia (Argentina & Chile). Actuamos como extensión directa del equipo de hoteles, lodges, operadores turísticos (DMCs), inversores, proyectos de conservación y destinos para transformar el potencial del territorio en negocios rentables (foco en Yield y ROI) y regenerativos (modelo DSO — Destination Stewardship Organization).
+
+## Propuesta de Valor & Diferenciales
+
+- **+100 años de experiencia combinada**: Equipo ejecutivo senior liderando hoteles, operadores, DMCs y organismos de gestión de destinos desde adentro, sin curva de aprendizaje.
+- **Velocidad de implementación (Ágil & Real)**: Co-ejecución junto al cliente sin burocracia ni diagnósticos teóricos eternos; foco directo en retorno de inversión (ROI) y time-to-market.
+- **Capital relacional (Red Patagonia)**: Articulación público-privada y comunitaria activa en toda la región patagónica y mercados emisores internacionales.
+- **Modalidad flexible**: Soluciones integrales llave en mano o módulos especializados a la carta.
+
+## Áreas de Práctica y Servicios
+
+1. **Práctica 01 — Estrategia, Datos & Planes de Negocio (Datos & ROI)**:
+   - Análisis e inteligencia de mercados turísticos (Big Data, IA, benchmarking, capacidad de carga).
+   - Desarrollo de planes de negocio, factibilidad económica-financiera y modelado de flujo de caja para hoteles, lodges, glampings y experiencias.
+   - Estrategia de ingresos enfocada en *Yield* (valor económico por visitante sobre volumen masivo).
+2. **Práctica 02 — Marketing & Representación Comercial (B2B & Marca)**:
+   - Representación comercial B2B ante operadores mayoristas, DMCs, agencias de viajes de lujo/aventura y mercados emisores clave.
+   - Planes y campañas de marketing turístico orientadas a conversión directa y posicionamiento de marca.
+   - Estrategias de desestacionalización y desarrollo de nuevos corredores territoriales.
+3. **Práctica 03 — Sustentabilidad, Regeneración & Capacitación (Cultura & Gestión)**:
+   - Transición del modelo tradicional DMO (Destination Marketing Organization) al modelo **DSO (Destination Stewardship Organization)**.
+   - Implementación operativa de políticas de sustentabilidad, medición de huella ambiental y preparación para certificaciones internacionales.
+   - Selección y entrenamiento de equipos de hospitalidad bajo la premisa: *"Contratá la actitud, entrená la habilidad"*.
+
+## Arquitectura del Producto Turístico Regenerativo
+
+Estructuramos experiencias transformadoras de alto valor (*Yield*) sobre **Comunidad Local** como cimiento de autenticidad y tres pilares de identidad patagónica:
+- **01. Agroecología**: Producción local, kilómetro cero, trazabilidad e identidad gastronómica conectada con la tierra.
+- **02. Cultura Viva**: Patrimonio territorial, saber local y narrativas genuinas contadas por sus protagonistas.
+- **03. Naturaleza**: Conservación activa de la biodiversidad e inmersión contemplativa de bajo impacto.
+
+## Para Quiénes Trabajamos
+
+- Hoteles, Lodges de Montaña, Estancias & Glampings
+- Operadores Receptivos (DMCs) & Agencias de Experiencias
+- Inversores, Desarrolladores & Nuevos Proyectos Turísticos/Inmobiliarios
+- Proyectos de Conservación, Parques & Áreas Naturales
+- Destinos, Municipios, Entes de Turismo & Cámaras Empresariales
+
+## Contacto Oficial
+
+- **Sitio Web**: [https://dhub.travel/](https://dhub.travel/)
+- **Contexto Extendido para IA**: [https://dhub.travel/llms-full.txt](https://dhub.travel/llms-full.txt)
+- **Email Corporativo**: mailto:hola@dhub.travel
+- **Agenda de Diagnóstico (30 min)**: [https://calendly.com/dhub-travel](https://calendly.com/dhub-travel)
+- **Ubicación Base**: Patagonia, Argentina (Alcance regional en Patagonia Argentina y Chilena, y mercados emisores globales).

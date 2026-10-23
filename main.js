@@ -291,47 +291,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 8. Física de Aguja Magnética en el Logo Principal (Oscilación al detener el Scroll)
+    // 8. Física Continua de Aguja Magnética (Sin saltos al frenar por inercia)
     const headerIsotipo = document.getElementById('header-isotipo');
     const headerNeedle = document.getElementById('header-compass-needle');
     let needleAngle = 0;
     let needleVel = 0;
-    let springRaf = null;
-    let scrollStopTimer = null;
+    let dragTarget = 0;
+    let isDragging = false;
+    let physicsRaf = null;
+    let dragReleaseTimer = null;
     let lastScrollY = window.scrollY || 0;
-    let lastScrollDir = 1;
 
-    function runNeedleSpring() {
-        const stiffness = 0.17; // Tensión magnética hacia el Norte-Este (0deg)
-        const damping = 0.84;   // Amortiguación que genera 4-5 oscilaciones visibles
-
-        const force = -stiffness * needleAngle;
-        needleVel = (needleVel + force) * damping;
-        needleAngle += needleVel;
+    function runNeedlePhysics() {
+        if (isDragging) {
+            // Mientras el scroll tiene velocidad activa, el flujo empuja la aguja hacia dragTarget
+            const pull = (dragTarget - needleAngle) * 0.24;
+            needleVel = (needleVel + pull) * 0.68;
+            needleAngle += needleVel;
+        } else {
+            // Al comenzar a frenar la inercia, se suelta desde su ángulo real actual (sin saltos)
+            // y oscila libremente como un péndulo magnético hasta clavarse en 0°
+            const stiffness = 0.145;
+            const damping = 0.865;
+            const force = -stiffness * needleAngle;
+            needleVel = (needleVel + force) * damping;
+            needleAngle += needleVel;
+        }
 
         if (headerNeedle) {
             headerNeedle.style.transform = `rotate(${needleAngle.toFixed(2)}deg)`;
         }
 
-        if (Math.abs(needleAngle) > 0.12 || Math.abs(needleVel) > 0.12) {
-            springRaf = requestAnimationFrame(runNeedleSpring);
+        if (isDragging || Math.abs(needleAngle) > 0.08 || Math.abs(needleVel) > 0.08) {
+            physicsRaf = requestAnimationFrame(runNeedlePhysics);
         } else {
             needleAngle = 0;
             needleVel = 0;
             if (headerNeedle) headerNeedle.style.transform = 'rotate(0deg)';
-            springRaf = null;
+            physicsRaf = null;
         }
     }
 
-    function triggerNeedleOscillation(direction = 1, intensity = 36) {
-        if (!headerNeedle) return;
-        if (springRaf) cancelAnimationFrame(springRaf);
-        // Impulso inicial claro para que la oscilación al frenar sea bien perceptible
-        if (Math.abs(needleAngle) < 18) {
-            needleAngle = direction * intensity;
+    function ensurePhysicsLoop() {
+        if (!physicsRaf && headerNeedle) {
+            physicsRaf = requestAnimationFrame(runNeedlePhysics);
         }
-        needleVel = -direction * 7.5;
-        springRaf = requestAnimationFrame(runNeedleSpring);
+    }
+
+    function impulseNeedle(velocityKick = 11) {
+        if (!headerNeedle) return;
+        isDragging = false;
+        needleVel += velocityKick;
+        ensurePhysicsLoop();
     }
 
     if (headerNeedle && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -340,29 +351,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const delta = currentY - lastScrollY;
             lastScrollY = currentY;
 
-            if (Math.abs(delta) > 0.5) {
-                lastScrollDir = delta > 0 ? 1 : -1;
-            }
+            // Ignoramos la "cola lenta" de inercia (< 2.4px por frame) para que la aguja
+            // empiece su oscilación natural apenas el scroll comienza a desacelerar,
+            // evitando que se quede quieta y pegue un salto artificial al final.
+            if (Math.abs(delta) >= 2.4) {
+                const dir = delta > 0 ? 1 : -1;
+                isDragging = true;
+                // Mantiene la aguja desviada a ~44° con una leve vibración magnética viva
+                dragTarget = dir * 44 + Math.sin(currentY * 0.05) * 6;
+                ensurePhysicsLoop();
 
-            // Mientras se scrollea, la aguja se desvía sutilmente por inercia
-            if (springRaf) {
-                cancelAnimationFrame(springRaf);
-                springRaf = null;
+                clearTimeout(dragReleaseTimer);
+                dragReleaseTimer = setTimeout(() => {
+                    isDragging = false;
+                    // Al soltar el empuje del scroll, le damos velocidad de retorno desde su posición actual
+                    needleVel -= Math.sign(needleAngle || dir) * 3.2;
+                    ensurePhysicsLoop();
+                }, 65);
             }
-            const liveDeflection = Math.max(-42, Math.min(42, delta * 1.15));
-            needleAngle = needleAngle * 0.65 + liveDeflection * 0.35;
-            headerNeedle.style.transform = `rotate(${needleAngle.toFixed(1)}deg)`;
-
-            // Cuando se detiene el scroll (~95ms sin movimiento), oscila buscando su eje
-            clearTimeout(scrollStopTimer);
-            scrollStopTimer = setTimeout(() => {
-                triggerNeedleOscillation(lastScrollDir, 38);
-            }, 95);
         }, { passive: true });
 
-        // También oscila al pasar el mouse sobre el logo principal
+        // Al pasar el mouse sobre el logo principal, recibe un impulso magnético suave sin teletransportarse
         document.querySelector('.brand-lockup')?.addEventListener('mouseenter', () => {
-            triggerNeedleOscillation(1, 34);
+            impulseNeedle(10.5);
         });
     }
 
@@ -393,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 headerIsotipo.classList.remove('is-waiting-intro');
                 introLoader.classList.add('is-done');
-                triggerNeedleOscillation(1, 30);
+                impulseNeedle(11);
             }, 1540);
         }
     }

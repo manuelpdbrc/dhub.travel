@@ -51,47 +51,53 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobileMenu(); });
     }
 
-    // 3. Animaciones Sutiles de Revelado al Hacer Scroll (Texto, Imágenes y Líneas)
-    const revealElements = document.querySelectorAll('[data-reveal], .hairline-divider');
-    if ('IntersectionObserver' in window) {
-        const revealObserver = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    obs.unobserve(entry.target);
-                }
+    // 3. Animaciones Sutiles de Revelado al Hacer Scroll (Se activan sincronizadas tras abrir el telón)
+    let revealsInitialized = false;
+    function initScrollReveals() {
+        if (revealsInitialized) return;
+        revealsInitialized = true;
+
+        const revealElements = document.querySelectorAll('[data-reveal], .hairline-divider');
+        if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '0px 0px -8% 0px',
+                threshold: 0.08
             });
-        }, {
-            rootMargin: '0px 0px -8% 0px',
-            threshold: 0.08
-        });
 
-        revealElements.forEach(el => revealObserver.observe(el));
-    } else {
-        revealElements.forEach(el => el.classList.add('is-visible'));
-    }
+            revealElements.forEach(el => revealObserver.observe(el));
+        } else {
+            revealElements.forEach(el => el.classList.add('is-visible'));
+        }
 
-    // 4. Contador Animado Sutil (+100 años)
-    const counterEl = document.querySelector('[data-counter]');
-    if (counterEl && 'IntersectionObserver' in window) {
-        const targetVal = parseInt(counterEl.getAttribute('data-counter'), 10) || 100;
-        const counterObserver = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                const duration = 1400;
-                const startTime = performance.now();
-                function tick(now) {
-                    const progress = Math.min((now - startTime) / duration, 1);
-                    const eased = 1 - Math.pow(1 - progress, 3); // Ease-out cubic
-                    counterEl.textContent = `+${Math.round(targetVal * eased)}`;
-                    if (progress < 1) requestAnimationFrame(tick);
-                }
-                requestAnimationFrame(tick);
-                obs.unobserve(counterEl);
-            });
-        }, { threshold: 0.4 });
+        // 4. Contador Animado Sutil (+100 años)
+        const counterEl = document.querySelector('[data-counter]');
+        if (counterEl && 'IntersectionObserver' in window) {
+            const targetVal = parseInt(counterEl.getAttribute('data-counter'), 10) || 100;
+            const counterObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const duration = 1400;
+                    const startTime = performance.now();
+                    function tick(now) {
+                        const progress = Math.min((now - startTime) / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3); // Ease-out cubic
+                        counterEl.textContent = `+${Math.round(targetVal * eased)}`;
+                        if (progress < 1) requestAnimationFrame(tick);
+                    }
+                    requestAnimationFrame(tick);
+                    obs.unobserve(counterEl);
+                });
+            }, { threshold: 0.4 });
 
-        counterObserver.observe(counterEl);
+            counterObserver.observe(counterEl);
+        }
     }
 
     // 5. Motor Unificado de Scroll: Parallax + Barra de Progreso + Text Scrubbing
@@ -387,35 +393,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 9. Animación de Apertura: Brújula Grande Girando → Se Achica hacia el Logo Principal
+    // 9. Secuencia Ordenada de Apertura: Bloqueo de Scroll → Giro Sincronizado → Vuelo al Header → Revelado del Hero
     const introLoader = document.getElementById('intro-loader');
     const introCompassWrap = document.getElementById('intro-compass-wrap');
 
+    function finishIntroImmediately() {
+        document.documentElement.classList.remove('is-intro-locked');
+        headerIsotipo?.classList.remove('is-waiting-intro');
+        introLoader?.classList.add('is-done');
+        initScrollReveals();
+    }
+
     if (introLoader && introCompassWrap && headerIsotipo) {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            headerIsotipo.classList.remove('is-waiting-intro');
-            introLoader.classList.add('is-done');
+            finishIntroImmediately();
         } else {
-            // Fase 1 (0 a 820ms): La brújula aparece grande en el centro y gira rápidamente
-            // Fase 2 (820ms a 1540ms): Se achica volando hacia la posición exacta del logo en el header y revela la página
-            setTimeout(() => {
-                const startRect = introCompassWrap.getBoundingClientRect();
-                const targetRect = headerIsotipo.getBoundingClientRect();
+            // Asegurar que la página inicie arriba de todo antes de medir coordenadas del logo
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            window.scrollTo(0, 0);
 
-                const dx = (targetRect.left + targetRect.width / 2) - (startRect.left + startRect.width / 2);
-                const dy = (targetRect.top + targetRect.height / 2) - (startRect.top + startRect.height / 2);
-                const scale = targetRect.width / startRect.width;
+            // Esperar al primer frame pintado (doble rAF) para iniciar el giro sin tirones ni FOUC
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    // Paso 1 (0ms): Arranca el giro rápido en el centro exacto de la pantalla
+                    introLoader.classList.add('is-spinning');
 
-                introLoader.classList.add('is-docking');
-                introCompassWrap.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
-            }, 820);
+                    // Paso 2 (850ms): Mide coordenadas del logo fijo, vuela hacia él, abre el telón y lanza los reveals del Hero
+                    setTimeout(() => {
+                        const startRect = introCompassWrap.getBoundingClientRect();
+                        const targetRect = headerIsotipo.getBoundingClientRect();
 
-            // Fase 3 (1540ms): Encastre perfecto en el header + oscilación final de bienvenida
-            setTimeout(() => {
-                headerIsotipo.classList.remove('is-waiting-intro');
-                introLoader.classList.add('is-done');
-                impulseNeedle(11);
-            }, 1540);
+                        const dx = (targetRect.left + targetRect.width / 2) - (startRect.left + startRect.width / 2);
+                        const dy = (targetRect.top + targetRect.height / 2) - (startRect.top + startRect.height / 2);
+                        const scale = targetRect.width / startRect.width;
+
+                        introLoader.classList.add('is-docking');
+                        introCompassWrap.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
+
+                        // Liberar el scroll e iniciar la entrada suave de textos e imágenes del Hero justo al abrirse el telón
+                        document.documentElement.classList.remove('is-intro-locked');
+                        initScrollReveals();
+                    }, 850);
+
+                    // Paso 3 (1570ms): Encastre final en el logo del header + oscilación magnética de bienvenida
+                    setTimeout(() => {
+                        headerIsotipo.classList.remove('is-waiting-intro');
+                        introLoader.classList.add('is-done');
+                        impulseNeedle(11);
+                    }, 1570);
+                });
+            });
+
+            // Salvaguarda por si la pestaña se abrió en segundo plano
+            setTimeout(finishIntroImmediately, 2600);
         }
+    } else {
+        finishIntroImmediately();
     }
 });

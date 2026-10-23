@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html lang="es" data-font="cormorant">
+<html lang="es" data-font="cormorant" class="is-intro-locked">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Destination Hub (dhub.travel) — Consultoría Estratégica, Comercial y Regenerativa en Patagonia</title>
     <meta name="description" content="Consultora de negocios, comercialización, inteligencia de mercados y sustentabilidad desde la Patagonia. Acompañamos a hoteles, operadores, inversores, proyectos y destinos.">
     <link rel="icon" type="image/svg+xml" href="destination-hub-isotipo-c.svg">
+
+    <!-- Critical First-Paint CSS: Guarantees the opening curtain covers 100% at 0ms before external CSS loads -->
+    <style>
+        html.is-intro-locked, html.is-intro-locked body { overflow: hidden !important; }
+        .intro-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100dvh; z-index: 2500; display: flex; align-items: center; justify-content: center; background-color: #F6F5F0; }
+        .intro-curtain { position: absolute; inset: 0; background-color: #F6F5F0; }
+        .intro-compass-wrap { position: relative; z-index: 2; width: clamp(130px, 34vw, 185px); height: clamp(130px, 34vw, 185px); margin: auto; }
+    </style>
 
     <!-- Google Fonts: Curated Options for Live Typography Preview + Plus Jakarta Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -1440,10 +1440,12 @@ html[data-font="outfit"] .h2-editorial em {
     align-items: center;
     justify-content: center;
     pointer-events: all;
+    background-color: transparent;
 }
 
 .intro-loader.is-docking {
     pointer-events: none;
+    background-color: transparent;
 }
 
 .intro-loader.is-done {
@@ -1476,18 +1478,29 @@ html[data-font="outfit"] .h2-editorial em {
     width: 100%;
     height: 100%;
     overflow: visible;
+    opacity: 0;
+    transform: scale(0.55);
+}
+
+.intro-loader.is-spinning .intro-compass-svg {
     animation: introCompassPop 0.38s var(--ease-out-expo) forwards;
 }
 
 .intro-compass-rings {
     transform-box: view-box;
     transform-origin: 100px 100px;
+}
+
+.intro-loader.is-spinning .intro-compass-rings {
     animation: introRingsSpin 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .intro-compass-needle {
     transform-box: view-box;
     transform-origin: 100px 100px;
+}
+
+.intro-loader.is-spinning .intro-compass-needle {
     animation: introNeedleSpin 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 

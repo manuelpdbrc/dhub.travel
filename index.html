@@ -68,7 +68,14 @@
     <link rel="icon" type="image/svg+xml" href="destination-hub-isotipo-c.svg">
     <link rel="icon" type="image/png" sizes="192x192" href="img/web/icon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="img/web/apple-touch-icon.png">
-    <link rel="manifest" href="site.webmanifest">
+    <script>
+        if (location.protocol === 'http:' || location.protocol === 'https:') {
+            const m = document.createElement('link');
+            m.rel = 'manifest';
+            m.href = 'site.webmanifest';
+            document.head.appendChild(m);
+        }
+    </script>
 
     <!-- Preload Critical LCP Hero Image -->
     <link rel="preload" as="image" href="img/web/hero-patagonia.jpg" fetchpriority="high">
@@ -101,6 +108,8 @@
 
     <!-- Pure Lightweight Stylesheet -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Módulo de Evaluación & Hoja de Ruta -->
+    <link rel="stylesheet" href="roadmap.css">
 
     <!-- =====================================================================
          DATOS ESTRUCTURADOS SCHEMA.ORG (JSON-LD GRAPH PARA SEO, DEO & AEO)
@@ -365,6 +374,7 @@
                 <a href="#enfoque" class="nav-link" data-i18n="nav_enfoque">Enfoque</a>
                 <a href="#servicios" class="nav-link" data-i18n="nav_servicios">Prácticas</a>
                 <a href="#arquitectura" class="nav-link" data-i18n="nav_arquitectura">Arquitectura</a>
+                <a href="#diagnostico" class="nav-link" data-i18n="nav_hoja_ruta" onclick="openRoadmapModal(); return false;" style="color: var(--color-terracota); font-weight: 500;">Hoja de Ruta</a>
                 <a href="#preguntas" class="nav-link" data-i18n="nav_preguntas">Preguntas</a>
                 <a href="#contacto" class="nav-link" data-i18n="nav_contacto">Contacto</a>
             </nav>
@@ -416,6 +426,7 @@
             <nav class="mobile-nav-list" aria-label="Navegación móvil">
                 <a href="#enfoque" class="mobile-nav-link" data-i18n="mobile_nav_1">01 · Nuestro Enfoque</a>
                 <a href="#servicios" class="mobile-nav-link" data-i18n="mobile_nav_2">02 · Áreas de Práctica</a>
+                <a href="#diagnostico" class="mobile-nav-link" data-i18n="mobile_nav_eval" onclick="openRoadmapModal(); const d=document.getElementById('mobile-drawer'); if(d) d.classList.remove('is-open'); return false;" style="color: var(--color-terracota); font-weight: 500;">✦ Evaluación &amp; Hoja de Ruta</a>
                 <a href="#arquitectura" class="mobile-nav-link" data-i18n="mobile_nav_3">03 · Arquitectura Regenerativa</a>
                 <a href="#preguntas" class="mobile-nav-link" data-i18n="mobile_nav_4">04 · Preguntas Frecuentes</a>
                 <a href="#contacto" class="mobile-nav-link" data-i18n="mobile_nav_5">05 · Contacto Directo</a>
@@ -449,15 +460,21 @@
                         </p>
 
                         <div class="hero-actions">
-                            <a href="#contacto" class="btn btn-primary" data-magnetic="0.2" data-track-cta="hero_impulsemos">
-                                <span data-i18n="hero_btn_primary">Impulsemos tu proyecto</span>
+                            <button type="button" class="btn btn-primary" onclick="openRoadmapModal()" data-magnetic="0.2" data-track-cta="hero_evaluar_hoja_ruta">
+                                <span data-i18n="hero_btn_eval">Evaluar Proyecto &amp; Hoja de Ruta</span>
                                 <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                                 </svg>
+                            </button>
+                            <a href="#contacto" class="btn btn-ghost" data-magnetic="0.18" data-track-cta="hero_contacto">
+                                <span data-i18n="header_cta">Conversar</span>
                             </a>
-                            <a href="#servicios" class="btn btn-ghost" data-magnetic="0.18" data-track-cta="hero_practicas">
-                                <span data-i18n="hero_btn_secondary">Áreas de práctica</span>
-                            </a>
+                        </div>
+                        <div class="hero-eval-banner">
+                            <button type="button" class="hero-eval-pill" onclick="openRoadmapModal()">
+                                <span class="hero-eval-sparkle">✦</span>
+                                <span data-i18n="hero_eval_pill">Definí cómo podemos co-ejecutar en tu proyecto (diagnóstico interactivo en 3 min) →</span>
+                            </button>
                         </div>
                     </div>
 
@@ -701,8 +718,39 @@
         </section>
 
         <!-- =================================================================
-             4. ARQUITECTURA DEL PRODUCTO REGENERATIVO (ATMÓSFERA FOREST DUSK)
+             2.1 INVITACIÓN EDITORIAL: EVALUACIÓN DE PROYECTO & HOJA DE RUTA
         ================================================================== -->
+        <section class="roadmap-invite-section" aria-label="Evaluación de Proyecto y Hoja de Ruta de Co-Ejecución">
+            <div class="container">
+                <div class="roadmap-invite-card" data-reveal="up">
+                    <div class="roadmap-invite-badge">
+                        <span class="roadmap-invite-dot"></span>
+                        <span data-i18n="eval_sec_badge">Evaluación Estratégica en Línea · Destination Hub</span>
+                    </div>
+                    <h2 class="roadmap-invite-title" data-i18n-html="eval_sec_title">
+                        ¿Cómo podemos <em>trabajar juntos</em> en tu proyecto?
+                    </h2>
+                    <p class="roadmap-invite-desc" data-i18n-html="eval_sec_desc">
+                        Realizá una evaluación inicial y definí en minutos una <strong>hoja de ruta de co-ejecución personalizada</strong>. A partir de tus respuestas sobre territorio, desafíos de Yield y visión regenerativa, estructuraremos las tareas clave, entregables y KPIs junto a Destination Hub, con un informe descargable en PDF.
+                    </p>
+                    <div class="roadmap-invite-actions">
+                        <button type="button" class="btn-roadmap-launch" onclick="openRoadmapModal()">
+                            <span data-i18n="eval_sec_btn">Evaluar mi Proyecto &amp; Diseñar Hoja de Ruta</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                        <div class="roadmap-invite-meta">
+                            <span class="roadmap-meta-item" data-i18n="eval_meta_1">Diagnóstico en 4 consultas</span>
+                            <span class="roadmap-meta-item" data-i18n="eval_meta_2">Matriz de 4 fases</span>
+                            <span class="roadmap-meta-item" data-i18n="eval_meta_3">Descarga en PDF editorial</span>
+                            <span class="roadmap-meta-item" data-i18n="eval_meta_4">Sin costo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section id="arquitectura" class="section section-dusk" aria-labelledby="heading-arquitectura">
             <div class="container">
                 
@@ -1042,6 +1090,235 @@
             </button>
         </div>
     </aside>
+
+    <!-- ======================================================================
+         MODAL CONVERSACIONAL: EVALUACIÓN DE PROYECTO & HOJA DE RUTA
+         ====================================================================== -->
+    <div class="modal-overlay" id="roadmapModal">
+        <div class="modal-container">
+            
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="modal-header-brand">
+                    <img src="destination-hub-isotipo-c.svg" alt="Isotipo D Hub">
+                    <div>
+                        <div class="modal-header-title" data-i18n-html="modal_header_title">Diagnóstico &amp; Hoja de Ruta D Hub</div>
+                        <div class="modal-header-sub" data-i18n-html="modal_header_sub">Definición de Co-Ejecución &amp; Ecosistema de Proyecto</div>
+                    </div>
+                </div>
+                <div class="modal-header-right">
+                    <div class="ai-status-pill" id="aiStatusPill" onclick="openApiConfigModal()" title="Configuración de Servicio">
+                        <span class="ai-status-dot"></span>
+                        <span id="aiStatusText" data-i18n="modal_status_badge">Diagnóstico en Línea</span>
+                    </div>
+                    <button class="modal-close-btn" onclick="closeRoadmapModal()" aria-label="Cerrar modal">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Banner de Alerta / Diagnóstico de API Key -->
+            <div class="api-alert-banner" id="apiAlertBanner">
+                <span id="apiAlertMsg">Aviso de API</span>
+                <button type="button" onclick="closeApiAlert()" style="background:none;border:none;cursor:pointer;font-weight:bold;color:inherit;">✕</button>
+            </div>
+
+            <!-- Vista 1: Chat Conversacional -->
+            <div class="chat-view-container" id="chatViewContainer">
+                <!-- Barra de Progreso Dinámica -->
+                <div class="chat-progress-wrap">
+                    <span class="chat-progress-text" id="chatProgressLabel">Paso 1: Datos de Contacto</span>
+                    <div class="chat-progress-bar-bg">
+                        <div class="chat-progress-bar-val" id="chatProgressBar" style="width: 20%;"></div>
+                    </div>
+                </div>
+
+                <!-- Historial de Mensajes -->
+                <div class="chat-messages-area" id="chatMessagesArea">
+                    <!-- Inyección dinámica -->
+                </div>
+
+                <!-- Indicador de "Formulando consulta..." -->
+                <div class="chat-thinking-bubble" id="chatThinkingBubble">
+                    <span id="thinkingLabelText">Destination Hub está analizando tu respuesta...</span>
+                    <div class="pulse-dots"><span></span><span></span><span></span></div>
+                </div>
+
+                <!-- Barra de Entrada de Respuestas -->
+                <div class="chat-input-bar" id="chatInputBarArea" style="display: none;">
+                    <form class="input-form-flex" id="chatForm" onsubmit="handleUserSubmit(event)">
+                        <textarea 
+                            id="chatInputText" 
+                            class="chat-textarea" 
+                            placeholder="Escribe tu respuesta con tus propias palabras..." 
+                            data-i18n-placeholder="modal_input_placeholder"
+                            rows="1" 
+                            onkeydown="handleKeyDown(event)"
+                            oninput="autoResizeTextarea(this)"></textarea>
+                        <button type="submit" class="chat-send-btn" id="chatSendBtn" aria-label="Enviar respuesta">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </form>
+                    <div class="input-meta-help">
+                        <span data-i18n-html="modal_input_help">Presiona <strong>Enter</strong> para enviar, <strong>Shift + Enter</strong> para salto de línea.</span>
+                        <span id="charCounter">0 caracteres</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista 2: Pantalla de Síntesis Territorial -->
+            <div class="analyzing-screen" id="analyzingScreen">
+                <img src="destination-hub-isotipo-c.svg" class="analyzing-compass" alt="Brújula D Hub">
+                <h3 class="analyzing-title" data-i18n-html="modal_analyzing_title">Estructurando Hoja de Ruta &amp; Modelo D Hub...</h3>
+                <p class="analyzing-desc" data-i18n-html="modal_analyzing_desc">
+                    El motor estratégico está cruzando tus respuestas con nuestros modelos de <strong>Yield comercial, articulación B2B y turismo regenerativo (DSO)</strong> para definir cómo co-ejecutaremos contigo.
+                </p>
+                <div class="analyzing-step-badge" id="analyzingBadge" data-i18n="modal_analyzing_badge">Generando flujograma de ecosistema y plan de 4 fases...</div>
+            </div>
+
+            <!-- Vista 3: Resultados Finales de la Hoja de Ruta -->
+            <div class="results-container" id="resultsView">
+                <div class="results-header">
+                    <div class="results-header-left">
+                        <span class="results-tag" id="resultsLeadTag" data-i18n="modal_results_tag">HOJA DE RUTA ESTRATÉGICA · DESTINATION HUB</span>
+                        <h2 class="results-title" id="resultsProjectTitle" data-i18n="modal_results_title">Plan de Co-Ejecución del Proyecto</h2>
+                        <p class="results-desc" id="resultsProjectSubtitle" data-i18n="modal_results_desc">
+                            Hoja de ruta inicial estructurada de acuerdo a las metodologías, criterios y valores de Destination Hub.
+                        </p>
+                    </div>
+                    <div class="results-actions">
+                        <button type="button" class="btn-pdf-download" onclick="exportToPDF()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            <span data-i18n="modal_btn_pdf">Descargar PDF</span>
+                        </button>
+                        <a href="https://calendly.com/dhub-travel" target="_blank" rel="noopener" class="btn-calendly-link">
+                            <span data-i18n="modal_btn_calendly">Agendar Sesión (30 min)</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <button type="button" class="btn-modify" onclick="restartChatSession()" data-i18n="modal_btn_restart">Nueva Consulta</button>
+                    </div>
+                </div>
+
+                <!-- Bloque Clave: Cómo Puede Ayudar Destination Hub -->
+                <div class="dhub-role-card">
+                    <span class="dhub-role-tag" data-i18n="modal_role_tag">PROPUESTA DE VALOR &amp; ALIANZA ESTRATÉGICA</span>
+                    <h3 class="dhub-role-title" data-i18n="modal_role_title">¿Cómo Destination Hub co-ejecuta en tu proyecto?</h3>
+                    <div class="dhub-role-text" id="dhubRoleText">
+                        Cargando rol de co-ejecución...
+                    </div>
+                </div>
+
+                <!-- Resumen Diagnóstico Territorial -->
+                <div class="ai-diagnosis-card">
+                    <div class="ai-diagnosis-tag" data-i18n="modal_diag_tag">DIAGNÓSTICO ESTRATÉGICO &amp; POTENCIAL TERRITORIAL</div>
+                    <div class="ai-diagnosis-text" id="aiDiagnosisText">
+                        Cargando diagnóstico...
+                    </div>
+                </div>
+
+                <!-- Flujograma del Ecosistema de Proyecto -->
+                <div class="results-diagram-box">
+                    <h3 class="results-diagram-title" data-i18n="modal_flow_title">Flujograma del Ecosistema de Proyecto</h3>
+                    <div class="results-flowchart-grid" id="flowchartNodesContainer">
+                        <!-- Nodos inyectados dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Matriz de 4 Fases de Co-Ejecución -->
+                <h3 class="results-diagram-title" style="margin-bottom: 1.5rem;" data-i18n="modal_phases_title">Matriz de Co-Ejecución por Fases (Tareas, Entregables &amp; KPIs)</h3>
+                <div class="roadmap-timeline-grid" id="roadmapPhasesGrid">
+                    <!-- Fases inyectadas dinámicamente -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal de Configuración de Parámetros de Servicio (Secundario) -->
+    <div class="api-config-modal" id="apiConfigModal">
+        <div class="api-config-card">
+            <h3 class="api-config-title">Parámetros de Servicio</h3>
+            <p class="api-config-desc">
+                Clave de servicio institucional para la evaluación estratégica en tiempo real.
+            </p>
+            <label class="api-input-label" for="apiKeyInput">Clave de Servicio:</label>
+            <input type="password" id="apiKeyInput" class="api-input-field" placeholder="•••••••••••••••• (Clave institucional activa)">
+            <div class="api-config-actions">
+                <button type="button" class="btn-api-cancel" onclick="closeApiConfigModal()">Cancelar</button>
+                <button type="button" class="btn-api-save" onclick="saveApiKey()">Guardar y Probar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Plantilla Oculta para Exportación a PDF -->
+    <div id="pdf-export-canvas">
+        <div class="pdf-page-header">
+            <div class="pdf-brand-box">
+                <img src="destination-hub-isotipo-c.svg" width="44" height="44" alt="Isotipo">
+                <div>
+                    <div class="pdf-brand-name">Destination Hub</div>
+                    <div style="font-size: 10px; color: #2B5B6C; letter-spacing: 0.05em; font-family: 'JetBrains Mono', monospace;">ESTRATEGIA · DATOS &amp; YIELD · B2B · REGENERACIÓN (DSO)</div>
+                </div>
+            </div>
+            <div class="pdf-meta-box">
+                <div>DOCUMENTO ESTRATÉGICO INICIAL</div>
+                <div id="pdfDateStamp">FECHA: 23 OCT 2026</div>
+                <div>DHUB.TRAVEL</div>
+            </div>
+        </div>
+
+        <h1 class="pdf-project-title" id="pdfProjectTitle">Hoja de Ruta Estratégica</h1>
+        <div class="pdf-lead-stamp" id="pdfLeadStamp">SOLICITANTE: - | EMAIL: - | TEL: -</div>
+
+        <div class="pdf-dhub-box">
+            <strong style="color: #C8A97E; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase;">¿CÓMO DESTINATION HUB CO-EJECUTA EN TU PROYECTO?</strong><br>
+            <span id="pdfDhubRoleText" style="display:block; margin-top: 4px;"></span>
+        </div>
+
+        <div class="pdf-diag-box">
+            <strong style="color: #C85A32; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase;">DIAGNÓSTICO ESTRATÉGICO &amp; POTENCIAL:</strong><br>
+            <span id="pdfDiagnosisText" style="display:block; margin-top: 4px; color: #183028;"></span>
+        </div>
+
+        <div style="background-color: #F6F5F0; border: 1px solid rgba(24, 48, 40, 0.12); padding: 10px 14px; margin-bottom: 20px; border-radius: 6px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: #2B5B6C; text-transform: uppercase; margin-bottom: 5px; font-weight: 600;">FLUJOGRAMA DE DECISIONES Y ARQUITECTURA</div>
+            <div id="pdfFlowNodesSummary" style="font-size: 11px; line-height: 1.5; color: #183028;"></div>
+        </div>
+
+        <table class="pdf-matrix-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Fase / Ventana</th>
+                    <th style="width: 45%;">Tareas a Desarrollar con D Hub</th>
+                    <th style="width: 30%;">Entregables &amp; KPIs</th>
+                </tr>
+            </thead>
+            <tbody id="pdfTableBody">
+            </tbody>
+        </table>
+
+        <div class="pdf-footer">
+            <div>DESTINATION HUB · PATAGONIA (ARGENTINA &amp; CHILE)</div>
+            <div>CONTACTO: HOLA@DHUB.TRAVEL · CALENDLY.COM/DHUB-TRAVEL</div>
+        </div>
+    </div>
+
+    <!-- Librería de Generación de PDF & Motor de Evaluación -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="roadmap.js" defer></script>
 
     <!-- Minimal Vanilla JS + Multilingual (ES/EN/PT) & Marketing Engine -->
     <script src="main.js" defer></script>

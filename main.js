@@ -194,7 +194,40 @@ const I18N_DICTIONARY = {
         brief_ok_prefix: 'Brief preparado para',
         brief_intro_msg: 'Hola equipo de Destination Hub, les comparto un brief rápido de proyecto:',
         footer_loc: ' · dhub.travel — Patagonia, Argentina',
-        footer_values: 'Innovación · Comunidad · Regeneración'
+        footer_values: 'Innovación · Comunidad · Regeneración',
+
+        // Evaluación & Hoja de Ruta
+        nav_hoja_ruta: 'Hoja de Ruta',
+        mobile_nav_eval: '✦ Evaluación & Hoja de Ruta',
+        hero_btn_eval: 'Evaluar Proyecto &amp; Hoja de Ruta',
+        hero_eval_pill: 'Definí cómo podemos co-ejecutar en tu proyecto (diagnóstico interactivo en 3 min) →',
+        eval_sec_badge: 'Evaluación Estratégica en Línea · Destination Hub',
+        eval_sec_title: '¿Cómo podemos <em>trabajar juntos</em> en tu proyecto?',
+        eval_sec_desc: 'Realizá una evaluación inicial y definí en minutos una <strong>hoja de ruta de co-ejecución personalizada</strong>. A partir de tus respuestas sobre territorio, desafíos de Yield y visión regenerativa, estructuraremos las tareas clave, entregables y KPIs junto a Destination Hub, con un informe descargable en PDF.',
+        eval_sec_btn: 'Evaluar mi Proyecto &amp; Diseñar Hoja de Ruta',
+        eval_meta_1: 'Diagnóstico en 4 consultas',
+        eval_meta_2: 'Matriz de 4 fases',
+        eval_meta_3: 'Descarga en PDF editorial',
+        eval_meta_4: 'Sin costo',
+        modal_header_title: 'Diagnóstico &amp; Hoja de Ruta D Hub',
+        modal_header_sub: 'Definición de Co-Ejecución &amp; Ecosistema de Proyecto',
+        modal_status_badge: 'Diagnóstico en Línea',
+        modal_input_placeholder: 'Escribe tu respuesta con tus propias palabras...',
+        modal_input_help: 'Presiona <strong>Enter</strong> para enviar, <strong>Shift + Enter</strong> para salto de línea.',
+        modal_analyzing_title: 'Estructurando Hoja de Ruta &amp; Modelo D Hub...',
+        modal_analyzing_desc: 'El motor estratégico está cruzando tus respuestas con nuestros modelos de <strong>Yield comercial, articulación B2B y turismo regenerativo (DSO)</strong> para definir cómo co-ejecutaremos contigo.',
+        modal_analyzing_badge: 'Generando flujograma de ecosistema y plan de 4 fases...',
+        modal_results_tag: 'HOJA DE RUTA ESTRATÉGICA · DESTINATION HUB',
+        modal_results_title: 'Plan de Co-Ejecución del Proyecto',
+        modal_results_desc: 'Hoja de ruta inicial estructurada de acuerdo a las metodologías, criterios y valores de Destination Hub.',
+        modal_btn_pdf: 'Descargar PDF',
+        modal_btn_calendly: 'Agendar Sesión (30 min)',
+        modal_btn_restart: 'Nueva Consulta',
+        modal_role_tag: 'PROPUESTA DE VALOR &amp; ALIANZA ESTRATÉGICA',
+        modal_role_title: '¿Cómo Destination Hub co-ejecuta en tu proyecto?',
+        modal_diag_tag: 'DIAGNÓSTICO ESTRATÉGICO &amp; POTENCIAL TERRITORIAL',
+        modal_flow_title: 'Flujograma del Ecosistema de Proyecto',
+        modal_phases_title: 'Matriz de Co-Ejecución por Fases (Tareas, Entregables &amp; KPIs)'
     },
 
     en: {
@@ -356,7 +389,40 @@ const I18N_DICTIONARY = {
         brief_ok_prefix: 'Brief prepared for',
         brief_intro_msg: 'Hello Destination Hub team, here is a quick project brief:',
         footer_loc: ' · dhub.travel — Patagonia, Argentina',
-        footer_values: 'Innovation · Community · Regeneration'
+        footer_values: 'Innovation · Community · Regeneration',
+
+        // Project Assessment & Roadmap
+        nav_hoja_ruta: 'Roadmap',
+        mobile_nav_eval: '✦ Project Assessment & Roadmap',
+        hero_btn_eval: 'Evaluate Project &amp; Roadmap',
+        hero_eval_pill: 'Explore how we can co-execute your project (interactive 3-min assessment) →',
+        eval_sec_badge: 'Online Strategic Assessment · Destination Hub',
+        eval_sec_title: 'How can we <em>work together</em> on your project?',
+        eval_sec_desc: 'Complete an initial assessment and establish a <strong>tailored co-execution roadmap</strong> in minutes. Based on your insights regarding territory, Yield challenges, and regenerative vision, we structure key tasks, deliverables, and KPIs alongside Destination Hub, complete with an editorial PDF report.',
+        eval_sec_btn: 'Evaluate My Project &amp; Design Roadmap',
+        eval_meta_1: '4-step strategic inquiry',
+        eval_meta_2: '4-phase matrix',
+        eval_meta_3: 'Editorial PDF export',
+        eval_meta_4: 'Complimentary',
+        modal_header_title: 'D Hub Assessment &amp; Roadmap',
+        modal_header_sub: 'Co-Execution Framework &amp; Project Ecosystem',
+        modal_status_badge: 'Online Assessment',
+        modal_input_placeholder: 'Type your answer in your own words...',
+        modal_input_help: 'Press <strong>Enter</strong> to send, <strong>Shift + Enter</strong> for line break.',
+        modal_analyzing_title: 'Structuring Roadmap &amp; D Hub Model...',
+        modal_analyzing_desc: 'Our strategic engine is cross-referencing your insights with our frameworks of <strong>commercial Yield, B2B development, and regenerative tourism (DSO)</strong> to define our joint roadmap.',
+        modal_analyzing_badge: 'Generating ecosystem flowchart and 4-phase plan...',
+        modal_results_tag: 'STRATEGIC ROADMAP · DESTINATION HUB',
+        modal_results_title: 'Project Co-Execution Plan',
+        modal_results_desc: 'Initial roadmap structured in accordance with Destination Hub methodologies, standards, and values.',
+        modal_btn_pdf: 'Download PDF',
+        modal_btn_calendly: 'Schedule Session (30 min)',
+        modal_btn_restart: 'New Consultation',
+        modal_role_tag: 'VALUE PROPOSITION &amp; STRATEGIC PARTNERSHIP',
+        modal_role_title: 'How does Destination Hub co-execute in your project?',
+        modal_diag_tag: 'STRATEGIC DIAGNOSIS &amp; TERRITORIAL POTENTIAL',
+        modal_flow_title: 'Project Ecosystem Flowchart',
+        modal_phases_title: 'Co-Execution Phase Matrix (Tasks, Deliverables &amp; KPIs)'
     },
 
     pt: {
@@ -518,7 +584,40 @@ const I18N_DICTIONARY = {
         brief_ok_prefix: 'Briefing preparado para',
         brief_intro_msg: 'Olá equipe da Destination Hub, compartilho um briefing rápido de projeto:',
         footer_loc: ' · dhub.travel — Patagônia, Argentina',
-        footer_values: 'Inovação · Comunidade · Regeneração'
+        footer_values: 'Inovação · Comunidade · Regeneração',
+
+        // Avaliação & Roteiro
+        nav_hoja_ruta: 'Roteiro',
+        mobile_nav_eval: '✦ Avaliação & Roteiro',
+        hero_btn_eval: 'Avaliar Projeto &amp; Roteiro',
+        hero_eval_pill: 'Defina como podemos co-executar no seu projeto (diagnóstico interativo em 3 min) →',
+        eval_sec_badge: 'Avaliação Estratégica Online · Destination Hub',
+        eval_sec_title: 'Como podemos <em>trabalhar juntos</em> no seu projeto?',
+        eval_sec_desc: 'Faça uma avaliação inicial e defina em minutos um <strong>roteiro personalizado de co-execução</strong>. A partir das suas respostas sobre território, desafios de Yield e visão regenerativa, estruturamos tarefas-chave, entregáveis e KPIs junto à Destination Hub, com relatório para download em PDF.',
+        eval_sec_btn: 'Avaliar Meu Projeto &amp; Desenhar Roteiro',
+        eval_meta_1: 'Diagnóstico em 4 consultas',
+        eval_meta_2: 'Matriz de 4 fases',
+        eval_meta_3: 'Download em PDF editorial',
+        eval_meta_4: 'Sem custo',
+        modal_header_title: 'Diagnóstico &amp; Roteiro D Hub',
+        modal_header_sub: 'Definição de Co-Execução &amp; Ecossistema de Projeto',
+        modal_status_badge: 'Diagnóstico Online',
+        modal_input_placeholder: 'Escreva sua resposta com suas próprias palavras...',
+        modal_input_help: 'Pressione <strong>Enter</strong> para enviar, <strong>Shift + Enter</strong> para quebra de linha.',
+        modal_analyzing_title: 'Estruturando Roteiro &amp; Modelo D Hub...',
+        modal_analyzing_desc: 'O motor estratégico está cruzando suas respostas com nossos modelos de <strong>Yield comercial, articulação B2B e turismo regenerativo (DSO)</strong> para definir como co-executaremos com você.',
+        modal_analyzing_badge: 'Gerando fluxograma de ecossistema e plano de 4 fases...',
+        modal_results_tag: 'ROTEIRO ESTRATÉGICO · DESTINATION HUB',
+        modal_results_title: 'Plano de Co-Execução do Projeto',
+        modal_results_desc: 'Roteiro inicial estruturado de acordo com as metodologias, critérios e valores da Destination Hub.',
+        modal_btn_pdf: 'Baixar PDF',
+        modal_btn_calendly: 'Agendar Sessão (30 min)',
+        modal_btn_restart: 'Nova Consulta',
+        modal_role_tag: 'PROPOSTA DE VALOR &amp; PARCERIA ESTRATÉGICA',
+        modal_role_title: 'Como a Destination Hub co-executa no seu projeto?',
+        modal_diag_tag: 'DIAGNÓSTICO ESTRATÉGICO &amp; POTENCIAL TERRITORIAL',
+        modal_flow_title: 'Fluxograma do Ecossistema de Projeto',
+        modal_phases_title: 'Matriz de Co-Execução por Fases (Tarefas, Entregáveis &amp; KPIs)'
     }
 };
 
@@ -813,6 +912,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (options.track) {
             trackEvent('language_switch', { selected_language: lang });
         }
+
+        // Notificar a módulos externos (como el motor de roadmap) sobre el cambio de idioma
+        window.dispatchEvent(new CustomEvent('dhub:language_changed', { detail: { lang } }));
     }
 
     // Bind de los selectores de idioma (ES / EN / PT) para cambio en vivo sin recargar

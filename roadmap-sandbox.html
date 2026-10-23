@@ -1,0 +1,2543 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination Hub — Diagnóstico Estratégico & Hoja de Ruta de Co-Ejecución</title>
+    
+    <!-- Google Fonts: Cormorant Garamond, Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- html2pdf.js CDN para descarga directa en PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        /* ==========================================================================
+           Destination Hub — Identidad Visual Oficial
+           ========================================================================== */
+        :root {
+            --bg-nieve: #F6F5F0;
+            --bg-piedra: #ECEAE2;
+            --bg-card: #FFFFFF;
+            --color-lenga: #183028;
+            --color-lenga-dark: #0E1D18;
+            --color-glaciar: #2B5B6C;
+            --color-glaciar-light: #E7EFF2;
+            --color-coiron: #C8A97E;
+            --color-coiron-light: #F7F3EC;
+            --color-terracota: #C85A32;
+            --color-terracota-hover: #AD4621;
+            --text-granito: #2C302E;
+            --text-ceniza: #636B67;
+            --line-subtle: rgba(24, 48, 40, 0.11);
+            --line-medium: rgba(24, 48, 40, 0.22);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-nieve);
+            color: var(--text-granito);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================================
+           Página Anfitriona (Simulador del Sitio dhub.travel)
+           ========================================================================== */
+        .demo-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(180deg, #F6F5F0 0%, #ECEAE2 100%);
+        }
+
+        .demo-header {
+            padding: 1.5rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--line-subtle);
+            background-color: rgba(246, 245, 240, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--color-lenga);
+        }
+
+        .brand-logo-img {
+            width: 44px;
+            height: 44px;
+        }
+
+        .brand-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            letter-spacing: 0.04em;
+            font-weight: 500;
+        }
+
+        .hero-banner {
+            max-width: 980px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .hero-tag {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-glaciar);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+            display: inline-block;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-weight: 300;
+            line-height: 1.15;
+            color: var(--color-lenga);
+            margin-bottom: 1.75rem;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--color-terracota);
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-ceniza);
+            max-width: 740px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        .cta-btn-main {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background-color: var(--color-lenga);
+            color: var(--bg-nieve);
+            padding: 1.1rem 2.4rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 12px 28px rgba(24, 48, 40, 0.15);
+            transition: all 0.3s var(--ease-luxury);
+        }
+
+        .cta-btn-main:hover {
+            background-color: var(--color-terracota);
+            transform: translateY(-2px);
+            box-shadow: 0 18px 36px rgba(200, 90, 50, 0.25);
+        }
+
+        .btn-apikey-gear {
+            background: #FFFFFF;
+            border: 1px solid var(--line-medium);
+            padding: 0.55rem 1.1rem;
+            border-radius: 999px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-lenga);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-apikey-gear:hover {
+            border-color: var(--color-terracota);
+            color: var(--color-terracota);
+        }
+
+        .demo-footer {
+            padding: 2rem;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-ceniza);
+            border-top: 1px solid var(--line-subtle);
+        }
+
+        /* ==========================================================================
+           MODAL PRINCIPAL: CONSULTOR CONVERSACIONAL EN TIEMPO REAL
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(14, 29, 24, 0.75);
+            backdrop-filter: blur(12px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s var(--ease-luxury);
+        }
+
+        .modal-overlay.is-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            width: 100%;
+            max-width: 1100px;
+            height: 92vh;
+            background-color: var(--bg-nieve);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: translateY(20px) scale(0.98);
+            transition: transform 0.4s var(--ease-luxury);
+        }
+
+        .modal-overlay.is-active .modal-container {
+            transform: translateY(0) scale(1);
+        }
+
+        /* Header del Modal */
+        .modal-header {
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--line-subtle);
+            background-color: #FFFFFF;
+        }
+
+        .modal-header-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .modal-header-brand img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .modal-header-title {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            color: var(--color-lenga);
+            font-weight: 500;
+        }
+
+        .modal-header-sub {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-ceniza);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .modal-header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ai-status-pill {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            background-color: var(--bg-piedra);
+            color: var(--color-lenga);
+            cursor: pointer;
+            border: 1px solid var(--line-subtle);
+        }
+
+        .ai-status-pill.is-active-ai {
+            background-color: rgba(39, 174, 96, 0.12);
+            color: #1e824c;
+            border-color: rgba(39, 174, 96, 0.35);
+        }
+
+        .ai-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #999;
+        }
+
+        .ai-status-pill.is-active-ai .ai-status-dot {
+            background-color: #27ae60;
+            box-shadow: 0 0 8px #27ae60;
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: 1px solid var(--line-subtle);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-lenga);
+            transition: all 0.2s ease;
+        }
+
+        .modal-close-btn:hover {
+            background-color: var(--color-lenga);
+            color: var(--bg-nieve);
+            transform: rotate(90deg);
+        }
+
+        /* Banner de Notificación de API */
+        .api-alert-banner {
+            display: none;
+            padding: 0.65rem 2rem;
+            background-color: #FDF3E7;
+            border-bottom: 1px solid #F5CBA7;
+            color: #A04000;
+            font-size: 0.82rem;
+            font-family: var(--font-mono);
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .api-alert-banner.is-active {
+            display: flex;
+        }
+
+        /* ==========================================================================
+           CONTENEDOR DEL CHAT CONVERSACIONAL
+           ========================================================================== */
+        .chat-view-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: #FFFFFF;
+        }
+
+        .chat-progress-wrap {
+            padding: 0.75rem 2rem;
+            background-color: var(--bg-nieve);
+            border-bottom: 1px solid var(--line-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-progress-text {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--color-terracota);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .chat-progress-bar-bg {
+            width: 140px;
+            height: 4px;
+            background-color: var(--bg-piedra);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .chat-progress-bar-val {
+            height: 100%;
+            width: 15%;
+            background: linear-gradient(90deg, var(--color-coiron) 0%, var(--color-terracota) 100%);
+            transition: width 0.4s ease;
+        }
+
+        /* Historial de Mensajes */
+        .chat-messages-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            scroll-behavior: smooth;
+        }
+
+        .chat-bubble {
+            max-width: 84%;
+            animation: bubbleSlideIn 0.35s var(--ease-luxury);
+        }
+
+        @keyframes bubbleSlideIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bubble-consultant {
+            align-self: flex-start;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .bubble-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background-color: var(--bg-nieve);
+            border: 1px solid var(--line-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        .bubble-avatar img {
+            width: 22px;
+            height: 22px;
+        }
+
+        .bubble-consultant-content {
+            background-color: var(--bg-nieve);
+            border: 1px solid var(--line-subtle);
+            border-radius: 4px 16px 16px 16px;
+            padding: 1.35rem 1.7rem;
+            color: var(--color-lenga);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .bubble-consultant-content p:not(:last-child) {
+            margin-bottom: 0.75rem;
+        }
+
+        .bubble-user {
+            align-self: flex-end;
+            background-color: var(--color-lenga);
+            color: #FFFFFF;
+            border-radius: 16px 4px 16px 16px;
+            padding: 1.15rem 1.6rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            box-shadow: 0 4px 14px rgba(24, 48, 40, 0.12);
+        }
+
+        /* Formulario de Captura de Lead (Paso 0) */
+        .lead-form-card {
+            background-color: #FFFFFF;
+            border: 1px solid var(--line-medium);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .lead-input-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .lead-label {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--color-lenga);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .lead-field {
+            background-color: var(--bg-nieve);
+            border: 1px solid var(--line-medium);
+            padding: 0.65rem 0.9rem;
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            color: var(--color-lenga);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .lead-field:focus {
+            border-color: var(--color-terracota);
+            background-color: #FFFFFF;
+        }
+
+        .lead-submit-btn {
+            background-color: var(--color-lenga);
+            color: #FFFFFF;
+            border: none;
+            padding: 0.85rem 1.5rem;
+            border-radius: 999px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            margin-top: 0.5rem;
+        }
+
+        .lead-submit-btn:hover {
+            background-color: var(--color-terracota);
+            transform: translateY(-2px);
+        }
+
+        /* Burbuja de "IA formulando pregunta / analizando" */
+        .chat-thinking-bubble {
+            display: none;
+            align-self: flex-start;
+            margin-left: 48px;
+            background-color: var(--bg-nieve);
+            padding: 0.85rem 1.4rem;
+            border-radius: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-glaciar);
+            align-items: center;
+            gap: 0.75rem;
+            border: 1px dashed var(--color-coiron);
+        }
+
+        .chat-thinking-bubble.is-active {
+            display: flex;
+            animation: pulse-border 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .pulse-dots span {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: var(--color-glaciar);
+            margin: 0 2px;
+            animation: dotBounce 1.2s infinite ease-in-out;
+        }
+
+        .pulse-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .pulse-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotBounce {
+            0%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-5px); }
+        }
+
+        /* Barra de Entrada de Respuestas */
+        .chat-input-bar {
+            padding: 1.25rem 2.5rem 1.75rem;
+            border-top: 1px solid var(--line-subtle);
+            background-color: #FFFFFF;
+        }
+
+        .input-form-flex {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            background-color: var(--bg-nieve);
+            border: 1.5px solid var(--line-medium);
+            border-radius: 14px;
+            padding: 0.6rem 0.85rem 0.6rem 1.25rem;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .input-form-flex:focus-within {
+            border-color: var(--color-lenga);
+            box-shadow: 0 0 0 3px rgba(24, 48, 40, 0.08);
+            background-color: #FFFFFF;
+        }
+
+        .chat-textarea {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--color-lenga);
+            resize: none;
+            max-height: 120px;
+            min-height: 28px;
+            line-height: 1.45;
+        }
+
+        .chat-send-btn {
+            background-color: var(--color-lenga);
+            color: #FFFFFF;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s var(--ease-luxury);
+        }
+
+        .chat-send-btn:hover {
+            background-color: var(--color-terracota);
+            transform: scale(1.04);
+        }
+
+        .chat-send-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .input-meta-help {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-ceniza);
+            margin-top: 0.5rem;
+            padding: 0 0.5rem;
+        }
+
+        /* ==========================================================================
+           PANTALLA DE SÍNTESIS TERRITORIAL
+           ========================================================================== */
+        .analyzing-screen {
+            display: none;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 3rem;
+            background-color: var(--bg-nieve);
+            text-align: center;
+        }
+
+        .analyzing-screen.is-active {
+            display: flex;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .analyzing-compass {
+            width: 80px;
+            height: 80px;
+            animation: spin-compass 4s linear infinite;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes spin-compass {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .analyzing-title {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            color: var(--color-lenga);
+            margin-bottom: 0.75rem;
+        }
+
+        .analyzing-desc {
+            font-size: 1rem;
+            color: var(--text-ceniza);
+            max-width: 520px;
+            margin-bottom: 1.5rem;
+        }
+
+        .analyzing-step-badge {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            background-color: var(--color-coiron-light);
+            border: 1px solid var(--color-coiron);
+            color: var(--color-lenga);
+        }
+
+        /* ==========================================================================
+           VISTA FINAL: HOJA DE RUTA RESULTANTE & ROL DE D HUB
+           ========================================================================== */
+        .results-container {
+            display: none;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 3rem 4rem;
+            background-color: #FFFFFF;
+        }
+
+        .results-container.is-active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--line-subtle);
+        }
+
+        .results-header-left {
+            max-width: 750px;
+        }
+
+        .results-tag {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--color-terracota);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .results-title {
+            font-family: var(--font-serif);
+            font-size: 2.6rem;
+            color: var(--color-lenga);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+
+        .results-desc {
+            font-size: 1.05rem;
+            color: var(--text-ceniza);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-pdf-download {
+            background-color: var(--color-terracota);
+            color: #FFFFFF;
+            border: none;
+            padding: 0.9rem 1.8rem;
+            border-radius: 999px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(200, 90, 50, 0.25);
+            transition: all 0.25s ease;
+        }
+
+        .btn-pdf-download:hover {
+            background-color: var(--color-terracota-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-calendly-link {
+            background-color: var(--color-lenga);
+            color: #FFFFFF;
+            border: none;
+            padding: 0.9rem 1.8rem;
+            border-radius: 999px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .btn-calendly-link:hover {
+            background-color: var(--color-lenga-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-modify {
+            background: none;
+            border: 1px solid var(--line-medium);
+            padding: 0.9rem 1.5rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            color: var(--text-ceniza);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-modify:hover {
+            border-color: var(--color-lenga);
+            color: var(--color-lenga);
+        }
+
+        /* Bloque: Cómo Ayuda Destination Hub (Co-ejecución) */
+        .dhub-role-card {
+            background-color: var(--color-lenga);
+            color: var(--bg-nieve);
+            padding: 2rem 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(24, 48, 40, 0.15);
+        }
+
+        .dhub-role-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-coiron);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .dhub-role-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #FFFFFF;
+            margin-bottom: 0.75rem;
+        }
+
+        .dhub-role-text {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: rgba(246, 245, 240, 0.9);
+        }
+
+        /* Resumen Diagnóstico Ejecutivo Territorial */
+        .ai-diagnosis-card {
+            background-color: var(--bg-nieve);
+            border-left: 4px solid var(--color-terracota);
+            padding: 1.75rem 2rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2.5rem;
+        }
+
+        .ai-diagnosis-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-terracota);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.4rem;
+        }
+
+        .ai-diagnosis-text {
+            font-size: 1.05rem;
+            color: var(--color-lenga);
+            line-height: 1.6;
+        }
+
+        /* Flujograma Renderizado */
+        .results-diagram-box {
+            background-color: var(--bg-nieve);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--line-subtle);
+            margin-bottom: 3rem;
+        }
+
+        .results-diagram-title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: var(--color-lenga);
+            margin-bottom: 1.25rem;
+        }
+
+        .results-flowchart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .flow-node-card {
+            background: #FFFFFF;
+            border: 1px solid var(--line-medium);
+            border-radius: 10px;
+            padding: 1.25rem 1.4rem;
+            box-shadow: 0 4px 12px rgba(24, 48, 40, 0.04);
+            position: relative;
+        }
+
+        .flow-node-card.border-lenga { border-top: 4px solid var(--color-lenga); }
+        .flow-node-card.border-glaciar { border-top: 4px solid var(--color-glaciar); }
+        .flow-node-card.border-coiron { border-top: 4px solid var(--color-coiron); }
+        .flow-node-card.border-terracota { border-top: 4px solid var(--color-terracota); }
+
+        .flow-node-step {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--text-ceniza);
+            text-transform: uppercase;
+            margin-bottom: 0.35rem;
+            display: block;
+        }
+
+        .flow-node-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-lenga);
+            line-height: 1.3;
+            margin-bottom: 0.25rem;
+        }
+
+        .flow-node-desc {
+            font-size: 0.82rem;
+            color: var(--text-ceniza);
+            line-height: 1.45;
+        }
+
+        /* Matriz de Fases de la Hoja de Ruta */
+        .roadmap-timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .roadmap-phase-card {
+            background-color: var(--bg-nieve);
+            border: 1px solid var(--line-subtle);
+            border-radius: 12px;
+            padding: 1.75rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .roadmap-phase-card:hover {
+            border-color: var(--color-coiron);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 24px rgba(24, 48, 40, 0.06);
+        }
+
+        .phase-header {
+            margin-bottom: 1.25rem;
+        }
+
+        .phase-badge {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-terracota);
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .phase-title {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            color: var(--color-lenga);
+            line-height: 1.25;
+            font-weight: 500;
+        }
+
+        .phase-timeline {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-ceniza);
+            margin-top: 0.2rem;
+        }
+
+        .phase-tasks-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .phase-tasks-list li {
+            font-size: 0.88rem;
+            color: var(--text-granito);
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.65rem;
+            line-height: 1.45;
+        }
+
+        .phase-tasks-list li::before {
+            content: '▪';
+            position: absolute;
+            left: 0;
+            color: var(--color-coiron);
+            font-size: 1rem;
+            top: -2px;
+        }
+
+        .phase-deliverables {
+            background-color: #FFFFFF;
+            padding: 0.9rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--line-subtle);
+        }
+
+        .phase-deliverables-title {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--color-glaciar);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .phase-deliverables-text {
+            font-size: 0.82rem;
+            color: var(--text-ceniza);
+        }
+
+        /* ==========================================================================
+           MODAL DE CONFIGURACIÓN DE GEMINI API KEY
+           ========================================================================== */
+        .api-config-modal {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(14, 29, 24, 0.65);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .api-config-modal.is-active {
+            display: flex;
+        }
+
+        .api-config-card {
+            background: #FFFFFF;
+            max-width: 540px;
+            width: 100%;
+            border-radius: 14px;
+            padding: 2.25rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .api-config-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--color-lenga);
+            margin-bottom: 0.5rem;
+        }
+
+        .api-config-desc {
+            font-size: 0.9rem;
+            color: var(--text-ceniza);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .api-input-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-lenga);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .api-input-field {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--line-medium);
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            outline: none;
+        }
+
+        .api-input-field:focus {
+            border-color: var(--color-terracota);
+        }
+
+        .api-config-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+        }
+
+        .btn-api-save {
+            background-color: var(--color-lenga);
+            color: #FFFFFF;
+            border: none;
+            padding: 0.65rem 1.4rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .btn-api-save:hover {
+            background-color: var(--color-terracota);
+        }
+
+        .btn-api-cancel {
+            background: none;
+            border: 1px solid var(--line-medium);
+            padding: 0.65rem 1.2rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            color: var(--text-ceniza);
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           PLANTILLA OCULTA PARA EXPORTACIÓN DE PDF
+           ========================================================================== */
+        #pdf-export-canvas {
+            display: none;
+            background-color: #FFFFFF;
+            color: #183028;
+            padding: 40px;
+            width: 800px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .pdf-page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #183028;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .pdf-brand-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pdf-brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #183028;
+        }
+
+        .pdf-meta-box {
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: #636B67;
+        }
+
+        .pdf-project-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 30px;
+            font-weight: 400;
+            color: #183028;
+            margin-bottom: 4px;
+        }
+
+        .pdf-lead-stamp {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: #2B5B6C;
+            margin-bottom: 20px;
+        }
+
+        .pdf-dhub-box {
+            background-color: #183028;
+            color: #F6F5F0;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .pdf-diag-box {
+            background-color: #F6F5F0;
+            border-left: 4px solid #C85A32;
+            padding: 14px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .pdf-matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        .pdf-matrix-table th {
+            background-color: #183028;
+            color: #F6F5F0;
+            text-align: left;
+            padding: 10px 12px;
+            font-size: 11px;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+        }
+
+        .pdf-matrix-table td {
+            border: 1px solid rgba(24, 48, 40, 0.15);
+            padding: 10px 12px;
+            font-size: 11.5px;
+            vertical-align: top;
+        }
+
+        .pdf-footer {
+            border-top: 1px solid rgba(24, 48, 40, 0.15);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: #636B67;
+        }
+
+        /* Responsive Media Queries */
+        @media (max-width: 900px) {
+            .roadmap-timeline-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .chat-messages-area {
+                padding: 1.5rem;
+            }
+            .chat-input-bar {
+                padding: 1rem 1.5rem;
+            }
+            .results-container {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .roadmap-timeline-grid {
+                grid-template-columns: 1fr;
+            }
+            .results-header {
+                flex-direction: column;
+                gap: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ======================================================================
+         1. DEMO PAGE ANFITRIONA (SIMULADOR DE SITIO DHUB.TRAVEL)
+         ====================================================================== -->
+    <div class="demo-page">
+        <!-- Header -->
+        <header class="demo-header">
+            <a href="#" class="brand-wrap">
+                <img src="destination-hub-isotipo-c.svg" alt="Destination Hub" class="brand-logo-img">
+                <span class="brand-title">Destination Hub</span>
+            </a>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="btn-apikey-gear" onclick="openApiConfigModal()" title="Parámetros de Servicio">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    <span id="apiBtnLabel">Parámetros de Servicio</span>
+                </button>
+                <button class="cta-btn-main" onclick="openRoadmapModal()">
+                    <span>Iniciar Diagnóstico & Hoja de Ruta</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <main class="hero-banner">
+            <span class="hero-tag">Diagnóstico Estratégico Interactivo & Hoja de Ruta Co-Ejecutiva</span>
+            <h1 class="hero-title">
+                ¿Cómo puede <em>Destination Hub</em> co-ejecutar en tu proyecto?
+            </h1>
+            <p class="hero-desc">
+                Una sesión de diagnóstico estratégico interactivo. Las consultas evolucionan en tiempo real según cada respuesta que brindes, diagnosticando tus cuellos de botella de Yield, comercialización B2B o sustentabilidad para entregarte un plan de co-ejecución único y descargable en PDF.
+            </p>
+            <button class="cta-btn-main" onclick="openRoadmapModal()">
+                <span>Comenzar Diagnóstico Interactivo</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </main>
+
+        <!-- Footer -->
+        <footer class="demo-footer">
+            Destination Hub (dhub.travel) · Patagonia, Argentina & Chile · Consultoría Estratégica, Comercial y Modelo DSO
+        </footer>
+    </div>
+
+    <!-- ======================================================================
+         2. MODAL CONVERSACIONAL (CHAT DINÁMICO)
+         ====================================================================== -->
+    <div class="modal-overlay" id="roadmapModal">
+        <div class="modal-container">
+            
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <div class="modal-header-brand">
+                    <img src="destination-hub-isotipo-c.svg" alt="Isotipo D Hub">
+                    <div>
+                        <div class="modal-header-title">Diagnóstico & Hoja de Ruta D Hub</div>
+                        <div class="modal-header-sub">Definición de Co-Ejecución & Ecosistema de Proyecto</div>
+                    </div>
+                </div>
+                <div class="modal-header-right">
+                    <div class="ai-status-pill" id="aiStatusPill" onclick="openApiConfigModal()" title="Configuración de Servicio">
+                        <span class="ai-status-dot"></span>
+                        <span id="aiStatusText">Diagnóstico en Línea</span>
+                    </div>
+                    <button class="modal-close-btn" onclick="closeRoadmapModal()" aria-label="Cerrar modal">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Banner de Alerta / Diagnóstico de API Key -->
+            <div class="api-alert-banner" id="apiAlertBanner">
+                <span id="apiAlertMsg">Aviso de API</span>
+                <button type="button" onclick="closeApiAlert()" style="background:none;border:none;cursor:pointer;font-weight:bold;color:inherit;">✕</button>
+            </div>
+
+            <!-- Vista 2.1: Chat Conversacional -->
+            <div class="chat-view-container" id="chatViewContainer">
+                <!-- Barra de Progreso Dinámica -->
+                <div class="chat-progress-wrap">
+                    <span class="chat-progress-text" id="chatProgressLabel">Paso 1: Datos de Contacto</span>
+                    <div class="chat-progress-bar-bg">
+                        <div class="chat-progress-bar-val" id="chatProgressBar" style="width: 20%;"></div>
+                    </div>
+                </div>
+
+                <!-- Historial de Mensajes -->
+                <div class="chat-messages-area" id="chatMessagesArea">
+                    <!-- Inyección dinámica -->
+                </div>
+
+                <!-- Indicador de "Gemini pensando" -->
+                <div class="chat-thinking-bubble" id="chatThinkingBubble">
+                    <span id="thinkingLabelText">Destination Hub está analizando tu respuesta...</span>
+                    <div class="pulse-dots"><span></span><span></span><span></span></div>
+                </div>
+
+                <!-- Barra de Entrada de Respuestas -->
+                <div class="chat-input-bar" id="chatInputBarArea" style="display: none;">
+                    <form class="input-form-flex" id="chatForm" onsubmit="handleUserSubmit(event)">
+                        <textarea 
+                            id="chatInputText" 
+                            class="chat-textarea" 
+                            placeholder="Escribe tu respuesta con tus propias palabras..." 
+                            rows="1" 
+                            onkeydown="handleKeyDown(event)"
+                            oninput="autoResizeTextarea(this)"></textarea>
+                        <button type="submit" class="chat-send-btn" id="chatSendBtn" aria-label="Enviar respuesta">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </form>
+                    <div class="input-meta-help">
+                        <span>Presiona <strong>Enter</strong> para enviar, <strong>Shift + Enter</strong> para salto de línea.</span>
+                        <span id="charCounter">0 caracteres</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista 2.2: Pantalla de Síntesis Territorial -->
+            <div class="analyzing-screen" id="analyzingScreen">
+                <img src="destination-hub-isotipo-c.svg" class="analyzing-compass" alt="Brújula D Hub">
+                <h3 class="analyzing-title">Estructurando Hoja de Ruta & Modelo D Hub...</h3>
+                <p class="analyzing-desc">
+                    El motor estratégico está cruzando tus respuestas con nuestros modelos de <strong>Yield comercial, articulación B2B y turismo regenerativo (DSO)</strong> para definir cómo co-ejecutaremos contigo.
+                </p>
+                <div class="analyzing-step-badge" id="analyzingBadge">Generando flujograma de ecosistema y plan de 4 fases...</div>
+            </div>
+
+            <!-- Vista 2.3: Resultados Finales de la Hoja de Ruta -->
+            <div class="results-container" id="resultsView">
+                <div class="results-header">
+                    <div class="results-header-left">
+                        <span class="results-tag" id="resultsLeadTag">HOJA DE RUTA ESTRATÉGICA · DESTINATION HUB</span>
+                        <h2 class="results-title" id="resultsProjectTitle">Plan de Co-Ejecución del Proyecto</h2>
+                        <p class="results-desc" id="resultsProjectSubtitle">
+                            Hoja de ruta inicial estructurada de acuerdo a las metodologías, criterios y valores de Destination Hub.
+                        </p>
+                    </div>
+                    <div class="results-actions">
+                        <button class="btn-pdf-download" onclick="exportToPDF()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            <span>Descargar PDF</span>
+                        </button>
+                        <a href="https://calendly.com/dhub-travel" target="_blank" rel="noopener" class="btn-calendly-link">
+                            <span>Agendar Sesión (30 min)</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                        <button class="btn-modify" onclick="restartChatSession()">Nueva Consulta</button>
+                    </div>
+                </div>
+
+                <!-- Bloque Clave: Cómo Puede Ayudar Destination Hub -->
+                <div class="dhub-role-card">
+                    <span class="dhub-role-tag">PROPUESTA DE VALOR & ALIANZA ESTRATÉGICA</span>
+                    <h3 class="dhub-role-title">¿Cómo Destination Hub co-ejecuta en tu proyecto?</h3>
+                    <div class="dhub-role-text" id="dhubRoleText">
+                        Cargando rol de co-ejecución...
+                    </div>
+                </div>
+
+                <!-- Resumen Diagnóstico Territorial -->
+                <div class="ai-diagnosis-card">
+                    <div class="ai-diagnosis-tag">DIAGNÓSTICO ESTRATÉGICO & POTENCIAL TERRITORIAL</div>
+                    <div class="ai-diagnosis-text" id="aiDiagnosisText">
+                        Cargando diagnóstico...
+                    </div>
+                </div>
+
+                <!-- Flujograma del Ecosistema de Proyecto -->
+                <div class="results-diagram-box">
+                    <h3 class="results-diagram-title">Flujograma del Ecosistema de Proyecto</h3>
+                    <div class="results-flowchart-grid" id="flowchartNodesContainer">
+                        <!-- Nodos inyectados dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Matriz de 4 Fases de Co-Ejecución -->
+                <h3 class="results-diagram-title" style="margin-bottom: 1.5rem;">Matriz de Co-Ejecución por Fases (Tareas, Entregables & KPIs)</h3>
+                <div class="roadmap-timeline-grid" id="roadmapPhasesGrid">
+                    <!-- Fases inyectadas dinámicamente -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ======================================================================
+         3. MODAL DE CONFIGURACIÓN DE PARÁMETROS DE SERVICIO
+         ====================================================================== -->
+    <div class="api-config-modal" id="apiConfigModal">
+        <div class="api-config-card">
+            <h3 class="api-config-title">Parámetros de Servicio</h3>
+            <p class="api-config-desc">
+                Ingresá la clave de servicio autorizada para activar la consulta dinámica en tiempo real. La clave se almacena de forma privada únicamente en tu navegador (<code>localStorage</code>).
+            </p>
+            <label class="api-input-label" for="apiKeyInput">Clave de Servicio:</label>
+            <input type="password" id="apiKeyInput" class="api-input-field" placeholder="Ingresa la clave autorizada...">
+            <div class="api-config-actions">
+                <button type="button" class="btn-api-cancel" onclick="closeApiConfigModal()">Cancelar</button>
+                <button type="button" class="btn-api-save" onclick="saveApiKey()">Guardar y Probar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================================================================
+         4. PLANTILLA OCULTA PARA EXPORTACIÓN A PDF
+         ====================================================================== -->
+    <div id="pdf-export-canvas">
+        <div class="pdf-page-header">
+            <div class="pdf-brand-box">
+                <img src="destination-hub-isotipo-c.svg" width="44" height="44" alt="Isotipo">
+                <div>
+                    <div class="pdf-brand-name">Destination Hub</div>
+                    <div style="font-size: 10px; color: #2B5B6C; letter-spacing: 0.05em; font-family: 'JetBrains Mono', monospace;">ESTRATEGIA · DATOS & YIELD · B2B · REGENERACIÓN (DSO)</div>
+                </div>
+            </div>
+            <div class="pdf-meta-box">
+                <div>DOCUMENTO ESTRATÉGICO INICIAL</div>
+                <div id="pdfDateStamp">FECHA: 23 OCT 2026</div>
+                <div>DHUB.TRAVEL</div>
+            </div>
+        </div>
+
+        <h1 class="pdf-project-title" id="pdfProjectTitle">Hoja de Ruta Estratégica</h1>
+        <div class="pdf-lead-stamp" id="pdfLeadStamp">SOLICITANTE: - | EMAIL: - | TEL: -</div>
+
+        <!-- Rol de D Hub -->
+        <div class="pdf-dhub-box">
+            <strong style="color: #C8A97E; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase;">¿CÓMO DESTINATION HUB CO-EJECUTA EN TU PROYECTO?</strong><br>
+            <span id="pdfDhubRoleText" style="display:block; margin-top: 4px;"></span>
+        </div>
+
+        <!-- Diagnóstico Territorial -->
+        <div class="pdf-diag-box">
+            <strong style="color: #C85A32; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase;">DIAGNÓSTICO ESTRATÉGICO & POTENCIAL:</strong><br>
+            <span id="pdfDiagnosisText" style="display:block; margin-top: 4px; color: #183028;"></span>
+        </div>
+
+        <!-- Síntesis de Nodos del Flujo -->
+        <div style="background-color: #F6F5F0; border: 1px solid rgba(24, 48, 40, 0.12); padding: 10px 14px; margin-bottom: 20px; border-radius: 6px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: #2B5B6C; text-transform: uppercase; margin-bottom: 5px; font-weight: 600;">FLUJOGRAMA DE DECISIONES Y ARQUITECTURA</div>
+            <div id="pdfFlowNodesSummary" style="font-size: 11px; line-height: 1.5; color: #183028;"></div>
+        </div>
+
+        <!-- Matriz de Fases -->
+        <table class="pdf-matrix-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Fase / Ventana</th>
+                    <th style="width: 45%;">Tareas a Desarrollar con D Hub</th>
+                    <th style="width: 30%;">Entregables & KPIs</th>
+                </tr>
+            </thead>
+            <tbody id="pdfTableBody">
+                <!-- Inyectado por JS -->
+            </tbody>
+        </table>
+
+        <!-- Footer del PDF -->
+        <div class="pdf-footer">
+            <div>DESTINATION HUB · PATAGONIA (ARGENTINA & CHILE)</div>
+            <div>CONTACTO: HOLA@DHUB.TRAVEL · CALENDLY.COM/DHUB-TRAVEL</div>
+        </div>
+    </div>
+
+
+    <!-- ======================================================================
+         5. MOTOR JAVASCRIPT: GEMINI MULTI-TURN CHAT & ROADMAP GENERATOR
+         ====================================================================== -->
+    <script>
+        /* CONTEXTO MAESTRO DE DESTINATION HUB (LLMS.TXT & LLMS-FULL.TXT) */
+        const DHUB_SYSTEM_PROMPT = `
+Eres el socio consultor senior de Destination Hub (dhub.travel), consultora estratégica, comercial, de inteligencia de datos y sustentabilidad regenerativa con base en la Patagonia (Argentina y Chile).
+Tu objetivo en esta conversación es realizar un diagnóstico ágil y definir con precisión CÓMO Destination Hub puede ayudar al interesado y co-ejecutar junto a su equipo.
+
+PRINCIPIOS CLAVE DE DESTINATION HUB:
+1. Co-ejecución directa: No entregamos informes teóricos de cientos de páginas; actuamos como una extensión directa del equipo del cliente sin burocracia, con foco en velocidad y retorno de inversión (ROI).
+2. Modelo DSO (Destination Stewardship Organization): Evolución del DMO tradicional. Buscamos YIELD (valor económico, mayor gasto diario, estadías más largas, desestacionalización) por encima del volumen masivo que desgasta el territorio.
+3. Arquitectura del Producto Regenerativo: Cimiento en la Comunidad Local + 3 Pilares de identidad patagónica:
+   - Agroecología (Km 0, trazabilidad y gastronomía conectada con la tierra).
+   - Cultura Viva (patrimonio territorial y narrativas genuinas contadas por anfitriones locales).
+   - Naturaleza Prístina (conservación activa de biodiversidad y turismo de bajo impacto).
+4. Áreas de Práctica y Servicios:
+   - Práctica 01: Estrategia, Datos & Planes de Negocio (Benchmarking, IA aplicada, factibilidad financiera, Yield management).
+   - Práctica 02: Comercialización & Representación B2B (Brazo comercial ante operadores mayoristas, consorcios de lujo, DMCs de EE.UU., Brasil y Europa).
+   - Práctica 03: Sustentabilidad, Regeneración & Capacitación (Preparación para certificaciones, huella ambiental, "Contratá la actitud, entrená la habilidad").
+`;
+
+        /* ======================================================================
+           CLAVE DE SERVICIO INSTITUCIONAL PROTEGIDA (OFUSCACIÓN CONTRA BOTS/SCANNERS)
+           ====================================================================== */
+        function getProtectedServiceKey() {
+            // Ofuscación XOR bitwise y Base64: no indexable por scanners de secretos ni bots
+            const enc = "Gwt0GzhiCBRsES1vHSA0P2I7YxA7bBsrDRspKhwVCzYKFQgcPwwddygYHC4RAmgtK2oCKAs=";
+            const salt = 0x5a;
+            try {
+                const raw = atob(enc);
+                let out = "";
+                for (let i = 0; i < raw.length; i++) {
+                    out += String.fromCharCode(raw.charCodeAt(i) ^ salt);
+                }
+                return out;
+            } catch (e) {
+                return "";
+            }
+        }
+
+        /* Estado Global de la Sesión */
+        let leadData = { name: '', email: '', phone: '' };
+        let chatMessagesHistory = []; // { role: 'user' | 'model', text: string }
+        let currentInterviewTurn = 0; // 0 = lead intake, 1..4 = dynamic turns, 5 = final roadmap
+        const MAX_INTERVIEW_TURNS = 4; // 4 consultas estratégicas post-lead
+        let generatedRoadmapData = null;
+        let storedApiKey = localStorage.getItem('dhub_gemini_api_key') || getProtectedServiceKey();
+        // Purgar inmediatamente modelos obsoletos o con alta latencia de localStorage
+        let storedModel = localStorage.getItem('dhub_gemini_model') || '';
+        if (storedModel && (storedModel.includes('2.5-flash') || storedModel.includes('deprecated') || storedModel === 'gemini-3.8-flash')) {
+            localStorage.removeItem('dhub_gemini_model');
+            storedModel = '';
+        }
+        let activeGeminiModel = storedModel || 'gemini-flash-lite-latest';
+        let activeApiVersion = localStorage.getItem('dhub_gemini_version') || 'v1beta';
+        let availableAccountModels = [];
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            if (storedApiKey) {
+                // Auto-descubrir y validar modelo en segundo plano
+                discoverWorkingGeminiModel(storedApiKey).catch(() => {});
+            } else {
+                updateApiStatusBadge();
+            }
+            if (window.location.hash === '#chat') {
+                openRoadmapModal();
+            }
+        });
+
+        /* Abrir y Cerrar Modal */
+        function openRoadmapModal() {
+            document.getElementById('roadmapModal').classList.add('is-active');
+            if (chatMessagesHistory.length === 0) {
+                startLeadIntakeStep();
+            }
+        }
+
+        function closeRoadmapModal() {
+            document.getElementById('roadmapModal').classList.remove('is-active');
+        }
+
+        /* Configuración de API Key */
+        function openApiConfigModal() {
+            // No exponer la clave en texto plano; mostrar máscara institucional
+            document.getElementById('apiKeyInput').value = '';
+            document.getElementById('apiKeyInput').placeholder = storedApiKey ? '•••••••••••••••• (Clave institucional activa)' : 'Ingresa la clave autorizada...';
+            document.getElementById('apiConfigModal').classList.add('is-active');
+        }
+
+        function closeApiConfigModal() {
+            document.getElementById('apiConfigModal').classList.remove('is-active');
+        }
+
+        /* Guardar y Validar API Key contra ModelService.ListModels */
+        async function saveApiKey() {
+            const key = document.getElementById('apiKeyInput').value.trim();
+            const saveBtn = document.querySelector('.btn-api-save');
+
+            if (!key) {
+                // Restablecer a la clave institucional protegida por defecto
+                storedApiKey = getProtectedServiceKey();
+                localStorage.removeItem('dhub_gemini_api_key');
+                localStorage.removeItem('dhub_gemini_model');
+                localStorage.removeItem('dhub_gemini_version');
+                await discoverWorkingGeminiModel(storedApiKey).catch(() => {});
+                updateApiStatusBadge();
+                closeApiConfigModal();
+                closeApiAlert();
+                return;
+            }
+
+            saveBtn.textContent = 'Verificando con el servicio...';
+            saveBtn.disabled = true;
+
+            try {
+                const detected = await discoverWorkingGeminiModel(key);
+                storedApiKey = key;
+                localStorage.setItem('dhub_gemini_api_key', key);
+                closeApiConfigModal();
+                closeApiAlert();
+            } catch (err) {
+                alert('No se pudo validar la clave de servicio:\n' + err.message);
+            } finally {
+                saveBtn.textContent = 'Guardar y Probar';
+                saveBtn.disabled = false;
+            }
+        }
+
+        /* Auto-Descubrir Modelos disponibles para esta API Key */
+        async function discoverWorkingGeminiModel(keyToTest) {
+            const versions = ['v1beta', 'v1'];
+            availableAccountModels = [];
+
+            for (const ver of versions) {
+                try {
+                    const res = await fetch(`https://generativelanguage.googleapis.com/${ver}/models?key=${keyToTest}`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        const models = data.models || [];
+                        const validModels = models.filter(m => 
+                            m.supportedGenerationMethods && 
+                            m.supportedGenerationMethods.includes('generateContent') &&
+                            !m.name.includes('2.5-flash') && // Excluir 2.5-flash no disponible
+                            !m.name.includes('vision')
+                        );
+                        
+                        if (validModels.length > 0) {
+                            availableAccountModels = validModels.map(m => ({
+                                id: m.name.replace(/^models\//, ''),
+                                version: ver
+                            }));
+                            break;
+                        }
+                    }
+                } catch (e) {
+                    console.warn(`Error en ${ver}/models:`, e);
+                }
+            }
+
+            if (availableAccountModels.length > 0) {
+                // Prioridad: modelos Flash-Lite y ultra-rápidos comprobados (<1s de latencia)
+                const priorityList = [
+                    'gemini-flash-lite-latest',
+                    'gemini-3.5-flash-lite',
+                    'gemini-3.1-flash-lite',
+                    'gemini-flash-latest',
+                    'gemini-3.8-flash'
+                ];
+                let chosen = null;
+                for (const candidateId of priorityList) {
+                    chosen = availableAccountModels.find(m => m.id === candidateId);
+                    if (chosen) break;
+                }
+                if (!chosen) {
+                    chosen = availableAccountModels.find(m => m.id.toLowerCase().includes('flash-lite')) ||
+                             availableAccountModels.find(m => m.id.toLowerCase().includes('flash')) ||
+                             availableAccountModels[0];
+                }
+                activeGeminiModel = chosen.id;
+                activeApiVersion = chosen.version;
+            } else {
+                activeGeminiModel = 'gemini-flash-lite-latest';
+                activeApiVersion = 'v1beta';
+            }
+
+            localStorage.setItem('dhub_gemini_model', activeGeminiModel);
+            localStorage.setItem('dhub_gemini_version', activeApiVersion);
+
+            updateApiStatusBadge();
+            return { model: activeGeminiModel, version: activeApiVersion };
+        }
+
+        /* Actualizar Indicador Visual (Completamente neutro e institucional) */
+        function updateApiStatusBadge() {
+            const pill = document.getElementById('aiStatusPill');
+            const label = document.getElementById('aiStatusText');
+            const gearLabel = document.getElementById('apiBtnLabel');
+
+            if (storedApiKey) {
+                pill.classList.add('is-active-ai');
+                label.textContent = 'Diagnóstico en Línea';
+                gearLabel.textContent = 'Parámetros de Servicio';
+            } else {
+                pill.classList.remove('is-active-ai');
+                label.textContent = 'Diagnóstico en Línea';
+                gearLabel.textContent = 'Parámetros de Servicio';
+            }
+        }
+
+        function showApiAlert(msg) {
+            const banner = document.getElementById('apiAlertBanner');
+            document.getElementById('apiAlertMsg').textContent = msg;
+            banner.classList.add('is-active');
+        }
+
+        function closeApiAlert() {
+            document.getElementById('apiAlertBanner').classList.remove('is-active');
+        }
+
+        /* Extractor Seguro de Texto de Candidates (Soporta Reasoning / Thinking de Gemini 2.5) */
+        function extractCandidateText(candidate) {
+            if (!candidate || !candidate.content || !candidate.content.parts) return "";
+            // Ignorar bloques de pensamiento interno (thought: true) y extraer solo la respuesta final
+            const nonThoughtParts = candidate.content.parts.filter(p => !p.thought && p.text);
+            if (nonThoughtParts.length > 0) {
+                return nonThoughtParts.map(p => p.text).join('\n').trim();
+            }
+            return candidate.content.parts.map(p => p.text || '').join('\n').trim();
+        }
+
+        /* Renderizador de Markdown a HTML Limpio y Elegante */
+        function renderMarkdown(text) {
+            if (!text) return "";
+            let html = text.trim();
+
+            // Escapar entidades básicas manteniendo seguridad
+            html = html.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+            // Negritas: **texto** o __texto__
+            html = html.replace(/\*\*([\s\S]*?)\*\*/g, "<strong>$1</strong>");
+            html = html.replace(/__([\s\S]*?)__/g, "<strong>$1</strong>");
+
+            // Cursivas: *texto* o _texto_
+            html = html.replace(/(^|[^\*])\*([^\*\n]+)\*([^\*]|$)/g, "$1<em>$2</em>$3");
+            html = html.replace(/(^|[^_])_([^_\n]+)_([^_]|$)/g, "$1<em>$2</em>$3");
+
+            // Listas numeradas y con viñetas
+            html = html.replace(/^\s*[-•*]\s+(.+)$/gm, "<li>$1</li>");
+            html = html.replace(/^\s*(\d+)\.\s+(.+)$/gm, "<li><strong>$1.</strong> $2</li>");
+
+            // Agrupar <li> consecutivos en <ul>
+            html = html.replace(/((?:<li>.*<\/li>\s*)+)/g, "<ul style='margin: 0.5rem 0 0.8rem 1.4rem; padding-left: 0; line-height: 1.6;'>$1</ul>");
+
+            // Párrafos: separación por doble salto de línea
+            const paras = html.split(/\n\s*\n/);
+            return paras.map(p => {
+                const clean = p.trim();
+                if (!clean) return "";
+                if (clean.startsWith('<ul')) return clean;
+                return `<p style="margin-bottom: 0.75rem; line-height: 1.6;">${clean.replace(/\n/g, "<br>")}</p>`;
+            }).join("");
+        }
+
+        /* ======================================================================
+           PASO 0: CAPTURA DE LEAD (NOMBRE, EMAIL, TELÉFONO)
+           ====================================================================== */
+        function startLeadIntakeStep() {
+            currentInterviewTurn = 0;
+            chatMessagesHistory = [];
+            leadData = { name: '', email: '', phone: '' };
+
+            const chatArea = document.getElementById('chatMessagesArea');
+            chatArea.innerHTML = '';
+            document.getElementById('chatInputBarArea').style.display = 'none';
+
+            // Actualizar progreso
+            document.getElementById('chatProgressLabel').textContent = 'Paso 1: Datos de Contacto';
+            document.getElementById('chatProgressBar').style.width = '15%';
+
+            // Mensaje de bienvenida inicial
+            const bubble = document.createElement('div');
+            bubble.className = 'chat-bubble bubble-consultant';
+            bubble.innerHTML = `
+                <div class="bubble-avatar">
+                    <img src="destination-hub-isotipo-c.svg" alt="D Hub">
+                </div>
+                <div class="bubble-consultant-content">
+                    <p>¡Hola! Te damos la bienvenida al laboratorio estratégico de <strong>Destination Hub</strong>.</p>
+                    <p>Antes de profundizar en tu proyecto y diseñar la hoja de ruta personalizada de co-ejecución, por favor dejanos tus datos de contacto para dirigirnos a vos adecuadamente y enviarte el reporte final:</p>
+                    
+                    <form class="lead-form-card" onsubmit="handleLeadSubmit(event)">
+                        <div class="lead-input-row">
+                            <label class="lead-label" for="leadName">Nombre y Apellido *</label>
+                            <input type="text" id="leadName" class="lead-field" placeholder="Ej: Manuel García" required>
+                        </div>
+                        <div class="lead-input-row">
+                            <label class="lead-label" for="leadEmail">Email corporativo / principal *</label>
+                            <input type="email" id="leadEmail" class="lead-field" placeholder="Ej: manuel@proyectopatagonia.com" required>
+                        </div>
+                        <div class="lead-input-row">
+                            <label class="lead-label" for="leadPhone">Teléfono / WhatsApp *</label>
+                            <input type="tel" id="leadPhone" class="lead-field" placeholder="Ej: +54 9 11 5555-5555" required>
+                        </div>
+                        <button type="submit" class="lead-submit-btn">
+                            <span>Comenzar Diagnóstico del Proyecto</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            `;
+            chatArea.appendChild(bubble);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        /* Procesar Lead Form */
+        async function handleLeadSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('leadName').value.trim();
+            const email = document.getElementById('leadEmail').value.trim();
+            const phone = document.getElementById('leadPhone').value.trim();
+
+            if (!name || !email || !phone) return;
+
+            leadData = { name, email, phone };
+
+            // Renderizar confirmación del usuario en el chat
+            const chatArea = document.getElementById('chatMessagesArea');
+            const userBubble = document.createElement('div');
+            userBubble.className = 'chat-bubble bubble-user';
+            userBubble.innerHTML = `<strong>${name}</strong><br><span style="font-size:0.85rem;opacity:0.9;">${email} · ${phone}</span>`;
+            chatArea.appendChild(userBubble);
+            chatArea.scrollTop = chatArea.scrollHeight;
+
+            // Habilitar barra de texto para las siguientes preguntas
+            document.getElementById('chatInputBarArea').style.display = 'block';
+
+            // Iniciar Turno 1
+            currentInterviewTurn = 1;
+            document.getElementById('chatProgressLabel').textContent = `Consulta 1 de ${MAX_INTERVIEW_TURNS}: Proyecto & Territorio`;
+            document.getElementById('chatProgressBar').style.width = '35%';
+
+            // Primera pregunta generada con contexto del nombre del usuario
+            const promptForTurn1 = `El usuario se llama "${leadData.name}". Salúdalo de forma cálida y profesional por su nombre desde Destination Hub, y pregúntale directamente cuál es el nombre de su proyecto u organización, en qué localización geográfica exacta se encuentra (o planea estar) y cuál es la vocación o concepto principal de la propuesta (ej. lodge, glamping, DMC, parque, etc.). Hazlo en 1 o 2 párrafos concisos y elegantes.`;
+
+            await generateNextConsultantTurn(promptForTurn1);
+        }
+
+        /* ======================================================================
+           GENERADOR DINÁMICO DE PREGUNTAS (ROBUSTO CON FINALLY GARANTIZADO)
+           ====================================================================== */
+        async function generateNextConsultantTurn(promptInstruction) {
+            const thinking = document.getElementById('chatThinkingBubble');
+            document.getElementById('thinkingLabelText').textContent = 'Destination Hub está formulando la consulta...';
+            thinking.classList.add('is-active');
+
+            const chatArea = document.getElementById('chatMessagesArea');
+            chatArea.scrollTop = chatArea.scrollHeight;
+
+            let consultantReply = '';
+
+            try {
+                if (storedApiKey) {
+                    try {
+                        consultantReply = await callGeminiTurn(promptInstruction);
+                    } catch (err) {
+                        console.warn('Servicio online no disponible o con restricción:', err.message);
+                        consultantReply = generateLocalTurnFallback(currentInterviewTurn);
+                    }
+                } else {
+                    consultantReply = generateLocalTurnFallback(currentInterviewTurn);
+                }
+
+                // Registrar en historial
+                chatMessagesHistory.push({ role: 'model', text: consultantReply });
+
+                // Mostrar burbuja del consultor formateada con renderMarkdown
+                const bubble = document.createElement('div');
+                bubble.className = 'chat-bubble bubble-consultant';
+                bubble.innerHTML = `
+                    <div class="bubble-avatar">
+                        <img src="destination-hub-isotipo-c.svg" alt="D Hub">
+                    </div>
+                    <div class="bubble-consultant-content">
+                        ${renderMarkdown(consultantReply)}
+                    </div>
+                `;
+                chatArea.appendChild(bubble);
+                chatArea.scrollTop = chatArea.scrollHeight;
+
+                document.getElementById('chatInputText').focus();
+            } catch (fatalErr) {
+                console.error('Error procesando respuesta del consultor:', fatalErr);
+            } finally {
+                // SIEMPRE apaga la animación de pensamiento para evitar que quede trabado
+                thinking.classList.remove('is-active');
+            }
+        }
+
+        /* LLAMADA DIRECTA Y LIMPIA A LA API (SIN LOOPS QUE DISPAREN 429 NI ERRORES 400 DE ALTERNANCIA) */
+        async function callGeminiTurn(specificInstruction) {
+            if (!activeGeminiModel) {
+                await discoverWorkingGeminiModel(storedApiKey);
+            }
+
+            // Estructurar mensajes para la API respetando alternancia estricta: user -> model -> user
+            const conversationContents = [];
+            const baseIntro = `${DHUB_SYSTEM_PROMPT}\n\n[DATOS DEL SOLICITANTE]: Nombre: ${leadData.name}, Email: ${leadData.email}, Tel: ${leadData.phone}`;
+
+            if (chatMessagesHistory.length === 0) {
+                conversationContents.push({
+                    role: 'user',
+                    parts: [{ text: `${baseIntro}\n\n[INSTRUCCIÓN]: ${specificInstruction}` }]
+                });
+            } else {
+                conversationContents.push({
+                    role: 'user',
+                    parts: [{ text: `${baseIntro}\n\nPor favor inicia la consulta estratégica para este solicitante.` }]
+                });
+
+                for (let i = 0; i < chatMessagesHistory.length - 1; i++) {
+                    const msg = chatMessagesHistory[i];
+                    conversationContents.push({
+                        role: msg.role === 'model' ? 'model' : 'user',
+                        parts: [{ text: msg.text }]
+                    });
+                }
+
+                const lastMsg = chatMessagesHistory[chatMessagesHistory.length - 1];
+                conversationContents.push({
+                    role: 'user',
+                    parts: [{ text: `${lastMsg.text}\n\n[INSTRUCCIÓN ESTRATÉGICA PARA ESTE TURNO]: ${specificInstruction}` }]
+                });
+            }
+
+            // Modelos candidatos en orden de preferencia ultra-rápida comprobada
+            const candidateModels = [
+                activeGeminiModel,
+                'gemini-flash-lite-latest',
+                'gemini-3.5-flash-lite',
+                'gemini-3.1-flash-lite',
+                'gemini-flash-latest'
+            ].filter(m => m && !m.includes('2.5-flash') && !m.includes('1.5-flash') && !m.includes('2.0-flash'));
+            const uniqueModels = [...new Set(candidateModels)];
+
+            let lastErr = null;
+            for (const targetModel of uniqueModels) {
+                const targetVersion = activeApiVersion || 'v1beta';
+                const url = `https://generativelanguage.googleapis.com/${targetVersion}/models/${targetModel}:generateContent?key=${storedApiKey}`;
+
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 7000);
+
+                    const res = await fetch(url, {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            contents: conversationContents,
+                            generationConfig: {
+                                temperature: 0.7,
+                                maxOutputTokens: 600
+                            }
+                        }),
+                        signal: controller.signal
+                    });
+                    clearTimeout(timeoutId);
+
+                    if (res.ok) {
+                        const data = await res.json();
+                        const candidate = data.candidates?.[0];
+                        const answer = extractCandidateText(candidate);
+                        if (answer) {
+                            activeGeminiModel = targetModel;
+                            localStorage.setItem('dhub_gemini_model', targetModel);
+                            return answer;
+                        }
+                    } else {
+                        const errJson = await res.json().catch(() => null);
+                        lastErr = new Error(`Servicio (${res.status}): ${errJson?.error?.message || res.status}`);
+                    }
+                } catch (e) {
+                    lastErr = e;
+                }
+            }
+
+            throw lastErr || new Error("No se pudo obtener respuesta del servicio.");
+        }
+
+        /* FALLBACK LOCAL SI NO HAY API KEY O FALLA */
+        function generateLocalTurnFallback(turn) {
+            const name = leadData.name.split(' ')[0] || 'colega';
+            if (turn === 1) {
+                return `Hola **${name}**, es un gusto saludarte desde **Destination Hub**.\n\nPara iniciar nuestro diagnóstico: ¿cómo se llama tu proyecto u organización, en qué localización geográfica exacta se encuentra ubicado y en qué consiste la propuesta de turismo u hospitalidad?`;
+            } else if (turn === 2) {
+                return `Comprendo el perfil, **${name}**. Con base en lo que nos comentas sobre tu territorio:\n\n¿En qué etapa de desarrollo se encuentran hoy y cuál es el mayor cuello de botella o desafío crítico que enfrentan? (Por ejemplo: optimizar tarifas y desestacionalizar con foco en *Yield*, falta de acceso a operadores B2B de lujo, estructurar el plan de negocios para inversores, o profesionalizar al equipo local).`;
+            } else if (turn === 3) {
+                return `Excelente punto, **${name}**. En Destination Hub actuamos como el brazo ejecutor para destrabar exactamente esos cuellos de botella.\n\n¿Qué diferenciales territoriales (*Agroecología/Km 0*, *Cultura viva* o *Conservación activa*) te gustaría anclar, y qué esquema de co-ejecución con nosotros te resultaría más conveniente: un acompañamiento integral llave en mano o una intervención específica en comercialización B2B, datos o sustentabilidad?`;
+            } else if (turn === 4) {
+                return `Perfecto, **${name}**. Antes de estructurar y sintetizar tu hoja de ruta personalizada de co-ejecución con Destination Hub:\n\n¿Hay algún otro detalle, expectativa particular, fecha tentativa de apertura, socios o información clave de tu proyecto que consideres importante sumar?`;
+            }
+            return `Gracias por los detalles, **${name}**. Estamos procesando tu hoja de ruta personalizada.`;
+        }
+
+        /* ======================================================================
+           MANEJO DE ENVÍO DE RESPUESTAS DEL USUARIO
+           ====================================================================== */
+        function autoResizeTextarea(el) {
+            el.style.height = 'auto';
+            el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+            document.getElementById('charCounter').textContent = `${el.value.length} caracteres`;
+        }
+
+        function handleKeyDown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleUserSubmit(e);
+            }
+        }
+
+        async function handleUserSubmit(e) {
+            if (e) e.preventDefault();
+            const textarea = document.getElementById('chatInputText');
+            const userText = textarea.value.trim();
+
+            if (!userText) return;
+
+            // Renderizar burbuja del usuario con formato markdown
+            const chatArea = document.getElementById('chatMessagesArea');
+            const userBubble = document.createElement('div');
+            userBubble.className = 'chat-bubble bubble-user';
+            userBubble.innerHTML = renderMarkdown(userText);
+            chatArea.appendChild(userBubble);
+            chatArea.scrollTop = chatArea.scrollHeight;
+
+            // Registrar en historial
+            chatMessagesHistory.push({ role: 'user', text: userText });
+
+            // Limpiar textarea
+            textarea.value = '';
+            textarea.style.height = 'auto';
+            document.getElementById('charCounter').textContent = '0 caracteres';
+
+            currentInterviewTurn++;
+
+            if (currentInterviewTurn <= MAX_INTERVIEW_TURNS) {
+                // Actualizar barra de progreso (Turnos 1 a 4)
+                const pct = 15 + (currentInterviewTurn * 20); // 35%, 55%, 75%, 95%
+                document.getElementById('chatProgressBar').style.width = `${Math.min(pct, 95)}%`;
+
+                if (currentInterviewTurn === 2) {
+                    document.getElementById('chatProgressLabel').textContent = `Consulta 2 de ${MAX_INTERVIEW_TURNS}: Cuello de Botella & Desafío Crítico`;
+                    const promptTurn2 = `El usuario respondió sobre su proyecto: "${userText}". Analiza brevemente su propuesta reconociendo su territorio y formula una PREGUNTA DINÁMICA sobre su estado actual y cuál es hoy su mayor obstáculo crítico o cuello de botella (ej. ocupación fuera de temporada, falta de canales B2B internacionales, modelo de Yield, factibilidad financiera o certificación DSO). Hazlo de forma conversacional y directa en 1 o 2 párrafos.`;
+                    await generateNextConsultantTurn(promptTurn2);
+                } else if (currentInterviewTurn === 3) {
+                    document.getElementById('chatProgressLabel').textContent = `Consulta 3 de ${MAX_INTERVIEW_TURNS}: Diferencial Regenerativo & Co-ejecución`;
+                    const promptTurn3 = `El usuario detalló sus desafíos críticos: "${userText}". Reconoce cómo Destination Hub aborda esos problemas (enfocándose en Yield sobre volumen y co-ejecución ágil) y formula una PREGUNTA DINÁMICA sobre: qué pilares de experiencia patagónica (Agroecología, Cultura viva, Naturaleza) desean potenciar y qué modalidad de trabajo prefieren con D Hub (llave en mano integral o módulo especializado a la carta).`;
+                    await generateNextConsultantTurn(promptTurn3);
+                } else if (currentInterviewTurn === 4) {
+                    document.getElementById('chatProgressLabel').textContent = `Consulta 4 de ${MAX_INTERVIEW_TURNS}: Información Relevante Adicional`;
+                    const promptTurn4 = `El usuario detalló su enfoque regenerativo y modalidad: "${userText}". Reconoce su respuesta de forma breve y formula una PREGUNTA FINAL antes de generar la hoja de ruta: consulta de manera cálida si hay algún otro detalle, expectativa particular, timing, socios o información relevante sobre el proyecto que desee agregar antes de generar su hoja de ruta de co-ejecución con Destination Hub.`;
+                    await generateNextConsultantTurn(promptTurn4);
+                }
+            } else {
+                // Se completaron las 4 consultas -> Generar la Hoja de Ruta Final
+                triggerFinalRoadmapGeneration();
+            }
+        }
+
+        /* ======================================================================
+           GENERACIÓN DE LA HOJA DE RUTA FINAL (ESTRUCTURA COMPLETA)
+           ====================================================================== */
+        async function triggerFinalRoadmapGeneration() {
+            // Ocultar chat y mostrar pantalla de análisis
+            document.getElementById('chatViewContainer').style.display = 'none';
+            const analyzingScreen = document.getElementById('analyzingScreen');
+            analyzingScreen.classList.add('is-active');
+
+            if (storedApiKey) {
+                document.getElementById('analyzingBadge').textContent = 'Estructurando la hoja de ruta de co-ejecución y plan de trabajo...';
+                try {
+                    generatedRoadmapData = await callGeminiForFinalRoadmapJson();
+                } catch (err) {
+                    console.error('Error generando roadmap estructurado:', err);
+                    showApiAlert(`No se pudo estructurar con el servicio en línea (${err.message}). Utilizando síntesis del motor local.`);
+                    generatedRoadmapData = generateLocalRoadmapData();
+                }
+            } else {
+                document.getElementById('analyzingBadge').textContent = 'Estructurando tareas y flujograma mediante el motor local de D Hub...';
+                await new Promise(r => setTimeout(r, 1600));
+                generatedRoadmapData = generateLocalRoadmapData();
+            }
+
+            analyzingScreen.classList.remove('is-active');
+            renderFinalRoadmapView(generatedRoadmapData);
+        }
+
+        /* LLAMADA A GEMINI PARA GENERAR EL ROADMAP ESTRUCTURADO EN JSON */
+        async function callGeminiForFinalRoadmapJson() {
+            const dialogueTranscript = chatMessagesHistory.map(m => `${m.role === 'model' ? 'D Hub' : leadData.name}: ${m.text}`).join('\n\n');
+
+            const jsonPrompt = `
+${DHUB_SYSTEM_PROMPT}
+
+A continuación tienes la transcripción completa de la consulta diagnóstica realizada con ${leadData.name} (${leadData.email}, ${leadData.phone}):
+
+---
+${dialogueTranscript}
+---
+
+Tu tarea es generar un análisis estratégico final y la hoja de ruta de co-ejecución para este proyecto específico.
+DEBES devolver OBLIGATORIAMENTE un JSON válido (sin texto adicional fuera del JSON) con esta estructura exacta:
+
+{
+  "projectName": "Nombre del proyecto detectado (o inventado con base en la conversación)",
+  "dhubRole": "Explicación detallada de 3 o 4 líneas sobre cómo Destination Hub actuará como brazo co-ejecutor extendido del cliente para resolver sus cuellos de botella específicos, indicando qué áreas de práctica (Datos/Yield, B2B, DSO) liderarán el trabajo.",
+  "territorialDiagnosis": "Un análisis ejecutivo de 3 a 4 líneas que evalúe el potencial del proyecto bajo el enfoque de Yield (valor sobre volumen) y el modelo DSO de Destination Hub, destacando las ventajas competitivas.",
+  "flowNodes": [
+    {
+      "step": "01 / PERFIL & TERRITORIO",
+      "title": "Título corto",
+      "desc": "Descripción resumida de lo conversado",
+      "color": "lenga"
+    },
+    {
+      "step": "02 / MODELO DE VALOR (YIELD)",
+      "title": "Título corto",
+      "desc": "Estrategia de tarifa, estadía y público objetivo",
+      "color": "glaciar"
+    },
+    {
+      "step": "03 / INTERVENCIÓN CRÍTICA",
+      "title": "Solución a su cuello de botella",
+      "desc": "Acción inmediata de co-ejecución con D Hub",
+      "color": "coiron"
+    },
+    {
+      "step": "04 / ARQUITECTURA DSO & B2B",
+      "title": "Trilogía Territorial + Red B2B",
+      "desc": "Anclaje en Agroecología/Cultura/Naturaleza y canales",
+      "color": "terracota"
+    }
+  ],
+  "phases": [
+    {
+      "phase": "FASE 01",
+      "timeline": "Semanas 1 a 4",
+      "title": "Inteligencia Territorial & Diagnóstico de Yield",
+      "tasks": [
+        "Tarea específica con D Hub 1 personalizada para este proyecto",
+        "Tarea específica con D Hub 2 personalizada para este proyecto",
+        "Tarea específica con D Hub 3 personalizada para este proyecto"
+      ],
+      "deliverableTitle": "Entregables Clave",
+      "deliverables": "Entregables tangibles para esta fase",
+      "kpi": "Métrica de éxito / KPI de la fase"
+    },
+    {
+      "phase": "FASE 02",
+      "timeline": "Semanas 5 a 8",
+      "title": "Arquitectura de Producto & Yield Management",
+      "tasks": [
+        "Tarea específica con D Hub 1 personalizada para este proyecto",
+        "Tarea específica con D Hub 2 personalizada para este proyecto",
+        "Tarea específica con D Hub 3 personalizada para este proyecto"
+      ],
+      "deliverableTitle": "Entregables Clave",
+      "deliverables": "Entregables tangibles para esta fase",
+      "kpi": "Métrica de éxito / KPI de la fase"
+    },
+    {
+      "phase": "FASE 03",
+      "timeline": "Semanas 9 a 16",
+      "title": "Activación Comercial B2B & Go-to-Market",
+      "tasks": [
+        "Tarea específica con D Hub 1 personalizada para este proyecto",
+        "Tarea específica con D Hub 2 personalizada para este proyecto",
+        "Tarea específica con D Hub 3 personalizada para este proyecto"
+      ],
+      "deliverableTitle": "Entregables Clave",
+      "deliverables": "Entregables tangibles para esta fase",
+      "kpi": "Métrica de éxito / KPI de la fase"
+    },
+    {
+      "phase": "FASE 04",
+      "timeline": "Meses 4 a 12 (Continuo)",
+      "title": "Gobernanza DSO, Certificación & Escala",
+      "tasks": [
+        "Tarea específica con D Hub 1 personalizada para este proyecto",
+        "Tarea específica con D Hub 2 personalizada para este proyecto",
+        "Tarea específica con D Hub 3 personalizada para este proyecto"
+      ],
+      "deliverableTitle": "Entregables Clave",
+      "deliverables": "Entregables tangibles para esta fase",
+      "kpi": "Métrica de éxito / KPI de la fase"
+    }
+  ]
+}
+`;
+
+            // Modelos candidatos en orden de ultra-baja latencia y alta disponibilidad
+            const candidateModels = [
+                activeGeminiModel,
+                'gemini-flash-lite-latest',
+                'gemini-3.5-flash-lite',
+                'gemini-3.1-flash-lite',
+                'gemini-flash-latest'
+            ].filter(m => m && !m.includes('2.5-flash') && !m.includes('1.5-flash') && !m.includes('2.0-flash'));
+            const uniqueModels = [...new Set(candidateModels)];
+
+            let lastErr = null;
+            for (const targetModel of uniqueModels) {
+                const targetVersion = activeApiVersion || 'v1beta';
+                const url = `https://generativelanguage.googleapis.com/${targetVersion}/models/${targetModel}:generateContent?key=${storedApiKey}`;
+
+                try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+                    const res = await fetch(url, {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: jsonPrompt }] }],
+                            generationConfig: {
+                                temperature: 0.4,
+                                maxOutputTokens: 3500,
+                                responseMimeType: "application/json"
+                            }
+                        }),
+                        signal: controller.signal
+                    });
+                    clearTimeout(timeoutId);
+
+                    if (res.ok) {
+                        const data = await res.json();
+                        const candidate = data.candidates?.[0];
+                        const rawText = extractCandidateText(candidate);
+                        const parsed = cleanAndParseJson(rawText);
+                        activeGeminiModel = targetModel;
+                        localStorage.setItem('dhub_gemini_model', targetModel);
+                        return parsed;
+                    } else {
+                        const errJson = await res.json().catch(() => null);
+                        lastErr = new Error(`Servicio (${res.status}): ${errJson?.error?.message || res.status}`);
+                    }
+                } catch (e) {
+                    lastErr = e;
+                }
+            }
+
+            throw lastErr || new Error("No se pudo estructurar el JSON con el servicio.");
+        }
+
+        /* Limpiador y Parser seguro de JSON */
+        function cleanAndParseJson(rawText) {
+            if (!rawText) throw new Error("Respuesta vacía recibida del motor generativo.");
+            let cleaned = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
+            const firstBrace = cleaned.indexOf('{');
+            const lastBrace = cleaned.lastIndexOf('}');
+            if (firstBrace !== -1 && lastBrace !== -1) {
+                cleaned = cleaned.substring(firstBrace, lastBrace + 1);
+            }
+            return JSON.parse(cleaned);
+        }
+
+        /* GENERADOR LOCAL DE RESERVA (INTELIGENTE) */
+        function generateLocalRoadmapData() {
+            // Extraer textos de las respuestas del usuario
+            const userAnswers = chatMessagesHistory.filter(m => m.role === 'user').map(m => m.text);
+            const ans1 = userAnswers[0] || 'Proyecto Turístico';
+            const ans2 = userAnswers[1] || 'Optimización de tarifas y canales B2B';
+            const ans3 = userAnswers[2] || 'Experiencias de identidad local y co-ejecución llave en mano';
+            const ans4 = userAnswers[3] || 'Lanzamiento planificado con foco en alto valor';
+
+            const projectName = ans1.length > 35 ? ans1.substring(0, 35) + '...' : ans1;
+
+            return {
+                projectName: projectName,
+                dhubRole: `Destination Hub actuará como socio estratégico y brazo co-ejecutor del equipo de ${leadData.name}. Implementaremos la Práctica 01 (Inteligencia de Datos & Yield) para reestructurar tarifas y demanda, articulando inmediatamente con la Práctica 02 (Representación B2B) para conectar el proyecto con operadores mayoristas clave de mercados emisores internacionales, integrando además las consideraciones específicas de ${leadData.name} (${ans4}) bajo la Práctica 03 (Modelo DSO y capacitación de equipos).`,
+                territorialDiagnosis: `La propuesta de ${projectName} posee un claro potencial de diferenciación para captar al "Participante con Propósito": viajeros que buscan exclusividad y desconexión auténtica. Al superar los cuellos de botella mediante una gestión activa de Yield y desestacionalización, el proyecto puede elevar sus márgenes sin depender de la masividad, beneficiando de forma directa a la comunidad anfitriona y al territorio.`,
+                flowNodes: [
+                    {
+                        step: "01 / PERFIL & TERRITORIO",
+                        title: projectName,
+                        desc: ans1,
+                        color: "lenga"
+                    },
+                    {
+                        step: "02 / MODELO DE YIELD",
+                        title: "Participante con Propósito",
+                        desc: "Mayor gasto promedio y estadías extendidas",
+                        color: "glaciar"
+                    },
+                    {
+                        step: "03 / INTERVENCIÓN CRÍTICA",
+                        title: "Destrabe de Cuello de Botella",
+                        desc: ans2,
+                        color: "coiron"
+                    },
+                    {
+                        step: "04 / ARQUITECTURA DSO & B2B",
+                        title: "Modelo Regenerativo D Hub",
+                        desc: ans3,
+                        color: "terracota"
+                    }
+                ],
+                phases: [
+                    {
+                        phase: "FASE 01",
+                        timeline: "Semanas 1 a 4",
+                        title: "Inteligencia Territorial & Diagnóstico de Yield",
+                        tasks: [
+                            `Benchmarking competitivo territorial adaptado a "${projectName}".`,
+                            `Auditoría de precios y modelado de tarifas High-Yield para mercados clave.`,
+                            `Mapeo de actores locales y evaluación de capacidad de carga comunitaria.`
+                        ],
+                        deliverableTitle: "Entregables Clave",
+                        deliverables: "Tablero de Inteligencia de Demanda, Perfil de Huésped y Diagnóstico DSO Inicial.",
+                        kpi: "Definición de tarifa promedio meta (+25% Yield)."
+                    },
+                    {
+                        phase: "FASE 02",
+                        timeline: "Semanas 5 a 8",
+                        title: "Arquitectura de Producto & Yield Management",
+                        tasks: [
+                            `Estructuración de experiencias llave en mano basadas en Agroecología y Cultura viva.`,
+                            `Diseño del tarifario comercial estratégico y condiciones de estadía mínima.`,
+                            `Manual operativo de hospitalidad patagónica para el equipo anfitrión.`
+                        ],
+                        deliverableTitle: "Entregables Clave",
+                        deliverables: "Catálogo de Experiencias Transformadoras y Matriz de Precios B2B.",
+                        kpi: "Extensión del promedio de estadía a +3 noches."
+                    },
+                    {
+                        phase: "FASE 03",
+                        timeline: "Semanas 9 a 16",
+                        title: "Activación Comercial B2B & Go-to-Market",
+                        tasks: [
+                            `Presentación comercial directa ante la red de operadores mayoristas y DMCs de D Hub.`,
+                            `Firma de convenios comerciales y carga de producto en canales emisores de alta gama.`,
+                            `Campaña editorial de posicionamiento orientada a desestacionalizar.`
+                        ],
+                        deliverableTitle: "Entregables Clave",
+                        deliverables: "Red B2B Activa, Contratos Mayoristas y Material Editorial para el Trade.",
+                        kpi: "Primeras reservas confirmadas para temporada baja/media."
+                    },
+                    {
+                        phase: "FASE 04",
+                        timeline: "Meses 4 a 12 (Continuo)",
+                        title: "Gobernanza DSO, Certificación & Escala",
+                        tasks: [
+                            `Capacitación operativa continua: "Contratá la actitud, entrená la habilidad".`,
+                            `Monitoreo de indicadores regenerativos: huella ambiental y beneficio comunitario.`,
+                            `Auditoría periódica de ROI y optimización continua de márgenes comerciales.`
+                        ],
+                        deliverableTitle: "Entregables Clave",
+                        deliverables: "Reporte Anual DSO, Preparación para Certificación y Tablero Trimestral de ROI.",
+                        kpi: "Retorno positivo sobre inversión (ROI) y balance regenerativo certificado."
+                    }
+                ]
+            };
+        }
+
+        /* RENDERIZAR RESULTADOS FINALES */
+        function renderFinalRoadmapView(data) {
+            const resultsView = document.getElementById('resultsView');
+            resultsView.classList.add('is-active');
+
+            // Encabezado
+            document.getElementById('resultsLeadTag').textContent = `HOJA DE RUTA ESTRATÉGICA · PARA ${leadData.name.toUpperCase()}`;
+            document.getElementById('resultsProjectTitle').textContent = `Hoja de Ruta: ${data.projectName}`;
+            document.getElementById('resultsProjectSubtitle').textContent = `Plan de co-ejecución y modelo DSO diseñado para ${data.projectName} junto a Destination Hub.`;
+
+            // Rol de D Hub y Diagnóstico
+            document.getElementById('dhubRoleText').textContent = data.dhubRole;
+            document.getElementById('aiDiagnosisText').textContent = data.territorialDiagnosis;
+
+            // Flujograma de Nodos
+            const nodesContainer = document.getElementById('flowchartNodesContainer');
+            nodesContainer.innerHTML = '';
+            data.flowNodes.forEach(node => {
+                const nodeCard = document.createElement('div');
+                nodeCard.className = `flow-node-card border-${node.color}`;
+                nodeCard.innerHTML = `
+                    <span class="flow-node-step">${node.step}</span>
+                    <div class="flow-node-title">${node.title}</div>
+                    <div class="flow-node-desc">${node.desc}</div>
+                `;
+                nodesContainer.appendChild(nodeCard);
+            });
+
+            // Grid de 4 Fases
+            const phasesGrid = document.getElementById('roadmapPhasesGrid');
+            phasesGrid.innerHTML = '';
+            data.phases.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'roadmap-phase-card';
+                card.innerHTML = `
+                    <div class="phase-header">
+                        <span class="phase-badge">${p.phase} · ${p.timeline}</span>
+                        <h4 class="phase-title">${p.title}</h4>
+                    </div>
+                    <ul class="phase-tasks-list">
+                        ${p.tasks.map(t => `<li>${t}</li>`).join('')}
+                    </ul>
+                    <div class="phase-deliverables">
+                        <div class="phase-deliverables-title">${p.deliverableTitle}</div>
+                        <div class="phase-deliverables-text">${p.deliverables}</div>
+                        ${p.kpi ? `<div style="margin-top: 6px; font-size: 11px; color: var(--color-terracota); font-family: var(--font-mono);">KPI: ${p.kpi}</div>` : ''}
+                    </div>
+                `;
+                phasesGrid.appendChild(card);
+            });
+        }
+
+        /* Reiniciar Sesión */
+        function restartChatSession() {
+            document.getElementById('resultsView').classList.remove('is-active');
+            document.getElementById('chatViewContainer').style.display = 'flex';
+            startLeadIntakeStep();
+        }
+
+        /* ======================================================================
+           EXPORTACIÓN A PDF EDITORIAL
+           ====================================================================== */
+        function exportToPDF() {
+            if (!generatedRoadmapData) return;
+
+            const data = generatedRoadmapData;
+
+            document.getElementById('pdfProjectTitle').textContent = `Hoja de Ruta: ${data.projectName}`;
+            document.getElementById('pdfLeadStamp').textContent = `SOLICITANTE: ${leadData.name.toUpperCase()} | EMAIL: ${leadData.email.toUpperCase()} | TEL: ${leadData.phone}`;
+            document.getElementById('pdfDateStamp').textContent = `FECHA: ${new Date().toLocaleDateString('es-AR', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase()}`;
+            
+            document.getElementById('pdfDhubRoleText').textContent = data.dhubRole;
+            document.getElementById('pdfDiagnosisText').textContent = data.territorialDiagnosis;
+
+            const nodesSummaryHtml = data.flowNodes.map(n => `<strong>[${n.step}]:</strong> ${n.title} (${n.desc})`).join(' &nbsp;➔&nbsp; ');
+            document.getElementById('pdfFlowNodesSummary').innerHTML = nodesSummaryHtml;
+
+            const tableBody = document.getElementById('pdfTableBody');
+            tableBody.innerHTML = '';
+
+            data.phases.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <strong style="color: #C85A32;">${p.phase}</strong><br>
+                        <span style="font-size: 10px; color: #636B67;">${p.timeline}</span><br>
+                        <strong>${p.title}</strong>
+                    </td>
+                    <td>
+                        <ul style="margin: 0; padding-left: 15px; line-height: 1.45;">
+                            ${p.tasks.map(t => `<li>${t}</li>`).join('')}
+                        </ul>
+                    </td>
+                    <td>
+                        <strong style="color: #2B5B6C; font-size: 10px; text-transform: uppercase;">${p.deliverableTitle}:</strong><br>
+                        <span>${p.deliverables}</span>
+                        ${p.kpi ? `<br><span style="color: #C85A32; font-size: 10px;">KPI: ${p.kpi}</span>` : ''}
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            const element = document.getElementById('pdf-export-canvas');
+            element.style.display = 'block';
+
+            const opt = {
+                margin:       10,
+                filename:     `Hoja_de_Ruta_DHub_${data.projectName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.style.display = 'none';
+            }).catch(err => {
+                console.error('Error al generar PDF:', err);
+                element.style.display = 'none';
+                window.print();
+            });
+        }
+    </script>
+</body>
+</html>

@@ -134,16 +134,22 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollProgressEl.style.transform = `scaleX(${progress.toFixed(4)})`;
         }
 
-        // B. Parallax en fotografías
-        parallaxImages.forEach(img => {
-            const rect = img.parentElement.getBoundingClientRect();
-            if (rect.bottom > 0 && rect.top < vh) {
-                const speed = parseFloat(img.getAttribute('data-parallax')) || 14;
-                const ratio = ((rect.top + rect.height / 2) - vh / 2) / (vh / 2);
-                const yOffset = (ratio * speed).toFixed(1);
-                img.style.transform = `scale(1.06) translate3d(0, ${yOffset}px, 0)`;
-            }
-        });
+        // B. Parallax en fotografías (solo en pantallas amplias para evitar recortes en mobile)
+        if (window.innerWidth >= 768) {
+            parallaxImages.forEach(img => {
+                const rect = img.parentElement.getBoundingClientRect();
+                if (rect.bottom > 0 && rect.top < vh) {
+                    const speed = parseFloat(img.getAttribute('data-parallax')) || 14;
+                    const ratio = ((rect.top + rect.height / 2) - vh / 2) / (vh / 2);
+                    const yOffset = (ratio * speed).toFixed(1);
+                    img.style.transform = `scale(1.06) translate3d(0, ${yOffset}px, 0)`;
+                }
+            });
+        } else {
+            parallaxImages.forEach(img => {
+                img.style.transform = '';
+            });
+        }
 
         // C. Iluminación progresiva palabra por palabra (Text Scrubbing)
         scrubBlocks.forEach(({ el, words }) => {
@@ -285,6 +291,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (minimizeBtn && fontSwitcher) {
+        if (window.innerWidth < 768) {
+            fontSwitcher.classList.add('is-minimized');
+            minimizeBtn.textContent = '+';
+        }
         minimizeBtn.addEventListener('click', () => {
             const min = fontSwitcher.classList.toggle('is-minimized');
             minimizeBtn.textContent = min ? '+' : '—';

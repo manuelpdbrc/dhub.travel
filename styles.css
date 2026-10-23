@@ -45,8 +45,10 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 5.25rem;
     font-size: 16px;
+    max-width: 100%;
+    overflow-x: clip;
 }
 
 body {
@@ -55,9 +57,11 @@ body {
     font-family: var(--font-sans);
     font-weight: 300;
     line-height: 1.7;
+    padding-top: 4.5rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    max-width: 100%;
+    overflow-x: clip;
 }
 
 ::selection {
@@ -248,19 +252,22 @@ html[data-font="outfit"] .h2-editorial em {
     overflow: hidden;
     background-color: var(--bg-piedra);
     border-radius: 2px;
+    width: 100%;
+    max-width: 100%;
 }
 
 .media-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(1.1);
+    object-position: center center;
+    transform: scale(1.06);
     transition: transform 1.6s var(--ease-out-expo), filter 0.8s ease;
     will-change: transform;
 }
 
 [data-reveal="image"] {
-    clip-path: inset(10% 0 0 0);
+    clip-path: inset(8% 0 0 0);
     opacity: 0;
     transition: clip-path 1.3s var(--ease-out-expo), opacity 0.9s ease;
     transition-delay: var(--delay, 0s);
@@ -272,22 +279,29 @@ html[data-font="outfit"] .h2-editorial em {
 }
 
 [data-reveal="image"].is-visible img {
-    transform: scale(1.03);
+    transform: scale(1);
 }
 
-.media-frame:hover img {
-    transform: scale(1.07) !important;
+@media (min-width: 768px) {
+    [data-reveal="image"].is-visible img {
+        transform: scale(1.03);
+    }
+    .media-frame:hover img {
+        transform: scale(1.07) !important;
+    }
 }
 
 .media-caption {
     margin-top: 0.75rem;
     display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
     justify-content: space-between;
     align-items: center;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.11em;
     color: var(--text-ceniza);
 }
 
@@ -340,12 +354,15 @@ html[data-font="outfit"] .h2-editorial em {
     transform: translateX(4px);
 }
 
-/* 6. Sticky Header */
+/* 6. Fixed Top Header (Guaranteed Sticky on Mobile & Desktop) */
 .site-header {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 100;
-    background-color: rgba(246, 245, 240, 0.86);
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(246, 245, 240, 0.92);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line-subtle);
@@ -356,7 +373,7 @@ html[data-font="outfit"] .h2-editorial em {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 4.75rem;
+    height: 4.5rem;
 }
 
 .brand-lockup {
@@ -520,15 +537,24 @@ html[data-font="outfit"] .h2-editorial em {
 
 /* 7. HERO SECTION (Editorial Split + Diptych + Rotating Compass Seal) */
 .hero {
-    padding-top: clamp(3.5rem, 7vw, 6.5rem);
-    padding-bottom: clamp(5rem, 9vw, 8rem);
+    padding-top: clamp(2.25rem, 6vw, 5.5rem);
+    padding-bottom: clamp(4rem, 8vw, 7.5rem);
 }
 
 .hero-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 3.5rem;
+    gap: 2.75rem;
     align-items: center;
+}
+
+.hero-grid > *,
+.paradigm-layout > *,
+.practices-columns > *,
+.arch-triptych > *,
+.contact-grid > * {
+    min-width: 0;
+    max-width: 100%;
 }
 
 @media (min-width: 980px) {
@@ -545,32 +571,33 @@ html[data-font="outfit"] .h2-editorial em {
     text-transform: uppercase;
     letter-spacing: 0.16em;
     color: var(--color-terracota);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.9rem;
-    margin-top: 2.5rem;
+    gap: 0.75rem;
+    margin-top: 2rem;
 }
 
 /* Editorial Image Composition in Hero */
 .hero-composition {
     position: relative;
-    padding-bottom: 2.5rem;
+    padding-bottom: 0;
+    width: 100%;
 }
 
 .hero-main-photo {
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 3 / 2;
     width: 100%;
 }
 
 .hero-inset-photo {
     position: absolute;
     bottom: 0;
-    left: -1.5rem;
+    left: 0;
     width: 38%;
     aspect-ratio: 3 / 4;
     border: 6px solid var(--bg-nieve);
@@ -585,7 +612,6 @@ html[data-font="outfit"] .h2-editorial em {
     }
     .hero-inset-photo {
         display: block;
-        left: 0;
     }
 }
 
@@ -602,10 +628,10 @@ html[data-font="outfit"] .h2-editorial em {
 
 .compass-seal {
     position: absolute;
-    top: -1.75rem;
-    right: 1.25rem;
-    width: 6.75rem;
-    height: 6.75rem;
+    top: -1.35rem;
+    right: 0.75rem;
+    width: 5.2rem;
+    height: 5.2rem;
     border-radius: 50%;
     background-color: var(--bg-nieve);
     border: 1px solid var(--line-subtle);
@@ -614,6 +640,15 @@ html[data-font="outfit"] .h2-editorial em {
     justify-content: center;
     box-shadow: 0 12px 30px -12px rgba(24, 48, 40, 0.14);
     z-index: 3;
+}
+
+@media (min-width: 640px) {
+    .compass-seal {
+        top: -1.75rem;
+        right: 1.25rem;
+        width: 6.75rem;
+        height: 6.75rem;
+    }
 }
 
 .compass-seal-ring {
@@ -750,7 +785,7 @@ html[data-font="outfit"] .h2-editorial em {
 }
 
 .paradigm-photo {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3 / 2;
 }
 
 .contrast-minimal {
@@ -862,7 +897,7 @@ html[data-font="outfit"] .h2-editorial em {
 }
 
 .practice-photo {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2;
     margin-bottom: 1.75rem;
 }
 
@@ -1017,7 +1052,7 @@ html[data-font="outfit"] .h2-editorial em {
 }
 
 .arch-item-photo {
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 3 / 2;
     margin-bottom: 1.25rem;
     background-color: #1B332B;
 }
@@ -1064,9 +1099,15 @@ html[data-font="outfit"] .h2-editorial em {
 
 /* 11. SECTION 5: MANIFIESTO PANORÁMICO (Scroll Text Scrubbing) & CONTACTO DIRECTO */
 .manifesto-panorama {
-    aspect-ratio: 21 / 8;
-    min-height: 240px;
-    margin-bottom: clamp(3.5rem, 6vw, 5.5rem);
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    margin-bottom: clamp(2.75rem, 6vw, 5.5rem);
+}
+
+@media (min-width: 640px) {
+    .manifesto-panorama {
+        aspect-ratio: 21 / 9;
+    }
 }
 
 .manifesto-quote {
@@ -1389,7 +1430,11 @@ html[data-font="outfit"] .h2-editorial em {
 /* 16. Opening Compass Intro Loader (Fast Spin -> Fly to Header Logo) */
 .intro-loader {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
     z-index: 2500;
     display: flex;
     align-items: center;
@@ -1419,8 +1464,10 @@ html[data-font="outfit"] .h2-editorial em {
 .intro-compass-wrap {
     position: relative;
     z-index: 2;
-    width: clamp(140px, 22vw, 190px);
-    height: clamp(140px, 22vw, 190px);
+    margin: auto;
+    width: clamp(130px, 34vw, 185px);
+    height: clamp(130px, 34vw, 185px);
+    transform-origin: center center;
     will-change: transform;
     transition: transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
 }

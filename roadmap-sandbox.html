@@ -14,1247 +14,1467 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        /* ==========================================================================
-           Destination Hub — Identidad Visual Oficial
-           ========================================================================== */
-        :root {
-            --bg-nieve: #F6F5F0;
-            --bg-piedra: #ECEAE2;
-            --bg-card: #FFFFFF;
-            --color-lenga: #183028;
-            --color-lenga-dark: #0E1D18;
-            --color-glaciar: #2B5B6C;
-            --color-glaciar-light: #E7EFF2;
-            --color-coiron: #C8A97E;
-            --color-coiron-light: #F7F3EC;
-            --color-terracota: #C85A32;
-            --color-terracota-hover: #AD4621;
-            --text-granito: #2C302E;
-            --text-ceniza: #636B67;
-            --line-subtle: rgba(24, 48, 40, 0.11);
-            --line-medium: rgba(24, 48, 40, 0.22);
-            --font-serif: 'Cormorant Garamond', Georgia, serif;
-            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-            --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-nieve);
-            color: var(--text-granito);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        /* ==========================================================================
-           Página Anfitriona (Simulador del Sitio dhub.travel)
-           ========================================================================== */
-        .demo-page {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background: linear-gradient(180deg, #F6F5F0 0%, #ECEAE2 100%);
-        }
-
-        .demo-header {
-            padding: 1.5rem 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--line-subtle);
-            background-color: rgba(246, 245, 240, 0.95);
-            backdrop-filter: blur(10px);
-        }
-
-        .brand-wrap {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            text-decoration: none;
-            color: var(--color-lenga);
-        }
-
-        .brand-logo-img {
-            width: 44px;
-            height: 44px;
-        }
-
-        .brand-title {
-            font-family: var(--font-serif);
-            font-size: 1.4rem;
-            letter-spacing: 0.04em;
-            font-weight: 500;
-        }
-
-        .hero-banner {
-            max-width: 980px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .hero-tag {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--color-glaciar);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 1.25rem;
-            display: inline-block;
-        }
-
-        .hero-title {
-            font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 5vw, 4.2rem);
-            font-weight: 300;
-            line-height: 1.15;
-            color: var(--color-lenga);
-            margin-bottom: 1.75rem;
-        }
-
-        .hero-title em {
-            font-style: italic;
-            color: var(--color-terracota);
-        }
-
-        .hero-desc {
-            font-size: 1.15rem;
-            color: var(--text-ceniza);
-            max-width: 740px;
-            margin: 0 auto 2.5rem;
-            font-weight: 300;
-        }
-
-        .cta-btn-main {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            background-color: var(--color-lenga);
-            color: var(--bg-nieve);
-            padding: 1.1rem 2.4rem;
-            font-size: 1rem;
-            font-weight: 500;
-            border-radius: 999px;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 12px 28px rgba(24, 48, 40, 0.15);
-            transition: all 0.3s var(--ease-luxury);
-        }
-
-        .cta-btn-main:hover {
-            background-color: var(--color-terracota);
-            transform: translateY(-2px);
-            box-shadow: 0 18px 36px rgba(200, 90, 50, 0.25);
-        }
-
-        .btn-apikey-gear {
-            background: #FFFFFF;
-            border: 1px solid var(--line-medium);
-            padding: 0.55rem 1.1rem;
-            border-radius: 999px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--color-lenga);
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.2s ease;
-        }
-
-        .btn-apikey-gear:hover {
-            border-color: var(--color-terracota);
-            color: var(--color-terracota);
-        }
-
-        .demo-footer {
-            padding: 2rem;
-            text-align: center;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-ceniza);
-            border-top: 1px solid var(--line-subtle);
-        }
-
-        /* ==========================================================================
-           MODAL PRINCIPAL: CONSULTOR CONVERSACIONAL EN TIEMPO REAL
-           ========================================================================== */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(14, 29, 24, 0.75);
-            backdrop-filter: blur(12px);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s var(--ease-luxury);
-        }
-
-        .modal-overlay.is-active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-container {
-            width: 100%;
-            max-width: 1100px;
-            height: 92vh;
-            background-color: var(--bg-nieve);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transform: translateY(20px) scale(0.98);
-            transition: transform 0.4s var(--ease-luxury);
-        }
-
-        .modal-overlay.is-active .modal-container {
-            transform: translateY(0) scale(1);
-        }
-
-        /* Header del Modal */
-        .modal-header {
-            padding: 1.25rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--line-subtle);
-            background-color: #FFFFFF;
-        }
-
-        .modal-header-brand {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .modal-header-brand img {
-            width: 36px;
-            height: 36px;
-        }
-
-        .modal-header-title {
-            font-family: var(--font-serif);
-            font-size: 1.35rem;
-            color: var(--color-lenga);
-            font-weight: 500;
-        }
-
-        .modal-header-sub {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--text-ceniza);
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-        }
-
-        .modal-header-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .ai-status-pill {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            padding: 0.35rem 0.85rem;
-            border-radius: 999px;
-            display: flex;
-            align-items: center;
-            gap: 0.45rem;
-            background-color: var(--bg-piedra);
-            color: var(--color-lenga);
-            cursor: pointer;
-            border: 1px solid var(--line-subtle);
-        }
-
-        .ai-status-pill.is-active-ai {
-            background-color: rgba(39, 174, 96, 0.12);
-            color: #1e824c;
-            border-color: rgba(39, 174, 96, 0.35);
-        }
-
-        .ai-status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #999;
-        }
-
-        .ai-status-pill.is-active-ai .ai-status-dot {
-            background-color: #27ae60;
-            box-shadow: 0 0 8px #27ae60;
-        }
-
-        .modal-close-btn {
-            background: none;
-            border: 1px solid var(--line-subtle);
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-lenga);
-            transition: all 0.2s ease;
-        }
-
-        .modal-close-btn:hover {
-            background-color: var(--color-lenga);
-            color: var(--bg-nieve);
-            transform: rotate(90deg);
-        }
-
-        /* Banner de Notificación de API */
-        .api-alert-banner {
-            display: none;
-            padding: 0.65rem 2rem;
-            background-color: #FDF3E7;
-            border-bottom: 1px solid #F5CBA7;
-            color: #A04000;
-            font-size: 0.82rem;
-            font-family: var(--font-mono);
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .api-alert-banner.is-active {
-            display: flex;
-        }
-
-        /* ==========================================================================
-           CONTENEDOR DEL CHAT CONVERSACIONAL
-           ========================================================================== */
-        .chat-view-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            background-color: #FFFFFF;
-        }
-
-        .chat-progress-wrap {
-            padding: 0.75rem 2rem;
-            background-color: var(--bg-nieve);
-            border-bottom: 1px solid var(--line-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .chat-progress-text {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--color-terracota);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .chat-progress-bar-bg {
-            width: 140px;
-            height: 4px;
-            background-color: var(--bg-piedra);
-            border-radius: 999px;
-            overflow: hidden;
-        }
-
-        .chat-progress-bar-val {
-            height: 100%;
-            width: 15%;
-            background: linear-gradient(90deg, var(--color-coiron) 0%, var(--color-terracota) 100%);
-            transition: width 0.4s ease;
-        }
-
-        /* Historial de Mensajes */
-        .chat-messages-area {
-            flex: 1;
-            overflow-y: auto;
-            padding: 2rem 3rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            scroll-behavior: smooth;
-        }
-
-        .chat-bubble {
-            max-width: 84%;
-            animation: bubbleSlideIn 0.35s var(--ease-luxury);
-        }
-
-        @keyframes bubbleSlideIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .bubble-consultant {
-            align-self: flex-start;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .bubble-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            background-color: var(--bg-nieve);
-            border: 1px solid var(--line-medium);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 2px;
-        }
-
-        .bubble-avatar img {
-            width: 22px;
-            height: 22px;
-        }
-
-        .bubble-consultant-content {
-            background-color: var(--bg-nieve);
-            border: 1px solid var(--line-subtle);
-            border-radius: 4px 16px 16px 16px;
-            padding: 1.35rem 1.7rem;
-            color: var(--color-lenga);
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        .bubble-consultant-content p:not(:last-child) {
-            margin-bottom: 0.75rem;
-        }
-
-        .bubble-user {
-            align-self: flex-end;
-            background-color: var(--color-lenga);
-            color: #FFFFFF;
-            border-radius: 16px 4px 16px 16px;
-            padding: 1.15rem 1.6rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            box-shadow: 0 4px 14px rgba(24, 48, 40, 0.12);
-        }
-
-        /* Formulario de Captura de Lead (Paso 0) */
-        .lead-form-card {
-            background-color: #FFFFFF;
-            border: 1px solid var(--line-medium);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .lead-input-row {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-        }
-
-        .lead-label {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--color-lenga);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .lead-field {
-            background-color: var(--bg-nieve);
-            border: 1px solid var(--line-medium);
-            padding: 0.65rem 0.9rem;
-            border-radius: 8px;
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            color: var(--color-lenga);
-            outline: none;
-            transition: border-color 0.2s ease;
-        }
-
-        .lead-field:focus {
-            border-color: var(--color-terracota);
-            background-color: #FFFFFF;
-        }
-
-        .lead-submit-btn {
-            background-color: var(--color-lenga);
-            color: #FFFFFF;
-            border: none;
-            padding: 0.85rem 1.5rem;
-            border-radius: 999px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            cursor: pointer;
-            align-self: flex-start;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.2s ease;
-            margin-top: 0.5rem;
-        }
-
-        .lead-submit-btn:hover {
-            background-color: var(--color-terracota);
-            transform: translateY(-2px);
-        }
-
-        /* Burbuja de "IA formulando pregunta / analizando" */
-        .chat-thinking-bubble {
-            display: none;
-            align-self: flex-start;
-            margin-left: 48px;
-            background-color: var(--bg-nieve);
-            padding: 0.85rem 1.4rem;
-            border-radius: 12px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--color-glaciar);
-            align-items: center;
-            gap: 0.75rem;
-            border: 1px dashed var(--color-coiron);
-        }
-
-        .chat-thinking-bubble.is-active {
-            display: flex;
-            animation: pulse-border 1.8s infinite ease-in-out;
-        }
-
-        @keyframes pulse-border {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-
-        .pulse-dots span {
-            display: inline-block;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background-color: var(--color-glaciar);
-            margin: 0 2px;
-            animation: dotBounce 1.2s infinite ease-in-out;
-        }
-
-        .pulse-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .pulse-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes dotBounce {
-            0%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-5px); }
-        }
-
-        /* Barra de Entrada de Respuestas */
-        .chat-input-bar {
-            padding: 1.25rem 2.5rem 1.75rem;
-            border-top: 1px solid var(--line-subtle);
-            background-color: #FFFFFF;
-        }
-
-        .input-form-flex {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-end;
-            background-color: var(--bg-nieve);
-            border: 1.5px solid var(--line-medium);
-            border-radius: 14px;
-            padding: 0.6rem 0.85rem 0.6rem 1.25rem;
-            transition: border-color 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .input-form-flex:focus-within {
-            border-color: var(--color-lenga);
-            box-shadow: 0 0 0 3px rgba(24, 48, 40, 0.08);
-            background-color: #FFFFFF;
-        }
-
-        .chat-textarea {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            color: var(--color-lenga);
-            resize: none;
-            max-height: 120px;
-            min-height: 28px;
-            line-height: 1.45;
-        }
-
-        .chat-send-btn {
-            background-color: var(--color-lenga);
-            color: #FFFFFF;
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: all 0.2s var(--ease-luxury);
-        }
-
-        .chat-send-btn:hover {
-            background-color: var(--color-terracota);
-            transform: scale(1.04);
-        }
-
-        .chat-send-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .input-meta-help {
-            display: flex;
-            justify-content: space-between;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--text-ceniza);
-            margin-top: 0.5rem;
-            padding: 0 0.5rem;
-        }
-
-        /* ==========================================================================
-           PANTALLA DE SÍNTESIS TERRITORIAL
-           ========================================================================== */
-        .analyzing-screen {
-            display: none;
-            flex: 1;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 3rem;
-            background-color: var(--bg-nieve);
-            text-align: center;
-        }
-
-        .analyzing-screen.is-active {
-            display: flex;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .analyzing-compass {
-            width: 80px;
-            height: 80px;
-            animation: spin-compass 4s linear infinite;
-            margin-bottom: 2rem;
-        }
-
-        @keyframes spin-compass {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .analyzing-title {
-            font-family: var(--font-serif);
-            font-size: 2.2rem;
-            color: var(--color-lenga);
-            margin-bottom: 0.75rem;
-        }
-
-        .analyzing-desc {
-            font-size: 1rem;
-            color: var(--text-ceniza);
-            max-width: 520px;
-            margin-bottom: 1.5rem;
-        }
-
-        .analyzing-step-badge {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            padding: 0.35rem 0.9rem;
-            border-radius: 999px;
-            background-color: var(--color-coiron-light);
-            border: 1px solid var(--color-coiron);
-            color: var(--color-lenga);
-        }
-
-        /* ==========================================================================
-           VISTA FINAL: HOJA DE RUTA RESULTANTE & ROL DE D HUB
-           ========================================================================== */
-        .results-container {
-            display: none;
-            width: 100%;
-            height: 100%;
-            overflow-y: auto;
-            padding: 3rem 4rem;
-            background-color: #FFFFFF;
-        }
-
-        .results-container.is-active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .results-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--line-subtle);
-        }
-
-        .results-header-left {
-            max-width: 750px;
-        }
-
-        .results-tag {
-            font-family: var(--font-mono);
-            font-size: 0.78rem;
-            color: var(--color-terracota);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .results-title {
-            font-family: var(--font-serif);
-            font-size: 2.6rem;
-            color: var(--color-lenga);
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 0.75rem;
-        }
-
-        .results-desc {
-            font-size: 1.05rem;
-            color: var(--text-ceniza);
-        }
-
-        .results-actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-pdf-download {
-            background-color: var(--color-terracota);
-            color: #FFFFFF;
-            border: none;
-            padding: 0.9rem 1.8rem;
-            border-radius: 999px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(200, 90, 50, 0.25);
-            transition: all 0.25s ease;
-        }
-
-        .btn-pdf-download:hover {
-            background-color: var(--color-terracota-hover);
-            transform: translateY(-2px);
-        }
-
-        .btn-calendly-link {
-            background-color: var(--color-lenga);
-            color: #FFFFFF;
-            border: none;
-            padding: 0.9rem 1.8rem;
-            border-radius: 999px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            text-decoration: none;
-            transition: all 0.25s ease;
-        }
-
-        .btn-calendly-link:hover {
-            background-color: var(--color-lenga-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-modify {
-            background: none;
-            border: 1px solid var(--line-medium);
-            padding: 0.9rem 1.5rem;
-            border-radius: 999px;
-            font-size: 0.9rem;
-            color: var(--text-ceniza);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-modify:hover {
-            border-color: var(--color-lenga);
-            color: var(--color-lenga);
-        }
-
-        /* Bloque: Cómo Ayuda Destination Hub (Co-ejecución) */
-        .dhub-role-card {
-            background-color: var(--color-lenga);
-            color: var(--bg-nieve);
-            padding: 2rem 2.5rem;
-            border-radius: 12px;
-            margin-bottom: 2.5rem;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(24, 48, 40, 0.15);
-        }
-
-        .dhub-role-tag {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--color-coiron);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .dhub-role-title {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            font-weight: 400;
-            color: #FFFFFF;
-            margin-bottom: 0.75rem;
-        }
-
-        .dhub-role-text {
-            font-size: 1.05rem;
-            line-height: 1.65;
-            color: rgba(246, 245, 240, 0.9);
-        }
-
-        /* Resumen Diagnóstico Ejecutivo Territorial */
-        .ai-diagnosis-card {
-            background-color: var(--bg-nieve);
-            border-left: 4px solid var(--color-terracota);
-            padding: 1.75rem 2rem;
-            border-radius: 0 12px 12px 0;
-            margin-bottom: 2.5rem;
-        }
-
-        .ai-diagnosis-tag {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--color-terracota);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.4rem;
-        }
-
-        .ai-diagnosis-text {
-            font-size: 1.05rem;
-            color: var(--color-lenga);
-            line-height: 1.6;
-        }
-
-        /* Flujograma Renderizado */
-        .results-diagram-box {
-            background-color: var(--bg-nieve);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--line-subtle);
-            margin-bottom: 3rem;
-        }
-
-        .results-diagram-title {
-            font-family: var(--font-serif);
-            font-size: 1.6rem;
-            color: var(--color-lenga);
-            margin-bottom: 1.25rem;
-        }
-
-        .results-flowchart-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .flow-node-card {
-            background: #FFFFFF;
-            border: 1px solid var(--line-medium);
-            border-radius: 10px;
-            padding: 1.25rem 1.4rem;
-            box-shadow: 0 4px 12px rgba(24, 48, 40, 0.04);
-            position: relative;
-        }
-
-        .flow-node-card.border-lenga { border-top: 4px solid var(--color-lenga); }
-        .flow-node-card.border-glaciar { border-top: 4px solid var(--color-glaciar); }
-        .flow-node-card.border-coiron { border-top: 4px solid var(--color-coiron); }
-        .flow-node-card.border-terracota { border-top: 4px solid var(--color-terracota); }
-
-        .flow-node-step {
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            color: var(--text-ceniza);
-            text-transform: uppercase;
-            margin-bottom: 0.35rem;
-            display: block;
-        }
-
-        .flow-node-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--color-lenga);
-            line-height: 1.3;
-            margin-bottom: 0.25rem;
-        }
-
-        .flow-node-desc {
-            font-size: 0.82rem;
-            color: var(--text-ceniza);
-            line-height: 1.45;
-        }
-
-        /* Matriz de Fases de la Hoja de Ruta */
-        .roadmap-timeline-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 3.5rem;
-        }
-
-        .roadmap-phase-card {
-            background-color: var(--bg-nieve);
-            border: 1px solid var(--line-subtle);
-            border-radius: 12px;
-            padding: 1.75rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .roadmap-phase-card:hover {
-            border-color: var(--color-coiron);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 24px rgba(24, 48, 40, 0.06);
-        }
-
-        .phase-header {
-            margin-bottom: 1.25rem;
-        }
-
-        .phase-badge {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--color-terracota);
-            display: block;
-            margin-bottom: 0.25rem;
-            font-weight: 500;
-        }
-
-        .phase-title {
-            font-family: var(--font-serif);
-            font-size: 1.35rem;
-            color: var(--color-lenga);
-            line-height: 1.25;
-            font-weight: 500;
-        }
-
-        .phase-timeline {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-ceniza);
-            margin-top: 0.2rem;
-        }
-
-        .phase-tasks-list {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .phase-tasks-list li {
-            font-size: 0.88rem;
-            color: var(--text-granito);
-            position: relative;
-            padding-left: 1.2rem;
-            margin-bottom: 0.65rem;
-            line-height: 1.45;
-        }
-
-        .phase-tasks-list li::before {
-            content: '▪';
-            position: absolute;
-            left: 0;
-            color: var(--color-coiron);
-            font-size: 1rem;
-            top: -2px;
-        }
-
-        .phase-deliverables {
-            background-color: #FFFFFF;
-            padding: 0.9rem 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--line-subtle);
-        }
-
-        .phase-deliverables-title {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            color: var(--color-glaciar);
-            margin-bottom: 0.3rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-        }
-
-        .phase-deliverables-text {
-            font-size: 0.82rem;
-            color: var(--text-ceniza);
-        }
-
-        /* ==========================================================================
-           MODAL DE CONFIGURACIÓN DE GEMINI API KEY
-           ========================================================================== */
-        .api-config-modal {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(14, 29, 24, 0.65);
-            backdrop-filter: blur(8px);
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-        }
-
-        .api-config-modal.is-active {
-            display: flex;
-        }
-
-        .api-config-card {
-            background: #FFFFFF;
-            max-width: 540px;
-            width: 100%;
-            border-radius: 14px;
-            padding: 2.25rem 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            position: relative;
-        }
-
-        .api-config-title {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            color: var(--color-lenga);
-            margin-bottom: 0.5rem;
-        }
-
-        .api-config-desc {
-            font-size: 0.9rem;
-            color: var(--text-ceniza);
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-        }
-
-        .api-input-label {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--color-lenga);
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 0.4rem;
-        }
-
-        .api-input-field {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--line-medium);
-            border-radius: 8px;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            outline: none;
-        }
-
-        .api-input-field:focus {
-            border-color: var(--color-terracota);
-        }
-
-        .api-config-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.75rem;
-        }
-
-        .btn-api-save {
-            background-color: var(--color-lenga);
-            color: #FFFFFF;
-            border: none;
-            padding: 0.65rem 1.4rem;
-            border-radius: 999px;
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-
-        .btn-api-save:hover {
-            background-color: var(--color-terracota);
-        }
-
-        .btn-api-cancel {
-            background: none;
-            border: 1px solid var(--line-medium);
-            padding: 0.65rem 1.2rem;
-            border-radius: 999px;
-            font-size: 0.85rem;
-            color: var(--text-ceniza);
-            cursor: pointer;
-        }
-
-        /* ==========================================================================
-           PLANTILLA OCULTA PARA EXPORTACIÓN DE PDF
-           ========================================================================== */
-        #pdf-export-canvas {
-            display: none;
-            background-color: #FFFFFF;
-            color: #183028;
-            padding: 40px;
-            width: 800px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        .pdf-page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #183028;
-            padding-bottom: 20px;
-            margin-bottom: 25px;
-        }
-
-        .pdf-brand-box {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .pdf-brand-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            font-weight: 600;
-            color: #183028;
-        }
-
-        .pdf-meta-box {
-            text-align: right;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: #636B67;
-        }
-
-        .pdf-project-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 30px;
-            font-weight: 400;
-            color: #183028;
-            margin-bottom: 4px;
-        }
-
-        .pdf-lead-stamp {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: #2B5B6C;
-            margin-bottom: 20px;
-        }
-
-        .pdf-dhub-box {
-            background-color: #183028;
-            color: #F6F5F0;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .pdf-diag-box {
-            background-color: #F6F5F0;
-            border-left: 4px solid #C85A32;
-            padding: 14px;
-            margin-bottom: 20px;
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .pdf-matrix-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 25px;
-        }
-
-        .pdf-matrix-table th {
-            background-color: #183028;
-            color: #F6F5F0;
-            text-align: left;
-            padding: 10px 12px;
-            font-size: 11px;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-        }
-
-        .pdf-matrix-table td {
-            border: 1px solid rgba(24, 48, 40, 0.15);
-            padding: 10px 12px;
-            font-size: 11.5px;
-            vertical-align: top;
-        }
-
-        .pdf-footer {
-            border-top: 1px solid rgba(24, 48, 40, 0.15);
-            padding-top: 15px;
-            display: flex;
-            justify-content: space-between;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: #636B67;
-        }
-
-        /* Responsive Media Queries */
-        @media (max-width: 900px) {
-            .roadmap-timeline-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .chat-messages-area {
-                padding: 1.5rem;
-            }
-            .chat-input-bar {
-                padding: 1rem 1.5rem;
-            }
-            .results-container {
-                padding: 2rem 1.5rem;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .roadmap-timeline-grid {
-                grid-template-columns: 1fr;
-            }
-            .results-header {
-                flex-direction: column;
-                gap: 1.25rem;
-            }
-        }
+/* ==========================================================================
+   Destination Hub (dhub.travel) — Módulo de Evaluación de Proyecto & Hoja de Ruta
+   ========================================================================== */
+
+/* 1. Invitación Editorial en el Sitio Principal */
+.hero-eval-banner {
+    margin-top: 1.5rem;
+}
+
+.hero-eval-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 1.35rem;
+    background-color: #FFFFFF;
+    border: 1px solid var(--line-medium);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-lenga);
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(24, 48, 40, 0.05);
+    transition: all 0.25s var(--ease-luxury);
+}
+
+.hero-eval-pill:hover {
+    border-color: var(--color-terracota);
+    color: var(--color-terracota);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(200, 90, 50, 0.15);
+}
+
+.hero-eval-sparkle {
+    color: var(--color-terracota);
+    font-size: 0.9rem;
+}
+
+/* Sección Editorial de Invitación a la Hoja de Ruta */
+.roadmap-invite-section {
+    padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+    background-color: var(--bg-nieve);
+}
+
+.roadmap-invite-card {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FAF9F5 100%);
+    border: 1px solid var(--line-medium);
+    border-radius: 20px;
+    padding: clamp(2.5rem, 5vw, 4.5rem);
+    box-shadow: 0 20px 48px rgba(24, 48, 40, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.roadmap-invite-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--color-terracota) 0%, var(--color-coiron) 50%, var(--color-glaciar) 100%);
+}
+
+.roadmap-invite-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.95rem;
+    background-color: rgba(200, 90, 50, 0.08);
+    border: 1px solid rgba(200, 90, 50, 0.25);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-terracota);
+    margin-bottom: 1.25rem;
+}
+
+.roadmap-invite-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-terracota);
+    animation: inviteDotPulse 2s infinite ease-in-out;
+}
+
+@keyframes inviteDotPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.5; }
+}
+
+.roadmap-invite-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    color: var(--color-lenga);
+    font-weight: 400;
+    line-height: 1.18;
+    max-width: 820px;
+    margin-bottom: 1.25rem;
+}
+
+.roadmap-invite-title em {
+    font-style: italic;
+    color: var(--color-terracota);
+}
+
+.roadmap-invite-desc {
+    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    color: var(--text-ceniza);
+    line-height: 1.7;
+    max-width: 780px;
+    margin-bottom: 2rem;
+}
+
+.roadmap-invite-desc strong {
+    color: var(--color-lenga);
+    font-weight: 500;
+}
+
+.roadmap-invite-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.btn-roadmap-launch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: var(--color-lenga);
+    color: var(--bg-nieve);
+    padding: 1.15rem 2.4rem;
+    font-size: 1.02rem;
+    font-weight: 500;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(24, 48, 40, 0.15);
+    transition: all 0.3s var(--ease-luxury);
+}
+
+.btn-roadmap-launch:hover {
+    background-color: var(--color-terracota);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 36px rgba(200, 90, 50, 0.25);
+    color: #FFFFFF;
+}
+
+.roadmap-invite-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-ceniza);
+}
+
+.roadmap-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.roadmap-meta-item::before {
+    content: '✦';
+    color: var(--color-coiron);
+    font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   2. MODAL CONVERSACIONAL (DIAGNÓSTICO EN TIEMPO REAL)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(14, 29, 24, 0.75);
+    backdrop-filter: blur(12px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease-luxury);
+}
+
+.modal-overlay.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-container {
+    width: 100%;
+    max-width: 1100px;
+    height: 92vh;
+    background-color: var(--bg-nieve);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.4s var(--ease-luxury);
+}
+
+.modal-overlay.is-active .modal-container {
+    transform: translateY(0) scale(1);
+}
+
+/* Header del Modal */
+.modal-header {
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line-subtle);
+    background-color: #FFFFFF;
+}
+
+.modal-header-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal-header-brand img {
+    width: 36px;
+    height: 36px;
+}
+
+.modal-header-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    color: var(--color-lenga);
+    font-weight: 500;
+}
+
+.modal-header-sub {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-ceniza);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.modal-header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ai-status-pill {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    background-color: var(--bg-piedra);
+    color: var(--color-lenga);
+    border: 1px solid var(--line-subtle);
+    user-select: none;
+}
+
+.ai-status-pill.is-active-ai {
+    background-color: rgba(39, 174, 96, 0.12);
+    color: #1e824c;
+    border-color: rgba(39, 174, 96, 0.35);
+}
+
+.ai-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #999;
+}
+
+.ai-status-pill.is-active-ai .ai-status-dot {
+    background-color: #27ae60;
+    box-shadow: 0 0 8px #27ae60;
+}
+
+.modal-close-btn {
+    background: none;
+    border: 1px solid var(--line-subtle);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-lenga);
+    transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background-color: var(--color-lenga);
+    color: var(--bg-nieve);
+    transform: rotate(90deg);
+}
+
+/* Banner de Notificación de Diagnóstico */
+.api-alert-banner {
+    display: none;
+    padding: 0.65rem 2rem;
+    background-color: #FDF3E7;
+    border-bottom: 1px solid #F5CBA7;
+    color: #A04000;
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.api-alert-banner.is-active {
+    display: flex;
+}
+
+/* ==========================================================================
+   3. CONTENEDOR DEL CHAT CONVERSACIONAL
+   ========================================================================== */
+.chat-view-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: #FFFFFF;
+}
+
+.chat-progress-wrap {
+    padding: 0.75rem 2rem;
+    background-color: var(--bg-nieve);
+    border-bottom: 1px solid var(--line-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chat-progress-text {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-terracota);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.chat-progress-bar-bg {
+    width: 140px;
+    height: 4px;
+    background-color: var(--bg-piedra);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.chat-progress-bar-val {
+    height: 100%;
+    width: 15%;
+    background: linear-gradient(90deg, var(--color-coiron) 0%, var(--color-terracota) 100%);
+    transition: width 0.4s ease;
+}
+
+/* Historial de Mensajes */
+.chat-messages-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    scroll-behavior: smooth;
+}
+
+.chat-bubble {
+    max-width: 84%;
+    animation: bubbleSlideIn 0.35s var(--ease-luxury);
+}
+
+@keyframes bubbleSlideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bubble-consultant {
+    align-self: flex-start;
+    display: flex;
+    gap: 1rem;
+}
+
+.bubble-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background-color: var(--bg-nieve);
+    border: 1px solid var(--line-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.bubble-avatar img {
+    width: 22px;
+    height: 22px;
+}
+
+.bubble-consultant-content {
+    background-color: var(--bg-nieve);
+    border: 1px solid var(--line-subtle);
+    border-radius: 4px 16px 16px 16px;
+    padding: 1.35rem 1.7rem;
+    color: var(--color-lenga);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.bubble-consultant-content p:not(:last-child) {
+    margin-bottom: 0.75rem;
+}
+
+.bubble-user {
+    align-self: flex-end;
+    background-color: var(--color-lenga);
+    color: #FFFFFF;
+    border-radius: 16px 4px 16px 16px;
+    padding: 1.15rem 1.6rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    box-shadow: 0 4px 14px rgba(24, 48, 40, 0.12);
+}
+
+/* Formulario de Captura de Lead (Paso 0) */
+.lead-form-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--line-medium);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.lead-input-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.lead-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-lenga);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.lead-field {
+    background-color: var(--bg-nieve);
+    border: 1px solid var(--line-medium);
+    padding: 0.65rem 0.9rem;
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--color-lenga);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.lead-field:focus {
+    border-color: var(--color-terracota);
+    background-color: #FFFFFF;
+}
+
+.lead-submit-btn {
+    background-color: var(--color-lenga);
+    color: #FFFFFF;
+    border: none;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+.lead-submit-btn:hover {
+    background-color: var(--color-terracota);
+    transform: translateY(-2px);
+}
+
+/* Burbuja de "Formulando consulta" */
+.chat-thinking-bubble {
+    display: none;
+    align-self: flex-start;
+    margin-left: 48px;
+    background-color: var(--bg-nieve);
+    padding: 0.85rem 1.4rem;
+    border-radius: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-glaciar);
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px dashed var(--color-coiron);
+}
+
+.chat-thinking-bubble.is-active {
+    display: flex;
+    animation: pulse-border 1.8s infinite ease-in-out;
+}
+
+@keyframes pulse-border {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.pulse-dots span {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--color-glaciar);
+    margin: 0 2px;
+    animation: dotBounce 1.2s infinite ease-in-out;
+}
+
+.pulse-dots span:nth-child(2) { animation-delay: 0.2s; }
+.pulse-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotBounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+}
+
+/* Barra de Entrada de Respuestas */
+.chat-input-bar {
+    padding: 1.25rem 2.5rem 1.75rem;
+    border-top: 1px solid var(--line-subtle);
+    background-color: #FFFFFF;
+}
+
+.input-form-flex {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    background-color: var(--bg-nieve);
+    border: 1.5px solid var(--line-medium);
+    border-radius: 14px;
+    padding: 0.6rem 0.85rem 0.6rem 1.25rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.input-form-flex:focus-within {
+    border-color: var(--color-lenga);
+    box-shadow: 0 0 0 3px rgba(24, 48, 40, 0.08);
+    background-color: #FFFFFF;
+}
+
+.chat-textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--color-lenga);
+    resize: none;
+    max-height: 120px;
+    min-height: 28px;
+    line-height: 1.45;
+}
+
+.chat-send-btn {
+    background-color: var(--color-lenga);
+    color: #FFFFFF;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s var(--ease-luxury);
+}
+
+.chat-send-btn:hover {
+    background-color: var(--color-terracota);
+    transform: scale(1.04);
+}
+
+.chat-send-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.input-meta-help {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-ceniza);
+    margin-top: 0.5rem;
+    padding: 0 0.5rem;
+}
+
+/* ==========================================================================
+   4. PANTALLA DE SÍNTESIS TERRITORIAL
+   ========================================================================== */
+.analyzing-screen {
+    display: none;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 3rem;
+    background-color: var(--bg-nieve);
+    text-align: center;
+}
+
+.analyzing-screen.is-active {
+    display: flex;
+    animation: fadeIn 0.4s ease;
+}
+
+.analyzing-compass {
+    width: 80px;
+    height: 80px;
+    animation: spin-compass 4s linear infinite;
+    margin-bottom: 2rem;
+}
+
+@keyframes spin-compass {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.analyzing-title {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    color: var(--color-lenga);
+    margin-bottom: 0.75rem;
+}
+
+.analyzing-desc {
+    font-size: 1rem;
+    color: var(--text-ceniza);
+    max-width: 520px;
+    margin-bottom: 1.5rem;
+}
+
+.analyzing-step-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    background-color: rgba(200, 169, 126, 0.2);
+    border: 1px solid var(--color-coiron);
+    color: var(--color-lenga);
+}
+
+/* ==========================================================================
+   5. VISTA FINAL: HOJA DE RUTA RESULTANTE & ROL DE D HUB
+   ========================================================================== */
+.results-container {
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 3rem 4rem;
+    background-color: #FFFFFF;
+}
+
+.results-container.is-active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.results-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line-subtle);
+}
+
+.results-header-left {
+    max-width: 750px;
+}
+
+.results-tag {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-terracota);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.results-title {
+    font-family: var(--font-serif);
+    font-size: 2.6rem;
+    color: var(--color-lenga);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+}
+
+.results-desc {
+    font-size: 1.05rem;
+    color: var(--text-ceniza);
+    max-width: 820px;
+}
+
+/* Acciones Finales de la Hoja de Ruta (Al final del documento) */
+.results-footer-actions {
+    margin-top: 2rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--line-subtle);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.results-actions-primary-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.results-actions-partner-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 0.25rem;
+}
+
+.btn-pdf-download {
+    background-color: var(--color-terracota);
+    color: #FFFFFF;
+    border: none;
+    padding: 0.95rem 2rem;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(200, 90, 50, 0.25);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-pdf-download:hover {
+    background-color: var(--color-terracota-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(200, 90, 50, 0.35);
+    color: #FFFFFF;
+}
+
+.btn-whatsapp-partner {
+    background-color: #25D366;
+    color: #FFFFFF;
+    border: none;
+    padding: 1.05rem 2.25rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    box-shadow: 0 10px 24px rgba(37, 211, 102, 0.28);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: 0.01em;
+}
+
+.btn-whatsapp-partner:hover {
+    background-color: #20BD5A;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(37, 211, 102, 0.38);
+    color: #FFFFFF;
+}
+
+.btn-whatsapp-partner svg {
+    flex-shrink: 0;
+}
+
+.btn-modify {
+    background: none;
+    border: 1px solid var(--line-medium);
+    padding: 0.9rem 1.5rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: var(--text-ceniza);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-modify:hover {
+    border-color: var(--color-lenga);
+    color: var(--color-lenga);
+}
+
+/* Bloque: Cómo Ayuda Destination Hub (Co-ejecución) */
+.dhub-role-card {
+    background-color: var(--color-lenga);
+    color: var(--bg-nieve);
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(24, 48, 40, 0.15);
+}
+
+.dhub-role-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-coiron);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.dhub-role-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin-bottom: 0.75rem;
+}
+
+.dhub-role-text {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: rgba(246, 245, 240, 0.9);
+}
+
+/* Resumen Diagnóstico Territorial */
+.ai-diagnosis-card {
+    background-color: var(--bg-nieve);
+    border-left: 4px solid var(--color-terracota);
+    padding: 1.75rem 2rem;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 2.5rem;
+}
+
+.ai-diagnosis-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-terracota);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.4rem;
+}
+
+.ai-diagnosis-text {
+    font-size: 1.05rem;
+    color: var(--color-lenga);
+    line-height: 1.6;
+}
+
+/* Flujograma Renderizado */
+.results-diagram-box {
+    background-color: var(--bg-nieve);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--line-subtle);
+    margin-bottom: 3rem;
+}
+
+.results-diagram-title {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    color: var(--color-lenga);
+    margin-bottom: 1.25rem;
+}
+
+.results-flowchart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+}
+
+.flow-node-card {
+    background: #FFFFFF;
+    border: 1px solid var(--line-medium);
+    border-radius: 10px;
+    padding: 1.25rem 1.4rem;
+    box-shadow: 0 4px 12px rgba(24, 48, 40, 0.04);
+    position: relative;
+}
+
+.flow-node-card.border-lenga { border-top: 4px solid var(--color-lenga); }
+.flow-node-card.border-glaciar { border-top: 4px solid var(--color-glaciar); }
+.flow-node-card.border-coiron { border-top: 4px solid var(--color-coiron); }
+.flow-node-card.border-terracota { border-top: 4px solid var(--color-terracota); }
+
+.flow-node-step {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-ceniza);
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+    display: block;
+}
+
+.flow-node-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-lenga);
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+}
+
+.flow-node-desc {
+    font-size: 0.82rem;
+    color: var(--text-ceniza);
+    line-height: 1.45;
+}
+
+/* Matriz de Fases de la Hoja de Ruta */
+.roadmap-timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+}
+
+.roadmap-phase-card {
+    background-color: var(--bg-nieve);
+    border: 1px solid var(--line-subtle);
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.roadmap-phase-card:hover {
+    border-color: var(--color-coiron);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(24, 48, 40, 0.06);
+}
+
+.phase-header {
+    margin-bottom: 1.25rem;
+}
+
+.phase-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-terracota);
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.phase-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    color: var(--color-lenga);
+    line-height: 1.25;
+    font-weight: 500;
+}
+
+.phase-tasks-list {
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+.phase-tasks-list li {
+    font-size: 0.88rem;
+    color: var(--text-granito);
+    position: relative;
+    padding-left: 1.2rem;
+    margin-bottom: 0.65rem;
+    line-height: 1.45;
+}
+
+.phase-tasks-list li::before {
+    content: '▪';
+    position: absolute;
+    left: 0;
+    color: var(--color-coiron);
+    font-size: 1rem;
+    top: -2px;
+}
+
+.phase-deliverables {
+    background-color: #FFFFFF;
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--line-subtle);
+}
+
+.phase-deliverables-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--color-glaciar);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.phase-deliverables-text {
+    font-size: 0.82rem;
+    color: var(--text-ceniza);
+}
+
+/* ==========================================================================
+   6. MODAL DE CONFIGURACIÓN DE SERVICIO (OCULTO/SECUNDARIO)
+   ========================================================================== */
+.api-config-modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(14, 29, 24, 0.65);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.api-config-modal.is-active {
+    display: flex;
+}
+
+.api-config-card {
+    background: #FFFFFF;
+    max-width: 540px;
+    width: 100%;
+    border-radius: 14px;
+    padding: 2.25rem 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.api-config-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--color-lenga);
+    margin-bottom: 0.5rem;
+}
+
+.api-config-desc {
+    font-size: 0.9rem;
+    color: var(--text-ceniza);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.api-input-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-lenga);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.api-input-field {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--line-medium);
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    outline: none;
+}
+
+.api-input-field:focus {
+    border-color: var(--color-terracota);
+}
+
+.api-config-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.btn-api-save {
+    background-color: var(--color-lenga);
+    color: #FFFFFF;
+    border: none;
+    padding: 0.65rem 1.4rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.btn-api-save:hover {
+    background-color: var(--color-terracota);
+}
+
+.btn-api-cancel {
+    background: none;
+    border: 1px solid var(--line-medium);
+    padding: 0.65rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: var(--text-ceniza);
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   7. PLANTILLA EDITORIAL DE 2 PÁGINAS PARA EXPORTACIÓN A PDF
+   ========================================================================== */
+#pdf-export-canvas {
+    display: none;
+    background-color: #FFFFFF;
+    color: #183028;
+    width: 710px;
+    margin: 0 auto;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+#pdf-export-canvas * {
+    box-sizing: border-box;
+}
+
+.pdf-page {
+    width: 710px;
+    min-height: 980px;
+    padding: 24px 28px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.html2pdf__page-break {
+    page-break-before: always !important;
+    break-before: page !important;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: block;
+}
+
+/* Encabezado Editorial Superior */
+.pdf-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid #183028;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.pdf-brand-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pdf-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #183028;
+    line-height: 1.1;
+}
+
+.pdf-brand-tagline {
+    font-size: 8.5px;
+    color: #2B5B6C;
+    letter-spacing: 0.06em;
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 2px;
+    font-weight: 500;
+}
+
+.pdf-meta-box {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #636B67;
+    line-height: 1.45;
+}
+
+/* Título de Proyecto y Metadatos */
+.pdf-hero-section {
+    margin-bottom: 14px;
+}
+
+.pdf-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    letter-spacing: 0.12em;
+    color: #C85A32;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.pdf-project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: #183028;
+    line-height: 1.2;
+    margin: 0 0 4px 0;
+}
+
+.pdf-lead-stamp {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: #2B5B6C;
+    line-height: 1.4;
+    padding-bottom: 4px;
+}
+
+/* Cajas de Diagnóstico y Rol de Co-ejecución */
+.pdf-box-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.eyebrow-gold { color: #C8A97E; }
+.eyebrow-terracota { color: #C85A32; }
+.eyebrow-slate { color: #2B5B6C; }
+
+.pdf-dhub-box {
+    background-color: #183028;
+    color: #F6F5F0;
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.pdf-box-body {
+    font-size: 11px;
+    line-height: 1.48;
+}
+
+.pdf-diag-box {
+    background-color: #F6F5F0;
+    border-left: 3.5px solid #C85A32;
+    padding: 11px 14px;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 12px;
+    color: #183028;
+}
+
+/* Flujograma de 4 Nodos en Página 1 */
+.pdf-flow-box {
+    background-color: #FAFAF7;
+    border: 1px solid rgba(24, 48, 40, 0.12);
+    border-radius: 6px;
+    padding: 11px 12px;
+    margin-bottom: 14px;
+}
+
+.pdf-flow-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.pdf-flow-item {
+    background-color: #FFFFFF;
+    border: 1px solid rgba(24, 48, 40, 0.12);
+    border-radius: 4px;
+    padding: 7px 8px;
+}
+
+.pdf-flow-item.border-lenga { border-top: 3px solid #183028; }
+.pdf-flow-item.border-glaciar { border-top: 3px solid #2B5B6C; }
+.pdf-flow-item.border-coiron { border-top: 3px solid #C8A97E; }
+.pdf-flow-item.border-terracota { border-top: 3px solid #C85A32; }
+
+.pdf-flow-step {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7.5px;
+    text-transform: uppercase;
+    color: #C85A32;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.pdf-flow-title {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: #183028;
+    line-height: 1.25;
+    margin-bottom: 3px;
+}
+
+.pdf-flow-desc {
+    font-size: 8.5px;
+    color: #636B67;
+    line-height: 1.35;
+}
+
+/* Página 2: Matriz Operativa de Fases */
+.pdf-matrix-header {
+    margin-bottom: 12px;
+}
+
+.pdf-matrix-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: #183028;
+    margin: 0 0 3px 0;
+}
+
+.pdf-matrix-desc {
+    font-size: 10px;
+    color: #636B67;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.pdf-matrix-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+}
+
+.pdf-matrix-table th {
+    background-color: #183028;
+    color: #F6F5F0;
+    text-align: left;
+    padding: 7px 9px;
+    font-size: 9px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pdf-matrix-table td {
+    border: 1px solid rgba(24, 48, 40, 0.15);
+    padding: 8px 9px;
+    font-size: 10px;
+    line-height: 1.4;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Tarjeta de Próximos Pasos (Página 2) */
+.pdf-next-steps-card {
+    background-color: #F6F5F0;
+    border: 1px solid rgba(24, 48, 40, 0.15);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 10px;
+    margin-bottom: 14px;
+}
+
+.pdf-next-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    color: #C85A32;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+}
+
+.pdf-next-desc {
+    font-size: 9.5px;
+    color: #183028;
+    line-height: 1.45;
+    margin: 0;
+}
+
+/* Pie de Página */
+.pdf-page-footer {
+    border-top: 1px solid rgba(24, 48, 40, 0.15);
+    padding-top: 8px;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    color: #636B67;
+    width: 100%;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 900px) {
+    .roadmap-timeline-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .chat-messages-area {
+        padding: 1.5rem;
+    }
+    .chat-input-bar {
+        padding: 1rem 1.5rem;
+    }
+    .results-container {
+        padding: 2rem 1.5rem;
+    }
+    .roadmap-invite-card {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .roadmap-timeline-grid {
+        grid-template-columns: 1fr;
+    }
+    .results-header {
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+    .modal-container {
+        height: 100vh;
+        border-radius: 0;
+    }
+    .modal-overlay {
+        padding: 0;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -2480,64 +2700,116 @@ DEBES devolver OBLIGATORIAMENTE un JSON válido (sin texto adicional fuera del J
            EXPORTACIÓN A PDF EDITORIAL
            ====================================================================== */
         function exportToPDF() {
-            if (!generatedRoadmapData) return;
+    if (!generatedRoadmapData) return;
 
-            const data = generatedRoadmapData;
+    const data = generatedRoadmapData;
+    const lang = getCurrentSiteLang();
+    const i18n = ROADMAP_I18N[lang] || ROADMAP_I18N.es;
+    const localeStr = lang === 'en' ? 'en-US' : lang === 'pt' ? 'pt-BR' : 'es-AR';
 
-            document.getElementById('pdfProjectTitle').textContent = `Hoja de Ruta: ${data.projectName}`;
-            document.getElementById('pdfLeadStamp').textContent = `SOLICITANTE: ${leadData.name.toUpperCase()} | EMAIL: ${leadData.email.toUpperCase()} | TEL: ${leadData.phone}`;
-            document.getElementById('pdfDateStamp').textContent = `FECHA: ${new Date().toLocaleDateString('es-AR', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase()}`;
-            
-            document.getElementById('pdfDhubRoleText').textContent = data.dhubRole;
-            document.getElementById('pdfDiagnosisText').textContent = data.territorialDiagnosis;
+    // Página 1: Visión Estratégica, Datos del Lead y Flujograma
+    const pTitle = document.getElementById('pdfProjectTitle');
+    if (pTitle) pTitle.textContent = `${i18n.pdf_title_prefix} ${data.projectName}`;
 
-            const nodesSummaryHtml = data.flowNodes.map(n => `<strong>[${n.step}]:</strong> ${n.title} (${n.desc})`).join(' &nbsp;➔&nbsp; ');
-            document.getElementById('pdfFlowNodesSummary').innerHTML = nodesSummaryHtml;
+    const pStamp = document.getElementById('pdfLeadStamp');
+    if (pStamp) pStamp.textContent = `${i18n.pdf_client_label} ${leadData.name.toUpperCase()} | ${i18n.pdf_email_label} ${leadData.email.toUpperCase()} | ${i18n.pdf_tel_label} ${leadData.phone}`;
 
-            const tableBody = document.getElementById('pdfTableBody');
-            tableBody.innerHTML = '';
+    const pDate = document.getElementById('pdfDateStamp');
+    if (pDate) pDate.textContent = `${i18n.pdf_date_label} ${new Date().toLocaleDateString(localeStr, { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase()}`;
+    
+    const pRole = document.getElementById('pdfDhubRoleText');
+    if (pRole) pRole.textContent = data.dhubRole;
 
-            data.phases.forEach(p => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>
-                        <strong style="color: #C85A32;">${p.phase}</strong><br>
-                        <span style="font-size: 10px; color: #636B67;">${p.timeline}</span><br>
-                        <strong>${p.title}</strong>
-                    </td>
-                    <td>
-                        <ul style="margin: 0; padding-left: 15px; line-height: 1.45;">
-                            ${p.tasks.map(t => `<li>${t}</li>`).join('')}
-                        </ul>
-                    </td>
-                    <td>
-                        <strong style="color: #2B5B6C; font-size: 10px; text-transform: uppercase;">${p.deliverableTitle}:</strong><br>
-                        <span>${p.deliverables}</span>
-                        ${p.kpi ? `<br><span style="color: #C85A32; font-size: 10px;">KPI: ${p.kpi}</span>` : ''}
-                    </td>
-                `;
-                tableBody.appendChild(tr);
-            });
+    const pDiag = document.getElementById('pdfDiagnosisText');
+    if (pDiag) pDiag.textContent = data.territorialDiagnosis;
 
-            const element = document.getElementById('pdf-export-canvas');
-            element.style.display = 'block';
+    // Renderizar Flujograma en Grid de 4 Nodos Elegantes en Página 1
+    const flowContainer = document.getElementById('pdfFlowNodesContainer');
+    if (flowContainer && data.flowNodes) {
+        flowContainer.innerHTML = data.flowNodes.map(n => `
+            <div class="pdf-flow-item border-${n.color || 'lenga'}">
+                <span class="pdf-flow-step">${n.step}</span>
+                <div class="pdf-flow-title">${n.title}</div>
+                <div class="pdf-flow-desc">${n.desc}</div>
+            </div>
+        `).join('');
+    }
 
-            const opt = {
-                margin:       10,
-                filename:     `Hoja_de_Ruta_DHub_${data.projectName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
+    // Página 2: Matriz de 4 Fases y Próximos Pasos
+    const pMiniTitle = document.getElementById('pdfProjectMiniTitle');
+    if (pMiniTitle) pMiniTitle.textContent = `${data.projectName.toUpperCase()} · DHUB.TRAVEL`;
 
-            html2pdf().set(opt).from(element).save().then(() => {
-                element.style.display = 'none';
-            }).catch(err => {
-                console.error('Error al generar PDF:', err);
-                element.style.display = 'none';
-                window.print();
-            });
-        }
+    const pMatrixTitle = document.getElementById('pdfMatrixTitle');
+    if (pMatrixTitle) pMatrixTitle.textContent = i18n.pdf_matrix_title;
+
+    const pMatrixDesc = document.getElementById('pdfMatrixDesc');
+    if (pMatrixDesc) pMatrixDesc.textContent = i18n.pdf_matrix_desc;
+
+    const pNextTitle = document.getElementById('pdfNextTitle');
+    if (pNextTitle) pNextTitle.textContent = i18n.pdf_next_title;
+
+    const pNextDesc = document.getElementById('pdfNextDesc');
+    if (pNextDesc) pNextDesc.textContent = i18n.pdf_next_desc;
+
+    const tableBody = document.getElementById('pdfTableBody');
+    if (tableBody) {
+        tableBody.innerHTML = '';
+        data.phases.forEach(p => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="width: 24%;">
+                    <strong style="color: #C85A32; font-family: 'JetBrains Mono', monospace; font-size: 10px;">${p.phase}</strong><br>
+                    <span style="font-size: 8.5px; color: #636B67; font-family: 'JetBrains Mono', monospace;">${p.timeline}</span><br>
+                    <strong style="color: #183028; font-size: 10px; display: inline-block; margin-top: 3px;">${p.title}</strong>
+                </td>
+                <td style="width: 44%;">
+                    <ul style="margin: 0; padding-left: 12px; line-height: 1.4; font-size: 9.5px; color: #183028;">
+                        ${p.tasks.map(t => `<li style="margin-bottom: 2px;">${t}</li>`).join('')}
+                    </ul>
+                </td>
+                <td style="width: 32%;">
+                    <div style="font-size: 8.5px; font-weight: 600; color: #2B5B6C; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; margin-bottom: 2px;">${p.deliverableTitle}:</div>
+                    <div style="font-size: 9px; color: #183028; line-height: 1.35; margin-bottom: 4px;">${p.deliverables}</div>
+                    ${p.kpi ? `<div style="font-size: 8.5px; color: #C85A32; font-family: 'JetBrains Mono', monospace; font-weight: 600;">KPI: ${p.kpi}</div>` : ''}
+                </td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    }
+
+    const element = document.getElementById('pdf-export-canvas');
+    element.style.display = 'block';
+
+    const opt = {
+        margin:       [8, 8, 8, 8],
+        filename:     `Hoja_de_Ruta_DHub_${data.projectName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { 
+            scale: 2, 
+            useCORS: true, 
+            logging: false,
+            scrollX: 0,
+            scrollY: 0,
+            windowWidth: 720
+        },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['css', 'legacy'], before: '.html2pdf__page-break', avoid: ['tr', '.pdf-avoid-break'] }
+    };
+
+    if (typeof html2pdf !== 'undefined') {
+        html2pdf().set(opt).from(element).save().then(() => {
+            element.style.display = 'none';
+        }).catch(err => {
+            console.error('Error al generar PDF:', err);
+            element.style.display = 'none';
+            window.print();
+        });
+    } else {
+        window.print();
+        element.style.display = 'none';
+    }
+}
+
     </script>
 </body>
 </html>

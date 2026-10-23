@@ -103,6 +103,10 @@ const ROADMAP_I18N = {
         pdf_email_label: "EMAIL:",
         pdf_tel_label: "TEL:",
         pdf_date_label: "FECHA:",
+        pdf_matrix_title: "Matriz de Co-Ejecución por Fases",
+        pdf_matrix_desc: "Tareas clave estructuradas junto al equipo de Destination Hub, entregables tangibles y métricas de retorno (Yield) por etapa.",
+        pdf_next_title: "✦ PRÓXIMO PASO: ACTIVACIÓN CON UN SOCIO DE DESTINATION HUB",
+        pdf_next_desc: "Esta hoja de ruta establece el marco de co-ejecución inicial. Para activar el plan de trabajo comercial, Yield y modelo regenerativo en tu territorio, comunícate directamente con un Socio Director vía WhatsApp o al correo hola@dhub.travel.",
         lang_name: "Español"
     },
     en: {
@@ -128,6 +132,10 @@ const ROADMAP_I18N = {
         pdf_email_label: "EMAIL:",
         pdf_tel_label: "PHONE:",
         pdf_date_label: "DATE:",
+        pdf_matrix_title: "Co-Execution Phase Matrix",
+        pdf_matrix_desc: "Key tasks structured alongside the Destination Hub team, tangible deliverables, and Yield return metrics by stage.",
+        pdf_next_title: "✦ NEXT STEP: ACTIVATION WITH A DESTINATION HUB PARTNER",
+        pdf_next_desc: "This roadmap establishes the initial framework for joint execution. To activate the commercial, Yield, and regenerative action plan in your territory, reach out directly to a Managing Partner via WhatsApp or at hola@dhub.travel.",
         lang_name: "English"
     },
     pt: {
@@ -153,6 +161,10 @@ const ROADMAP_I18N = {
         pdf_email_label: "E-MAIL:",
         pdf_tel_label: "TEL:",
         pdf_date_label: "DATA:",
+        pdf_matrix_title: "Matriz de Co-Execução por Fases",
+        pdf_matrix_desc: "Tarefas-chave estruturadas junto à equipe da Destination Hub, entregáveis tangíveis e métricas de retorno (Yield) por etapa.",
+        pdf_next_title: "✦ PRÓXIMO PASSO: ATIVAÇÃO COM UM SÓCIO DA DESTINATION HUB",
+        pdf_next_desc: "Este roteiro estabelece a base para o plano de co-execução. Para ativar o plano de trabalho comercial, Yield e modelo regenerativo no seu território, fale diretamente com um Sócio Diretor via WhatsApp ou pelo e-mail hola@dhub.travel.",
         lang_name: "Português"
     }
 };
@@ -1089,6 +1101,19 @@ function renderFinalRoadmapView(data) {
         `;
         phasesGrid.appendChild(card);
     });
+
+    // Configurar enlace dinámico de WhatsApp directo con un Socio Director
+    const lang = getCurrentSiteLang();
+    const waMessages = {
+        es: `Hola equipo de Destination Hub, mi nombre es ${leadData.name}. Acabo de generar la hoja de ruta para mi proyecto "${data.projectName}" y me gustaría conversar directamente con un Socio Director sobre los próximos pasos.`,
+        en: `Hello Destination Hub team, my name is ${leadData.name}. I just generated the roadmap for my project "${data.projectName}" and would like to speak directly with a Managing Partner regarding next steps.`,
+        pt: `Olá equipe da Destination Hub, meu nome é ${leadData.name}. Acabei de gerar o roteiro para o meu projeto "${data.projectName}" e gostaria de conversar diretamente com um Sócio Diretor sobre os próximos passos.`
+    };
+    const waText = encodeURIComponent(waMessages[lang] || waMessages.es);
+    const waPartnerBtn = document.getElementById('btnWhatsappPartner');
+    if (waPartnerBtn) {
+        waPartnerBtn.href = `https://wa.me/5492944000000?text=${waText}`;
+    }
 }
 
 function restartChatSession() {
@@ -1100,7 +1125,7 @@ function restartChatSession() {
 }
 
 /* ==========================================================================
-   10. EXPORTACIÓN A PDF EDITORIAL
+   10. EXPORTACIÓN A PDF EDITORIAL (SISTEMA DE 2 PÁGINAS A4 SIN CORTES)
    ========================================================================== */
 function exportToPDF() {
     if (!generatedRoadmapData) return;
@@ -1110,50 +1135,93 @@ function exportToPDF() {
     const i18n = ROADMAP_I18N[lang] || ROADMAP_I18N.es;
     const localeStr = lang === 'en' ? 'en-US' : lang === 'pt' ? 'pt-BR' : 'es-AR';
 
-    document.getElementById('pdfProjectTitle').textContent = `${i18n.pdf_title_prefix} ${data.projectName}`;
-    document.getElementById('pdfLeadStamp').textContent = `${i18n.pdf_client_label} ${leadData.name.toUpperCase()} | ${i18n.pdf_email_label} ${leadData.email.toUpperCase()} | ${i18n.pdf_tel_label} ${leadData.phone}`;
-    document.getElementById('pdfDateStamp').textContent = `${i18n.pdf_date_label} ${new Date().toLocaleDateString(localeStr, { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase()}`;
-    
-    document.getElementById('pdfDhubRoleText').textContent = data.dhubRole;
-    document.getElementById('pdfDiagnosisText').textContent = data.territorialDiagnosis;
+    // Página 1: Visión Estratégica, Datos del Lead y Flujograma
+    const pTitle = document.getElementById('pdfProjectTitle');
+    if (pTitle) pTitle.textContent = `${i18n.pdf_title_prefix} ${data.projectName}`;
 
-    const nodesSummaryHtml = data.flowNodes.map(n => `<strong>[${n.step}]:</strong> ${n.title} (${n.desc})`).join(' &nbsp;➔&nbsp; ');
-    document.getElementById('pdfFlowNodesSummary').innerHTML = nodesSummaryHtml;
+    const pStamp = document.getElementById('pdfLeadStamp');
+    if (pStamp) pStamp.textContent = `${i18n.pdf_client_label} ${leadData.name.toUpperCase()} | ${i18n.pdf_email_label} ${leadData.email.toUpperCase()} | ${i18n.pdf_tel_label} ${leadData.phone}`;
+
+    const pDate = document.getElementById('pdfDateStamp');
+    if (pDate) pDate.textContent = `${i18n.pdf_date_label} ${new Date().toLocaleDateString(localeStr, { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase()}`;
+    
+    const pRole = document.getElementById('pdfDhubRoleText');
+    if (pRole) pRole.textContent = data.dhubRole;
+
+    const pDiag = document.getElementById('pdfDiagnosisText');
+    if (pDiag) pDiag.textContent = data.territorialDiagnosis;
+
+    // Renderizar Flujograma en Grid de 4 Nodos Elegantes en Página 1
+    const flowContainer = document.getElementById('pdfFlowNodesContainer');
+    if (flowContainer && data.flowNodes) {
+        flowContainer.innerHTML = data.flowNodes.map(n => `
+            <div class="pdf-flow-item border-${n.color || 'lenga'}">
+                <span class="pdf-flow-step">${n.step}</span>
+                <div class="pdf-flow-title">${n.title}</div>
+                <div class="pdf-flow-desc">${n.desc}</div>
+            </div>
+        `).join('');
+    }
+
+    // Página 2: Matriz de 4 Fases y Próximos Pasos
+    const pMiniTitle = document.getElementById('pdfProjectMiniTitle');
+    if (pMiniTitle) pMiniTitle.textContent = `${data.projectName.toUpperCase()} · DHUB.TRAVEL`;
+
+    const pMatrixTitle = document.getElementById('pdfMatrixTitle');
+    if (pMatrixTitle) pMatrixTitle.textContent = i18n.pdf_matrix_title;
+
+    const pMatrixDesc = document.getElementById('pdfMatrixDesc');
+    if (pMatrixDesc) pMatrixDesc.textContent = i18n.pdf_matrix_desc;
+
+    const pNextTitle = document.getElementById('pdfNextTitle');
+    if (pNextTitle) pNextTitle.textContent = i18n.pdf_next_title;
+
+    const pNextDesc = document.getElementById('pdfNextDesc');
+    if (pNextDesc) pNextDesc.textContent = i18n.pdf_next_desc;
 
     const tableBody = document.getElementById('pdfTableBody');
-    tableBody.innerHTML = '';
-
-    data.phases.forEach(p => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>
-                <strong style="color: #C85A32;">${p.phase}</strong><br>
-                <span style="font-size: 10px; color: #636B67;">${p.timeline}</span><br>
-                <strong>${p.title}</strong>
-            </td>
-            <td>
-                <ul style="margin: 0; padding-left: 15px; line-height: 1.45;">
-                    ${p.tasks.map(t => `<li>${t}</li>`).join('')}
-                </ul>
-            </td>
-            <td>
-                <strong style="color: #2B5B6C; font-size: 10px; text-transform: uppercase;">${p.deliverableTitle}:</strong><br>
-                <span>${p.deliverables}</span>
-                ${p.kpi ? `<br><span style="color: #C85A32; font-size: 10px;">KPI: ${p.kpi}</span>` : ''}
-            </td>
-        `;
-        tableBody.appendChild(tr);
-    });
+    if (tableBody) {
+        tableBody.innerHTML = '';
+        data.phases.forEach(p => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="width: 24%;">
+                    <strong style="color: #C85A32; font-family: 'JetBrains Mono', monospace; font-size: 10px;">${p.phase}</strong><br>
+                    <span style="font-size: 8.5px; color: #636B67; font-family: 'JetBrains Mono', monospace;">${p.timeline}</span><br>
+                    <strong style="color: #183028; font-size: 10px; display: inline-block; margin-top: 3px;">${p.title}</strong>
+                </td>
+                <td style="width: 44%;">
+                    <ul style="margin: 0; padding-left: 12px; line-height: 1.4; font-size: 9.5px; color: #183028;">
+                        ${p.tasks.map(t => `<li style="margin-bottom: 2px;">${t}</li>`).join('')}
+                    </ul>
+                </td>
+                <td style="width: 32%;">
+                    <div style="font-size: 8.5px; font-weight: 600; color: #2B5B6C; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; margin-bottom: 2px;">${p.deliverableTitle}:</div>
+                    <div style="font-size: 9px; color: #183028; line-height: 1.35; margin-bottom: 4px;">${p.deliverables}</div>
+                    ${p.kpi ? `<div style="font-size: 8.5px; color: #C85A32; font-family: 'JetBrains Mono', monospace; font-weight: 600;">KPI: ${p.kpi}</div>` : ''}
+                </td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    }
 
     const element = document.getElementById('pdf-export-canvas');
     element.style.display = 'block';
 
     const opt = {
-        margin:       10,
+        margin:       [8, 8, 8, 8],
         filename:     `Hoja_de_Ruta_DHub_${data.projectName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        html2canvas:  { 
+            scale: 2, 
+            useCORS: true, 
+            logging: false,
+            scrollX: 0,
+            scrollY: 0,
+            windowWidth: 720
+        },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak:    { mode: ['css', 'legacy'], before: '.html2pdf__page-break', avoid: ['tr', '.pdf-avoid-break'] }
     };
 
     if (typeof html2pdf !== 'undefined') {

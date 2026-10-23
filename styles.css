@@ -368,11 +368,17 @@ html[data-font="outfit"] .h2-editorial em {
 .brand-isotipo {
     width: 2.4rem;
     height: 2.4rem;
-    transition: transform 0.8s var(--ease-out-expo);
+    transition: opacity 0.15s ease;
 }
 
-.brand-lockup:hover .brand-isotipo {
-    transform: rotate(25deg);
+.brand-isotipo.is-waiting-intro {
+    opacity: 0;
+}
+
+.header-compass-needle {
+    transform-box: view-box;
+    transform-origin: 100px 100px;
+    will-change: transform;
 }
 
 .brand-name {
@@ -1377,6 +1383,99 @@ html[data-font="outfit"] .h2-editorial em {
 @media (hover: none), (pointer: coarse) {
     .photo-cursor {
         display: none;
+    }
+}
+
+/* 16. Opening Compass Intro Loader (Fast Spin -> Fly to Header Logo) */
+.intro-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 2500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+}
+
+.intro-loader.is-docking {
+    pointer-events: none;
+}
+
+.intro-loader.is-done {
+    display: none;
+}
+
+.intro-curtain {
+    position: absolute;
+    inset: 0;
+    background-color: var(--bg-nieve);
+    transition: opacity 0.65s var(--ease-luxury);
+}
+
+.intro-loader.is-docking .intro-curtain {
+    opacity: 0;
+}
+
+.intro-compass-wrap {
+    position: relative;
+    z-index: 2;
+    width: clamp(140px, 22vw, 190px);
+    height: clamp(140px, 22vw, 190px);
+    will-change: transform;
+    transition: transform 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.intro-compass-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    animation: introCompassPop 0.38s var(--ease-out-expo) forwards;
+}
+
+.intro-compass-rings {
+    transform-box: view-box;
+    transform-origin: 100px 100px;
+    animation: introRingsSpin 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.intro-compass-needle {
+    transform-box: view-box;
+    transform-origin: 100px 100px;
+    animation: introNeedleSpin 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes introCompassPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.55);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes introRingsSpin {
+    0% {
+        transform: rotate(-360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes introNeedleSpin {
+    0% {
+        transform: rotate(-720deg);
+    }
+    72% {
+        transform: rotate(26deg);
+    }
+    88% {
+        transform: rotate(-10deg);
+    }
+    100% {
+        transform: rotate(0deg);
     }
 }
 

@@ -290,4 +290,111 @@ document.addEventListener('DOMContentLoaded', () => {
             minimizeBtn.textContent = min ? '+' : '—';
         });
     }
+
+    // 8. Física de Aguja Magnética en el Logo Principal (Oscilación al detener el Scroll)
+    const headerIsotipo = document.getElementById('header-isotipo');
+    const headerNeedle = document.getElementById('header-compass-needle');
+    let needleAngle = 0;
+    let needleVel = 0;
+    let springRaf = null;
+    let scrollStopTimer = null;
+    let lastScrollY = window.scrollY || 0;
+    let lastScrollDir = 1;
+
+    function runNeedleSpring() {
+        const stiffness = 0.17; // Tensión magnética hacia el Norte-Este (0deg)
+        const damping = 0.84;   // Amortiguación que genera 4-5 oscilaciones visibles
+
+        const force = -stiffness * needleAngle;
+        needleVel = (needleVel + force) * damping;
+        needleAngle += needleVel;
+
+        if (headerNeedle) {
+            headerNeedle.style.transform = `rotate(${needleAngle.toFixed(2)}deg)`;
+        }
+
+        if (Math.abs(needleAngle) > 0.12 || Math.abs(needleVel) > 0.12) {
+            springRaf = requestAnimationFrame(runNeedleSpring);
+        } else {
+            needleAngle = 0;
+            needleVel = 0;
+            if (headerNeedle) headerNeedle.style.transform = 'rotate(0deg)';
+            springRaf = null;
+        }
+    }
+
+    function triggerNeedleOscillation(direction = 1, intensity = 36) {
+        if (!headerNeedle) return;
+        if (springRaf) cancelAnimationFrame(springRaf);
+        // Impulso inicial claro para que la oscilación al frenar sea bien perceptible
+        if (Math.abs(needleAngle) < 18) {
+            needleAngle = direction * intensity;
+        }
+        needleVel = -direction * 7.5;
+        springRaf = requestAnimationFrame(runNeedleSpring);
+    }
+
+    if (headerNeedle && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.addEventListener('scroll', () => {
+            const currentY = window.scrollY || 0;
+            const delta = currentY - lastScrollY;
+            lastScrollY = currentY;
+
+            if (Math.abs(delta) > 0.5) {
+                lastScrollDir = delta > 0 ? 1 : -1;
+            }
+
+            // Mientras se scrollea, la aguja se desvía sutilmente por inercia
+            if (springRaf) {
+                cancelAnimationFrame(springRaf);
+                springRaf = null;
+            }
+            const liveDeflection = Math.max(-42, Math.min(42, delta * 1.15));
+            needleAngle = needleAngle * 0.65 + liveDeflection * 0.35;
+            headerNeedle.style.transform = `rotate(${needleAngle.toFixed(1)}deg)`;
+
+            // Cuando se detiene el scroll (~95ms sin movimiento), oscila buscando su eje
+            clearTimeout(scrollStopTimer);
+            scrollStopTimer = setTimeout(() => {
+                triggerNeedleOscillation(lastScrollDir, 38);
+            }, 95);
+        }, { passive: true });
+
+        // También oscila al pasar el mouse sobre el logo principal
+        document.querySelector('.brand-lockup')?.addEventListener('mouseenter', () => {
+            triggerNeedleOscillation(1, 34);
+        });
+    }
+
+    // 9. Animación de Apertura: Brújula Grande Girando → Se Achica hacia el Logo Principal
+    const introLoader = document.getElementById('intro-loader');
+    const introCompassWrap = document.getElementById('intro-compass-wrap');
+
+    if (introLoader && introCompassWrap && headerIsotipo) {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            headerIsotipo.classList.remove('is-waiting-intro');
+            introLoader.classList.add('is-done');
+        } else {
+            // Fase 1 (0 a 820ms): La brújula aparece grande en el centro y gira rápidamente
+            // Fase 2 (820ms a 1540ms): Se achica volando hacia la posición exacta del logo en el header y revela la página
+            setTimeout(() => {
+                const startRect = introCompassWrap.getBoundingClientRect();
+                const targetRect = headerIsotipo.getBoundingClientRect();
+
+                const dx = (targetRect.left + targetRect.width / 2) - (startRect.left + startRect.width / 2);
+                const dy = (targetRect.top + targetRect.height / 2) - (startRect.top + startRect.height / 2);
+                const scale = targetRect.width / startRect.width;
+
+                introLoader.classList.add('is-docking');
+                introCompassWrap.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
+            }, 820);
+
+            // Fase 3 (1540ms): Encastre perfecto en el header + oscilación final de bienvenida
+            setTimeout(() => {
+                headerIsotipo.classList.remove('is-waiting-intro');
+                introLoader.classList.add('is-done');
+                triggerNeedleOscillation(1, 30);
+            }, 1540);
+        }
+    }
 });

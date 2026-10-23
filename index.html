@@ -16,6 +16,32 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- =====================================================================
+         ANIMACIÓN DE APERTURA (INTRO BRÚJULA → VUELO AL LOGO PRINCIPAL)
+    ====================================================================== -->
+    <div class="intro-loader" id="intro-loader" aria-hidden="true">
+        <div class="intro-curtain" id="intro-curtain"></div>
+        <div class="intro-compass-wrap" id="intro-compass-wrap">
+            <svg class="intro-compass-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="intro-compass-rings">
+                    <path d="M100 28 A72 72 0 0 1 172 100" stroke="#183028" stroke-width="7.5" stroke-linecap="round"/>
+                    <path d="M156 112 A58 58 0 0 1 88 158" stroke="#2B5B6C" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M76 148 A52 52 0 0 1 46 84" stroke="#C8A97E" stroke-width="6.5" stroke-linecap="round"/>
+                    <path d="M56 70 A48 48 0 0 1 114 52" stroke="#183028" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+                    <line x1="100" y1="18" x2="100" y2="26" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="182" y1="100" x2="174" y2="100" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="100" y1="182" x2="100" y2="174" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="18" y1="100" x2="26" y2="100" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
+                </g>
+                <g class="intro-compass-needle">
+                    <polygon points="152,48 108,104 96,92" fill="#C85A32"/>
+                    <polygon points="58,142 108,104 96,92" fill="#183028"/>
+                    <circle cx="100" cy="100" r="8" fill="#F6F5F0" stroke="#183028" stroke-width="3.5"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
     <!-- Top 1.5px Reading Progress Line & Tactile Mineral Grain -->
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
     <div class="grain-overlay" aria-hidden="true"></div>
@@ -28,18 +54,22 @@
             
             <!-- Brand Lockup with Isotipo C (Brújula de Ciclo Regenerativo) -->
             <a href="#inicio" class="brand-lockup" aria-label="Destination Hub — Inicio">
-                <svg class="brand-isotipo" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M100 28 A72 72 0 0 1 172 100" stroke="#183028" stroke-width="7.5" stroke-linecap="round"/>
-                    <path d="M156 112 A58 58 0 0 1 88 158" stroke="#2B5B6C" stroke-width="7" stroke-linecap="round"/>
-                    <path d="M76 148 A52 52 0 0 1 46 84" stroke="#C8A97E" stroke-width="6.5" stroke-linecap="round"/>
-                    <path d="M56 70 A48 48 0 0 1 114 52" stroke="#183028" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
-                    <line x1="100" y1="18" x2="100" y2="26" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
-                    <line x1="182" y1="100" x2="174" y2="100" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
-                    <line x1="100" y1="182" x2="100" y2="174" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
-                    <line x1="18" y1="100" x2="26" y2="100" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
-                    <polygon points="152,48 108,104 96,92" fill="#C85A32"/>
-                    <polygon points="58,142 108,104 96,92" fill="#183028"/>
-                    <circle cx="100" cy="100" r="8" fill="#F6F5F0" stroke="#183028" stroke-width="3.5"/>
+                <svg class="brand-isotipo is-waiting-intro" id="header-isotipo" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g id="header-compass-rings">
+                        <path d="M100 28 A72 72 0 0 1 172 100" stroke="#183028" stroke-width="7.5" stroke-linecap="round"/>
+                        <path d="M156 112 A58 58 0 0 1 88 158" stroke="#2B5B6C" stroke-width="7" stroke-linecap="round"/>
+                        <path d="M76 148 A52 52 0 0 1 46 84" stroke="#C8A97E" stroke-width="6.5" stroke-linecap="round"/>
+                        <path d="M56 70 A48 48 0 0 1 114 52" stroke="#183028" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+                        <line x1="100" y1="18" x2="100" y2="26" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="182" y1="100" x2="174" y2="100" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="100" y1="182" x2="100" y2="174" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="18" y1="100" x2="26" y2="100" stroke="#C8A97E" stroke-width="3" stroke-linecap="round"/>
+                    </g>
+                    <g class="header-compass-needle" id="header-compass-needle">
+                        <polygon points="152,48 108,104 96,92" fill="#C85A32"/>
+                        <polygon points="58,142 108,104 96,92" fill="#183028"/>
+                        <circle cx="100" cy="100" r="8" fill="#F6F5F0" stroke="#183028" stroke-width="3.5"/>
+                    </g>
                 </svg>
                 <div>
                     <div class="brand-name">

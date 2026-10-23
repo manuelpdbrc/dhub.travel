@@ -200,6 +200,8 @@ function openRoadmapModal() {
     const modal = document.getElementById('roadmapModal');
     if (!modal) return;
     modal.classList.add('is-active');
+    document.documentElement.classList.add('roadmap-modal-open');
+    document.body.classList.add('roadmap-modal-open');
     document.body.style.overflow = 'hidden';
     if (chatMessagesHistory.length === 0) {
         startLeadIntakeStep();
@@ -210,6 +212,8 @@ function closeRoadmapModal() {
     const modal = document.getElementById('roadmapModal');
     if (!modal) return;
     modal.classList.remove('is-active');
+    document.documentElement.classList.remove('roadmap-modal-open');
+    document.body.classList.remove('roadmap-modal-open');
     document.body.style.overflow = '';
 }
 

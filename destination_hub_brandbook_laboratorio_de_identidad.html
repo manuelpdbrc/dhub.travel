@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination Hub (dhub.travel) — Sistema de Identidad Visual & Brandbook Interactivo</title>
+    
+    <!-- Google Fonts for the 3 Typographic Systems -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lenga: {
+                            DEFAULT: '#183028',
+                            dark: '#0E1D18',
+                            light: '#24453a'
+                        },
+                        glaciar: {
+                            DEFAULT: '#2B5B6C',
+                            dark: '#1D3E4A',
+                            light: '#3E7B90'
+                        },
+                        coiron: {
+                            DEFAULT: '#C8A97E',
+                            light: '#E2D3BC',
+                            dark: '#9E7F56'
+                        },
+                        terracota: {
+                            DEFAULT: '#C85A32',
+                            hover: '#AC4722'
+                        },
+                        nieve: '#F6F5F0',
+                        piedra: '#EAE7DF',
+                        granito: '#2C302E',
+                        ceniza: '#5C6460'
+                    },
+                    fontFamily: {
+                        fraunces: ['Fraunces', 'Georgia', 'serif'],
+                        jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+                        syne: ['Syne', 'sans-serif'],
+                        cormorant: ['Cormorant Garamond', 'Georgia', 'serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --font-heading: 'Fraunces', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --brand-bg: #F6F5F0;
+            --brand-primary: #183028;
+            --brand-secondary: #2B5B6C;
+            --brand-accent: #C8A97E;
+            --brand-cta: #C85A32;
+        }
+
+        body {
+            background-color: #F6F5F0;
+            color: #2C302E;
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        .dynamic-heading {
+            font-family: var(--font-heading);
+        }
+
+        .dynamic-body {
+            font-family: var(--font-body);
+        }
+
+        /* Construction Grid Overlay toggleable via class */
+        .construction-grid {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+        body.show-grid .construction-grid {
+            opacity: 1;
+        }
+
+        /* Subtle Blueprint Pattern for Canvas Cards */
+        .canvas-stage {
+            background-size: 24px 24px;
+            transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+        }
+        body.show-grid .canvas-stage {
+            background-image: 
+                linear-gradient(to right, rgba(200, 169, 126, 0.14) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(200, 169, 126, 0.14) 1px, transparent 1px);
+        }
+
+        /* Dynamic SVG Animations when 'animate-iso' is active on body */
+        @keyframes slowRotate {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(6deg); }
+            100% { transform: rotate(0deg); }
+        }
+        @keyframes pulseNode {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.22); opacity: 0.8; }
+        }
+        @keyframes dashFlow {
+            to { stroke-dashoffset: -40; }
+        }
+        @keyframes floatPeak {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+
+        body.animate-iso .anim-flow {
+            stroke-dasharray: 180 12;
+            animation: dashFlow 5s linear infinite;
+        }
+        body.animate-iso .anim-node {
+            transform-origin: center;
+            transform-box: fill-box;
+            animation: pulseNode 2.8s ease-in-out infinite;
+        }
+        body.animate-iso .anim-compass {
+            transform-origin: 100px 100px;
+            animation: slowRotate 6s ease-in-out infinite;
+        }
+        body.animate-iso .anim-peak {
+            animation: floatPeak 4s ease-in-out infinite;
+        }
+
+        /* Stage Theme Variations */
+        .stage-light {
+            background-color: #F6F5F0;
+            color: #183028;
+            border-color: rgba(24, 48, 40, 0.14);
+        }
+        .stage-lenga {
+            background-color: #183028;
+            color: #F6F5F0;
+            border-color: rgba(200, 169, 126, 0.35);
+        }
+        .stage-glaciar {
+            background-color: #1D3E4A;
+            color: #F6F5F0;
+            border-color: rgba(200, 169, 126, 0.35);
+        }
+        .stage-mono {
+            background-color: #FFFFFF;
+            color: #111111;
+            border-color: rgba(0, 0, 0, 0.2);
+            filter: grayscale(100%) contrast(125%);
+        }
+
+        /* Adjust SVG strokes inside dark stages */
+        .stage-lenga .iso-primary-stroke,
+        .stage-glaciar .iso-primary-stroke {
+            stroke: #F6F5F0 !important;
+        }
+        .stage-lenga .iso-primary-fill,
+        .stage-glaciar .iso-primary-fill {
+            fill: #F6F5F0 !important;
+        }
+        .stage-lenga .wordmark-primary,
+        .stage-glaciar .wordmark-primary {
+            color: #F6F5F0 !important;
+        }
+        .stage-lenga .wordmark-sub,
+        .stage-glaciar .wordmark-sub {
+            color: #C8A97E !important;
+        }
+
+        /* Topographic subtle card background */
+        .bg-topo-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='500' height='500' viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C8A97E' stroke-width='1' stroke-opacity='0.12'%3E%3Cpath d='M0 80 C 140 150, 280 20, 500 90'/%3E%3Cpath d='M0 120 C 160 190, 300 60, 500 130'/%3E%3Cpath d='M0 260 C 120 190, 350 340, 500 240'/%3E%3Cpath d='M0 300 C 150 230, 370 380, 500 280'/%3E%3Ccircle cx='390' cy='140' r='85'/%3E%3Ccircle cx='390' cy='140' r='50'/%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="show-grid animate-iso selection:bg-lenga selection:text-nieve">
+
+    <!-- =================================================================
+         1. STICKY INTERACTIVE BRANDBOOK CONTROL BAR
+    ================================================================== -->
+    <header class="sticky top-0 z-50 bg-lenga-dark/95 backdrop-blur-md text-nieve border-b border-coiron/25 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                
+                <!-- Brandbook Title & Status -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-terracota animate-pulse"></span>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-serif font-semibold text-base sm:text-lg text-white tracking-tight">Destination Hub</span>
+                                <span class="text-[11px] font-mono uppercase px-2 py-0.5 rounded bg-coiron/20 text-coiron border border-coiron/30">dhub.travel</span>
+                            </div>
+                            <p class="text-[11px] text-nieve/65 font-mono uppercase tracking-wider">Sistema de Identidad Visual &amp; Laboratorio de Marca v2.5</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Jump Links on Mobile -->
+                    <a href="#aplicaciones" class="lg:hidden text-xs font-mono bg-terracota text-white px-3 py-1.5 rounded-lg">
+                        Ver Mockups ↓
+                    </a>
+                </div>
+
+                <!-- Interactive Controls Toolbar -->
+                <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
+                    
+                    <!-- Control 1: Active Concept Selector -->
+                    <div class="flex items-center bg-white/5 rounded-xl p-1 border border-white/10">
+                        <span class="px-2 text-[10px] font-mono uppercase text-coiron hidden sm:inline">Isotipo:</span>
+                        <button onclick="selectConcept('A')" id="toolbar-concept-A" class="px-2.5 py-1.5 rounded-lg font-semibold transition-all bg-coiron text-lenga-dark">
+                            A · Nudo Hub
+                        </button>
+                        <button onclick="selectConcept('B')" id="toolbar-concept-B" class="px-2.5 py-1.5 rounded-lg font-semibold transition-all text-nieve/80 hover:text-white">
+                            B · Cumbre Nodal
+                        </button>
+                        <button onclick="selectConcept('C')" id="toolbar-concept-C" class="px-2.5 py-1.5 rounded-lg font-semibold transition-all text-nieve/80 hover:text-white">
+                            C · Ciclo Brújula
+                        </button>
+                    </div>
+
+                    <!-- Control 2: Background Mode Selector -->
+                    <div class="flex items-center bg-white/5 rounded-xl p-1 border border-white/10" role="group" aria-label="Modo de fondo">
+                        <span class="px-2 text-[10px] font-mono uppercase text-coiron hidden xl:inline">Fondo:</span>
+                        <button onclick="setStageTheme('light')" id="theme-btn-light" title="Fondo Claro Piedra #F6F5F0" class="px-2.5 py-1.5 rounded-lg font-medium bg-nieve text-lenga shadow-sm transition-all">
+                            Piedra
+                        </button>
+                        <button onclick="setStageTheme('lenga')" id="theme-btn-lenga" title="Fondo Verde Bosque Lenga #183028" class="px-2.5 py-1.5 rounded-lg font-medium text-nieve/80 hover:text-white transition-all">
+                            Bosque
+                        </button>
+                        <button onclick="setStageTheme('glaciar')" id="theme-btn-glaciar" title="Fondo Azul Glaciar #1D3E4A" class="px-2.5 py-1.5 rounded-lg font-medium text-nieve/80 hover:text-white transition-all">
+                            Glaciar
+                        </button>
+                        <button onclick="setStageTheme('mono')" id="theme-btn-mono" title="Monocromo / Sello Tinta" class="px-2.5 py-1.5 rounded-lg font-medium text-nieve/80 hover:text-white transition-all">
+                            Mono
+                        </button>
+                    </div>
+
+                    <!-- Control 3: Construction Grid Toggle -->
+                    <button onclick="toggleGrid()" id="grid-toggle-btn" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-coiron/50 bg-coiron/15 text-coiron font-mono text-[11px] transition-all">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                        </svg>
+                        <span>Grilla: ON</span>
+                    </button>
+
+                    <!-- Control 4: Dynamic Motion Toggle -->
+                    <button onclick="toggleAnimation()" id="anim-toggle-btn" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-terracota/60 bg-terracota/20 text-white font-mono text-[11px] transition-all">
+                        <span class="w-2 h-2 rounded-full bg-terracota animate-ping"></span>
+                        <span>Dinamismo: ON</span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-20">
+
+        <!-- =================================================================
+             INTRO BANNER: RATIONALE & DESIGN PHILOSOPHY
+        ================================================================== -->
+        <section class="bg-white rounded-3xl p-6 sm:p-10 border border-lenga/12 shadow-sm">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-8 space-y-3">
+                    <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-glaciar bg-glaciar/10 px-3 py-1 rounded-full">
+                        <span>Directriz de Diseño · Patagonia B2B &amp; Stewardship</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl dynamic-heading font-semibold text-lenga leading-tight">
+                        Un isotipo dinámico, corporativo y refinado para liderar destinos.
+                    </h1>
+                    <p class="text-ceniza text-base sm:text-lg leading-relaxed">
+                        Alejándonos del cliché turístico rústico, diseñamos tres caminos visuales que sintetizan la esencia de <strong class="text-granito">Destination Hub (`dhub.travel`)</strong>: la solidez de <strong class="text-lenga">+100 años de experiencia combinada</strong>, la velocidad de articulación en toda la Patagonia y el enfoque regenerativo impulsado por datos.
+                    </p>
+                </div>
+                <div class="lg:col-span-4 bg-piedra/70 rounded-2xl p-6 border border-lenga/10 space-y-3">
+                    <div class="flex items-center justify-between text-xs font-mono text-ceniza border-b border-lenga/10 pb-2">
+                        <span>CONFIGURACIÓN ACTIVA</span>
+                        <span class="text-terracota font-bold">EN VIVO</span>
+                    </div>
+                    <div>
+                        <span class="text-[11px] uppercase font-mono text-ceniza block">Isotipo Seleccionado:</span>
+                        <p id="status-concept-name" class="font-bold text-lenga text-base">Concepto A · El Nudo Topográfico (Hub de Flujos)</p>
+                    </div>
+                    <div>
+                        <span class="text-[11px] uppercase font-mono text-ceniza block">Sistema Tipográfico:</span>
+                        <p id="status-font-name" class="font-bold text-glaciar text-sm">Opción 1 · Fraunces + Plus Jakarta Sans</p>
+                    </div>
+                    <div class="pt-2">
+                        <button onclick="downloadActiveSVG()" class="w-full inline-flex justify-center items-center gap-2 bg-lenga hover:bg-lenga-light text-nieve text-xs font-semibold py-2.5 px-4 rounded-xl transition-all shadow-sm">
+                            <svg class="w-4 h-4 text-coiron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            <span>Descargar SVG del Isotipo Activo</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             2. SECCIÓN 1: LABORATORIO DE ISOTIPOS Y LOGOTIPOS (3 PROPUESTAS)
+        ================================================================== -->
+        <section id="isotipos" class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-lenga/15 pb-5">
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-widest text-terracota font-semibold block mb-1">
+                        SECCIÓN 01 · EXPLORACIÓN MORFOLÓGICA &amp; LOCKUPS
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl dynamic-heading font-semibold text-lenga">
+                        Tres Propuestas de Isotipo Vectorial
+                    </h2>
+                </div>
+                <p class="text-xs sm:text-sm text-ceniza max-w-md">
+                    Usá la barra superior para cambiar el color de fondo o encender la <strong>grilla constructiva áurea</strong>. Hacé clic en <em>"Seleccionar"</em> en cualquiera de las tarjetas para actualizar todo el Brandbook.
+                </p>
+            </div>
+
+            <!-- 3 Proposals Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- =========================================================
+                     CONCEPTO A: EL NUDO TOPOGRÁFICO / HUB DE FLUJOS
+                ========================================================== -->
+                <article id="card-concept-A" class="bg-white rounded-3xl border-2 border-terracota shadow-xl flex flex-col justify-between overflow-hidden transition-all">
+                    <div>
+                        <!-- Card Header -->
+                        <div class="p-6 pb-4 flex items-center justify-between border-b border-lenga/10">
+                            <div>
+                                <span class="text-[11px] font-mono uppercase tracking-widest text-terracota font-bold block">PROPUESTA A · ORGÁNICA &amp; ÁGIL</span>
+                                <h3 class="text-xl dynamic-heading font-semibold text-lenga mt-0.5">El Nudo Topográfico (Hub)</h3>
+                            </div>
+                            <span id="badge-A" class="px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold bg-terracota text-white">
+                                Activo
+                            </span>
+                        </div>
+
+                        <!-- Main Interactive SVG Stage -->
+                        <div class="p-6">
+                            <div class="canvas-stage stage-light relative rounded-2xl border p-6 flex flex-col items-center justify-center min-h-[260px]">
+                                <span class="absolute top-3 left-3 text-[10px] font-mono uppercase opacity-60">Escala 1:1 · Red de Flujos D+H</span>
+                                <span class="absolute top-3 right-3 text-[10px] font-mono uppercase opacity-60">φ 1.618</span>
+
+                                <!-- SVG CONCEPT A: Topographic Ribbon Flow Forming Mountain Peak + D/H + Central Hub Node -->
+                                <svg id="svg-concept-A" class="w-44 h-44" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Construction Grid Overlay -->
+                                    <g class="construction-grid" stroke="#C8A97E" stroke-width="0.75" stroke-dasharray="3 3" opacity="0.65">
+                                        <circle cx="100" cy="100" r="76"/>
+                                        <circle cx="100" cy="100" r="47"/>
+                                        <circle cx="100" cy="100" r="18"/>
+                                        <line x1="15" y1="100" x2="185" y2="100"/>
+                                        <line x1="100" y1="15" x2="100" y2="185"/>
+                                        <line x1="35" y1="165" x2="165" y2="35"/>
+                                        <rect x="24" y="24" width="152" height="152" rx="36"/>
+                                    </g>
+
+                                    <!-- Outer Topographic Ribbon 1 (Primary Lenga Loop -> Ascending Peak) -->
+                                    <path class="iso-primary-stroke anim-flow"
+                                          d="M36 142 C36 96, 68 34, 102 34 C134 34, 146 78, 166 136"
+                                          stroke="#183028" stroke-width="8" stroke-linecap="round"/>
+                                    
+                                    <!-- Parallel Topographic Contour 2 (Refined Inner Echo) -->
+                                    <path class="iso-primary-stroke"
+                                          d="M52 148 C54 106, 78 54, 102 54 C124 54, 134 90, 150 142"
+                                          stroke="#183028" stroke-width="3.2" stroke-linecap="round" opacity="0.85"/>
+
+                                    <!-- Intersecting Glacier Stream (Forms the 'D' loop & 'H' crossbar) -->
+                                    <path class="anim-flow"
+                                          d="M32 114 C68 114, 86 96, 102 96 C122 96, 142 82, 168 58"
+                                          stroke="#2B5B6C" stroke-width="6.5" stroke-linecap="round"/>
+
+                                    <!-- Warm Coirón Territorial Horizon / Base Flow -->
+                                    <path d="M44 156 C82 138, 118 138, 160 156"
+                                          stroke="#C8A97E" stroke-width="5" stroke-linecap="round"/>
+
+                                    <!-- Central Convergence Point (The HUB) -->
+                                    <circle cx="102" cy="96" r="11" fill="#F6F5F0" stroke="#183028" stroke-width="3"/>
+                                    <circle class="anim-node" cx="102" cy="96" r="5.5" fill="#C85A32"/>
+                                    
+                                    <!-- Northeast Action Node -->
+                                    <circle class="anim-node" cx="168" cy="58" r="4.5" fill="#C8A97E"/>
+                                </svg>
+                            </div>
+
+                            <!-- Lockup 1: Horizontal Corporate Lockup -->
+                            <div class="mt-4 canvas-stage stage-light rounded-xl border p-4 flex items-center justify-between">
+                                <div class="flex items-center gap-3.5">
+                                    <svg class="w-11 h-11 shrink-0" viewBox="0 0 200 200" fill="none">
+                                        <path class="iso-primary-stroke" d="M36 142 C36 96, 68 34, 102 34 C134 34, 146 78, 166 136" stroke="#183028" stroke-width="11" stroke-linecap="round"/>
+                                        <path class="iso-primary-stroke" d="M52 148 C54 106, 78 54, 102 54 C124 54, 134 90, 150 142" stroke="#183028" stroke-width="5" stroke-linecap="round"/>
+                                        <path d="M32 114 C68 114, 86 96, 102 96 C122 96, 142 82, 168 58" stroke="#2B5B6C" stroke-width="9" stroke-linecap="round"/>
+                                        <path d="M44 156 C82 138, 118 138, 160 156" stroke="#C8A97E" stroke-width="7" stroke-linecap="round"/>
+                                        <circle cx="102" cy="96" r="10" fill="#C85A32"/>
+                                    </svg>
+                                    <div>
+                                        <div class="leading-none flex items-baseline gap-1.5">
+                                            <span class="dynamic-heading font-semibold text-xl wordmark-primary text-lenga tracking-tight">Destination</span>
+                                            <span class="dynamic-body font-extrabold text-base uppercase tracking-widest text-glaciar wordmark-sub">Hub</span>
+                                        </div>
+                                        <span class="text-[10px] font-mono uppercase tracking-widest opacity-70 block mt-1">Patagonia · Stewardship &amp; Business</span>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] font-mono opacity-50">Lockup H</span>
+                            </div>
+
+                            <!-- Lockup 2: Digital Domain dhub.travel + App Icon Favicons -->
+                            <div class="mt-3 flex items-center justify-between gap-3 bg-piedra/60 rounded-xl p-3 border border-lenga/10">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-mono font-bold text-sm text-lenga">d·hub</span>
+                                    <span class="text-xs font-mono px-2 py-0.5 rounded bg-lenga text-coiron">dhub.travel</span>
+                                </div>
+                                <div class="flex items-center gap-2" title="Previsualización en 32px y 16px (Favicon)">
+                                    <span class="text-[10px] font-mono text-ceniza">Favicon:</span>
+                                    <div class="w-8 h-8 rounded-lg bg-lenga flex items-center justify-center shadow-sm">
+                                        <svg class="w-5 h-5" viewBox="0 0 200 200" fill="none">
+                                            <path d="M36 142 C36 96, 68 34, 102 34 C134 34, 146 78, 166 136" stroke="#F6F5F0" stroke-width="16" stroke-linecap="round"/>
+                                            <path d="M32 114 C68 114, 86 96, 102 96 C122 96, 142 82, 168 58" stroke="#C8A97E" stroke-width="14" stroke-linecap="round"/>
+                                            <circle cx="102" cy="96" r="16" fill="#C85A32"/>
+                                        </svg>
+                                    </div>
+                                    <div class="w-5 h-5 rounded bg-lenga flex items-center justify-center">
+                                        <span class="w-2 h-2 rounded-full bg-terracota"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Concept Rationale -->
+                            <p class="mt-4 text-xs text-ceniza leading-relaxed">
+                                <strong class="text-granito">Racional:</strong> Las curvas de nivel topográficas tejen una cumbre patagónica ascendente mientras el flujo glaciar la cruza generando un nodo central de articulación (el <em>Hub</em>). Transmite agilidad, conexión territorial y movimiento continuo.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Action Footer -->
+                    <div class="px-6 pb-6 pt-2">
+                        <button onclick="selectConcept('A')" id="btn-select-A" class="w-full py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-wider bg-terracota text-white shadow-sm transition-all">
+                            ✓ Identidad Principal Activa
+                        </button>
+                    </div>
+                </article>
+
+                <!-- =========================================================
+                     CONCEPTO B: CUMBRE NODAL / PRISMA TERRITORIAL
+                ========================================================== -->
+                <article id="card-concept-B" class="bg-white rounded-3xl border border-lenga/15 shadow-sm flex flex-col justify-between overflow-hidden transition-all">
+                    <div>
+                        <!-- Card Header -->
+                        <div class="p-6 pb-4 flex items-center justify-between border-b border-lenga/10">
+                            <div>
+                                <span class="text-[11px] font-mono uppercase tracking-widest text-glaciar font-bold block">PROPUESTA B · SMART DATA &amp; EJECUTIVA</span>
+                                <h3 class="text-xl dynamic-heading font-semibold text-lenga mt-0.5">Cumbre Nodal (Prisma DSO)</h3>
+                            </div>
+                            <span id="badge-B" class="px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold bg-piedra text-ceniza">
+                                Explorar
+                            </span>
+                        </div>
+
+                        <!-- Main Interactive SVG Stage -->
+                        <div class="p-6">
+                            <div class="canvas-stage stage-light relative rounded-2xl border p-6 flex flex-col items-center justify-center min-h-[260px]">
+                                <span class="absolute top-3 left-3 text-[10px] font-mono uppercase opacity-60">Escala 1:1 · 5 Nodos DSO</span>
+                                <span class="absolute top-3 right-3 text-[10px] font-mono uppercase opacity-60">Agujas Andinas</span>
+
+                                <!-- SVG CONCEPT B: Geometric Prism Peak + 5 Strategic DSO Nodes -->
+                                <svg id="svg-concept-B" class="w-44 h-44" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Construction Grid Overlay -->
+                                    <g class="construction-grid" stroke="#C8A97E" stroke-width="0.75" stroke-dasharray="3 3" opacity="0.65">
+                                        <circle cx="100" cy="105" r="72"/>
+                                        <polygon points="100,26 168,154 32,154"/>
+                                        <line x1="100" y1="15" x2="100" y2="185"/>
+                                        <line x1="20" y1="112" x2="180" y2="112"/>
+                                    </g>
+
+                                    <g class="anim-peak">
+                                        <!-- Left Shadowed Granite Facet (Nature & Depth) -->
+                                        <polygon class="iso-primary-fill" points="100,32 38,148 100,124" fill="#183028" fill-opacity="0.92"/>
+                                        
+                                        <!-- Right Illuminated Smart Facet (Wireframe & Data) -->
+                                        <polygon points="100,32 162,148 100,124" fill="#2B5B6C" fill-opacity="0.22" stroke="#2B5B6C" stroke-width="3.5" stroke-linejoin="round"/>
+                                        
+                                        <!-- Secondary Fitz Roy Spire / Eastern Needle -->
+                                        <polyline points="131,90 152,66 162,148" stroke="#C8A97E" stroke-width="3" stroke-linejoin="round"/>
+                                        <line x1="100" y1="124" x2="152" y2="66" stroke="#2B5B6C" stroke-width="2" stroke-dasharray="3 3"/>
+
+                                        <!-- Lower Base Stewardship Diamond -->
+                                        <polygon points="38,148 100,124 162,148 100,168" fill="#C8A97E" fill-opacity="0.3" stroke="#183028" stroke-width="3" stroke-linejoin="round" class="iso-primary-stroke"/>
+
+                                        <!-- 5 Strategic Nodes (Economía, Gobernanza, Comunidad, Ambiente, Regeneración) -->
+                                        <circle class="anim-node" cx="100" cy="32" r="5.5" fill="#C85A32"/>
+                                        <circle class="anim-node" cx="152" cy="66" r="4.5" fill="#C8A97E"/>
+                                        <circle cx="100" cy="124" r="6" fill="#F6F5F0" stroke="#183028" stroke-width="3"/>
+                                        <circle cx="38" cy="148" r="4" fill="#183028" class="iso-primary-fill"/>
+                                        <circle cx="162" cy="148" r="4" fill="#2B5B6C"/>
+                                        <circle cx="100" cy="168" r="4" fill="#C8A97E"/>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <!-- Lockup 1: Horizontal Corporate Lockup -->
+                            <div class="mt-4 canvas-stage stage-light rounded-xl border p-4 flex items-center justify-between">
+                                <div class="flex items-center gap-3.5">
+                                    <svg class="w-11 h-11 shrink-0" viewBox="0 0 200 200" fill="none">
+                                        <polygon class="iso-primary-fill" points="100,28 34,150 100,124" fill="#183028"/>
+                                        <polygon points="100,28 166,150 100,124" fill="#2B5B6C" fill-opacity="0.35" stroke="#2B5B6C" stroke-width="7" stroke-linejoin="round"/>
+                                        <polygon points="34,150 100,124 166,150 100,172" fill="#C8A97E"/>
+                                        <circle cx="100" cy="28" r="10" fill="#C85A32"/>
+                                        <circle cx="100" cy="124" r="9" fill="#F6F5F0"/>
+                                    </svg>
+                                    <div>
+                                        <div class="leading-none flex items-baseline gap-1.5">
+                                            <span class="dynamic-heading font-semibold text-xl wordmark-primary text-lenga tracking-tight">Destination</span>
+                                            <span class="dynamic-body font-extrabold text-base uppercase tracking-widest text-glaciar wordmark-sub">Hub</span>
+                                        </div>
+                                        <span class="text-[10px] font-mono uppercase tracking-widest opacity-70 block mt-1">Patagonia · Smart Destination Lab</span>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] font-mono opacity-50">Lockup H</span>
+                            </div>
+
+                            <!-- Lockup 2: Digital Domain + Favicon -->
+                            <div class="mt-3 flex items-center justify-between gap-3 bg-piedra/60 rounded-xl p-3 border border-lenga/10">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-mono font-bold text-sm text-lenga">DHUB</span>
+                                    <span class="text-xs font-mono px-2 py-0.5 rounded bg-glaciar text-white">dhub.travel</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[10px] font-mono text-ceniza">Favicon:</span>
+                                    <div class="w-8 h-8 rounded-lg bg-lenga flex items-center justify-center shadow-sm">
+                                        <svg class="w-5 h-5" viewBox="0 0 200 200" fill="none">
+                                            <polygon points="100,28 34,154 100,126" fill="#F6F5F0"/>
+                                            <polygon points="100,28 166,154 100,126" fill="#C8A97E"/>
+                                            <circle cx="100" cy="28" r="16" fill="#C85A32"/>
+                                        </svg>
+                                    </div>
+                                    <div class="w-5 h-5 rounded bg-glaciar flex items-center justify-center">
+                                        <span class="w-2 h-2 rotate-45 bg-coiron"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Concept Rationale -->
+                            <p class="mt-4 text-xs text-ceniza leading-relaxed">
+                                <strong class="text-granito">Racional:</strong> Inspirado en los macizos graníticos patagónicos y la última lámina de <em>DestinationNEXT</em>. Su cara izquierda es sólida y orgánica; su cara derecha es un prisma de inteligencia conectado por los 5 nodos del modelo DSO.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Action Footer -->
+                    <div class="px-6 pb-6 pt-2">
+                        <button onclick="selectConcept('B')" id="btn-select-B" class="w-full py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-wider bg-lenga/10 hover:bg-lenga hover:text-white text-lenga transition-all">
+                            Seleccionar Propuesta B
+                        </button>
+                    </div>
+                </article>
+
+                <!-- =========================================================
+                     CONCEPTO C: BRÚJULA DE CICLO REGENERATIVO
+                ========================================================== -->
+                <article id="card-concept-C" class="bg-white rounded-3xl border border-lenga/15 shadow-sm flex flex-col justify-between overflow-hidden transition-all">
+                    <div>
+                        <!-- Card Header -->
+                        <div class="p-6 pb-4 flex items-center justify-between border-b border-lenga/10">
+                            <div>
+                                <span class="text-[11px] font-mono uppercase tracking-widest text-lenga font-bold block">PROPUESTA C · INSTITUCIONAL &amp; GLOBAL</span>
+                                <h3 class="text-xl dynamic-heading font-semibold text-lenga mt-0.5">Brújula de Ciclo Regenerativo</h3>
+                            </div>
+                            <span id="badge-C" class="px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold bg-piedra text-ceniza">
+                                Explorar
+                            </span>
+                        </div>
+
+                        <!-- Main Interactive SVG Stage -->
+                        <div class="p-6">
+                            <div class="canvas-stage stage-light relative rounded-2xl border p-6 flex flex-col items-center justify-center min-h-[260px]">
+                                <span class="absolute top-3 left-3 text-[10px] font-mono uppercase opacity-60">Escala 1:1 · Ciclo 4 Etapas</span>
+                                <span class="absolute top-3 right-3 text-[10px] font-mono uppercase opacity-60">Vector NE +45°</span>
+
+                                <!-- SVG CONCEPT C: Golden Spiral Regenerative Cycle + Northeast Compass Vector -->
+                                <svg id="svg-concept-C" class="w-44 h-44" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Construction Grid Overlay -->
+                                    <g class="construction-grid" stroke="#C8A97E" stroke-width="0.75" stroke-dasharray="3 3" opacity="0.65">
+                                        <circle cx="100" cy="100" r="74"/>
+                                        <circle cx="100" cy="100" r="52"/>
+                                        <circle cx="100" cy="100" r="28"/>
+                                        <line x1="20" y1="100" x2="180" y2="100"/>
+                                        <line x1="100" y1="20" x2="100" y2="180"/>
+                                        <line x1="40" y1="160" x2="160" y2="40"/>
+                                    </g>
+
+                                    <g class="anim-compass">
+                                        <!-- 4 Sweeping Regenerative Cycle Arcs (Inteligencia, Gobernanza, Uso Público, Producto) -->
+                                        <path class="iso-primary-stroke" d="M100 28 A72 72 0 0 1 172 100" stroke="#183028" stroke-width="6.5" stroke-linecap="round"/>
+                                        <path d="M156 112 A58 58 0 0 1 88 158" stroke="#2B5B6C" stroke-width="6" stroke-linecap="round"/>
+                                        <path d="M76 148 A52 52 0 0 1 46 84" stroke="#C8A97E" stroke-width="5.5" stroke-linecap="round"/>
+                                        <path class="iso-primary-stroke" d="M56 70 A48 48 0 0 1 114 52" stroke="#183028" stroke-width="4.5" stroke-linecap="round" opacity="0.8"/>
+
+                                        <!-- Cardinal Subtle Ticks (N-S-E-O Territorial Distribution) -->
+                                        <line x1="100" y1="18" x2="100" y2="26" stroke="#C8A97E" stroke-width="2.5" stroke-linecap="round"/>
+                                        <line x1="182" y1="100" x2="174" y2="100" stroke="#C8A97E" stroke-width="2.5" stroke-linecap="round"/>
+                                        <line x1="100" y1="182" x2="100" y2="174" stroke="#C8A97E" stroke-width="2.5" stroke-linecap="round"/>
+                                        <line x1="18" y1="100" x2="26" y2="100" stroke="#C8A97E" stroke-width="2.5" stroke-linecap="round"/>
+
+                                        <!-- Dynamic Northeast Vector Needle (Yield & Strategic Direction) -->
+                                        <polygon points="152,48 108,104 96,92" fill="#C85A32"/>
+                                        <polygon class="iso-primary-fill" points="58,142 108,104 96,92" fill="#183028"/>
+
+                                        <!-- Central Hub Core -->
+                                        <circle cx="100" cy="100" r="8" fill="#F6F5F0" stroke="#183028" stroke-width="3"/>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <!-- Lockup 1: Horizontal Corporate Lockup -->
+                            <div class="mt-4 canvas-stage stage-light rounded-xl border p-4 flex items-center justify-between">
+                                <div class="flex items-center gap-3.5">
+                                    <svg class="w-11 h-11 shrink-0" viewBox="0 0 200 200" fill="none">
+                                        <path class="iso-primary-stroke" d="M100 26 A74 74 0 0 1 174 100" stroke="#183028" stroke-width="12" stroke-linecap="round"/>
+                                        <path d="M158 114 A60 60 0 0 1 86 160" stroke="#2B5B6C" stroke-width="11" stroke-linecap="round"/>
+                                        <path d="M74 148 A52 52 0 0 1 44 82" stroke="#C8A97E" stroke-width="11" stroke-linecap="round"/>
+                                        <polygon points="156,44 110,106 94,90" fill="#C85A32"/>
+                                        <polygon class="iso-primary-fill" points="54,146 110,106 94,90" fill="#183028"/>
+                                    </svg>
+                                    <div>
+                                        <div class="leading-none flex items-baseline gap-1.5">
+                                            <span class="dynamic-heading font-semibold text-xl wordmark-primary text-lenga tracking-tight">Destination</span>
+                                            <span class="dynamic-body font-extrabold text-base uppercase tracking-widest text-glaciar wordmark-sub">Hub</span>
+                                        </div>
+                                        <span class="text-[10px] font-mono uppercase tracking-widest opacity-70 block mt-1">Patagonia · Regenerative Advisory</span>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] font-mono opacity-50">Lockup H</span>
+                            </div>
+
+                            <!-- Lockup 2: Digital Domain + Favicon -->
+                            <div class="mt-3 flex items-center justify-between gap-3 bg-piedra/60 rounded-xl p-3 border border-lenga/10">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-mono font-bold text-sm text-lenga">dhub°</span>
+                                    <span class="text-xs font-mono px-2 py-0.5 rounded bg-terracota text-white">dhub.travel</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[10px] font-mono text-ceniza">Favicon:</span>
+                                    <div class="w-8 h-8 rounded-lg bg-lenga flex items-center justify-center shadow-sm">
+                                        <svg class="w-5 h-5" viewBox="0 0 200 200" fill="none">
+                                            <circle cx="100" cy="100" r="68" stroke="#C8A97E" stroke-width="16" stroke-dasharray="280 120"/>
+                                            <polygon points="158,42 110,108 92,90" fill="#C85A32"/>
+                                            <polygon points="50,150 110,108 92,90" fill="#F6F5F0"/>
+                                        </svg>
+                                    </div>
+                                    <div class="w-5 h-5 rounded-full bg-lenga border border-coiron flex items-center justify-center">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-terracota"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Concept Rationale -->
+                            <p class="mt-4 text-xs text-ceniza leading-relaxed">
+                                <strong class="text-granito">Racional:</strong> Representa el ciclo operativo regenerativo en 4 arcos envolventes que convergen en el centro y proyectan un vector en ángulo ascendente (+45° Noreste: Norte, dirección estratégica y crecimiento de <em>Yield</em>).
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Action Footer -->
+                    <div class="px-6 pb-6 pt-2">
+                        <button onclick="selectConcept('C')" id="btn-select-C" class="w-full py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-wider bg-lenga/10 hover:bg-lenga hover:text-white text-lenga transition-all">
+                            Seleccionar Propuesta C
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- =================================================================
+             3. SECCIÓN 2: ARQUITECTURA TIPOGRÁFICA INTERACTIVA
+        ================================================================== -->
+        <section id="tipografia" class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-lenga/15 pb-5">
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-widest text-glaciar font-semibold block mb-1">
+                        SECCIÓN 02 · SISTEMA DE VOZ Y JERARQUÍA EDITORIAL
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl dynamic-heading font-semibold text-lenga">
+                        Probador de Combinaciones Tipográficas en Tiempo Real
+                    </h2>
+                </div>
+                <p class="text-xs sm:text-sm text-ceniza max-w-md">
+                    Seleccioná cualquiera de las 3 duplas tipográficas para evaluar cómo cambia la personalidad de los titulares, los números de KPIs y el logotipo de <strong>Destination Hub</strong>.
+                </p>
+            </div>
+
+            <!-- 3 Typography Pairing Selector Buttons -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button onclick="setTypography(1)" id="font-card-1" class="text-left p-5 rounded-2xl border-2 border-terracota bg-white shadow-md transition-all">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[11px] font-mono uppercase font-bold text-terracota">OPCIÓN 01 · RECOMENDADA</span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-terracota"></span>
+                    </div>
+                    <h3 class="font-fraunces text-xl font-semibold text-lenga">Editorial &amp; Consultoría Senior</h3>
+                    <p class="text-xs text-ceniza mt-1 font-jakarta"><strong>Títulos:</strong> Fraunces (Serif) · <strong>Cuerpo:</strong> Plus Jakarta Sans</p>
+                    <p class="text-[11px] text-ceniza/80 mt-2">Combina el prestigio de +100 años de trayectoria con lectura ágil de datos.</p>
+                </button>
+
+                <button onclick="setTypography(2)" id="font-card-2" class="text-left p-5 rounded-2xl border border-lenga/15 bg-white hover:border-glaciar transition-all">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[11px] font-mono uppercase font-bold text-glaciar">OPCIÓN 02 · VANGUARDIA</span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-piedra"></span>
+                    </div>
+                    <h3 class="font-syne text-xl font-bold text-lenga">Minimalismo Suizo &amp; Smart Tech</h3>
+                    <p class="text-xs text-ceniza mt-1 font-jakarta"><strong>Títulos:</strong> Syne (Display Geométrica) · <strong>Cuerpo:</strong> Plus Jakarta Sans</p>
+                    <p class="text-[11px] text-ceniza/80 mt-2">Carácter arquitectónico, disruptivo y orientado a innovación tecnológica.</p>
+                </button>
+
+                <button onclick="setTypography(3)" id="font-card-3" class="text-left p-5 rounded-2xl border border-lenga/15 bg-white hover:border-glaciar transition-all">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[11px] font-mono uppercase font-bold text-lenga">OPCIÓN 03 · INSTITUCIONAL</span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-piedra"></span>
+                    </div>
+                    <h3 class="font-cormorant text-2xl font-bold text-lenga">Clásico Contemporáneo de Alto Contraste</h3>
+                    <p class="text-xs text-ceniza mt-1 font-outfit"><strong>Títulos:</strong> Cormorant Garamond · <strong>Cuerpo:</strong> Outfit</p>
+                    <p class="text-[11px] text-ceniza/80 mt-2">Elegancia diplomática, ideal para fondos de inversión y alta hospitalidad.</p>
+                </button>
+            </div>
+
+            <!-- Live Typographic Specimen Board -->
+            <div class="bg-white rounded-3xl p-6 sm:p-10 border border-lenga/15 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-10">
+                
+                <!-- Left: Hierarchy Scale -->
+                <div class="lg:col-span-8 space-y-6 border-b lg:border-b-0 lg:border-r border-lenga/10 pb-8 lg:pb-0 lg:pr-8">
+                    <div class="flex items-center justify-between text-xs font-mono text-ceniza border-b border-lenga/10 pb-2">
+                        <span>ESPECIMEN EN VIVO · JERARQUÍA EDITORIAL</span>
+                        <span id="specimen-font-label">Fraunces + Plus Jakarta Sans</span>
+                    </div>
+
+                    <div>
+                        <span class="text-[10px] font-mono uppercase text-terracota block mb-1">Display H1 · Hero / Portadas (44px - 54px)</span>
+                        <h3 class="text-3xl sm:text-5xl dynamic-heading font-semibold text-lenga leading-[1.12]">
+                            Gestionar destinos hoy es diseñar el futuro del territorio.
+                        </h3>
+                    </div>
+
+                    <div>
+                        <span class="text-[10px] font-mono uppercase text-glaciar block mb-1">Sección H2 · Subtítulos Estratégicos (28px - 34px)</span>
+                        <h4 class="text-2xl sm:text-3xl dynamic-heading font-semibold text-granito leading-snug">
+                            De la promoción masiva al liderazgo regenerativo basado en datos.
+                        </h4>
+                    </div>
+
+                    <div>
+                        <span class="text-[10px] font-mono uppercase text-ceniza block mb-1">Párrafo Editorial &amp; Consultoría (16px - 18px)</span>
+                        <p class="dynamic-body text-base text-ceniza leading-relaxed">
+                            Actuamos como una extensión directa de tu equipo en la Patagonia. Con más de <strong>100 años de experiencia combinada</strong> en la industria turística, diseñamos planes de negocios, implementamos políticas de sustentabilidad y lideramos la representación comercial con foco en retorno sobre la inversión (<em>Yield</em>) y beneficio tangible para las comunidades locales.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Numeric & KPI Specimen -->
+                <div class="lg:col-span-4 flex flex-col justify-between space-y-6">
+                    <div>
+                        <span class="text-xs font-mono text-ceniza block border-b border-lenga/10 pb-2 mb-4">
+                            NUMERALES, KPIS &amp; CARACTERES
+                        </span>
+                        <div class="bg-lenga text-nieve rounded-2xl p-6 space-y-4">
+                            <div>
+                                <span class="text-[11px] font-mono uppercase text-coiron">Indicador de Trayectoria</span>
+                                <div class="text-5xl dynamic-heading font-bold text-white mt-1">+100 <span class="text-xl italic font-normal text-coiron">años</span></div>
+                            </div>
+                            <div class="pt-3 border-t border-nieve/15 grid grid-cols-2 gap-3">
+                                <div>
+                                    <span class="text-[10px] font-mono text-nieve/70 block">CRECIMIENTO YIELD</span>
+                                    <span class="text-2xl dynamic-heading font-semibold text-coiron">+38.4%</span>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-mono text-nieve/70 block">NODOS PATAGONIA</span>
+                                    <span class="text-2xl dynamic-heading font-semibold text-white">N·S·E·O</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-piedra/60 rounded-2xl p-5 border border-lenga/10">
+                        <span class="text-[10px] font-mono uppercase text-ceniza block mb-1">Set de Caracteres</span>
+                        <p class="dynamic-heading text-lg text-lenga tracking-wide">
+                            ABCDEFGHIJKLMNÑOPQRSTUVWXYZ<br>
+                            abcdefghijklmnñopqrstuvwxyz<br>
+                            0123456789 · $ % &amp; ( ) [ ]
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             4. SECCIÓN 3: SISTEMA CROMÁTICO PATAGONIA (CLICK TO COPY HEX)
+        ================================================================== -->
+        <section id="colores" class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-lenga/15 pb-5">
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-widest text-lenga font-semibold block mb-1">
+                        SECCIÓN 03 · PALETA CROMÁTICA &amp; PROPORCIÓN DE USO
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl dynamic-heading font-semibold text-lenga">
+                        Sistema Cromático Patagonia Regenerativa
+                    </h2>
+                </div>
+                <p id="copy-toast" class="text-xs font-mono px-3 py-1.5 rounded-lg bg-lenga/10 text-lenga">
+                    💡 Hacé clic en cualquier tarjeta de color para copiar su código HEX.
+                </p>
+            </div>
+
+            <!-- 6 Interactive Color Swatches -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-5">
+                
+                <!-- Color 1: Verde Bosque Lenga -->
+                <div onclick="copyHex('#183028', 'Verde Bosque Lenga')" class="cursor-pointer group bg-white rounded-2xl p-3 border border-lenga/15 shadow-sm hover:shadow-md transition-all">
+                    <div class="h-32 rounded-xl bg-[#183028] p-3 flex flex-col justify-between text-nieve relative overflow-hidden">
+                        <span class="text-[10px] font-mono uppercase opacity-75">Primario · 35%</span>
+                        <span class="font-mono font-bold text-sm group-hover:translate-x-1 transition-transform">#183028</span>
+                    </div>
+                    <div class="pt-3 px-1">
+                        <h3 class="font-bold text-sm text-lenga">Verde Bosque Lenga</h3>
+                        <p class="text-[11px] font-mono text-ceniza mt-0.5">RGB: 24, 48, 40</p>
+                        <p class="text-[11px] font-mono text-ceniza">PMS: 5535 C · AAA</p>
+                        <p class="text-[11px] text-ceniza mt-2">Autoridad, bosque andino y conservación profunda.</p>
+                    </div>
+                </div>
+
+                <!-- Color 2: Azul Glaciar Smart -->
+                <div onclick="copyHex('#2B5B6C', 'Azul Glaciar / Smart Data')" class="cursor-pointer group bg-white rounded-2xl p-3 border border-lenga/15 shadow-sm hover:shadow-md transition-all">
+                    <div class="h-32 rounded-xl bg-[#2B5B6C] p-3 flex flex-col justify-between text-nieve">
+                        <span class="text-[10px] font-mono uppercase opacity-75">Secundario · 15%</span>
+                        <span class="font-mono font-bold text-sm group-hover:translate-x-1 transition-transform">#2B5B6C</span>
+                    </div>
+                    <div class="pt-3 px-1">
+                        <h3 class="font-bold text-sm text-lenga">Azul Glaciar Tech</h3>
+                        <p class="text-[11px] font-mono text-ceniza mt-0.5">RGB: 43, 91, 108</p>
+                        <p class="text-[11px] font-mono text-ceniza">PMS: 5473 C · AA+</p>
+                        <p class="text-[11px] text-ceniza mt-2">Lagos patagónicos, inteligencia de datos y precisión.</p>
+                    </div>
+                </div>
+
+                <!-- Color 3: Tierra Coirón -->
+                <div onclick="copyHex('#C8A97E', 'Tierra Coirón / Estepa')" class="cursor-pointer group bg-white rounded-2xl p-3 border border-lenga/15 shadow-sm hover:shadow-md transition-all">
+                    <div class="h-32 rounded-xl bg-[#C8A97E] p-3 flex flex-col justify-between text-lenga-dark">
+                        <span class="text-[10px] font-mono uppercase opacity-80">Acento Cálido · 10%</span>
+                        <span class="font-mono font-bold text-sm group-hover:translate-x-1 transition-transform">#C8A97E</span>
+                    </div>
+                    <div class="pt-3 px-1">
+                        <h3 class="font-bold text-sm text-lenga">Tierra Coirón</h3>
+                        <p class="text-[11px] font-mono text-ceniza mt-0.5">RGB: 200, 169, 126</p>
+                        <p class="text-[11px] font-mono text-ceniza">PMS: 466 C</p>
+                        <p class="text-[11px] text-ceniza mt-2">Estepa, comunidad local, detalles editoriales y líneas.</p>
+                    </div>
+                </div>
+
+                <!-- Color 4: Terracota Otoño -->
+                <div onclick="copyHex('#C85A32', 'Terracota / Acción Regenerativa')" class="cursor-pointer group bg-white rounded-2xl p-3 border border-lenga/15 shadow-sm hover:shadow-md transition-all">
+                    <div class="h-32 rounded-xl bg-[#C85A32] p-3 flex flex-col justify-between text-white">
+                        <span class="text-[10px] font-mono uppercase opacity-80">CTA &amp; Nodos · 5%</span>
+                        <span class="font-mono font-bold text-sm group-hover:translate-x-1 transition-transform">#C85A32</span>
+                    </div>
+                    <div class="pt-3 px-1">
+                        <h3 class="font-bold text-sm text-lenga">Terracota Lenga</h3>
+                        <p class="text-[11px] font-mono text-ceniza mt-0.5">RGB: 200, 90, 50</p>
+                        <p class="text-[11px] font-mono text-ceniza">PMS: 7579 C</p>
+                        <p class="text-[11px] text-ceniza mt-2">Bosque en otoño, energía ejecutiva y llamados a la acción.</p>
+                    </div>
+                </div>
+
+                <!-- Color 5: Blanco Piedra / Nieve -->
+                <div onclick="copyHex('#F6F5F0', 'Blanco Piedra / Nieve')" class="cursor-pointer group bg-white rounded-2xl p-3 border border-lenga/15 shadow-sm hover:shadow-md transition-all">
+                    <div class="h-32 rounded-xl bg-[#F6F5F0] border border-lenga/15 p-3 flex flex-col justify-between text-lenga">
+                        <span class="text-[10px] font-mono uppercase opacity-75">Fondo Base · 30%</span>
+                        <span class="font-mono font-bold text-sm group-hover:translate-x-1 transition-transform">#F6F5F0</span>
+                    </div>
+                    <div class="pt-3 px-1">
+                        <h3 class="font-bold text-sm text-lenga">Blanco Piedra</h3>
+                        <p class="text-[11px] font-mono text-ceniza mt-0.5">RGB: 246, 245, 240</p>
+                        <p class="text-[11px] font-mono text-ceniza">Papel Algodón</p>
+                        <p class="text-[11px] text-ceniza mt-2">Luz natural orgánica que aporta calidez editorial.</p>
+                    </div>
+                </div>
+
+                <!-- Color 6: Gris Granito -->
+                <div onclick="copyHex('#2C302E', 'Gris Granito Andino')" class="cursor-pointer group bg-white rounded-2xl p-3 border border-lenga/15 shadow-sm hover:shadow-md transition-all">
+                    <div class="h-32 rounded-xl bg-[#2C302E] p-3 flex flex-col justify-between text-nieve">
+                        <span class="text-[10px] font-mono uppercase opacity-75">Texto · 5%</span>
+                        <span class="font-mono font-bold text-sm group-hover:translate-x-1 transition-transform">#2C302E</span>
+                    </div>
+                    <div class="pt-3 px-1">
+                        <h3 class="font-bold text-sm text-lenga">Gris Granito</h3>
+                        <p class="text-[11px] font-mono text-ceniza mt-0.5">RGB: 44, 48, 46</p>
+                        <p class="text-[11px] font-mono text-ceniza">PMS: 447 C · AAA</p>
+                        <p class="text-[11px] text-ceniza mt-2">Roca cordillerana para lectura prolongada de textos.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================================================================
+             5. SECCIÓN 4: APLICACIONES DE MARCA EN VIVO (MOCKUPS EN TIEMPO REAL)
+        ================================================================== -->
+        <section id="aplicaciones" class="space-y-8 pb-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-lenga/15 pb-5">
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-widest text-terracota font-semibold block mb-1">
+                        SECCIÓN 04 · PRUEBA DE ESTRÉS EN APLICACIONES REALES
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl dynamic-heading font-semibold text-lenga">
+                        Mockups Corporativos en Tiempo Real
+                    </h2>
+                </div>
+                <p class="text-xs sm:text-sm text-ceniza max-w-md">
+                    Todas las piezas de abajo se actualizan automáticamente con el <strong>Isotipo (A, B o C)</strong> y la <strong>Tipografía</strong> que tengas seleccionada arriba.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+                <!-- MOCKUP 1: Tarjeta Ejecutiva Personal (Frente y Dorso) -->
+                <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-lenga/15 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <span class="text-[11px] font-mono uppercase text-ceniza">APLICACIÓN 01 · PAPELERÍA SENIOR</span>
+                            <h3 class="text-lg font-bold text-lenga">Tarjetas Personales Ejecutivas (Frente &amp; Dorso)</h3>
+                        </div>
+                        <span class="text-xs font-mono px-2.5 py-1 rounded bg-piedra text-granito">90 × 55 mm</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 my-auto">
+                        <!-- Card Front (Dark Forest Lenga + Topographic Foil) -->
+                        <div class="aspect-[1.65/1] rounded-2xl bg-lenga bg-topo-pattern p-6 text-nieve shadow-lg border border-coiron/40 flex flex-col justify-between relative overflow-hidden">
+                            <div class="flex justify-between items-start">
+                                <!-- Dynamic Clone of Selected Isotype -->
+                                <div class="live-iso-target w-12 h-12 rounded-xl bg-white/5 border border-coiron/30 p-1.5 flex items-center justify-center"></div>
+                                <span class="text-[10px] font-mono uppercase tracking-widest text-coiron">dhub.travel</span>
+                            </div>
+                            <div>
+                                <div class="leading-none flex items-baseline gap-1.5">
+                                    <span class="dynamic-heading font-semibold text-xl text-white">Destination</span>
+                                    <span class="dynamic-body font-extrabold text-sm uppercase tracking-widest text-coiron">Hub</span>
+                                </div>
+                                <p class="text-[10px] font-mono uppercase tracking-wider text-nieve/70 mt-1">
+                                    Patagonia · Desarrollo de Negocios Turísticos
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Card Back (Light Stone Paper) -->
+                        <div class="aspect-[1.65/1] rounded-2xl bg-nieve p-6 text-granito shadow-md border border-lenga/20 flex flex-col justify-between">
+                            <div class="flex justify-between items-start border-b border-lenga/10 pb-3">
+                                <div>
+                                    <h4 class="dynamic-heading font-bold text-base text-lenga">Dirección Estratégica</h4>
+                                    <p class="text-[11px] text-glaciar font-semibold">Socio Director · Senior Partner</p>
+                                </div>
+                                <div class="live-iso-target w-7 h-7 opacity-80"></div>
+                            </div>
+                            <div class="space-y-1 text-[11px] font-mono text-ceniza">
+                                <p class="text-lenga font-semibold">hola@dhub.travel · www.dhub.travel</p>
+                                <p>Patagonia, Argentina · Red Regional Activa</p>
+                                <p class="text-[9px] uppercase tracking-widest text-terracota pt-1">Innovación · Comunidad · Regeneración</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-ceniza mt-6 pt-4 border-t border-lenga/10">
+                        Impresión recomendada sobre papel de algodón ecológico de 400g con laca sectorizada mate sobre las curvas topográficas.
+                    </p>
+                </div>
+
+                <!-- MOCKUP 2: Portada de Reporte Estratégico (DestinationNEXT) -->
+                <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 border border-lenga/15 shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <span class="text-[11px] font-mono uppercase text-ceniza">APLICACIÓN 02 · ENTREGABLES B2B</span>
+                            <h3 class="text-lg font-bold text-lenga">Portada de Plan de Negocios / Dossier</h3>
+                        </div>
+                        <span class="text-xs font-mono px-2.5 py-1 rounded bg-piedra text-granito">Formato A4</span>
+                    </div>
+
+                    <!-- A4 Cover Mockup -->
+                    <div class="max-w-[290px] mx-auto w-full aspect-[1/1.35] rounded-2xl bg-lenga-dark bg-topo-pattern p-6 text-nieve shadow-xl border border-coiron/30 flex flex-col justify-between relative">
+                        <div class="flex items-center justify-between border-b border-nieve/15 pb-3">
+                            <div class="flex items-center gap-2">
+                                <div class="live-iso-target w-7 h-7"></div>
+                                <span class="dynamic-heading font-semibold text-sm text-white">Destination <span class="font-sans text-[11px] uppercase tracking-wider text-coiron">Hub</span></span>
+                            </div>
+                            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-terracota text-white">2025/2030</span>
+                        </div>
+
+                        <div class="my-auto py-4 space-y-2.5">
+                            <span class="text-[9px] font-mono uppercase tracking-widest text-coiron block">DOCUMENTO CONFIDENCIAL · MODELO DSO</span>
+                            <h4 class="dynamic-heading text-2xl font-semibold text-white leading-tight">
+                                Estrategia para el Desarrollo Regenerativo de Destinos.
+                            </h4>
+                            <p class="text-[11px] text-nieve/75 leading-relaxed">
+                                Análisis de mercado, matriz de gobernanza y hoja de ruta comercial enfocada en Yield.
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-nieve/15 flex items-center justify-between text-[9px] font-mono text-coiron">
+                            <span>PATAGONIA · ARGENTINA</span>
+                            <span>DHUB.TRAVEL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MOCKUP 3: Previsualización del Header Web de dhub.travel + Firma Digital -->
+                <div class="lg:col-span-12 bg-white rounded-3xl p-6 sm:p-8 border border-lenga/15 shadow-sm space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <span class="text-[11px] font-mono uppercase text-ceniza">APLICACIÓN 03 · ECOSISTEMA DIGITAL</span>
+                            <h3 class="text-lg font-bold text-lenga">Encabezado Web (`dhub.travel`) &amp; Firma Corporativa</h3>
+                        </div>
+                        <span class="text-xs font-mono text-glaciar">Vista previa responsiva</span>
+                    </div>
+
+                    <!-- Simulated Browser Header -->
+                    <div class="rounded-2xl border border-lenga/20 overflow-hidden shadow-sm">
+                        <div class="bg-granito text-nieve/70 px-4 py-2 text-xs font-mono flex items-center justify-between">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-terracota"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-coiron"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                            </div>
+                            <span>https://www.dhub.travel</span>
+                            <span class="text-[10px]">SSL Seguro</span>
+                        </div>
+                        <div class="bg-nieve px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+                            <div class="flex items-center gap-3.5">
+                                <div class="live-iso-target w-11 h-11 rounded-xl bg-lenga p-1.5 flex items-center justify-center shadow-sm"></div>
+                                <div>
+                                    <div class="flex items-baseline gap-1.5">
+                                        <span class="dynamic-heading font-bold text-xl text-lenga">Destination</span>
+                                        <span class="dynamic-body font-extrabold text-sm uppercase tracking-widest text-glaciar">Hub</span>
+                                        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-piedra text-lenga border border-lenga/15 ml-1">dhub.travel</span>
+                                    </div>
+                                    <p class="text-[10px] font-mono uppercase tracking-wider text-ceniza">Patagonia · Business &amp; Destination Stewardship</p>
+                                </div>
+                            </div>
+                            <div class="hidden md:flex items-center gap-6 text-xs font-semibold text-granito">
+                                <span>El Paradigma</span>
+                                <span>Diferenciales (+100 años)</span>
+                                <span>Servicios</span>
+                                <span>KPIs</span>
+                                <span class="bg-terracota text-white px-4 py-2 rounded-xl">Agendar Consulta →</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =================================================================
+         JAVASCRIPT ENGINE FOR REAL-TIME BRANDBOOK INTERACTIVITY
+    ================================================================== -->
+    <script>
+        let currentConcept = 'A';
+        let currentFont = 1;
+        let currentStageTheme = 'light';
+
+        const conceptNames = {
+            'A': 'Concepto A · El Nudo Topográfico (Hub de Flujos)',
+            'B': 'Concepto B · Cumbre Nodal (Prisma DSO)',
+            'C': 'Concepto C · Brújula de Ciclo Regenerativo'
+        };
+
+        // Compact high-contrast SVGs for dark/light live mockups
+        const mockupSVGs = {
+            'A': `<svg class="w-full h-full" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36 142 C36 96, 68 34, 102 34 C134 34, 146 78, 166 136" stroke="#F6F5F0" stroke-width="14" stroke-linecap="round"/>
+                    <path d="M32 114 C68 114, 86 96, 102 96 C122 96, 142 82, 168 58" stroke="#C8A97E" stroke-width="12" stroke-linecap="round"/>
+                    <circle cx="102" cy="96" r="16" fill="#C85A32"/>
+                  </svg>`,
+            'B': `<svg class="w-full h-full" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="100,28 34,150 100,124" fill="#F6F5F0"/>
+                    <polygon points="100,28 166,150 100,124" fill="#2B5B6C" stroke="#C8A97E" stroke-width="8" stroke-linejoin="round"/>
+                    <polygon points="34,150 100,124 166,150 100,172" fill="#C8A97E"/>
+                    <circle cx="100" cy="28" r="14" fill="#C85A32"/>
+                  </svg>`,
+            'C': `<svg class="w-full h-full" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 26 A74 74 0 0 1 174 100" stroke="#F6F5F0" stroke-width="14" stroke-linecap="round"/>
+                    <path d="M158 114 A60 60 0 0 1 86 160" stroke="#C8A97E" stroke-width="13" stroke-linecap="round"/>
+                    <path d="M74 148 A52 52 0 0 1 44 82" stroke="#2B5B6C" stroke-width="13" stroke-linecap="round"/>
+                    <polygon points="158,42 110,106 94,90" fill="#C85A32"/>
+                    <polygon points="52,148 110,106 94,90" fill="#F6F5F0"/>
+                  </svg>`
+        };
+
+        // 1. Select Active Isotype Concept (A, B, or C)
+        function selectConcept(conceptId) {
+            currentConcept = conceptId;
+            document.getElementById('status-concept-name').textContent = conceptNames[conceptId];
+
+            ['A', 'B', 'C'].forEach(id => {
+                const card = document.getElementById('card-concept-' + id);
+                const badge = document.getElementById('badge-' + id);
+                const btn = document.getElementById('btn-select-' + id);
+                const toolbarBtn = document.getElementById('toolbar-concept-' + id);
+
+                if (id === conceptId) {
+                    card.classList.remove('border-lenga/15', 'shadow-sm');
+                    card.classList.add('border-2', 'border-terracota', 'shadow-xl');
+                    badge.textContent = 'Activo';
+                    badge.className = 'px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold bg-terracota text-white';
+                    btn.textContent = '✓ Identidad Principal Activa';
+                    btn.className = 'w-full py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-wider bg-terracota text-white shadow-sm transition-all';
+                    toolbarBtn.className = 'px-2.5 py-1.5 rounded-lg font-semibold transition-all bg-coiron text-lenga-dark';
+                } else {
+                    card.classList.remove('border-2', 'border-terracota', 'shadow-xl');
+                    card.classList.add('border-lenga/15', 'shadow-sm');
+                    badge.textContent = 'Explorar';
+                    badge.className = 'px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold bg-piedra text-ceniza';
+                    btn.textContent = 'Seleccionar Propuesta ' + id;
+                    btn.className = 'w-full py-3 px-4 rounded-xl font-semibold text-xs uppercase tracking-wider bg-lenga/10 hover:bg-lenga hover:text-white text-lenga transition-all';
+                    toolbarBtn.className = 'px-2.5 py-1.5 rounded-lg font-semibold transition-all text-nieve/80 hover:text-white';
+                }
+            });
+
+            // Inject active SVG into all live mockup targets
+            const targets = document.querySelectorAll('.live-iso-target');
+            targets.forEach(el => {
+                el.innerHTML = mockupSVGs[conceptId];
+            });
+        }
+
+        // 2. Change Canvas Background Theme (Piedra, Bosque Lenga, Glaciar, Mono)
+        function setStageTheme(theme) {
+            currentStageTheme = theme;
+            const stages = document.querySelectorAll('.canvas-stage');
+            stages.forEach(stage => {
+                stage.classList.remove('stage-light', 'stage-lenga', 'stage-glaciar', 'stage-mono');
+                stage.classList.add('stage-' + theme);
+            });
+
+            const themes = ['light', 'lenga', 'glaciar', 'mono'];
+            themes.forEach(t => {
+                const btn = document.getElementById('theme-btn-' + t);
+                if (t === theme) {
+                    btn.className = 'px-2.5 py-1.5 rounded-lg font-medium bg-nieve text-lenga shadow-sm transition-all';
+                } else {
+                    btn.className = 'px-2.5 py-1.5 rounded-lg font-medium text-nieve/80 hover:text-white transition-all';
+                }
+            });
+        }
+
+        // 3. Toggle Geometric Construction Grid
+        function toggleGrid() {
+            document.body.classList.toggle('show-grid');
+            const isGridOn = document.body.classList.contains('show-grid');
+            const btn = document.getElementById('grid-toggle-btn');
+            btn.querySelector('span').textContent = isGridOn ? 'Grilla: ON' : 'Grilla: OFF';
+            btn.classList.toggle('bg-coiron/15', isGridOn);
+            btn.classList.toggle('text-coiron', isGridOn);
+            btn.classList.toggle('text-nieve/60', !isGridOn);
+        }
+
+        // 4. Toggle Dynamic SVG Motion
+        function toggleAnimation() {
+            document.body.classList.toggle('animate-iso');
+            const isAnimOn = document.body.classList.contains('animate-iso');
+            const btn = document.getElementById('anim-toggle-btn');
+            btn.querySelector('span:last-child').textContent = isAnimOn ? 'Dinamismo: ON' : 'Dinamismo: OFF';
+            btn.classList.toggle('bg-terracota/20', isAnimOn);
+            btn.classList.toggle('text-nieve/60', !isAnimOn);
+        }
+
+        // 5. Switch Typography System (1, 2, or 3)
+        function setTypography(option) {
+            currentFont = option;
+            const root = document.documentElement;
+            const fontConfigs = {
+                1: {
+                    heading: "'Fraunces', Georgia, serif",
+                    body: "'Plus Jakarta Sans', sans-serif",
+                    label: "Opción 1 · Fraunces + Plus Jakarta Sans"
+                },
+                2: {
+                    heading: "'Syne', sans-serif",
+                    body: "'Plus Jakarta Sans', sans-serif",
+                    label: "Opción 2 · Syne + Plus Jakarta Sans"
+                },
+                3: {
+                    heading: "'Cormorant Garamond', Georgia, serif",
+                    body: "'Outfit', sans-serif",
+                    label: "Opción 3 · Cormorant Garamond + Outfit"
+                }
+            };
+
+            root.style.setProperty('--font-heading', fontConfigs[option].heading);
+            root.style.setProperty('--font-body', fontConfigs[option].body);
+            document.getElementById('status-font-name').textContent = fontConfigs[option].label;
+            document.getElementById('specimen-font-label').textContent = fontConfigs[option].label;
+
+            [1, 2, 3].forEach(num => {
+                const card = document.getElementById('font-card-' + num);
+                if (num === option) {
+                    card.classList.add('border-2', 'border-terracota', 'shadow-md');
+                    card.classList.remove('border-lenga/15');
+                } else {
+                    card.classList.remove('border-2', 'border-terracota', 'shadow-md');
+                    card.classList.add('border-lenga/15');
+                }
+            });
+        }
+
+        // 6. Copy HEX Code to Clipboard (Safe for iFrame)
+        function copyHex(hex, name) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = hex;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const toast = document.getElementById('copy-toast');
+            toast.textContent = `✓ Copiado al portapapeles: ${name} (${hex})`;
+            toast.className = 'text-xs font-mono px-3 py-1.5 rounded-lg bg-lenga text-coiron transition-all';
+        }
+
+        // 7. Download Active SVG File Directly
+        function downloadActiveSVG() {
+            const svgElement = document.getElementById('svg-concept-' + currentConcept);
+            if (!svgElement) return;
+            const clone = svgElement.cloneNode(true);
+            // Remove construction grid before exporting clean corporate vector
+            const grid = clone.querySelector('.construction-grid');
+            if (grid) grid.remove();
+
+            const svgData = new XMLSerializer().serializeToString(clone);
+            const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `destination-hub-isotipo-${currentConcept.toLowerCase()}.svg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize Live Mockups on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            selectConcept('A');
+        });
+    </script>
+</body>
+</html>

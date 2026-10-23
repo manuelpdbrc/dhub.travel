@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination Hub | Desarrollo de Negocios y Destinos Turísticos en Patagonia</title>
+    <meta name="description" content="Consultoría estratégica, desarrollo comercial e inteligencia aplicada desde la Patagonia. Transformamos el potencial del territorio en negocios y destinos turísticos regenerativos.">
+    
+    <!-- Google Fonts: Fraunces (Editorial Serif) & Plus Jakarta Sans (Clean Geometric Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lenga: {
+                            DEFAULT: '#183028',
+                            dark: '#0f201a',
+                            light: '#24453a'
+                        },
+                        glaciar: {
+                            DEFAULT: '#2B5B6C',
+                            light: '#3b768b',
+                            soft: '#e3eef2'
+                        },
+                        coiron: {
+                            DEFAULT: '#C8A97E',
+                            light: '#dfd1bc',
+                            dark: '#a8885c'
+                        },
+                        terracota: {
+                            DEFAULT: '#C85A32',
+                            hover: '#ae4a26'
+                        },
+                        nieve: '#F6F5F0',
+                        piedra: '#EFECE6',
+                        granito: '#2C302E',
+                        ceniza: '#5C6460'
+                    },
+                    fontFamily: {
+                        serif: ['Fraunces', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS Variables, Animations & Topographic Patterns -->
+    <style>
+        :root {
+            --color-primary: #183028;
+            --color-secondary: #2B5B6C;
+            --color-accent: #C8A97E;
+            --color-cta: #C85A32;
+            --color-bg: #F6F5F0;
+            --color-surface: #EFECE6;
+            --color-text: #2C302E;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-editorial {
+            font-family: 'Fraunces', serif;
+        }
+
+        /* Subtle Topographic Background Pattern */
+        .bg-topographic {
+            background-image: url("data:image/svg+xml,%3Csvg width='600' height='600' viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23183028' stroke-width='1' stroke-opacity='0.05'%3E%3Cpath d='M0 100 C 150 180, 300 20, 600 100'/%3E%3Cpath d='M0 140 C 180 220, 320 60, 600 140'/%3E%3Cpath d='M0 180 C 210 260, 340 100, 600 180'/%3E%3Cpath d='M0 280 C 120 200, 400 380, 600 260'/%3E%3Cpath d='M0 320 C 150 240, 420 420, 600 300'/%3E%3Cpath d='M0 450 C 250 520, 350 380, 600 480'/%3E%3Cpath d='M0 490 C 270 560, 370 420, 600 520'/%3E%3Ccircle cx='450' cy='150' r='90'/%3E%3Ccircle cx='450' cy='150' r='60'/%3E%3Ccircle cx='450' cy='150' r='30'/%3E%3Ccircle cx='140' cy='420' r='110'/%3E%3Ccircle cx='140' cy='420' r='70'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .bg-topographic-dark {
+            background-image: url("data:image/svg+xml,%3Csvg width='600' height='600' viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C8A97E' stroke-width='1' stroke-opacity='0.07'%3E%3Cpath d='M0 100 C 150 180, 300 20, 600 100'/%3E%3Cpath d='M0 140 C 180 220, 320 60, 600 140'/%3E%3Cpath d='M0 280 C 120 200, 400 380, 600 260'/%3E%3Cpath d='M0 320 C 150 240, 420 420, 600 300'/%3E%3Cpath d='M0 450 C 250 520, 350 380, 600 480'/%3E%3Ccircle cx='480' cy='180' r='120'/%3E%3Ccircle cx='480' cy='180' r='80'/%3E%3Ccircle cx='480' cy='180' r='40'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Smooth Card Hover Transitions */
+        .service-card {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -15px rgba(24, 48, 40, 0.12);
+            border-color: #C8A97E;
+        }
+
+        /* Pulse animation for Smart Nodes */
+        @keyframes nodePulse {
+            0%, 100% { r: 3.5; opacity: 1; }
+            50% { r: 5.5; opacity: 0.6; }
+        }
+        .node-pulse {
+            animation: nodePulse 3s infinite ease-in-out;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F6F5F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #183028;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-lenga selection:text-nieve">
+
+    <!-- ==========================================
+         1. STICKY HEADER / NAVIGATION
+    =========================================== -->
+    <header id="header" class="sticky top-0 z-50 bg-nieve/95 backdrop-blur-md border-b border-lenga/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group focus:outline-none">
+                    <div class="w-11 h-11 rounded-xl bg-lenga flex items-center justify-center text-nieve shadow-sm group-hover:bg-glaciar transition-colors">
+                        <!-- Custom Node-Mountain Icon -->
+                        <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 28L14 11L21 22L26 15L32 28H4Z" stroke="#F6F5F0" stroke-width="1.8" stroke-linejoin="round"/>
+                            <path d="M14 11L21 15L26 15" stroke="#C8A97E" stroke-width="1.2" stroke-dasharray="2 2"/>
+                            <circle cx="14" cy="11" r="2.2" fill="#C8A97E"/>
+                            <circle cx="26" cy="15" r="2.2" fill="#C85A32"/>
+                            <circle cx="21" cy="22" r="2" fill="#F6F5F0"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-serif font-bold text-xl tracking-tight text-lenga">Destination Hub</span>
+                            <span class="text-[11px] font-mono font-semibold uppercase tracking-widest px-2 py-0.5 rounded-full bg-piedra text-glaciar border border-glaciar/20">dhub.travel</span>
+                        </div>
+                        <p class="text-[11px] text-ceniza tracking-wide uppercase font-medium">Patagonia · Business & Destination Stewardship</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-granito">
+                    <a href="#paradigma" class="hover:text-terracota transition-colors">El Paradigma</a>
+                    <a href="#diferenciales" class="hover:text-terracota transition-colors">Diferenciales</a>
+                    <a href="#servicios" class="hover:text-terracota transition-colors">Servicios</a>
+                    <a href="#modelo" class="hover:text-terracota transition-colors">Modelo Regenerativo</a>
+                    <a href="#kpis" class="hover:text-terracota transition-colors">KPIs & Impacto</a>
+                </nav>
+
+                <!-- CTA & Mobile Toggle -->
+                <div class="flex items-center gap-3">
+                    <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 bg-terracota hover:bg-terracota-hover text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-sm transition-all transform hover:-translate-y-0.5">
+                        <span>Agendar Consulta</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+
+                    <!-- Mobile Hamburger Button -->
+                    <button id="mobile-menu-btn" aria-label="Abrir menú" class="lg:hidden p-2.5 rounded-xl border border-lenga/15 text-lenga hover:bg-piedra focus:outline-none">
+                        <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-nieve border-b border-lenga/10 px-4 pt-3 pb-6 space-y-3">
+            <a href="#paradigma" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-granito hover:bg-piedra">El Cambio de Paradigma</a>
+            <a href="#diferenciales" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-granito hover:bg-piedra">Quiénes Somos & Diferenciales</a>
+            <a href="#servicios" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-granito hover:bg-piedra">Qué Hacemos (Servicios)</a>
+            <a href="#modelo" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-granito hover:bg-piedra">Diseño Regenerativo</a>
+            <a href="#kpis" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium text-granito hover:bg-piedra">Nuevos KPIs & Roadmap</a>
+            <div class="pt-2">
+                <a href="#contacto" class="mobile-link w-full inline-flex justify-center items-center gap-2 bg-terracota text-white font-semibold px-5 py-3 rounded-xl shadow-sm">
+                    Agendar Consulta Estratégica
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ==========================================
+             2. HERO SECTION (Editorial + Custom SVG Fusion)
+        =========================================== -->
+        <section class="relative bg-topographic pt-10 pb-16 lg:pt-16 lg:pb-24 border-b border-lenga/10 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                    
+                    <!-- Left Column: High-Impact Copy -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-lenga/5 border border-lenga/15">
+                            <span class="w-2 h-2 rounded-full bg-terracota animate-pulse"></span>
+                            <span class="text-xs font-bold tracking-widest uppercase text-lenga">
+                                PATAGONIA · DESARROLLO DE NEGOCIOS Y DESTINOS TURÍSTICOS
+                            </span>
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-[54px] font-serif font-semibold text-lenga leading-[1.12] tracking-tight">
+                            Transformamos el potencial del territorio en negocios y destinos turísticos <span class="italic font-normal text-glaciar underline decoration-coiron/60 decoration-2 underline-offset-4">regenerativos.</span>
+                        </h1>
+
+                        <p class="text-lg sm:text-xl text-ceniza leading-relaxed max-w-2xl">
+                            Consultoría estratégica, desarrollo comercial e inteligencia aplicada desde la Patagonia. Pasamos de la promoción tradicional a la <strong class="text-granito font-semibold">gestión integral con impacto real</strong> en tu rentabilidad, la comunidad local y la naturaleza.
+                        </p>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
+                            <a href="#contacto" class="inline-flex justify-center items-center gap-3 bg-terracota hover:bg-terracota-hover text-white font-semibold px-7 py-4 rounded-xl shadow-md hover:shadow-lg transition-all text-base">
+                                <span>Impulsemos tu proyecto</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                                </svg>
+                            </a>
+                            <a href="#servicios" class="inline-flex justify-center items-center gap-2 bg-white hover:bg-piedra text-lenga border border-lenga/20 font-semibold px-6 py-4 rounded-xl transition-all text-base">
+                                <span>Explorar servicios</span>
+                                <svg class="w-4 h-4 text-glaciar" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <!-- Editorial Identity Pill -->
+                        <div class="pt-4 flex flex-wrap items-center gap-6 text-xs text-ceniza border-t border-lenga/10">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-lenga" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Enfoque directo en <strong>ROI & Yield</strong></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-lenga" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Modelo <strong>DSO (Destination Stewardship)</strong></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-lenga" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Soluciones <strong>a la carta o llave en mano</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Custom SVG Art (Half Nature Mountain / Half Smart Data Wireframe) -->
+                    <div class="lg:col-span-5">
+                        <div class="relative bg-lenga rounded-2xl p-6 sm:p-8 shadow-xl border border-coiron/30 text-nieve overflow-hidden">
+                            
+                            <!-- Top Card Header -->
+                            <div class="flex justify-between items-center pb-5 mb-4 border-b border-nieve/10 text-xs">
+                                <span class="font-mono uppercase tracking-wider text-coiron">ADN PATAGONIA · SMART DESTINATION</span>
+                                <span class="px-2.5 py-1 rounded-md bg-glaciar/40 text-nieve font-mono">2025 / 2030</span>
+                            </div>
+
+                            <!-- Custom SVG Illustration: Half Organic Fitz Roy / Half Wireframe Grid -->
+                            <div class="relative my-2 bg-nieve/5 rounded-xl p-4 border border-nieve/10">
+                                <svg class="w-full h-auto" viewBox="0 0 500 310" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fusión entre montaña orgánica patagónica y red de inteligencia de datos">
+                                    <!-- Topographic Contour Lines in Background -->
+                                    <path d="M10 60 Q 90 20, 180 70 T 350 50" stroke="#C8A97E" stroke-opacity="0.2" stroke-width="1" fill="none"/>
+                                    <path d="M5 100 Q 110 50, 210 100 T 420 80" stroke="#C8A97E" stroke-opacity="0.15" stroke-width="1" fill="none"/>
+                                    
+                                    <!-- Center Divider Line (Nature vs Smart Data) -->
+                                    <line x1="250" y1="15" x2="250" y2="290" stroke="#C8A97E" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+                                    <!-- LEFT SIDE: Organic Patagonia Mountain (Nature, Glaciers, Forest) -->
+                                    <g>
+                                        <!-- Deep Mountain Silhouette -->
+                                        <path d="M20 270 L75 175 L105 205 L155 110 L190 145 L250 30 L250 270 Z" fill="#2B5B6C" fill-opacity="0.55"/>
+                                        <!-- Illuminated Snow & Granite Facets -->
+                                        <path d="M250 30 L210 135 L230 160 L195 210 L250 270 Z" fill="#F6F5F0" fill-opacity="0.85"/>
+                                        <path d="M155 110 L175 165 L140 195 L155 110 Z" fill="#F6F5F0" fill-opacity="0.65"/>
+                                        <!-- Foreground Lenga Forest Ridges -->
+                                        <path d="M20 270 L95 210 L145 235 L205 185 L250 220 L250 270 Z" fill="#183028"/>
+                                        <path d="M20 270 Q 130 245, 250 270" stroke="#C8A97E" stroke-width="2"/>
+                                    </g>
+
+                                    <!-- RIGHT SIDE: Topographic Wireframe & Data Mesh (Smart Intelligence) -->
+                                    <g>
+                                        <!-- Outer Wireframe Outline -->
+                                        <path d="M250 30 L295 130 L330 95 L380 185 L415 155 L480 270 L250 270 Z" stroke="#C8A97E" stroke-width="1.5" fill="#2B5B6C" fill-opacity="0.15"/>
+                                        
+                                        <!-- Internal Triangulated Mesh (Data Topology) -->
+                                        <line x1="250" y1="30" x2="285" y2="175" stroke="#C8A97E" stroke-opacity="0.6" stroke-width="1"/>
+                                        <line x1="250" y1="120" x2="295" y2="130" stroke="#C8A97E" stroke-opacity="0.6" stroke-width="1"/>
+                                        <line x1="295" y1="130" x2="285" y2="175" stroke="#C8A97E" stroke-opacity="0.6" stroke-width="1"/>
+                                        <line x1="330" y1="95" x2="285" y2="175" stroke="#C8A97E" stroke-opacity="0.6" stroke-width="1"/>
+                                        <line x1="330" y1="95" x2="345" y2="210" stroke="#C8A97E" stroke-opacity="0.6" stroke-width="1"/>
+                                        <line x1="285" y1="175" x2="345" y2="210" stroke="#C8A97E" stroke-opacity="0.6" stroke-width="1"/>
+                                        <line x1="380" y1="185" x2="345" y2="210" stroke="#C8A97E" stroke-opacity="0.6" stroke-width="1"/>
+                                        <line x1="415" y1="155" x2="395" y2="235" stroke="#C8A97E" stroke-opacity="0.6" stroke-width="1"/>
+                                        <line x1="345" y1="210" x2="395" y2="235" stroke="#C8A97E" stroke-opacity="0.6" stroke-width="1"/>
+                                        <line x1="250" y1="210" x2="445" y2="210" stroke="#F6F5F0" stroke-opacity="0.25" stroke-width="1"/>
+                                        <line x1="250" y1="240" x2="462" y2="240" stroke="#F6F5F0" stroke-opacity="0.25" stroke-width="1"/>
+                                        <line x1="285" y1="175" x2="250" y2="270" stroke="#C8A97E" stroke-opacity="0.5" stroke-width="1"/>
+                                        <line x1="345" y1="210" x2="320" y2="270" stroke="#C8A97E" stroke-opacity="0.5" stroke-width="1"/>
+                                        <line x1="395" y1="235" x2="395" y2="270" stroke="#C8A97E" stroke-opacity="0.5" stroke-width="1"/>
+
+                                        <!-- Interactive Data Nodes -->
+                                        <circle cx="250" cy="30" r="4" fill="#C85A32" class="node-pulse"/>
+                                        <circle cx="330" cy="95" r="3.5" fill="#C8A97E"/>
+                                        <circle cx="285" cy="175" r="4" fill="#F6F5F0" class="node-pulse"/>
+                                        <circle cx="345" cy="210" r="3.5" fill="#C85A32"/>
+                                        <circle cx="415" cy="155" r="3.5" fill="#C8A97E"/>
+                                        <circle cx="395" cy="235" r="3" fill="#F6F5F0"/>
+                                    </g>
+
+                                    <!-- Labels inside SVG -->
+                                    <rect x="24" y="24" width="132" height="24" rx="4" fill="#183028" stroke="#C8A97E" stroke-width="0.8"/>
+                                    <text x="34" y="40" fill="#F6F5F0" font-size="10" font-family="Plus Jakarta Sans" font-weight="600">NATURALEZA &amp; CULTURA</text>
+
+                                    <rect x="330" y="24" width="146" height="24" rx="4" fill="#2B5B6C" stroke="#F6F5F0" stroke-width="0.8"/>
+                                    <text x="340" y="40" fill="#F6F5F0" font-size="10" font-family="Plus Jakarta Sans" font-weight="600">INTELIGENCIA &amp; GESTIÓN</text>
+                                </svg>
+                            </div>
+
+                            <!-- Bottom Caption inside Visual Card -->
+                            <div class="mt-5 grid grid-cols-2 gap-4 pt-3 border-t border-nieve/10 text-xs">
+                                <div>
+                                    <span class="text-coiron block font-semibold">Territorio Vivo</span>
+                                    <span class="text-nieve/80">Conservación activa y comunidad local como ancla.</span>
+                                </div>
+                                <div>
+                                    <span class="text-coiron block font-semibold">Motor de Inteligencia</span>
+                                    <span class="text-nieve/80">Datos reales, estrategia comercial y retorno (ROI).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Trust Bar at the bottom of Hero -->
+                <div class="mt-14 pt-8 border-t border-lenga/15 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex items-center gap-4 bg-white/80 p-4 rounded-xl border border-lenga/10 shadow-sm">
+                        <div class="w-12 h-12 rounded-xl bg-lenga text-coiron flex items-center justify-center font-serif font-bold text-lg shrink-0">
+                            +100
+                        </div>
+                        <div>
+                            <p class="font-bold text-lenga text-sm">+100 años de experiencia combinada</p>
+                            <p class="text-xs text-ceniza">Liderando destinos y negocios turísticos desde adentro.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 bg-white/80 p-4 rounded-xl border border-lenga/10 shadow-sm">
+                        <div class="w-12 h-12 rounded-xl bg-glaciar text-nieve flex items-center justify-center shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-bold text-lenga text-sm">Red estratégica en toda la Patagonia</p>
+                            <p class="text-xs text-ceniza">Articulación público-privada que acelera cada gestión.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 bg-white/80 p-4 rounded-xl border border-lenga/10 shadow-sm">
+                        <div class="w-12 h-12 rounded-xl bg-terracota text-nieve flex items-center justify-center shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-bold text-lenga text-sm">Enfoque en Yield & Regeneración</p>
+                            <p class="text-xs text-ceniza">Valor económico sostenible por encima del volumen masivo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             3. SECCIÓN: EL CAMBIO DE PARADIGMA (De DMO a DSO)
+        =========================================== -->
+        <section id="paradigma" class="py-20 lg:py-28 bg-piedra/60 border-b border-lenga/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Editorial Intro -->
+                <div class="max-w-3xl">
+                    <span class="text-xs font-bold uppercase tracking-widest text-glaciar block mb-3">
+                        01 · EL CONTEXTO GLOBAL EXIGE UN CAMBIO DE MODELO
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-lenga leading-tight">
+                        De la promoción de volumen al liderazgo territorial y rentable.
+                    </h2>
+                    <p class="mt-5 text-base sm:text-lg text-ceniza leading-relaxed">
+                        La crisis climática, la saturación de los ecosistemas y la evolución del mercado hacen que el modelo tradicional ya no sea viable. Hoy el viajero dejó de ser un consumidor pasivo de transacciones para convertirse en un <strong class="text-lenga">Participante con Propósito</strong>: demanda experiencias transformadoras, prioriza la naturaleza prístina y exige autenticidad.
+                    </p>
+                </div>
+
+                <!-- Traveler Evolution 3-Step Strip -->
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-lenga/10">
+                        <span class="text-xs font-mono uppercase text-ceniza">Ayer · Modelo Agotado</span>
+                        <h3 class="text-xl font-serif font-semibold text-granito mt-1">El Turista Consumidor</h3>
+                        <p class="text-sm text-ceniza mt-2">Búsqueda de volumen masivo, transacciones rápidas y sobrecarga sobre la capacidad local del destino.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-glaciar/30 relative">
+                        <span class="text-xs font-mono uppercase text-glaciar font-semibold">Factor de Transición</span>
+                        <h3 class="text-xl font-serif font-semibold text-lenga mt-1">Presión Social y Climática</h3>
+                        <p class="text-sm text-ceniza mt-2">Conciencia creciente sobre el impacto ambiental, la identidad cultural y la necesidad de proteger la biodiversidad patagónica.</p>
+                    </div>
+                    <div class="bg-lenga text-nieve p-6 rounded-2xl border border-lenga shadow-md">
+                        <span class="text-xs font-mono uppercase text-coiron font-semibold">Hoy · La Oportunidad Patagonia</span>
+                        <h3 class="text-xl font-serif font-semibold text-white mt-1">El Participante con Propósito</h3>
+                        <p class="text-sm text-nieve/80 mt-2">Prioriza espacios prístinos, inmersión genuina y genera mayor <strong class="text-coiron">valor económico (Yield)</strong> con menor huella.</p>
+                    </div>
+                </div>
+
+                <!-- Comparison Matrix: Traditional DMO vs Destination Hub DSO -->
+                <div class="mt-14 bg-white rounded-3xl shadow-sm border border-lenga/15 overflow-hidden">
+                    <div class="p-6 sm:p-8 bg-lenga text-nieve flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-2xl font-serif font-semibold">Evolución Estratégica: DMO vs. Modelo DSO (Stewardship)</h3>
+                            <p class="text-sm text-nieve/80 mt-1">Cómo acompañamos a empresas y destinos a dar el salto cualitativo y comercial.</p>
+                        </div>
+                        <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-mono bg-coiron/20 text-coiron border border-coiron/40 self-start md:self-auto">
+                            Marco DestinationNEXT Patagonia
+                        </span>
+                    </div>
+
+                    <div class="divide-y divide-lenga/10">
+                        <!-- Table Header (Desktop) -->
+                        <div class="hidden md:grid md:grid-cols-12 bg-piedra/70 px-8 py-4 text-xs font-bold uppercase tracking-wider text-ceniza">
+                            <div class="col-span-3">Eje de Gestión</div>
+                            <div class="col-span-4">Modelo Tradicional (DMO / Convencional)</div>
+                            <div class="col-span-5 text-lenga">Modelo Destination Hub (DSO / Regenerativo)</div>
+                        </div>
+
+                        <!-- Row 1: Enfoque -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 px-6 sm:px-8 py-6 gap-4 items-center hover:bg-nieve/60 transition-colors">
+                            <div class="md:col-span-3 font-serif font-semibold text-lg text-lenga">
+                                1. Enfoque
+                            </div>
+                            <div class="md:col-span-4 text-sm text-ceniza flex items-start gap-2.5">
+                                <span class="text-terracota font-bold">✕</span>
+                                <span>Promoción aislada del destino o producto. Acciones tácticas desconectadas de la capacidad real.</span>
+                            </div>
+                            <div class="md:col-span-5 text-sm text-granito font-medium bg-glaciar/5 p-3.5 rounded-xl border border-glaciar/20 flex items-start gap-2.5">
+                                <span class="text-lenga font-bold">✓</span>
+                                <span><strong>Gestión integral del destino y del negocio:</strong> articulación comercial, inteligencia de datos y cuidado del territorio.</span>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Objetivo -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 px-6 sm:px-8 py-6 gap-4 items-center hover:bg-nieve/60 transition-colors">
+                            <div class="md:col-span-3 font-serif font-semibold text-lg text-lenga">
+                                2. Objetivo Comercial
+                            </div>
+                            <div class="md:col-span-4 text-sm text-ceniza flex items-start gap-2.5">
+                                <span class="text-terracota font-bold">✕</span>
+                                <span>Volumen bruto de turistas, llegadas masivas y competencia por precio.</span>
+                            </div>
+                            <div class="md:col-span-5 text-sm text-granito font-medium bg-glaciar/5 p-3.5 rounded-xl border border-glaciar/20 flex items-start gap-2.5">
+                                <span class="text-lenga font-bold">✓</span>
+                                <span><strong>Valor sobre volumen (Yield):</strong> mayor gasto promedio por visitante, desestacionalización y regeneración.</span>
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Rol de la Comunidad -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 px-6 sm:px-8 py-6 gap-4 items-center hover:bg-nieve/60 transition-colors">
+                            <div class="md:col-span-3 font-serif font-semibold text-lg text-lenga">
+                                3. Rol de la Comunidad
+                            </div>
+                            <div class="md:col-span-4 text-sm text-ceniza flex items-start gap-2.5">
+                                <span class="text-terracota font-bold">✕</span>
+                                <span>Espectadores pasivos que sufren la saturación de infraestructura.</span>
+                            </div>
+                            <div class="md:col-span-5 text-sm text-granito font-medium bg-glaciar/5 p-3.5 rounded-xl border border-glaciar/20 flex items-start gap-2.5">
+                                <span class="text-lenga font-bold">✓</span>
+                                <span><strong>Co-creadores activos:</strong> la comunidad local es el ancla de autenticidad del producto turístico.</span>
+                            </div>
+                        </div>
+
+                        <!-- Row 4: Métricas de Éxito -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 px-6 sm:px-8 py-6 gap-4 items-center hover:bg-nieve/60 transition-colors">
+                            <div class="md:col-span-3 font-serif font-semibold text-lg text-lenga">
+                                4. Métricas de Éxito
+                            </div>
+                            <div class="md:col-span-4 text-sm text-ceniza flex items-start gap-2.5">
+                                <span class="text-terracota font-bold">✕</span>
+                                <span>Cantidad de tickets vendidos o arribos totales sin medir el retorno neto.</span>
+                            </div>
+                            <div class="md:col-span-5 text-sm text-granito font-medium bg-glaciar/5 p-3.5 rounded-xl border border-glaciar/20 flex items-start gap-2.5">
+                                <span class="text-lenga font-bold">✓</span>
+                                <span><strong>ROI comercial, calidad de vida local</strong>, distribución geográfica del impacto y huella ecológica controlada.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================
+             4. SECCIÓN: QUIÉNES SOMOS & 3 DIFERENCIALES CLAVE
+        =========================================== -->
+        <section id="diferenciales" class="py-20 lg:py-28 bg-nieve bg-topographic border-b border-lenga/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Executive Narrative (Madre.travel inspired tone) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end mb-16">
+                    <div class="lg:col-span-7">
+                        <span class="text-xs font-bold uppercase tracking-widest text-terracota block mb-3">
+                            02 · QUIÉNES SOMOS & POR QUÉ ELEGIRNOS
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-lenga leading-tight">
+                            Somos tus socios estratégicos en el territorio.
+                        </h2>
+                    </div>
+                    <div class="lg:col-span-5">
+                        <p class="text-base sm:text-lg text-ceniza leading-relaxed">
+                            Actuamos como una <strong class="text-granito">extensión directa de tu equipo</strong> para diseñar, destrabar e implementar estrategias comerciales, operativas y de sustentabilidad. Combinamos visión global con ejecución local inmediata en la Patagonia.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 3 High-Impact Differential Cards -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Differential 1 -->
+                    <div class="bg-white rounded-3xl p-8 sm:p-10 border border-lenga/15 shadow-sm flex flex-col justify-between relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-piedra/60 rounded-bl-full -z-0 transition-transform group-hover:scale-110"></div>
+                        <div class="relative z-10">
+                            <span class="inline-block text-xs font-mono uppercase tracking-widest px-3 py-1 rounded-full bg-lenga/10 text-lenga font-semibold mb-6">
+                                Trayectoria Comprobada
+                            </span>
+                            <div class="font-serif text-5xl sm:text-6xl font-bold text-lenga tracking-tight">
+                                +100 <span class="text-2xl font-normal italic text-glaciar">años</span>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold text-granito mt-4">
+                                Experiencia Combinada en la Industria
+                            </h3>
+                            <p class="text-sm sm:text-base text-ceniza mt-3 leading-relaxed">
+                                Nuestro equipo reúne más de un siglo de experiencia acumulada liderando destinos turísticos, empresas de hospitalidad, operadores y organismos desde adentro. Conocemos cada eslabón de la cadena de valor.
+                            </p>
+                        </div>
+                        <div class="relative z-10 mt-8 pt-5 border-t border-lenga/10 flex items-center justify-between text-xs font-semibold text-lenga">
+                            <span>Visión ejecutiva senior</span>
+                            <span class="text-terracota">→ Sin curva de aprendizaje</span>
+                        </div>
+                    </div>
+
+                    <!-- Differential 2 -->
+                    <div class="bg-lenga text-nieve rounded-3xl p-8 sm:p-10 border border-lenga shadow-lg flex flex-col justify-between relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-glaciar/20 rounded-bl-full -z-0 transition-transform group-hover:scale-110"></div>
+                        <div class="relative z-10">
+                            <span class="inline-block text-xs font-mono uppercase tracking-widest px-3 py-1 rounded-full bg-coiron/20 text-coiron font-semibold mb-6">
+                                Agilidad Ejecutiva
+                            </span>
+                            <div class="font-serif text-5xl sm:text-6xl font-bold text-coiron tracking-tight">
+                                Ágil <span class="text-2xl font-normal italic text-nieve/90">&amp; Real</span>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold text-white mt-4">
+                                Velocidad de Implementación
+                            </h3>
+                            <p class="text-sm sm:text-base text-nieve/80 mt-3 leading-relaxed">
+                                Pasamos de la estrategia a la acción sin burocracia ni diagnósticos eternos. Diseñamos hojas de ruta pragmáticas para destrabar proyectos, activar ventas y capturar oportunidades de mercado en tiempo récord.
+                            </p>
+                        </div>
+                        <div class="relative z-10 mt-8 pt-5 border-t border-nieve/15 flex items-center justify-between text-xs font-semibold text-coiron">
+                            <span>Foco 100% en ROI y resultados</span>
+                            <span class="text-white">→ Time-to-market veloz</span>
+                        </div>
+                    </div>
+
+                    <!-- Differential 3 -->
+                    <div class="bg-white rounded-3xl p-8 sm:p-10 border border-lenga/15 shadow-sm flex flex-col justify-between relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-piedra/60 rounded-bl-full -z-0 transition-transform group-hover:scale-110"></div>
+                        <div class="relative z-10">
+                            <span class="inline-block text-xs font-mono uppercase tracking-widest px-3 py-1 rounded-full bg-glaciar/15 text-glaciar font-semibold mb-6">
+                                Capital Relacional
+                            </span>
+                            <div class="font-serif text-5xl sm:text-6xl font-bold text-glaciar tracking-tight">
+                                Red <span class="text-2xl font-normal italic text-lenga">Patagonia</span>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold text-granito mt-4">
+                                Contactos y Articulación Territorial
+                            </h3>
+                            <p class="text-sm sm:text-base text-ceniza mt-3 leading-relaxed">
+                                Contamos con una red de contactos activa en toda la Patagonia que rompe los silos entre el sector público, privado y las comunidades locales, agilizando cualquier gestión, alianza estratégica o desembarco.
+                            </p>
+                        </div>
+                        <div class="relative z-10 mt-8 pt-5 border-t border-lenga/10 flex items-center justify-between text-xs font-semibold text-glaciar">
+                            <span>Gobernanza colaborativa</span>
+                            <span class="text-terracota">→ Acceso directo local</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Core Values Strip -->
+                <div class="mt-12 bg-piedra rounded-2xl p-6 sm:p-8 border border-lenga/10">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+                        <div class="md:border-r md:border-lenga/15 pr-4">
+                            <span class="text-xs font-mono uppercase tracking-widest text-ceniza block">ADN Corporativo</span>
+                            <h4 class="text-xl font-serif font-semibold text-lenga mt-1">Los 3 Valores que guían cada proyecto en dhub.travel</h4>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-9 h-9 rounded-lg bg-glaciar/15 text-glaciar flex items-center justify-center shrink-0 mt-0.5">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-sm text-lenga">Innovación Aplicada</h5>
+                                <p class="text-xs text-ceniza mt-1">Big Data, IA e inteligencia de mercado para tomar decisiones en tiempo real.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-9 h-9 rounded-lg bg-terracota/15 text-terracota flex items-center justify-center shrink-0 mt-0.5">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-sm text-lenga">Compromiso Comunitario</h5>
+                                <p class="text-xs text-ceniza mt-1">Empoderamiento local e inclusión genuina como eje del diseño territorial.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-9 h-9 rounded-lg bg-lenga/15 text-lenga flex items-center justify-center shrink-0 mt-0.5">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-sm text-lenga">Conciencia Regenerativa</h5>
+                                <p class="text-xs text-ceniza mt-1">Conservación activa que restaura ecosistemas y protege el patrimonio vivo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================
+             5. SECCIÓN: QUÉ HACEMOS (HABILIDADES Y SERVICIOS)
+        =========================================== -->
+        <section id="servicios" class="py-20 lg:py-28 bg-white border-b border-lenga/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Header + Filter Buttons -->
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-14 gap-6">
+                    <div class="max-w-2xl">
+                        <span class="text-xs font-bold uppercase tracking-widest text-glaciar block mb-3">
+                            03 · NUESTRAS HABILIDADES & SERVICIOS A LA CARTA
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-lenga leading-tight">
+                            Soluciones integrales o modulares según tu desafío.
+                        </h2>
+                        <p class="mt-4 text-base text-ceniza">
+                            Podés contratarnos para un proyecto integral llave en mano o elegir módulos específicos "a medida" donde tu organización necesite acelerar resultados.
+                        </p>
+                    </div>
+
+                    <!-- Interactive Category Filter -->
+                    <div class="flex flex-wrap gap-2" role="tablist" aria-label="Filtrar servicios">
+                        <button onclick="filterServices('all')" id="btn-all" class="service-filter-btn active bg-lenga text-nieve text-xs font-semibold px-4 py-2.5 rounded-xl transition-all">
+                            Todos (6)
+                        </button>
+                        <button onclick="filterServices('estrategia')" id="btn-estrategia" class="service-filter-btn bg-piedra text-granito hover:bg-coiron/30 text-xs font-semibold px-4 py-2.5 rounded-xl transition-all">
+                            Estrategia & Datos
+                        </button>
+                        <button onclick="filterServices('comercial')" id="btn-comercial" class="service-filter-btn bg-piedra text-granito hover:bg-coiron/30 text-xs font-semibold px-4 py-2.5 rounded-xl transition-all">
+                            Comercial & Marketing
+                        </button>
+                        <button onclick="filterServices('territorio')" id="btn-territorio" class="service-filter-btn bg-piedra text-granito hover:bg-coiron/30 text-xs font-semibold px-4 py-2.5 rounded-xl transition-all">
+                            Sustentabilidad & Equipos
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 6 Services Grid -->
+                <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Service 1: Análisis de Mercados -->
+                    <article data-category="estrategia" class="service-card bg-nieve rounded-2xl p-8 border border-lenga/12 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-12 h-12 rounded-xl bg-glaciar/10 border border-glaciar/25 text-glaciar flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-mono font-semibold text-glaciar bg-glaciar/10 px-2.5 py-1 rounded-md">01 · INTELIGENCIA</span>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold text-lenga">
+                                Análisis e Inteligencia de Mercados
+                            </h3>
+                            <p class="text-sm text-ceniza mt-3 leading-relaxed">
+                                Convertimos datos dispersos en decisiones estratégicas. Evaluamos las 6 macro-tendencias del sector, capacidad de carga y comportamiento de la demanda para anticipar oportunidades.
+                            </p>
+                            <ul class="mt-5 space-y-2 text-xs text-granito font-medium border-t border-lenga/10 pt-4">
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-glaciar"></span> Captura de datos, Big Data e IA aplicada</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-glaciar"></span> Benchmarking competitivo y mapeo de flujos</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-glaciar"></span> Identificación de nichos de alto valor (Yield)</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-lenga/10">
+                            <a href="#contacto" onclick="selectService('Análisis e Inteligencia de Mercados')" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-terracota hover:text-lenga transition-colors">
+                                <span>Consultar por este módulo</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Service 2: Planes de Negocios -->
+                    <article data-category="estrategia" class="service-card bg-nieve rounded-2xl p-8 border border-lenga/12 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-12 h-12 rounded-xl bg-lenga/10 border border-lenga/25 text-lenga flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-mono font-semibold text-lenga bg-lenga/10 px-2.5 py-1 rounded-md">02 · NEGOCIOS</span>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold text-lenga">
+                                Desarrollo de Planes de Negocios
+                            </h3>
+                            <p class="text-sm text-ceniza mt-3 leading-relaxed">
+                                Estructuramos modelos económicos rentables y resilientes. Desde la conceptualización de un nuevo lodge, experiencia o destino hasta su factibilidad financiera y retorno de inversión.
+                            </p>
+                            <ul class="mt-5 space-y-2 text-xs text-granito font-medium border-t border-lenga/10 pt-4">
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-lenga"></span> Modelado financiero, flujo de caja y ROI</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-lenga"></span> Diseño de productos con identidad patagónica</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-lenga"></span> Reconversión de negocios tradicionales al modelo DSO</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-lenga/10">
+                            <a href="#contacto" onclick="selectService('Desarrollo de Planes de Negocios')" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-terracota hover:text-lenga transition-colors">
+                                <span>Consultar por este módulo</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Service 3: Políticas de Sustentabilidad -->
+                    <article data-category="territorio" class="service-card bg-nieve rounded-2xl p-8 border border-lenga/12 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-12 h-12 rounded-xl bg-lenga/10 border border-lenga/25 text-lenga flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-mono font-semibold text-lenga bg-coiron/30 px-2.5 py-1 rounded-md">03 · REGENERACIÓN</span>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold text-lenga">
+                                Implementación de Políticas de Sustentabilidad
+                            </h3>
+                            <p class="text-sm text-ceniza mt-3 leading-relaxed">
+                                Llevamos la sustentabilidad del discurso a la práctica operativa. Diseñamos programas regenerativos que integran agroecología, cultura viva y conservación activa.
+                            </p>
+                            <ul class="mt-5 space-y-2 text-xs text-granito font-medium border-t border-lenga/10 pt-4">
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-terracota"></span> Medición y mitigación de huella ambiental</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-terracota"></span> Gobernanza y alianzas con comunidades locales</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-terracota"></span> Preparación para certificaciones internacionales</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-lenga/10">
+                            <a href="#contacto" onclick="selectService('Políticas de Sustentabilidad y Regeneración')" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-terracota hover:text-lenga transition-colors">
+                                <span>Consultar por este módulo</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Service 4: Planes y Campañas de Marketing -->
+                    <article data-category="comercial" class="service-card bg-nieve rounded-2xl p-8 border border-lenga/12 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-12 h-12 rounded-xl bg-terracota/10 border border-terracota/25 text-terracota flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-mono font-semibold text-terracota bg-terracota/10 px-2.5 py-1 rounded-md">04 · MARKETING</span>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold text-lenga">
+                                Planes y Campañas de Marketing
+                            </h3>
+                            <p class="text-sm text-ceniza mt-3 leading-relaxed">
+                                Construimos marcas con propósito y narrativas auténticas que conectan con el viajero consciente. Ejecutamos campañas integrales enfocadas en conversión y posicionamiento.
+                            </p>
+                            <ul class="mt-5 space-y-2 text-xs text-granito font-medium border-t border-lenga/10 pt-4">
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-terracota"></span> Identidad verbal/visual y storytelling territorial</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-terracota"></span> Estrategia digital, contenidos y pauta segmentada</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-terracota"></span> Campañas de desestacionalización (Norte-Sur-Este-Oeste)</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-lenga/10">
+                            <a href="#contacto" onclick="selectService('Planes y Campañas de Marketing')" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-terracota hover:text-lenga transition-colors">
+                                <span>Consultar por este módulo</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Service 5: Representación Comercial -->
+                    <article data-category="comercial" class="service-card bg-nieve rounded-2xl p-8 border border-lenga/12 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-12 h-12 rounded-xl bg-glaciar/10 border border-glaciar/25 text-glaciar flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-mono font-semibold text-glaciar bg-glaciar/10 px-2.5 py-1 rounded-md">05 · COMERCIAL</span>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold text-lenga">
+                                Representación Comercial Estratégica
+                            </h3>
+                            <p class="text-sm text-ceniza mt-3 leading-relaxed">
+                                Somos la extensión de tu oficina comercial con el <strong class="text-granito">ROI como meta</strong>. Conectamos tu producto o destino con los tomadores de decisión, operadores y mercados emisores clave.
+                            </p>
+                            <ul class="mt-5 space-y-2 text-xs text-granito font-medium border-t border-lenga/10 pt-4">
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-glaciar"></span> Desarrollo de canales B2B, DMCs y tour operadores</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-glaciar"></span> Sales calls, roadshows, ferias y fam tours</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-glaciar"></span> Alianzas estratégicas comerciales en Patagonia</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-lenga/10">
+                            <a href="#contacto" onclick="selectService('Representación Comercial')" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-terracota hover:text-lenga transition-colors">
+                                <span>Consultar por este módulo</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Service 6: Capacitación y Consultoría a Medida -->
+                    <article data-category="territorio" class="service-card bg-nieve rounded-2xl p-8 border border-lenga/12 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="w-12 h-12 rounded-xl bg-lenga/10 border border-lenga/25 text-lenga flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-mono font-semibold text-lenga bg-coiron/30 px-2.5 py-1 rounded-md">06 · EQUIPOS &amp; CUSTOM</span>
+                            </div>
+                            <h3 class="text-2xl font-serif font-semibold text-lenga">
+                                Capacitación y Consultoría a Medida
+                            </h3>
+                            <p class="text-sm text-ceniza mt-3 leading-relaxed">
+                                <em class="text-granito font-medium">"Contratá la actitud, entrená la habilidad."</em> Formamos equipos de alto rendimiento y diseñamos soluciones de consultoría a medida para destrabar cuellos de botella operativos.
+                            </p>
+                            <ul class="mt-5 space-y-2 text-xs text-granito font-medium border-t border-lenga/10 pt-4">
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-lenga"></span> Entrenamiento en hospitalidad, ventas y liderazgo</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-lenga"></span> Sensibilización en cultura regenerativa y servicio</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-lenga"></span> Acompañamiento ejecutivo 1 a 1 para directorios</li>
+                            </ul>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-lenga/10">
+                            <a href="#contacto" onclick="selectService('Capacitación y Consultoría a Medida')" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-terracota hover:text-lenga transition-colors">
+                                <span>Consultar por este módulo</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             6. SECCIÓN: ARQUITECTURA REGENERATIVA, KPIs & ROADMAP (Dark Forest Green Section)
+        =========================================== -->
+        <section id="modelo" class="py-20 lg:py-28 bg-lenga bg-topographic-dark text-nieve relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Part A: El Diseño del Producto Regenerativo (Architectural Temple Diagram from PDF Page 10) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pb-20 border-b border-nieve/15">
+                    
+                    <div class="lg:col-span-5 space-y-5">
+                        <span class="text-xs font-mono uppercase tracking-widest text-coiron block">
+                            04 · ARQUITECTURA DE PRODUCTO (MODELO DSO)
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-serif font-semibold text-white leading-tight">
+                            El diseño del producto regenerativo en Patagonia.
+                        </h2>
+                        <p class="text-nieve/80 text-base leading-relaxed">
+                            Para atraer al viajero de alto valor, estructuramos la oferta turística sobre tres pilares esenciales sostenidos por un cimiento innegociable: <strong class="text-coiron">la comunidad local como ancla del producto</strong>.
+                        </p>
+                        <div class="pt-3 space-y-3 text-sm text-nieve/85">
+                            <div class="flex items-center gap-3">
+                                <span class="w-2 h-2 rounded-full bg-coiron"></span>
+                                <span><strong>Inteligencia:</strong> Los datos guían el diseño y capacidad de carga.</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="w-2 h-2 rounded-full bg-coiron"></span>
+                                <span><strong>Gobernanza:</strong> Articulación público-privada y consejo ampliado.</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="w-2 h-2 rounded-full bg-coiron"></span>
+                                <span><strong>Uso Público:</strong> Gestión inteligente de flujos en el territorio.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Architectural Pillar Diagram (Recreation of Slide 10) -->
+                    <div class="lg:col-span-7">
+                        <div class="bg-lenga-dark/70 rounded-3xl p-6 sm:p-10 border border-coiron/30 shadow-2xl">
+                            
+                            <!-- Roof: High-Value Transformative Experiences -->
+                            <div class="bg-gradient-to-r from-glaciar via-lenga-light to-glaciar text-center py-5 px-6 rounded-2xl border border-coiron/50 shadow-md">
+                                <span class="text-[11px] font-mono uppercase tracking-widest text-coiron block">Techo de Valor &amp; Diferenciación</span>
+                                <h3 class="text-xl sm:text-2xl font-serif font-semibold text-white mt-0.5">
+                                    Experiencias Transformadoras de Alto Valor
+                                </h3>
+                            </div>
+
+                            <!-- 3 Columns / Pillars -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-5">
+                                <!-- Pillar 1: Agroecología -->
+                                <div class="bg-nieve/10 backdrop-blur-sm rounded-xl p-6 border border-nieve/15 text-center flex flex-col justify-between hover:border-coiron transition-colors">
+                                    <div>
+                                        <div class="w-10 h-10 mx-auto rounded-lg bg-coiron/20 text-coiron flex items-center justify-center mb-3">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                            </svg>
+                                        </div>
+                                        <h4 class="font-serif font-semibold text-lg text-white">Agroecología</h4>
+                                        <p class="text-xs text-nieve/75 mt-2 leading-relaxed">
+                                            Conexión con la tierra, producción local e identidad gastronómica y soberanía alimentaria.
+                                        </p>
+                                    </div>
+                                    <span class="mt-4 pt-3 border-t border-nieve/10 text-[10px] font-mono uppercase text-coiron block">Pilar 01</span>
+                                </div>
+
+                                <!-- Pillar 2: Cultura -->
+                                <div class="bg-nieve/10 backdrop-blur-sm rounded-xl p-6 border border-nieve/15 text-center flex flex-col justify-between hover:border-coiron transition-colors">
+                                    <div>
+                                        <div class="w-10 h-10 mx-auto rounded-lg bg-coiron/20 text-coiron flex items-center justify-center mb-3">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                            </svg>
+                                        </div>
+                                        <h4 class="font-serif font-semibold text-lg text-white">Cultura</h4>
+                                        <p class="text-xs text-nieve/75 mt-2 leading-relaxed">
+                                            Patrimonio vivo, historia territorial y narrativas auténticas contadas por sus protagonistas.
+                                        </p>
+                                    </div>
+                                    <span class="mt-4 pt-3 border-t border-nieve/10 text-[10px] font-mono uppercase text-coiron block">Pilar 02</span>
+                                </div>
+
+                                <!-- Pillar 3: Naturaleza -->
+                                <div class="bg-nieve/10 backdrop-blur-sm rounded-xl p-6 border border-nieve/15 text-center flex flex-col justify-between hover:border-coiron transition-colors">
+                                    <div>
+                                        <div class="w-10 h-10 mx-auto rounded-lg bg-coiron/20 text-coiron flex items-center justify-center mb-3">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                            </svg>
+                                        </div>
+                                        <h4 class="font-serif font-semibold text-lg text-white">Naturaleza</h4>
+                                        <p class="text-xs text-nieve/75 mt-2 leading-relaxed">
+                                            Conservación activa, biodiversidad protegida e inmersión de bajo impacto ambiental.
+                                        </p>
+                                    </div>
+                                    <span class="mt-4 pt-3 border-t border-nieve/10 text-[10px] font-mono uppercase text-coiron block">Pilar 03</span>
+                                </div>
+                            </div>
+
+                            <!-- Base Foundation: Local Community -->
+                            <div class="bg-coiron text-lenga-dark text-center py-4 px-6 rounded-xl font-bold shadow-md">
+                                <span class="text-[11px] font-mono uppercase tracking-wider block opacity-80">Base Estructural</span>
+                                <p class="text-base sm:text-lg font-serif">Comunidad Local (El ancla del producto y la hospitalidad)</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part B: El Tablero Topográfico - Nuevos KPIs (Slide 12) -->
+                <div id="kpis" class="py-20 border-b border-nieve/15">
+                    <div class="text-center max-w-3xl mx-auto mb-14">
+                        <span class="text-xs font-mono uppercase tracking-widest text-coiron block mb-2">
+                            05 · EL TABLERO TOPOGRÁFICO DE RESULTADOS
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-serif font-semibold text-white">
+                            Nuevos KPIs: Midiendo lo que realmente importa.
+                        </h2>
+                        <p class="text-nieve/75 text-base mt-3">
+                            Dejamos atrás las métricas vanidosas de volumen bruto para medir el éxito a través de cuatro indicadores integrados de rentabilidad y sostenibilidad.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        
+                        <!-- KPI 1: Valor Económico (Yield) -->
+                        <div class="bg-nieve/5 rounded-2xl p-6 border border-nieve/15 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-xs font-mono uppercase text-coiron">KPI 01 · RENTABILIDAD</span>
+                                    <span class="px-2.5 py-1 rounded bg-coiron/20 text-coiron font-mono font-bold text-sm">$$ Yield</span>
+                                </div>
+                                <h3 class="text-xl font-serif font-semibold text-white">Valor Económico (Yield)</h3>
+                                <p class="text-xs text-nieve/75 mt-2 leading-relaxed">
+                                    Optimización del gasto promedio por visitante y margen operativo (Yield vs. volumen masivo).
+                                </p>
+                            </div>
+                            <!-- Mini SVG Rising Chart -->
+                            <div class="mt-6 pt-4 border-t border-nieve/10">
+                                <svg class="w-full h-12" viewBox="0 0 200 50" fill="none">
+                                    <path d="M5 45 L45 30 L85 36 L130 18 L160 22 L192 6" stroke="#C8A97E" stroke-width="2.5" stroke-linecap="round"/>
+                                    <circle cx="192" cy="6" r="4" fill="#C85A32"/>
+                                </svg>
+                                <span class="text-[11px] font-mono text-coiron block mt-1">↑ Incremento de ticket promedio</span>
+                            </div>
+                        </div>
+
+                        <!-- KPI 2: Calidad de Vida -->
+                        <div class="bg-nieve/5 rounded-2xl p-6 border border-nieve/15 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-xs font-mono uppercase text-coiron">KPI 02 · COMUNIDAD</span>
+                                    <span class="px-2.5 py-1 rounded bg-glaciar/40 text-nieve font-mono font-bold text-xs">Impacto Local</span>
+                                </div>
+                                <h3 class="text-xl font-serif font-semibold text-white">Calidad de Vida Residente</h3>
+                                <p class="text-xs text-nieve/75 mt-2 leading-relaxed">
+                                    Beneficio económico tangible, empleo calificado y fortalecimiento de proveedores de la comunidad local.
+                                </p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-nieve/10">
+                                <div class="w-full bg-nieve/10 h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-coiron h-full w-4/5 rounded-full"></div>
+                                </div>
+                                <span class="text-[11px] font-mono text-nieve/80 block mt-2">Retención de valor en el territorio</span>
+                            </div>
+                        </div>
+
+                        <!-- KPI 3: Huella Ambiental -->
+                        <div class="bg-nieve/5 rounded-2xl p-6 border border-nieve/15 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-xs font-mono uppercase text-coiron">KPI 03 · ECOSISTEMA</span>
+                                    <span class="px-2.5 py-1 rounded bg-lenga-light text-coiron font-mono font-bold text-xs">Low Impact</span>
+                                </div>
+                                <h3 class="text-xl font-serif font-semibold text-white">Huella Ambiental</h3>
+                                <p class="text-xs text-nieve/75 mt-2 leading-relaxed">
+                                    Monitoreo continuo del impacto ecológico, climático y respeto estricto por la capacidad de carga.
+                                </p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-nieve/10">
+                                <div class="flex items-center justify-between text-xs font-mono text-coiron mb-1">
+                                    <span>Presión Ecológica</span>
+                                    <span>Baja / Controlada</span>
+                                </div>
+                                <div class="w-full bg-nieve/10 h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-emerald-400 h-full w-1/3 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- KPI 4: Distribución Territorial -->
+                        <div class="bg-nieve/5 rounded-2xl p-6 border border-nieve/15 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-xs font-mono uppercase text-coiron">KPI 04 · FLUJO</span>
+                                    <span class="px-2.5 py-1 rounded bg-glaciar/40 text-nieve font-mono font-bold text-xs">N · S · E · O</span>
+                                </div>
+                                <h3 class="text-xl font-serif font-semibold text-white">Distribución Territorial</h3>
+                                <p class="text-xs text-nieve/75 mt-2 leading-relaxed">
+                                    Dispersión geográfica y estacional del visitante para evitar zonas de saturación y activar nuevos corredores.
+                                </p>
+                            </div>
+                            <!-- Mini Bar Chart N-S-E-O (From Slide 12) -->
+                            <div class="mt-6 pt-4 border-t border-nieve/10">
+                                <div class="grid grid-cols-4 gap-2 items-end h-10 px-2">
+                                    <div class="bg-glaciar-light h-9 rounded-t"></div>
+                                    <div class="bg-coiron h-8 rounded-t"></div>
+                                    <div class="bg-glaciar-light h-9 rounded-t"></div>
+                                    <div class="bg-coiron h-8 rounded-t"></div>
+                                </div>
+                                <div class="grid grid-cols-4 text-center text-[10px] font-mono text-nieve/70 mt-1">
+                                    <span>Norte</span><span>Sur</span><span>Este</span><span>Oeste</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Part C: Roadmap de Implementación (3 Fases - Slide 13) -->
+                <div class="pt-20">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-widest text-coiron block mb-2">
+                                METODOLOGÍA DE IMPLEMENTACIÓN VELOZ
+                            </span>
+                            <h3 class="text-2xl sm:text-3xl font-serif font-semibold text-white">
+                                Roadmap hacia un negocio o destino inteligente
+                            </h3>
+                        </div>
+                        <p class="text-sm text-nieve/75 max-w-md">
+                            Acompañamos cada etapa con entregables concretos, articulando datos, gobernanza y ejecución comercial.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Phase 1 -->
+                        <div class="bg-lenga-dark/80 p-7 rounded-2xl border border-nieve/15 relative">
+                            <span class="text-xs font-mono uppercase px-3 py-1 rounded-full bg-terracota text-white font-semibold">
+                                Fase 1 · Corto Plazo
+                            </span>
+                            <h4 class="text-xl font-serif font-semibold text-white mt-4">Estructuración y Diagnóstico</h4>
+                            <p class="text-sm text-nieve/75 mt-2 leading-relaxed">
+                                Auditoría comercial y de datos actuales, definición del modelo de gobernanza, alineación de actores locales y plan de acción de victorias rápidas (*Quick Wins*).
+                            </p>
+                        </div>
+
+                        <!-- Phase 2 -->
+                        <div class="bg-lenga-dark/80 p-7 rounded-2xl border border-coiron/40 relative">
+                            <span class="text-xs font-mono uppercase px-3 py-1 rounded-full bg-coiron text-lenga-dark font-semibold">
+                                Fase 2 · Mediano Plazo
+                            </span>
+                            <h4 class="text-xl font-serif font-semibold text-white mt-4">Integración y Despliegue</h4>
+                            <p class="text-sm text-nieve/75 mt-2 leading-relaxed">
+                                Puesta en marcha del tablero de inteligencia, lanzamiento de productos regenerativos piloto, activación de representación comercial, campañas y capacitación de equipos.
+                            </p>
+                        </div>
+
+                        <!-- Phase 3 -->
+                        <div class="bg-lenga-dark/80 p-7 rounded-2xl border border-nieve/15 relative">
+                            <span class="text-xs font-mono uppercase px-3 py-1 rounded-full bg-glaciar text-white font-semibold">
+                                Fase 3 · Largo Plazo
+                            </span>
+                            <h4 class="text-xl font-serif font-semibold text-white mt-4">Consolidación Smart &amp; Líder</h4>
+                            <p class="text-sm text-nieve/75 mt-2 leading-relaxed">
+                                Operación integrada con toma de decisiones en tiempo real, posicionamiento consolidado en mercados de alto valor y liderazgo regional en turismo regenerativo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================
+             7. SECCIÓN: MANIFIESTO Y CONTACTO (dhub.travel)
+        =========================================== -->
+        <section id="contacto" class="py-20 lg:py-28 bg-nieve bg-topographic">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Manifesto Banner (Inspired by Slide 14) -->
+                <div class="bg-piedra rounded-3xl p-8 sm:p-12 border border-lenga/15 mb-16 text-center max-w-5xl mx-auto shadow-sm">
+                    <span class="text-xs font-mono uppercase tracking-widest text-terracota font-semibold block mb-3">
+                        EL MOMENTO DE ACTUAR ES AHORA
+                    </span>
+                    <blockquote class="text-2xl sm:text-4xl font-serif font-semibold text-lenga leading-snug">
+                        “El destino y tu negocio necesitan líderes, no solo gestores. Gestionar hoy es diseñar el futuro del territorio.”
+                    </blockquote>
+                    <p class="mt-4 text-sm sm:text-base text-ceniza max-w-2xl mx-auto">
+                        Hablemos sobre cómo potenciar tu rentabilidad, profesionalizar tu equipo o posicionar tu destino desde la Patagonia hacia el mundo.
+                    </p>
+                </div>
+
+                <!-- Contact Grid: Form + Direct Info Sidebar -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    
+                    <!-- Left Sidebar: Corporate Contact Details -->
+                    <div class="lg:col-span-5 space-y-8 bg-lenga text-nieve p-8 sm:p-10 rounded-3xl shadow-lg">
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-widest text-coiron">CONTACTO DIRECTO</span>
+                            <h3 class="text-3xl font-serif font-semibold text-white mt-2">
+                                Iniciemos una conversación estratégica.
+                            </h3>
+                            <p class="text-sm text-nieve/80 mt-3 leading-relaxed">
+                                Respondemos con la misma velocidad con la que implementamos. Agendá una primera reunión de diagnóstico sin cargo con nuestro equipo senior.
+                            </p>
+                        </div>
+
+                        <div class="space-y-5 pt-4 border-t border-nieve/15 text-sm">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-nieve/10 text-coiron flex items-center justify-center shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-mono uppercase text-coiron block">Sitio Web Oficial</span>
+                                    <span class="font-semibold text-base text-white">www.dhub.travel</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-nieve/10 text-coiron flex items-center justify-center shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-mono uppercase text-coiron block">Email Corporativo</span>
+                                    <a href="mailto:hola@dhub.travel" class="font-semibold text-base text-white hover:text-coiron transition-colors">hola@dhub.travel</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-nieve/10 text-coiron flex items-center justify-center shrink-0">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-mono uppercase text-coiron block">Base Operativa &amp; Alcance</span>
+                                    <span class="font-semibold text-base text-white">Patagonia, Argentina</span>
+                                    <span class="text-xs text-nieve/70 block mt-0.5">Red activa de contactos en toda la región patagónica y mercados emisores.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visual Palette Reference Badge (Helpful for Mockup Review) -->
+                        <div class="pt-6 border-t border-nieve/15">
+                            <span class="text-[11px] font-mono uppercase text-nieve/60 block mb-2.5">Identidad Visual Patagonia:</span>
+                            <div class="flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-[#183028] border border-white/40" title="Verde Bosque Lenga #183028"></span>
+                                <span class="w-6 h-6 rounded-full bg-[#2B5B6C] border border-white/40" title="Azul Glaciar #2B5B6C"></span>
+                                <span class="w-6 h-6 rounded-full bg-[#C8A97E] border border-white/40" title="Tierra Coirón #C8A97E"></span>
+                                <span class="w-6 h-6 rounded-full bg-[#C85A32] border border-white/40" title="Terracota Otoño #C85A32"></span>
+                                <span class="w-6 h-6 rounded-full bg-[#F6F5F0] border border-white/40" title="Blanco Piedra #F6F5F0"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Interactive Contact Form -->
+                    <div class="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-10 border border-lenga/15 shadow-sm">
+                        <h3 class="text-2xl font-serif font-semibold text-lenga mb-2">
+                            Contanos sobre tu proyecto o desafío
+                        </h3>
+                        <p class="text-sm text-ceniza mb-6">
+                            Completá los datos a continuación para coordinar una llamada con el especialista adecuado de nuestro equipo.
+                        </p>
+
+                        <form id="contact-form" class="space-y-5" onsubmit="handleFormSubmit(event)">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="nombre" class="block text-xs font-bold uppercase tracking-wider text-granito mb-2">Nombre y Apellido *</label>
+                                    <input type="text" id="nombre" required placeholder="Ej. Martín Gómez" class="w-full px-4 py-3 rounded-xl bg-nieve border border-lenga/15 text-granito text-sm focus:outline-none focus:border-glaciar">
+                                </div>
+                                <div>
+                                    <label for="empresa" class="block text-xs font-bold uppercase tracking-wider text-granito mb-2">Empresa / Destino / Entidad *</label>
+                                    <input type="text" id="empresa" required placeholder="Nombre de tu organización" class="w-full px-4 py-3 rounded-xl bg-nieve border border-lenga/15 text-granito text-sm focus:outline-none focus:border-glaciar">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="email" class="block text-xs font-bold uppercase tracking-wider text-granito mb-2">Email Corporativo *</label>
+                                    <input type="email" id="email" required placeholder="nombre@empresa.com" class="w-full px-4 py-3 rounded-xl bg-nieve border border-lenga/15 text-granito text-sm focus:outline-none focus:border-glaciar">
+                                </div>
+                                <div>
+                                    <label for="servicio-select" class="block text-xs font-bold uppercase tracking-wider text-granito mb-2">Área de Interés Principal</label>
+                                    <select id="servicio-select" class="w-full px-4 py-3 rounded-xl bg-nieve border border-lenga/15 text-granito text-sm focus:outline-none focus:border-glaciar">
+                                        <option value="Consultoría Integral">Consultoría Estratégica Integral</option>
+                                        <option value="Análisis e Inteligencia de Mercados">Análisis e Inteligencia de Mercados</option>
+                                        <option value="Desarrollo de Planes de Negocios">Desarrollo de Planes de Negocios</option>
+                                        <option value="Políticas de Sustentabilidad y Regeneración">Políticas de Sustentabilidad y Regeneración</option>
+                                        <option value="Planes y Campañas de Marketing">Planes y Campañas de Marketing</option>
+                                        <option value="Representación Comercial">Representación Comercial</option>
+                                        <option value="Capacitación y Consultoría a Medida">Capacitación de Personal / A Medida</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="mensaje" class="block text-xs font-bold uppercase tracking-wider text-granito mb-2">¿En qué desafío te podemos acompañar? *</label>
+                                <textarea id="mensaje" rows="4" required placeholder="Describí brevemente tus objetivos comerciales, de desarrollo o de gestión en Patagonia..." class="w-full px-4 py-3 rounded-xl bg-nieve border border-lenga/15 text-granito text-sm focus:outline-none focus:border-glaciar"></textarea>
+                            </div>
+
+                            <div class="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                <button type="submit" class="inline-flex justify-center items-center gap-3 bg-terracota hover:bg-terracota-hover text-white font-semibold px-8 py-4 rounded-xl shadow-md transition-all text-sm">
+                                    <span>Iniciar Conversación Estratégica</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                    </svg>
+                                </button>
+                                <span class="text-xs text-ceniza">Confidencialidad garantizada · Respuesta en &lt; 24 hs</span>
+                            </div>
+                        </form>
+
+                        <!-- Confirmation Message Box (Hidden by default, no alert() used) -->
+                        <div id="form-success" class="hidden mt-6 p-6 rounded-2xl bg-lenga text-nieve border border-coiron">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-coiron text-lenga flex items-center justify-center shrink-0 font-bold">
+                                    ✓
+                                </div>
+                                <div>
+                                    <h4 class="font-serif font-semibold text-lg text-white">¡Mensaje recibido con éxito!</h4>
+                                    <p id="success-detail" class="text-xs text-nieve/85 mt-1 leading-relaxed">
+                                        Gracias por contactar a Destination Hub (dhub.travel). Nuestro equipo en Patagonia revisará tu solicitud y se pondrá en contacto a la brevedad.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================
+         8. CORPORATE FOOTER
+    =========================================== -->
+    <footer class="bg-lenga-dark text-nieve/80 py-12 border-t border-nieve/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-8 border-b border-nieve/10">
+                
+                <!-- Brand -->
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-lenga flex items-center justify-center border border-coiron/40">
+                        <span class="font-serif font-bold text-coiron text-lg">D</span>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-lg text-white">Destination Hub</span>
+                        <span class="text-xs font-mono text-coiron ml-2">dhub.travel</span>
+                        <p class="text-xs text-nieve/60">Desarrollo de Negocios y Destinos Turísticos Regenerativos en Patagonia</p>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="flex flex-wrap gap-6 text-xs font-medium text-nieve/80">
+                    <a href="#paradigma" class="hover:text-coiron transition-colors">El Paradigma</a>
+                    <a href="#diferenciales" class="hover:text-coiron transition-colors">Diferenciales (+100 años)</a>
+                    <a href="#servicios" class="hover:text-coiron transition-colors">Servicios</a>
+                    <a href="#modelo" class="hover:text-coiron transition-colors">Modelo Regenerativo</a>
+                    <a href="#kpis" class="hover:text-coiron transition-colors">Nuevos KPIs</a>
+                    <a href="#contacto" class="hover:text-coiron transition-colors">Contacto</a>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-nieve/50 gap-4">
+                <p>© 2025 Destination Hub (dhub.travel). Todos los derechos reservados. Patagonia, Argentina.</p>
+                <p>Innovación · Compromiso Comunitario · Conciencia Regenerativa</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         MINIMAL VANILLA JAVASCRIPT FOR INTERACTIVITY
+    =========================================== -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                iconOpen.classList.add('hidden');
+                iconClose.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+            });
+        });
+
+        // 2. Interactive Services Filter
+        function filterServices(category) {
+            const cards = document.querySelectorAll('#services-grid article');
+            const buttons = document.querySelectorAll('.service-filter-btn');
+
+            // Update active button styles
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-lenga', 'text-nieve');
+                btn.classList.add('bg-piedra', 'text-granito');
+            });
+
+            const activeBtn = document.getElementById('btn-' + category);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-piedra', 'text-granito');
+                activeBtn.classList.add('bg-lenga', 'text-nieve');
+            }
+
+            // Show/hide cards smoothly
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // 3. Pre-select service in Contact Form when clicking a service card
+        function selectService(serviceName) {
+            const selectEl = document.getElementById('servicio-select');
+            if (selectEl) {
+                selectEl.value = serviceName;
+            }
+        }
+
+        // 4. Contact Form Submission Handler (No alert() used)
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const empresa = document.getElementById('empresa').value;
+            const servicio = document.getElementById('servicio-select').value;
+            
+            const successBox = document.getElementById('form-success');
+            const successDetail = document.getElementById('success-detail');
+
+            successDetail.textContent = `Gracias ${nombre} (${empresa}). Registramos tu interés en "${servicio}". Nuestro equipo en Patagonia te contactará dentro de las próximas 24 horas.`;
+            successBox.classList.remove('hidden');
+
+            // Reset form fields
+            document.getElementById('contact-form').reset();
+        }
+    </script>
+</body>
+</html>

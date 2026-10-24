@@ -1225,7 +1225,7 @@ function exportToPDF() {
             windowWidth: 720
         },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak:    { mode: ['css', 'legacy'], before: '.html2pdf__page-break', avoid: ['tr', '.pdf-avoid-break'] }
+        pagebreak:    { mode: ['css', 'legacy'], before: '.pdf-page-2', avoid: ['tr', '.pdf-avoid-break'] }
     };
 
     if (typeof html2pdf !== 'undefined') {

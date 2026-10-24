@@ -1190,6 +1190,11 @@
     break-inside: avoid;
 }
 
+.pdf-page-2 {
+    page-break-before: always !important;
+    break-before: page !important;
+}
+
 .html2pdf__page-break {
     page-break-before: always !important;
     break-before: page !important;
@@ -2216,61 +2221,96 @@ body.roadmap-modal-open {
          4. PLANTILLA OCULTA PARA EXPORTACIÓN A PDF
          ====================================================================== -->
     <div id="pdf-export-canvas">
-        <div class="pdf-page-header">
-            <div class="pdf-brand-box">
-                <img src="destination-hub-isotipo-c.svg" width="44" height="44" alt="Isotipo">
-                <div>
-                    <div class="pdf-brand-name">Destination Hub</div>
-                    <div style="font-size: 10px; color: #2B5B6C; letter-spacing: 0.05em; font-family: 'JetBrains Mono', monospace;">ESTRATEGIA · DATOS & YIELD · B2B · REGENERACIÓN (DSO)</div>
+        
+        <!-- PÁGINA 1: VISIÓN ESTRATÉGICA, DATOS DEL LEAD & FLUJOGRAMA -->
+        <div class="pdf-page pdf-page-1">
+            <div class="pdf-page-header">
+                <div class="pdf-brand-box">
+                    <img src="destination-hub-isotipo-c.svg" width="38" height="38" alt="Isotipo D Hub">
+                    <div>
+                        <div class="pdf-brand-name">Destination Hub</div>
+                        <div class="pdf-brand-tagline">ESTRATEGIA · DATOS &amp; YIELD · B2B · REGENERACIÓN (DSO)</div>
+                    </div>
+                </div>
+                <div class="pdf-meta-box">
+                    <div>DOCUMENTO ESTRATÉGICO</div>
+                    <div id="pdfDateStamp">FECHA: 23 OCT 2026</div>
+                    <div>DHUB.TRAVEL · PATAGONIA</div>
                 </div>
             </div>
-            <div class="pdf-meta-box">
-                <div>DOCUMENTO ESTRATÉGICO INICIAL</div>
-                <div id="pdfDateStamp">FECHA: 23 OCT 2026</div>
-                <div>DHUB.TRAVEL</div>
+
+            <div class="pdf-hero-section">
+                <div class="pdf-kicker">HOJA DE RUTA ESTRATÉGICA &amp; CO-EJECUCIÓN</div>
+                <h1 class="pdf-project-title" id="pdfProjectTitle">Hoja de Ruta Estratégica</h1>
+                <div class="pdf-lead-stamp" id="pdfLeadStamp">SOLICITANTE: - | EMAIL: - | TEL: -</div>
+            </div>
+
+            <div class="pdf-dhub-box">
+                <div class="pdf-box-eyebrow eyebrow-gold">¿CÓMO DESTINATION HUB CO-EJECUTA EN TU PROYECTO?</div>
+                <div id="pdfDhubRoleText" class="pdf-box-body"></div>
+            </div>
+
+            <div class="pdf-diag-box">
+                <div class="pdf-box-eyebrow eyebrow-terracota">DIAGNÓSTICO ESTRATÉGICO &amp; POTENCIAL TERRITORIAL (YIELD &amp; DSO)</div>
+                <div id="pdfDiagnosisText" class="pdf-box-body"></div>
+            </div>
+
+            <div class="pdf-flow-box">
+                <div class="pdf-box-eyebrow eyebrow-slate">FLUJOGRAMA DE DECISIONES &amp; ARQUITECTURA DEL PROYECTO</div>
+                <div id="pdfFlowNodesContainer" class="pdf-flow-grid"></div>
+            </div>
+
+            <div class="pdf-page-footer">
+                <div>DESTINATION HUB · PATAGONIA (ARGENTINA &amp; CHILE)</div>
+                <div>PÁGINA 1 DE 2 · DHUB.TRAVEL</div>
             </div>
         </div>
 
-        <h1 class="pdf-project-title" id="pdfProjectTitle">Hoja de Ruta Estratégica</h1>
-        <div class="pdf-lead-stamp" id="pdfLeadStamp">SOLICITANTE: - | EMAIL: - | TEL: -</div>
+        <!-- PÁGINA 2: MATRIZ DE CO-EJECUCIÓN POR FASES & PRÓXIMOS PASOS -->
+        <div class="pdf-page pdf-page-2">
+            <div class="pdf-page-header">
+                <div class="pdf-brand-box">
+                    <img src="destination-hub-isotipo-c.svg" width="32" height="32" alt="Isotipo D Hub">
+                    <div>
+                        <div class="pdf-brand-name" style="font-size: 18px;">Destination Hub</div>
+                    </div>
+                </div>
+                <div class="pdf-meta-box">
+                    <div id="pdfProjectMiniTitle" style="color: #183028; font-weight: 600;">HOJA DE RUTA DE CO-EJECUCIÓN</div>
+                    <div>MATRIZ OPERATIVA DE 4 FASES</div>
+                </div>
+            </div>
 
-        <!-- Rol de D Hub -->
-        <div class="pdf-dhub-box">
-            <strong style="color: #C8A97E; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase;">¿CÓMO DESTINATION HUB CO-EJECUTA EN TU PROYECTO?</strong><br>
-            <span id="pdfDhubRoleText" style="display:block; margin-top: 4px;"></span>
+            <div class="pdf-matrix-header">
+                <h2 class="pdf-matrix-title" id="pdfMatrixTitle">Matriz de Co-Ejecución por Fases</h2>
+                <p class="pdf-matrix-desc" id="pdfMatrixDesc">Tareas clave estructuradas junto al equipo de Destination Hub, entregables tangibles y métricas de retorno (Yield) por etapa.</p>
+            </div>
+
+            <table class="pdf-matrix-table">
+                <thead>
+                    <tr>
+                        <th style="width: 24%;">Fase / Ventana</th>
+                        <th style="width: 44%;">Tareas a Desarrollar con D Hub</th>
+                        <th style="width: 32%;">Entregables &amp; KPIs</th>
+                    </tr>
+                </thead>
+                <tbody id="pdfTableBody">
+                </tbody>
+            </table>
+
+            <div class="pdf-next-steps-card">
+                <div class="pdf-next-title" id="pdfNextTitle">✦ PRÓXIMO PASO: ACTIVACIÓN CON UN SOCIO DE DESTINATION HUB</div>
+                <p class="pdf-next-desc" id="pdfNextDesc">
+                    Esta hoja de ruta establece el marco de co-ejecución inicial. Para activar el plan de trabajo comercial, Yield y modelo regenerativo en tu territorio, comunícate directamente con un Socio Director vía WhatsApp o al correo hola@dhub.travel.
+                </p>
+            </div>
+
+            <div class="pdf-page-footer">
+                <div>DESTINATION HUB · PATAGONIA · HOLA@DHUB.TRAVEL</div>
+                <div>PÁGINA 2 DE 2 · DHUB.TRAVEL</div>
+            </div>
         </div>
 
-        <!-- Diagnóstico Territorial -->
-        <div class="pdf-diag-box">
-            <strong style="color: #C85A32; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase;">DIAGNÓSTICO ESTRATÉGICO & POTENCIAL:</strong><br>
-            <span id="pdfDiagnosisText" style="display:block; margin-top: 4px; color: #183028;"></span>
-        </div>
-
-        <!-- Síntesis de Nodos del Flujo -->
-        <div style="background-color: #F6F5F0; border: 1px solid rgba(24, 48, 40, 0.12); padding: 10px 14px; margin-bottom: 20px; border-radius: 6px;">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: #2B5B6C; text-transform: uppercase; margin-bottom: 5px; font-weight: 600;">FLUJOGRAMA DE DECISIONES Y ARQUITECTURA</div>
-            <div id="pdfFlowNodesSummary" style="font-size: 11px; line-height: 1.5; color: #183028;"></div>
-        </div>
-
-        <!-- Matriz de Fases -->
-        <table class="pdf-matrix-table">
-            <thead>
-                <tr>
-                    <th style="width: 25%;">Fase / Ventana</th>
-                    <th style="width: 45%;">Tareas a Desarrollar con D Hub</th>
-                    <th style="width: 30%;">Entregables & KPIs</th>
-                </tr>
-            </thead>
-            <tbody id="pdfTableBody">
-                <!-- Inyectado por JS -->
-            </tbody>
-        </table>
-
-        <!-- Footer del PDF -->
-        <div class="pdf-footer">
-            <div>DESTINATION HUB · PATAGONIA (ARGENTINA & CHILE)</div>
-            <div>CONTACTO: HOLA@DHUB.TRAVEL · CALENDLY.COM/DHUB-TRAVEL</div>
-        </div>
     </div>
 
 
@@ -3307,7 +3347,7 @@ DEBES devolver OBLIGATORIAMENTE un JSON válido (sin texto adicional fuera del J
             windowWidth: 720
         },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak:    { mode: ['css', 'legacy'], before: '.html2pdf__page-break', avoid: ['tr', '.pdf-avoid-break'] }
+        pagebreak:    { mode: ['css', 'legacy'], before: '.pdf-page-2', avoid: ['tr', '.pdf-avoid-break'] }
     };
 
     if (typeof html2pdf !== 'undefined') {

@@ -1174,6 +1174,11 @@
     break-inside: avoid;
 }
 
+.pdf-page-2 {
+    page-break-before: always !important;
+    break-before: page !important;
+}
+
 .html2pdf__page-break {
     page-break-before: always !important;
     break-before: page !important;

@@ -381,11 +381,15 @@ html[data-font="outfit"] .h2-editorial em {
     display: inline-flex;
     align-items: center;
     gap: 0.85rem;
+    text-decoration: none;
+    flex-shrink: 0;
 }
 
 .brand-isotipo {
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex-shrink: 0;
+    transition: transform 0.3s var(--ease-luxury);
 }
 
 .brand-isotipo.is-waiting-intro {
@@ -407,18 +411,18 @@ html[data-font="outfit"] .h2-editorial em {
 
 .brand-name-main {
     font-family: var(--font-serif);
-    font-weight: 400;
-    font-size: 1.25rem;
+    font-weight: 500;
+    font-size: 1.35rem;
     color: var(--color-lenga);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
 }
 
 .brand-name-hub {
     font-family: var(--font-sans);
     font-weight: 600;
-    font-size: 0.72rem;
+    font-size: 0.76rem;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     color: var(--color-glaciar);
 }
 
@@ -426,9 +430,9 @@ html[data-font="outfit"] .h2-editorial em {
     font-family: var(--font-mono);
     font-size: 0.6rem;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     color: var(--text-ceniza);
-    margin-top: 0.2rem;
+    margin-top: 0.22rem;
     display: block;
 }
 
@@ -1866,4 +1870,80 @@ textarea:focus-visible {
     text-transform: uppercase;
     letter-spacing: 0.14em;
     color: var(--text-ceniza);
+}
+
+/* 22. Mobile Header Brand & Logo Proportions */
+@media (max-width: 768px) {
+    .site-header .container {
+        padding-inline: clamp(1rem, 3.5vw, 1.35rem);
+    }
+    .header-inner {
+        height: 4.25rem;
+    }
+    .brand-lockup {
+        gap: 0.65rem;
+    }
+    .brand-isotipo {
+        width: 2.65rem;
+        height: 2.65rem;
+    }
+    .brand-name-main {
+        font-size: 1.32rem;
+        font-weight: 500;
+    }
+    .brand-name-hub {
+        font-size: 0.74rem;
+    }
+    .brand-sub {
+        font-size: 0.56rem;
+        letter-spacing: 0.08em;
+        margin-top: 0.15rem;
+    }
+    .header-right {
+        gap: 0.45rem;
+    }
+    .lang-switcher {
+        padding: 0.2rem 0.38rem;
+        font-size: 0.6rem;
+        letter-spacing: 0.06em;
+        gap: 0.15rem;
+    }
+    .lang-btn {
+        padding: 0.08rem 0.18rem;
+    }
+    .menu-toggle {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .site-header .container {
+        padding-inline: 0.75rem;
+    }
+    .brand-lockup {
+        gap: 0.5rem;
+    }
+    .brand-isotipo {
+        width: 2.45rem;
+        height: 2.45rem;
+    }
+    .brand-name-main {
+        font-size: 1.22rem;
+    }
+    .brand-name-hub {
+        font-size: 0.68rem;
+    }
+    .brand-sub {
+        font-size: 0.52rem;
+        letter-spacing: 0.06em;
+    }
+    .lang-switcher {
+        padding: 0.15rem 0.3rem;
+        font-size: 0.56rem;
+    }
+    .menu-toggle {
+        width: 2.1rem;
+        height: 2.1rem;
+    }
 }

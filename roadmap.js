@@ -23,6 +23,14 @@ PRINCIPIOS CLAVE DE DESTINATION HUB:
    - Práctica 01: Estrategia, Datos & Planes de Negocio (Benchmarking, IA aplicada, factibilidad financiera, Yield management).
    - Práctica 02: Comercialización & Representación B2B (Brazo comercial ante operadores mayoristas, consorcios de lujo, DMCs de EE.UU., Brasil y Europa).
    - Práctica 03: Sustentabilidad, Regeneración & Capacitación (Preparación para certificaciones, huella ambiental, "Contratá la actitud, entrená la habilidad").
+
+PAUTAS CRÍTICAS DE ESTILO Y CONCISIÓN (MUY IMPORTANTE):
+- Respuestas breves, directas y ágiles: El usuario prefiere agilidad ejecutiva. Evita parrafadas largas, preámbulos ceremoniales o rodeos conversacionales innecesarios.
+- Longitud máxima: 1 o 2 párrafos breves (no más de 2 a 4 oraciones en total por intervención).
+- Estructura ideal de cada turno:
+  1. Una sola frase breve de empatía estratégica o reconocimiento territorial/conceptual.
+  2. La pregunta directa, clara y accionable del turno actual.
+- Mantén siempre el tono de un consultor senior experimentado de Destination Hub: sobrio, empático, sofisticado y enfocado en destrabar resultados de negocio y co-ejecución.
 `;
 
 /* ==========================================================================
@@ -49,8 +57,8 @@ function getProtectedServiceKey() {
    ========================================================================== */
 let leadData = { name: '', email: '', phone: '' };
 let chatMessagesHistory = []; // { role: 'user' | 'model', text: string }
-let currentInterviewTurn = 0; // 0 = lead intake, 1..4 = dynamic turns, 5 = final roadmap
-const MAX_INTERVIEW_TURNS = 4; // 4 consultas estratégicas post-lead
+let currentInterviewTurn = 0; // 0 = lead intake, 1..5 = dynamic turns, 6 = final roadmap
+const MAX_INTERVIEW_TURNS = 5; // 5 consultas estratégicas post-lead
 let generatedRoadmapData = null;
 let storedApiKey = localStorage.getItem('dhub_gemini_api_key') || getProtectedServiceKey();
 
@@ -82,10 +90,11 @@ function getAssetPath(filename) {
 const ROADMAP_I18N = {
     es: {
         step0_label: "Paso 1: Datos de Contacto",
-        step1_label: "Consulta 1 de 4: Proyecto & Territorio",
-        step2_label: "Consulta 2 de 4: Cuello de Botella & Desafío Crítico",
-        step3_label: "Consulta 3 de 4: Diferencial Regenerativo & Co-ejecución",
-        step4_label: "Consulta 4 de 4: Información Relevante Adicional",
+        step1_label: "Consulta 1 de 5: Proyecto & Territorio",
+        step2_label: "Consulta 2 de 5: Cuello de Botella & Desafío Crítico",
+        step3_label: "Consulta 3 de 5: Pilares & Diferencial Regenerativo",
+        step4_label: "Consulta 4 de 5: Modelo de Co-Operación & Co-Ejecución",
+        step5_label: "Consulta 5 de 5: Información Relevante Adicional",
         welcome_p1: "¡Hola! Te damos la bienvenida a la evaluación estratégica de <strong>Destination Hub</strong>.",
         welcome_p2: "Antes de profundizar en tu proyecto y diseñar la hoja de ruta personalizada de co-ejecución, por favor dejanos tus datos de contacto para dirigirnos a vos adecuadamente y enviarte el reporte final:",
         lbl_name: "Nombre y Apellido *",
@@ -111,10 +120,11 @@ const ROADMAP_I18N = {
     },
     en: {
         step0_label: "Step 1: Contact Details",
-        step1_label: "Query 1 of 4: Project & Territory",
-        step2_label: "Query 2 of 4: Critical Bottlenecks & Challenges",
-        step3_label: "Query 3 of 4: Regenerative Differentiation & Co-Execution",
-        step4_label: "Query 4 of 4: Additional Relevant Information",
+        step1_label: "Query 1 of 5: Project & Territory",
+        step2_label: "Query 2 of 5: Critical Bottlenecks & Challenges",
+        step3_label: "Query 3 of 5: Regenerative Pillars & Identity",
+        step4_label: "Query 4 of 5: Co-Operation & Co-Execution Model",
+        step5_label: "Query 5 of 5: Additional Relevant Information",
         welcome_p1: "Hello! Welcome to the strategic assessment by <strong>Destination Hub</strong>.",
         welcome_p2: "Before delving into your project and designing your tailored co-execution roadmap, please provide your contact details so we can address you properly and send you the final report:",
         lbl_name: "Full Name *",
@@ -140,10 +150,11 @@ const ROADMAP_I18N = {
     },
     pt: {
         step0_label: "Passo 1: Dados de Contato",
-        step1_label: "Consulta 1 de 4: Projeto & Território",
-        step2_label: "Consulta 2 de 4: Gargalo & Desafio Crítico",
-        step3_label: "Consulta 3 de 4: Diferencial Regenerativo & Co-execução",
-        step4_label: "Consulta 4 de 4: Informação Relevante Adicional",
+        step1_label: "Consulta 1 de 5: Projeto & Território",
+        step2_label: "Consulta 2 de 5: Gargalo & Desafio Crítico",
+        step3_label: "Consulta 3 de 5: Pilares & Diferencial Regenerativo",
+        step4_label: "Consulta 4 de 5: Modelo de Cooperação & Co-execução",
+        step5_label: "Consulta 5 de 5: Informação Relevante Adicional",
         welcome_p1: "Olá! Seja bem-vindo(a) à avaliação estratégica da <strong>Destination Hub</strong>.",
         welcome_p2: "Antes de nos aprofundarmos no seu projeto e desenhar o roteiro personalizado de co-execução, por favor informe seus dados de contato para nos dirigirmos adequadamente e enviar o relatório final:",
         lbl_name: "Nome Completo *",
@@ -491,9 +502,9 @@ async function handleLeadSubmit(e) {
     // Iniciar Turno 1
     currentInterviewTurn = 1;
     document.getElementById('chatProgressLabel').textContent = i18n.step1_label;
-    document.getElementById('chatProgressBar').style.width = '35%';
+    document.getElementById('chatProgressBar').style.width = '30%';
 
-    const promptForTurn1 = `El usuario se llama "${leadData.name}". Salúdalo de forma cálida y profesional por su nombre desde Destination Hub, y pregúntale directamente cuál es el nombre de su proyecto u organización, en qué localización geográfica exacta se encuentra (o planea estar) y cuál es la vocación o concepto principal de la propuesta (ej. lodge, glamping, DMC, parque, etc.). Hazlo en 1 o 2 párrafos concisos y elegantes.
+    const promptForTurn1 = `El usuario se llama "${leadData.name}". Salúdalo de forma cálida y profesional por su nombre desde Destination Hub en una sola frase breve, y pregúntale directamente cuál es el nombre de su proyecto u organización, en qué localización geográfica exacta se encuentra (o planea estar) y cuál es la vocación o concepto principal de la propuesta (ej. lodge, glamping, DMC, parque, etc.). Mantén la respuesta muy concisa y ejecutiva (máximo 2 párrafos cortos, directo al punto).
 
 [IDIOMA OBLIGATORIO]: El usuario está interactuando en ${i18n.lang_name}. Toda tu respuesta DEBE ser formulada enteramente en ${i18n.lang_name}.`;
 
@@ -612,8 +623,8 @@ async function callGeminiTurn(specificInstruction) {
                 body: JSON.stringify({
                     contents: conversationContents,
                     generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 600
+                        temperature: 0.6,
+                        maxOutputTokens: 280
                     }
                 }),
                 signal: controller.signal
@@ -648,39 +659,45 @@ function generateLocalTurnFallback(turn) {
 
     if (lang === 'en') {
         if (turn === 1) {
-            return `Hello **${name}**, it is a pleasure to connect with you from **Destination Hub**.\n\nTo start our diagnostic: what is the name of your project or organization, where is it located, and what is your primary hospitality or tourism concept?`;
+            return `Hello **${name}**, it is a pleasure to connect from **Destination Hub**.\n\nTo begin our diagnostic: what is the name of your project or organization, where is it located, and what is your primary hospitality or tourism concept?`;
         } else if (turn === 2) {
-            return `Understood, **${name}**. Looking at your territorial context:\n\nWhat stage of development are you currently in, and what is your single greatest operational or commercial bottleneck? (e.g. rate optimization and seasonality with focus on *Yield*, accessing high-end international B2B operators, business plan structuring for investors, or local team training).`;
+            return `Understood, **${name}**.\n\nWhat stage of development are you currently in, and what is your single greatest operational or commercial bottleneck? (e.g. rate optimization and seasonality focused on *Yield*, accessing international B2B operators, business plan structuring, or local team training).`;
         } else if (turn === 3) {
-            return `Excellent point, **${name}**. At Destination Hub, we act as an extended execution arm to unlock precisely those challenges.\n\nWhich territorial identity pillars (*Agroecology/Km 0*, *Living Culture*, or *Pristine Nature*) do you wish to anchor, and what engagement model suits you best: turnkey co-execution or a specialized modular intervention in B2B sales, data, or sustainability?`;
+            return `Great point, **${name}**. At Destination Hub, we address those challenges by anchoring the experience in territorial identity.\n\nWhich of our 3 regenerative pillars would you like to prioritize or consolidate: *Agroecology / Km 0*, *Living Culture*, or *Pristine Nature / Conservation*?`;
         } else if (turn === 4) {
-            return `Perfect, **${name}**. Before we synthesize your tailored co-execution roadmap with Destination Hub:\n\nIs there any additional detail, specific expectation, target opening timeline, partner dynamic, or key background you would like to include?`;
+            return `Very clear, **${name}**.\n\nRegarding co-execution with us, what engagement model suits you best: a turnkey end-to-end partnership, or a focused modular intervention in B2B Sales, Yield & Data Intelligence, or DSO & Sustainability?`;
+        } else if (turn === 5) {
+            return `Perfect, **${name}**. Before synthesizing your tailored co-execution roadmap with Destination Hub:\n\nIs there any additional detail, target opening timeline, partner dynamic, or key background you would like to include?`;
         }
         return `Thank you for the details, **${name}**. We are structuring your tailored roadmap.`;
     }
 
     if (lang === 'pt') {
         if (turn === 1) {
-            return `Olá **${name}**, é um prazer falar com você a partir da **Destination Hub**.\n\nPara iniciar nosso diagnóstico: qual é o nome do seu projeto ou organização, em qual localização geográfica se encontra e em que consiste sua proposta de hospitalidade ou turismo?`;
+            return `Olá **${name}**, é um prazer falar com você a partir da **Destination Hub**.\n\nPara iniciar nosso diagnóstico: qual é o nome do seu projeto ou organização, em qual localização geográfica se encontra e qual é a proposta principal de turismo ou hospitalidade?`;
         } else if (turn === 2) {
-            return `Compreendo o perfil, **${name}**. Com base no que você compartilhou sobre seu território:\n\nEm qual etapa de desenvolvimento vocês estão hoje e qual é o principal gargalo ou desafio crítico que enfrentam? (Por exemplo: otimização tarifária e desestacionalização focada em *Yield*, acesso a operadores B2B de alto padrão, estruturação de plano de negócios para investidores ou capacitação de equipe local).`;
+            return `Compreendo o contexto, **${name}**.\n\nEm qual etapa de desenvolvimento vocês estão hoje e qual é o principal gargalo ou desafio crítico que enfrentam? (Por exemplo: otimização tarifária e desestacionalização focada em *Yield*, canais B2B internacionais, plano de negócios para investidores ou capacitação de equipe).`;
         } else if (turn === 3) {
-            return `Excelente ponto, **${name}**. Na Destination Hub atuamos como o braço executor para destravar exatamente esses gargalos.\n\nQuais diferenciais territoriais (*Agroecologia/Km 0*, *Cultura Viva* ou *Conservação Ativa*) você deseja consolidar, e qual modalidade de trabalho conosco é mais conveniente: acompanhamento integral chave na mão ou intervenção modular em B2B, dados ou sustentabilidade?`;
+            return `Excelente ponto, **${name}**. Na Destination Hub destravamos esses desafios ancorando a proposta na identidade do território.\n\nQual ou quais dos nossos 3 pilares regenerativos você deseja priorizar ou consolidar: *Agroecologia / Km 0*, *Cultura Viva* ou *Natureza Prístina / Conservação*?`;
         } else if (turn === 4) {
-            return `Perfeito, **${name}**. Antes de sintetizar seu roteiro personalizado de co-execução com a Destination Hub:\n\nHá algum outro detalhe, expectativa particular, prazo previsto de abertura, parceiros ou informação relevante que considere importante adicionar?`;
+            return `Muito claro, **${name}**.\n\nEm relação à co-execução conosco, qual modelo de trabalho prefere: acompanhamento integral chave na mão ou uma intervenção modular específica em Comercialização B2B, Inteligência de Yield & Dados ou Modelo DSO e Sustentabilidade?`;
+        } else if (turn === 5) {
+            return `Perfeito, **${name}**. Antes de sintetizar seu roteiro personalizado de co-execução com a Destination Hub:\n\nHá algum outro detalhe, prazo previsto de abertura, parceiros ou informação relevante que considere importante adicionar?`;
         }
         return `Obrigado pelos detalhes, **${name}**. Estamos processando seu roteiro personalizado.`;
     }
 
     // Default Español
     if (turn === 1) {
-        return `Hola **${name}**, es un gusto saludarte desde **Destination Hub**.\n\nPara iniciar nuestro diagnóstico: ¿cómo se llama tu proyecto u organización, en qué localización geográfica exacta se encuentra ubicado y en qué consiste la propuesta de turismo u hospitalidad?`;
+        return `Hola **${name}**, es un gusto saludarte desde **Destination Hub**.\n\nPara iniciar nuestro diagnóstico: ¿cómo se llama tu proyecto u organización, en qué localización geográfica exacta se encuentra y en qué consiste la propuesta de turismo u hospitalidad?`;
     } else if (turn === 2) {
-        return `Comprendo el perfil, **${name}**. Con base en lo que nos comentas sobre tu territorio:\n\n¿En qué etapa de desarrollo se encuentran hoy y cuál es el mayor cuello de botella o desafío crítico que enfrentan? (Por ejemplo: optimizar tarifas y desestacionalizar con foco en *Yield*, falta de acceso a operadores B2B de lujo, estructurar el plan de negocios para inversores, o profesionalizar al equipo local).`;
+        return `Comprendo el contexto, **${name}**.\n\n¿En qué etapa de desarrollo se encuentran hoy y cuál es el mayor cuello de botella o desafío crítico que enfrentan? (Por ejemplo: optimizar tarifas y desestacionalizar con foco en *Yield*, falta de canales B2B internacionales, modelo de negocio para inversores o profesionalizar al equipo local).`;
     } else if (turn === 3) {
-        return `Excelente punto, **${name}**. En Destination Hub actuamos como el brazo ejecutor para destrabar exactamente esos cuellos de botella.\n\n¿Qué diferenciales territoriales (*Agroecología/Km 0*, *Cultura viva* o *Conservación activa*) te gustaría anclar, y qué esquema de co-ejecución con nosotros te resultaría más conveniente: un acompañamiento integral llave en mano o una intervención específica en comercialización B2B, datos o sustentabilidad?`;
+        return `Excelente punto, **${name}**. En Destination Hub destrabamos esos desafíos anclando la propuesta en la identidad del territorio.\n\n¿Cuál o cuáles de nuestros 3 pilares regenerativos te interesa priorizar o consolidar: *Agroecología / Km 0*, *Cultura Viva* o *Naturaleza Prístina / Conservación*?`;
     } else if (turn === 4) {
-        return `Perfecto, **${name}**. Antes de estructurar y sintetizar tu hoja de ruta personalizada de co-ejecución con Destination Hub:\n\n¿Hay algún otro detalle, expectativa particular, fecha tentativa de apertura, socios o información clave de tu proyecto que consideres importante sumar?`;
+        return `Muy claro, **${name}**.\n\nEn cuanto a la co-ejecución con nosotros, ¿qué esquema de trabajo preferís: un acompañamiento integral llave en mano o una intervención modular específica en Comercialización B2B, Inteligencia de Yield & Datos, o Certificación DSO y Sustentabilidad?`;
+    } else if (turn === 5) {
+        return `Perfecto, **${name}**. Antes de estructurar tu hoja de ruta personalizada de co-ejecución con Destination Hub:\n\n¿Hay algún otro detalle, fecha tentativa de apertura, socios o información clave de tu proyecto que consideres importante sumar?`;
     }
     return `Gracias por los detalles, **${name}**. Estamos procesando tu hoja de ruta personalizada.`;
 }
@@ -727,7 +744,7 @@ async function handleUserSubmit(e) {
     currentInterviewTurn++;
 
     if (currentInterviewTurn <= MAX_INTERVIEW_TURNS) {
-        const pct = 15 + (currentInterviewTurn * 20); // 35%, 55%, 75%, 95%
+        const pct = 15 + (currentInterviewTurn * 15); // Turn 1: 30%, 2: 45%, 3: 60%, 4: 75%, 5: 90%
         document.getElementById('chatProgressBar').style.width = `${Math.min(pct, 95)}%`;
 
         const lang = getCurrentSiteLang();
@@ -735,22 +752,28 @@ async function handleUserSubmit(e) {
 
         if (currentInterviewTurn === 2) {
             document.getElementById('chatProgressLabel').textContent = i18n.step2_label;
-            const promptTurn2 = `El usuario respondió sobre su proyecto: "${userText}". Analiza brevemente su propuesta reconociendo su territorio y formula una PREGUNTA DINÁMICA sobre su estado actual y cuál es hoy su mayor obstáculo crítico o cuello de botella (ej. ocupación fuera de temporada, falta de canales B2B internacionales, modelo de Yield, factibilidad financiera o certificación DSO). Hazlo de forma conversacional y directa en 1 o 2 párrafos.
+            const promptTurn2 = `El usuario respondió sobre su proyecto: "${userText}". En 1 sola oración ejecutiva reconoce su propuesta o territorio, y hazle directamente una pregunta ágil y concreta sobre su estado actual y cuál es su mayor obstáculo crítico o cuello de botella (ej. ocupación fuera de temporada con foco en Yield, falta de canales B2B internacionales, estructuración financiera o profesionalización del equipo). Sé muy conciso (máximo 2 párrafos cortos, directo al punto).
 
 [IDIOMA OBLIGATORIO]: El usuario está interactuando en ${i18n.lang_name}. Toda tu respuesta DEBE ser formulada enteramente en ${i18n.lang_name}.`;
             await generateNextConsultantTurn(promptTurn2);
         } else if (currentInterviewTurn === 3) {
             document.getElementById('chatProgressLabel').textContent = i18n.step3_label;
-            const promptTurn3 = `El usuario detalló sus desafíos críticos: "${userText}". Reconoce cómo Destination Hub aborda esos problemas (enfocándose en Yield sobre volumen y co-ejecución ágil) y formula una PREGUNTA DINÁMICA sobre: qué pilares de experiencia patagónica (Agroecología, Cultura viva, Naturaleza) desean potenciar y qué modalidad de trabajo prefieren con D Hub (llave en mano integral o módulo especializado a la carta).
+            const promptTurn3 = `El usuario detalló sus desafíos críticos: "${userText}". En 1 sola frase breve valida el enfoque de co-ejecución ágil de Destination Hub, y pregúntale con precisión cuál o cuáles de los 3 pilares de identidad y regeneración territorial de Destination Hub (Agroecología/Km 0, Cultura Viva local, o Naturaleza Prístina/Conservación) busca priorizar o consolidar en su propuesta. Sé ágil y conciso (máximo 2 párrafos cortos, directo a la pregunta sobre los pilares).
 
 [IDIOMA OBLIGATORIO]: El usuario está interactuando en ${i18n.lang_name}. Toda tu respuesta DEBE ser formulada enteramente en ${i18n.lang_name}.`;
             await generateNextConsultantTurn(promptTurn3);
         } else if (currentInterviewTurn === 4) {
             document.getElementById('chatProgressLabel').textContent = i18n.step4_label;
-            const promptTurn4 = `El usuario detalló su enfoque regenerativo y modalidad: "${userText}". Reconoce su respuesta de forma breve y formula una PREGUNTA FINAL antes de generar la hoja de ruta: consulta de manera cálida si hay algún otro detalle, expectativa particular, timing, socios o información relevante sobre el proyecto que desee agregar antes de generar su hoja de ruta de co-ejecución con Destination Hub.
+            const promptTurn4 = `El usuario comentó sobre los pilares regenerativos que desea potenciar: "${userText}". En 1 sola frase breve reconoce su valor, y pregúntale directamente cuál es el modelo de trabajo o co-operación que mejor se adapta a su proyecto con Destination Hub: un acompañamiento integral de co-ejecución llave en mano, o una intervención modular focalizada (Comercialización B2B, Inteligencia de Yield & Datos, o Certificación DSO y Sustentabilidad). Sé muy conciso (máximo 2 párrafos cortos).
 
 [IDIOMA OBLIGATORIO]: El usuario está interactuando en ${i18n.lang_name}. Toda tu respuesta DEBE ser formulada enteramente en ${i18n.lang_name}.`;
             await generateNextConsultantTurn(promptTurn4);
+        } else if (currentInterviewTurn === 5) {
+            document.getElementById('chatProgressLabel').textContent = i18n.step5_label;
+            const promptTurn5 = `El usuario detalló su esquema o modalidad de trabajo preferida: "${userText}". Reconoce su respuesta en una sola frase breve y ejecutiva, y formula la PREGUNTA FINAL antes de estructurar la hoja de ruta: consulta de manera directa y cálida si hay algún otro detalle, expectativa particular, timing de apertura, socios o información relevante sobre el proyecto que desee agregar. Sé muy conciso (máximo 2 párrafos cortos).
+
+[IDIOMA OBLIGATORIO]: El usuario está interactuando en ${i18n.lang_name}. Toda tu respuesta DEBE ser formulada enteramente en ${i18n.lang_name}.`;
+            await generateNextConsultantTurn(promptTurn5);
         }
     } else {
         triggerFinalRoadmapGeneration();
@@ -812,25 +835,25 @@ DEBES devolver OBLIGATORIAMENTE un JSON válido (sin texto adicional fuera del J
     {
       "step": "01 / PERFIL & TERRITORIO",
       "title": "Título corto",
-      "desc": "Descripción resumida de lo conversado",
+      "desc": "Descripción resumida de la propuesta y territorio",
       "color": "lenga"
     },
     {
       "step": "02 / MODELO DE VALOR (YIELD)",
       "title": "Título corto",
-      "desc": "Estrategia de tarifa, estadía y público objetivo",
+      "desc": "Estrategia frente a cuellos de botella y público objetivo",
       "color": "glaciar"
     },
     {
-      "step": "03 / INTERVENCIÓN CRÍTICA",
-      "title": "Solución a su cuello de botella",
-      "desc": "Acción inmediata de co-ejecución con D Hub",
+      "step": "03 / PILARES REGENERATIVOS",
+      "title": "Pilares Territoriales",
+      "desc": "Anclaje en Agroecología, Cultura viva o Naturaleza",
       "color": "coiron"
     },
     {
-      "step": "04 / ARQUITECTURA DSO & B2B",
-      "title": "Trilogía Territorial + Red B2B",
-      "desc": "Anclaje en Agroecología/Cultura/Naturaleza y canales",
+      "step": "04 / MODELO DE CO-EJECUCIÓN",
+      "title": "Alianza con Destination Hub",
+      "desc": "Modalidad de trabajo conjunto y foco de activación B2B",
       "color": "terracota"
     }
   ],
@@ -960,14 +983,15 @@ function generateLocalRoadmapData() {
     const userAnswers = chatMessagesHistory.filter(m => m.role === 'user').map(m => m.text);
     const ans1 = userAnswers[0] || 'Proyecto Turístico';
     const ans2 = userAnswers[1] || 'Optimización de tarifas y canales B2B';
-    const ans3 = userAnswers[2] || 'Experiencias de identidad local y co-ejecución llave en mano';
-    const ans4 = userAnswers[3] || 'Lanzamiento planificado con foco en alto valor';
+    const ans3 = userAnswers[2] || 'Pilares de Agroecología, Cultura viva y Conservación';
+    const ans4 = userAnswers[3] || 'Acompañamiento y co-ejecución estratégica con D Hub';
+    const ans5 = userAnswers[4] || 'Lanzamiento planificado con foco en alto valor';
 
     const projectName = ans1.length > 35 ? ans1.substring(0, 35) + '...' : ans1;
 
     return {
         projectName: projectName,
-        dhubRole: `Destination Hub actuará como socio estratégico y brazo co-ejecutor del equipo de ${leadData.name}. Implementaremos la Práctica 01 (Inteligencia de Datos & Yield) para reestructurar tarifas y demanda, articulando inmediatamente con la Práctica 02 (Representación B2B) para conectar el proyecto con operadores mayoristas clave de mercados emisores internacionales, integrando además las consideraciones específicas de ${leadData.name} (${ans4}) bajo la Práctica 03 (Modelo DSO y capacitación de equipos).`,
+        dhubRole: `Destination Hub actuará como socio estratégico y brazo co-ejecutor del equipo de ${leadData.name}. Implementaremos la Práctica 01 (Inteligencia de Datos & Yield) para reestructurar tarifas y demanda frente al desafío identificado ("${ans2}"), articulando con la Práctica 02 (Representación B2B) y la Práctica 03 (Modelo DSO) bajo el modelo de co-operación seleccionado ("${ans4}"), anclando el valor diferencial en ${ans3}.`,
         territorialDiagnosis: `La propuesta de ${projectName} posee un claro potencial de diferenciación para captar al "Participante con Propósito": viajeros que buscan exclusividad y desconexión auténtica. Al superar los cuellos de botella mediante una gestión activa de Yield y desestacionalización, el proyecto puede elevar sus márgenes sin depender de la masividad, beneficiando de forma directa a la comunidad anfitriona y al territorio.`,
         flowNodes: [
             {
@@ -979,19 +1003,19 @@ function generateLocalRoadmapData() {
             {
                 step: "02 / MODELO DE YIELD",
                 title: "Participante con Propósito",
-                desc: "Mayor gasto promedio y estadías extendidas",
+                desc: ans2,
                 color: "glaciar"
             },
             {
-                step: "03 / INTERVENCIÓN CRÍTICA",
-                title: "Destrabe de Cuello de Botella",
-                desc: ans2,
+                step: "03 / PILARES REGENERATIVOS",
+                title: "Identidad Territorial",
+                desc: ans3,
                 color: "coiron"
             },
             {
-                step: "04 / ARQUITECTURA DSO & B2B",
-                title: "Modelo Regenerativo D Hub",
-                desc: ans3,
+                step: "04 / MODELO CO-EJECUCIÓN",
+                title: "Alianza con D Hub",
+                desc: ans4,
                 color: "terracota"
             }
         ],

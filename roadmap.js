@@ -53,14 +53,91 @@ function getProtectedServiceKey() {
 }
 
 /* ==========================================================================
-   3. ESTADO GLOBAL DE LA SESIÓN
+   3. ESTADO GLOBAL DE LA SESIÓN & CONFIGURACIÓN DE GOOGLE SHEETS / DRIVE
    ========================================================================== */
+/**
+ * URL del Web App de Google Apps Script (Google Sheets + Google Drive PDF).
+ * Pega aquí la URL obtenida al implementar el script (termina en /exec).
+ */
+const ROADMAP_SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzcZeF8I32Um2OOqp_8ZqRAfx-kFEx9CV3cGmVK1gsy1hhGFJyi6mHNPgJD3sLu6GGy/exec';
+
 let leadData = { name: '', email: '', phone: '' };
 let chatMessagesHistory = []; // { role: 'user' | 'model', text: string }
 let currentInterviewTurn = 0; // 0 = lead intake, 1..5 = dynamic turns, 6 = final roadmap
 const MAX_INTERVIEW_TURNS = 5; // 5 consultas estratégicas post-lead
 let generatedRoadmapData = null;
 let storedApiKey = localStorage.getItem('dhub_gemini_api_key') || getProtectedServiceKey();
+
+// Estado de trazabilidad progresiva para Google Sheets y Drive
+let currentSessionId = '';
+let sessionTurnsData = {
+    1: { question: '', answer: '' },
+    2: { question: '', answer: '' },
+    3: { question: '', answer: '' },
+    4: { question: '', answer: '' },
+    5: { question: '', answer: '' }
+};
+let pdfAlreadySyncedToDrive = false;
+let activePdfRenderJobs = 0;
+
+function initNewSessionTracking() {
+    const ts = Date.now().toString(36).toUpperCase();
+    const rnd = Math.random().toString(36).substring(2, 6).toUpperCase();
+    currentSessionId = `DH-${ts}-${rnd}`;
+    sessionTurnsData = {
+        1: { question: '', answer: '' },
+        2: { question: '', answer: '' },
+        3: { question: '', answer: '' },
+        4: { question: '', answer: '' },
+        5: { question: '', answer: '' }
+    };
+    pdfAlreadySyncedToDrive = false;
+}
+
+function getSheetsWebhookUrl() {
+    return ROADMAP_SHEETS_WEBHOOK_URL ||
+           localStorage.getItem('dhub_sheets_webhook_url') ||
+           (typeof MARKETING_CONFIG !== 'undefined' && MARKETING_CONFIG.leadWebhookUrl ? MARKETING_CONFIG.leadWebhookUrl : '');
+}
+
+/**
+ * Envía el estado acumulativo de la sesión a Google Sheets (y el PDF final a Drive).
+ * Usa text/plain para evitar bloqueos CORS preflight en Google Apps Script y
+ * keepalive: true en todos los envíos livianos de progreso para tolerar cierres de pestaña.
+ */
+async function syncRoadmapToSheets(progressStatus, extraPayload = {}) {
+    const webhookUrl = getSheetsWebhookUrl();
+    if (!webhookUrl || !currentSessionId) return null;
+
+    const payload = {
+        sessionId: currentSessionId,
+        timestamp: new Date().toISOString(),
+        lang: getCurrentSiteLang(),
+        lead: leadData,
+        progress: progressStatus,
+        turns: sessionTurnsData,
+        projectName: extraPayload.projectName || (generatedRoadmapData ? generatedRoadmapData.projectName : ''),
+        executiveSummary: extraPayload.executiveSummary || (generatedRoadmapData ? `[ROL D HUB]: ${generatedRoadmapData.dhubRole}\n\n[DIAGNÓSTICO]: ${generatedRoadmapData.territorialDiagnosis}` : ''),
+        pdfBase64: extraPayload.pdfBase64 || ''
+    };
+
+    const hasLargeAttachment = Boolean(payload.pdfBase64);
+
+    try {
+        const res = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload),
+            keepalive: !hasLargeAttachment
+        });
+        if (res.ok) {
+            return await res.json().catch(() => null);
+        }
+    } catch (err) {
+        console.warn('Sincronización de diagnóstico en segundo plano:', err);
+    }
+    return null;
+}
 
 // Purgar inmediatamente modelos obsoletos o con alta latencia de localStorage
 let storedModel = localStorage.getItem('dhub_gemini_model') || '';
@@ -423,6 +500,8 @@ function startLeadIntakeStep() {
     currentInterviewTurn = 0;
     chatMessagesHistory = [];
     leadData = { name: '', email: '', phone: '' };
+    generatedRoadmapData = null;
+    initNewSessionTracking();
 
     const chatArea = document.getElementById('chatMessagesArea');
     if (!chatArea) return;
@@ -484,6 +563,10 @@ async function handleLeadSubmit(e) {
     if (!name || !email || !phone) return;
 
     leadData = { name, email, phone };
+    if (!currentSessionId) initNewSessionTracking();
+
+    // Checkpoint 0: Registrar datos de contacto inmediatamente en Google Sheets
+    syncRoadmapToSheets('0/5 - Contacto registrado');
 
     const lang = getCurrentSiteLang();
     const i18n = ROADMAP_I18N[lang] || ROADMAP_I18N.es;
@@ -541,6 +624,12 @@ async function generateNextConsultantTurn(promptInstruction) {
 
         // Registrar en historial
         chatMessagesHistory.push({ role: 'model', text: consultantReply });
+
+        // Checkpoint P(N): Guardar la pregunta formulada por el sistema en Google Sheets
+        if (currentInterviewTurn >= 1 && currentInterviewTurn <= MAX_INTERVIEW_TURNS) {
+            sessionTurnsData[currentInterviewTurn].question = consultantReply;
+            syncRoadmapToSheets(`En Pregunta ${currentInterviewTurn}/5 (Esperando respuesta)`);
+        }
 
         // Mostrar burbuja del consultor formateada
         const bubble = document.createElement('div');
@@ -735,6 +824,12 @@ async function handleUserSubmit(e) {
     chatArea.scrollTop = chatArea.scrollHeight;
 
     chatMessagesHistory.push({ role: 'user', text: userText });
+
+    // Checkpoint R(N): Guardar la respuesta del usuario inmediatamente en Google Sheets
+    if (currentInterviewTurn >= 1 && currentInterviewTurn <= MAX_INTERVIEW_TURNS) {
+        sessionTurnsData[currentInterviewTurn].answer = userText;
+        syncRoadmapToSheets(`Completó Respuesta ${currentInterviewTurn}/5`);
+    }
 
     textarea.value = '';
     textarea.style.height = 'auto';
@@ -1141,7 +1236,21 @@ function renderFinalRoadmapView(data) {
     const waPartnerBtn = document.getElementById('btnWhatsappPartner');
     if (waPartnerBtn) {
         waPartnerBtn.href = `https://wa.me/5492944000000?text=${waText}`;
+        waPartnerBtn.onclick = () => {
+            syncRoadmapToSheets('100% - Completado (Inició contacto por WhatsApp)');
+        };
     }
+
+    // Checkpoint Final 1: Guardar proyecto detectado y síntesis ejecutiva en Google Sheets
+    syncRoadmapToSheets('5/5 - Hoja de Ruta generada (Subiendo PDF a Drive)', {
+        projectName: data.projectName,
+        executiveSummary: `[ROL D HUB]: ${data.dhubRole}\n\n[DIAGNÓSTICO]: ${data.territorialDiagnosis}`
+    });
+
+    // Checkpoint Final 2: Generar en segundo plano el mismo PDF descargable y subirlo a Google Drive
+    setTimeout(() => {
+        generateAndUploadPdfToDrive(data);
+    }, 350);
 }
 
 function restartChatSession() {
@@ -1155,10 +1264,7 @@ function restartChatSession() {
 /* ==========================================================================
    10. EXPORTACIÓN A PDF EDITORIAL (SISTEMA DE 2 PÁGINAS A4 SIN CORTES)
    ========================================================================== */
-function exportToPDF() {
-    if (!generatedRoadmapData) return;
-
-    const data = generatedRoadmapData;
+function preparePdfCanvasAndOptions(data) {
     const lang = getCurrentSiteLang();
     const i18n = ROADMAP_I18N[lang] || ROADMAP_I18N.es;
     const localeStr = lang === 'en' ? 'en-US' : lang === 'pt' ? 'pt-BR' : 'es-AR';
@@ -1234,8 +1340,6 @@ function exportToPDF() {
     }
 
     const element = document.getElementById('pdf-export-canvas');
-    element.style.display = 'block';
-
     const opt = {
         margin:       [8, 8, 8, 8],
         filename:     `Hoja_de_Ruta_DHub_${data.projectName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`,
@@ -1252,16 +1356,75 @@ function exportToPDF() {
         pagebreak:    { mode: ['css', 'legacy'], before: '.pdf-page-2', avoid: ['tr', '.pdf-avoid-break'] }
     };
 
+    return { element, opt };
+}
+
+/**
+ * Compila silenciosamente el mismo PDF editorial que se entrega al usuario y lo envía
+ * en Base64 a Google Apps Script para alojarlo en Google Drive y vincularlo en Google Sheets.
+ */
+async function generateAndUploadPdfToDrive(data) {
+    if (!data || pdfAlreadySyncedToDrive || !getSheetsWebhookUrl()) return;
+    if (typeof html2pdf === 'undefined') return;
+
+    const { element, opt } = preparePdfCanvasAndOptions(data);
+    if (!element) return;
+
+    activePdfRenderJobs++;
+    element.style.display = 'block';
+
+    try {
+        const pdfDataUri = await html2pdf().set(opt).from(element).outputPdf('datauristring');
+        if (pdfDataUri) {
+            const base64Content = pdfDataUri.includes(',') ? pdfDataUri.split(',')[1] : pdfDataUri;
+            pdfAlreadySyncedToDrive = true;
+            await syncRoadmapToSheets('100% - Hoja de Ruta y PDF Completados', {
+                projectName: data.projectName,
+                executiveSummary: `[ROL D HUB]: ${data.dhubRole}\n\n[DIAGNÓSTICO]: ${data.territorialDiagnosis}`,
+                pdfBase64: base64Content
+            });
+        }
+    } catch (err) {
+        console.warn('No se pudo compilar el PDF en segundo plano para Drive:', err);
+    } finally {
+        activePdfRenderJobs = Math.max(0, activePdfRenderJobs - 1);
+        if (activePdfRenderJobs === 0) {
+            element.style.display = 'none';
+        }
+    }
+}
+
+function exportToPDF() {
+    if (!generatedRoadmapData) return;
+
+    const data = generatedRoadmapData;
+    const { element, opt } = preparePdfCanvasAndOptions(data);
+    if (!element) return;
+
+    activePdfRenderJobs++;
+    element.style.display = 'block';
+
     if (typeof html2pdf !== 'undefined') {
         html2pdf().set(opt).from(element).save().then(() => {
-            element.style.display = 'none';
+            if (!pdfAlreadySyncedToDrive) {
+                generateAndUploadPdfToDrive(data);
+            } else {
+                syncRoadmapToSheets('100% - Hoja de Ruta y PDF Descargado');
+            }
         }).catch(err => {
             console.error('Error al generar PDF:', err);
-            element.style.display = 'none';
             window.print();
+        }).finally(() => {
+            activePdfRenderJobs = Math.max(0, activePdfRenderJobs - 1);
+            if (activePdfRenderJobs === 0) {
+                element.style.display = 'none';
+            }
         });
     } else {
         window.print();
-        element.style.display = 'none';
+        activePdfRenderJobs = Math.max(0, activePdfRenderJobs - 1);
+        if (activePdfRenderJobs === 0) {
+            element.style.display = 'none';
+        }
     }
 }

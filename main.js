@@ -72,7 +72,7 @@ const I18N_DICTIONARY = {
         metric_1_unit: 'años',
         metric_1_label: 'Experiencia combinada en la industria',
         metric_1_sub: 'Visión ejecutiva senior liderando negocios y destinos desde adentro.',
-        metric_2_val: 'Ágil <em>&amp; Real</em>',
+        metric_2_val: 'Ágil <em>& Real</em>',
         metric_2_label: 'Velocidad de implementación',
         metric_2_sub: 'De la estrategia a la acción comercial sin burocracia y con foco en ROI.',
         metric_3_val: 'Red <em>Patagonia</em>',
@@ -199,22 +199,22 @@ const I18N_DICTIONARY = {
         // Evaluación & Hoja de Ruta
         nav_hoja_ruta: 'Hoja de Ruta',
         mobile_nav_eval: '✦ Evaluación & Hoja de Ruta',
-        hero_btn_eval: 'Evaluar Proyecto &amp; Hoja de Ruta',
+        hero_btn_eval: 'Evaluar Proyecto & Hoja de Ruta',
         hero_eval_pill: 'Definí cómo podemos co-ejecutar en tu proyecto (diagnóstico interactivo en 3 min) →',
         eval_sec_badge: 'Evaluación Estratégica en Línea · Destination Hub',
         eval_sec_title: '¿Cómo podemos <em>trabajar juntos</em> en tu proyecto?',
         eval_sec_desc: 'Realizá una evaluación inicial y definí en minutos una <strong>hoja de ruta de co-ejecución personalizada</strong>. A partir de tus respuestas sobre territorio, desafíos de Yield y visión regenerativa, estructuraremos las tareas clave, entregables y KPIs junto a Destination Hub, con un informe descargable en PDF.',
-        eval_sec_btn: 'Evaluar mi Proyecto &amp; Diseñar Hoja de Ruta',
+        eval_sec_btn: 'Evaluar mi Proyecto & Diseñar Hoja de Ruta',
         eval_meta_1: 'Diagnóstico en 4 consultas',
         eval_meta_2: 'Matriz de 4 fases',
         eval_meta_3: 'Descarga en PDF editorial',
         eval_meta_4: 'Sin costo',
-        modal_header_title: 'Diagnóstico &amp; Hoja de Ruta D Hub',
-        modal_header_sub: 'Definición de Co-Ejecución &amp; Ecosistema de Proyecto',
+        modal_header_title: 'Diagnóstico & Hoja de Ruta D Hub',
+        modal_header_sub: 'Definición de Co-Ejecución & Ecosistema de Proyecto',
         modal_status_badge: 'Diagnóstico en Línea',
         modal_input_placeholder: 'Escribe tu respuesta con tus propias palabras...',
         modal_input_help: 'Presiona <strong>Enter</strong> para enviar, <strong>Shift + Enter</strong> para salto de línea.',
-        modal_analyzing_title: 'Estructurando Hoja de Ruta &amp; Modelo D Hub...',
+        modal_analyzing_title: 'Estructurando Hoja de Ruta & Modelo D Hub...',
         modal_analyzing_desc: 'El motor estratégico está cruzando tus respuestas con nuestros modelos de <strong>Yield comercial, articulación B2B y turismo regenerativo (DSO)</strong> para definir cómo co-ejecutaremos contigo.',
         modal_analyzing_badge: 'Generando flujograma de ecosistema y plan de 4 fases...',
         modal_results_tag: 'HOJA DE RUTA ESTRATÉGICA · DESTINATION HUB',
@@ -223,11 +223,11 @@ const I18N_DICTIONARY = {
         modal_btn_pdf: 'Descargar PDF',
         modal_btn_restart: 'Nueva Evaluación',
         modal_btn_whatsapp_partner: 'Contacta con un Socio de Destination Hub',
-        modal_role_tag: 'PROPUESTA DE VALOR &amp; ALIANZA ESTRATÉGICA',
+        modal_role_tag: 'PROPUESTA DE VALOR & ALIANZA ESTRATÉGICA',
         modal_role_title: '¿Cómo Destination Hub co-ejecuta en tu proyecto?',
-        modal_diag_tag: 'DIAGNÓSTICO ESTRATÉGICO &amp; POTENCIAL TERRITORIAL',
+        modal_diag_tag: 'DIAGNÓSTICO ESTRATÉGICO & POTENCIAL TERRITORIAL',
         modal_flow_title: 'Flujograma del Ecosistema de Proyecto',
-        modal_phases_title: 'Matriz de Co-Ejecución por Fases (Tareas, Entregables &amp; KPIs)'
+        modal_phases_title: 'Matriz de Co-Ejecución por Fases (Tareas, Entregables & KPIs)'
     },
 
     en: {
@@ -267,7 +267,7 @@ const I18N_DICTIONARY = {
         metric_1_unit: 'years',
         metric_1_label: 'Combined industry experience',
         metric_1_sub: 'Senior executive vision leading hospitality businesses and destinations from within.',
-        metric_2_val: 'Agile <em>&amp; Real</em>',
+        metric_2_val: 'Agile <em>& Real</em>',
         metric_2_label: 'Implementation speed',
         metric_2_sub: 'From strategy to commercial execution without bureaucracy and focused on ROI.',
         metric_3_val: 'Patagonia <em>Network</em>',
@@ -394,22 +394,22 @@ const I18N_DICTIONARY = {
         // Project Assessment & Roadmap
         nav_hoja_ruta: 'Roadmap',
         mobile_nav_eval: '✦ Project Assessment & Roadmap',
-        hero_btn_eval: 'Evaluate Project &amp; Roadmap',
+        hero_btn_eval: 'Evaluate Project & Roadmap',
         hero_eval_pill: 'Explore how we can co-execute your project (interactive 3-min assessment) →',
         eval_sec_badge: 'Online Strategic Assessment · Destination Hub',
         eval_sec_title: 'How can we <em>work together</em> on your project?',
         eval_sec_desc: 'Complete an initial assessment and establish a <strong>tailored co-execution roadmap</strong> in minutes. Based on your insights regarding territory, Yield challenges, and regenerative vision, we structure key tasks, deliverables, and KPIs alongside Destination Hub, complete with an editorial PDF report.',
-        eval_sec_btn: 'Evaluate My Project &amp; Design Roadmap',
+        eval_sec_btn: 'Evaluate My Project & Design Roadmap',
         eval_meta_1: '4-step strategic inquiry',
         eval_meta_2: '4-phase matrix',
         eval_meta_3: 'Editorial PDF export',
         eval_meta_4: 'Complimentary',
-        modal_header_title: 'D Hub Assessment &amp; Roadmap',
-        modal_header_sub: 'Co-Execution Framework &amp; Project Ecosystem',
+        modal_header_title: 'D Hub Assessment & Roadmap',
+        modal_header_sub: 'Co-Execution Framework & Project Ecosystem',
         modal_status_badge: 'Online Assessment',
         modal_input_placeholder: 'Type your answer in your own words...',
         modal_input_help: 'Press <strong>Enter</strong> to send, <strong>Shift + Enter</strong> for line break.',
-        modal_analyzing_title: 'Structuring Roadmap &amp; D Hub Model...',
+        modal_analyzing_title: 'Structuring Roadmap & D Hub Model...',
         modal_analyzing_desc: 'Our strategic engine is cross-referencing your insights with our frameworks of <strong>commercial Yield, B2B development, and regenerative tourism (DSO)</strong> to define our joint roadmap.',
         modal_analyzing_badge: 'Generating ecosystem flowchart and 4-phase plan...',
         modal_results_tag: 'STRATEGIC ROADMAP · DESTINATION HUB',
@@ -418,11 +418,11 @@ const I18N_DICTIONARY = {
         modal_btn_pdf: 'Download PDF',
         modal_btn_restart: 'New Assessment',
         modal_btn_whatsapp_partner: 'Contact a Destination Hub Partner',
-        modal_role_tag: 'VALUE PROPOSITION &amp; STRATEGIC PARTNERSHIP',
+        modal_role_tag: 'VALUE PROPOSITION & STRATEGIC PARTNERSHIP',
         modal_role_title: 'How does Destination Hub co-execute in your project?',
-        modal_diag_tag: 'STRATEGIC DIAGNOSIS &amp; TERRITORIAL POTENTIAL',
+        modal_diag_tag: 'STRATEGIC DIAGNOSIS & TERRITORIAL POTENTIAL',
         modal_flow_title: 'Project Ecosystem Flowchart',
-        modal_phases_title: 'Co-Execution Phase Matrix (Tasks, Deliverables &amp; KPIs)'
+        modal_phases_title: 'Co-Execution Phase Matrix (Tasks, Deliverables & KPIs)'
     },
 
     pt: {
@@ -462,7 +462,7 @@ const I18N_DICTIONARY = {
         metric_1_unit: 'anos',
         metric_1_label: 'Experiência combinada no setor',
         metric_1_sub: 'Visão executiva sênior liderando negócios e destinos por dentro.',
-        metric_2_val: 'Ágil <em>&amp; Real</em>',
+        metric_2_val: 'Ágil <em>& Real</em>',
         metric_2_label: 'Velocidade de implementação',
         metric_2_sub: 'Da estratégia à ação comercial sem burocracia e com foco em ROI.',
         metric_3_val: 'Rede <em>Patagônia</em>',
@@ -589,22 +589,22 @@ const I18N_DICTIONARY = {
         // Avaliação & Roteiro
         nav_hoja_ruta: 'Roteiro',
         mobile_nav_eval: '✦ Avaliação & Roteiro',
-        hero_btn_eval: 'Avaliar Projeto &amp; Roteiro',
+        hero_btn_eval: 'Avaliar Projeto & Roteiro',
         hero_eval_pill: 'Defina como podemos co-executar no seu projeto (diagnóstico interativo em 3 min) →',
         eval_sec_badge: 'Avaliação Estratégica Online · Destination Hub',
         eval_sec_title: 'Como podemos <em>trabalhar juntos</em> no seu projeto?',
         eval_sec_desc: 'Faça uma avaliação inicial e defina em minutos um <strong>roteiro personalizado de co-execução</strong>. A partir das suas respostas sobre território, desafios de Yield e visão regenerativa, estruturamos tarefas-chave, entregáveis e KPIs junto à Destination Hub, com relatório para download em PDF.',
-        eval_sec_btn: 'Avaliar Meu Projeto &amp; Desenhar Roteiro',
+        eval_sec_btn: 'Avaliar Meu Projeto & Desenhar Roteiro',
         eval_meta_1: 'Diagnóstico em 4 consultas',
         eval_meta_2: 'Matriz de 4 fases',
         eval_meta_3: 'Download em PDF editorial',
         eval_meta_4: 'Sem custo',
-        modal_header_title: 'Diagnóstico &amp; Roteiro D Hub',
-        modal_header_sub: 'Definição de Co-Execução &amp; Ecossistema de Projeto',
+        modal_header_title: 'Diagnóstico & Roteiro D Hub',
+        modal_header_sub: 'Definição de Co-Execução & Ecossistema de Projeto',
         modal_status_badge: 'Diagnóstico Online',
         modal_input_placeholder: 'Escreva sua resposta com suas próprias palavras...',
         modal_input_help: 'Pressione <strong>Enter</strong> para enviar, <strong>Shift + Enter</strong> para quebra de linha.',
-        modal_analyzing_title: 'Estruturando Roteiro &amp; Modelo D Hub...',
+        modal_analyzing_title: 'Estruturando Roteiro & Modelo D Hub...',
         modal_analyzing_desc: 'O motor estratégico está cruzando suas respostas com nossos modelos de <strong>Yield comercial, articulação B2B e turismo regenerativo (DSO)</strong> para definir como co-executaremos com você.',
         modal_analyzing_badge: 'Gerando fluxograma de ecossistema e plano de 4 fases...',
         modal_results_tag: 'ROTEIRO ESTRATÉGICO · DESTINATION HUB',
@@ -613,11 +613,11 @@ const I18N_DICTIONARY = {
         modal_btn_pdf: 'Baixar PDF',
         modal_btn_restart: 'Nova Avaliação',
         modal_btn_whatsapp_partner: 'Fale com um Sócio da Destination Hub',
-        modal_role_tag: 'PROPOSTA DE VALOR &amp; PARCERIA ESTRATÉGICA',
+        modal_role_tag: 'PROPOSTA DE VALOR & PARCERIA ESTRATÉGICA',
         modal_role_title: 'Como a Destination Hub co-executa no seu projeto?',
-        modal_diag_tag: 'DIAGNÓSTICO ESTRATÉGICO &amp; POTENCIAL TERRITORIAL',
+        modal_diag_tag: 'DIAGNÓSTICO ESTRATÉGICO & POTENCIAL TERRITORIAL',
         modal_flow_title: 'Fluxograma do Ecossistema de Projeto',
-        modal_phases_title: 'Matriz de Co-Execução por Fases (Tarefas, Entregáveis &amp; KPIs)'
+        modal_phases_title: 'Matriz de Co-Execução por Fases (Tarefas, Entregáveis & KPIs)'
     }
 };
 
@@ -852,7 +852,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (dict[key] !== undefined) {
-                el.textContent = dict[key];
+                el.textContent = typeof dict[key] === 'string' ? dict[key].replace(/&amp;/g, '&') : dict[key];
             }
         });
 
@@ -868,7 +868,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
             const key = el.getAttribute('data-i18n-placeholder');
             if (dict[key] !== undefined) {
-                el.setAttribute('placeholder', dict[key]);
+                el.setAttribute('placeholder', typeof dict[key] === 'string' ? dict[key].replace(/&amp;/g, '&') : dict[key]);
             }
         });
 
@@ -876,7 +876,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n-caption]').forEach(el => {
             const key = el.getAttribute('data-i18n-caption');
             if (dict[key] !== undefined) {
-                el.setAttribute('data-caption', dict[key]);
+                el.setAttribute('data-caption', typeof dict[key] === 'string' ? dict[key].replace(/&amp;/g, '&') : dict[key]);
             }
         });
 
@@ -884,7 +884,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n-alt]').forEach(el => {
             const key = el.getAttribute('data-i18n-alt');
             if (dict[key] !== undefined) {
-                el.setAttribute('alt', dict[key]);
+                el.setAttribute('alt', typeof dict[key] === 'string' ? dict[key].replace(/&amp;/g, '&') : dict[key]);
             }
         });
 
@@ -1323,7 +1323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
     // 8. INDICADOR DE SECCIÓN ACTIVA EN NAVEGACIÓN & TRACKING DE SECCIONES
     // =========================================================================
-    const sections = document.querySelectorAll('main section[id]');
+    const sections = document.querySelectorAll('main section[id], #contacto');
     const navLinks = document.querySelectorAll('.nav-desktop .nav-link');
     const viewedSections = new Set();
 

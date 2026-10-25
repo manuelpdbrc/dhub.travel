@@ -1147,20 +1147,19 @@ html[data-font="outfit"] .h2-editorial em {
     font-style: italic;
 }
 
+.manifesto-divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--line-subtle);
+    margin-bottom: clamp(1.5rem, 2.5vw, 2.25rem);
+}
+
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
-    padding-top: clamp(1.75rem, 2.8vw, 2.5rem);
-    border-top: 1px solid var(--line-subtle);
+    padding-top: clamp(1.5rem, 2.5vw, 2.25rem);
     align-items: start;
-    scroll-margin-top: 4.5rem;
-}
-
-@media (max-width: 768px) {
-    .contact-grid {
-        scroll-margin-top: 4.25rem;
-    }
 }
 
 @media (min-width: 860px) {

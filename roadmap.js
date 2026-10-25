@@ -70,6 +70,8 @@ let storedApiKey = localStorage.getItem('dhub_gemini_api_key') || getProtectedSe
 
 // Estado de trazabilidad progresiva para Google Sheets y Drive
 let currentSessionId = '';
+let visitorIpInfo = '';
+let visitorIpPromise = null;
 let sessionTurnsData = {
     1: { question: '', answer: '' },
     2: { question: '', answer: '' },
@@ -79,6 +81,75 @@ let sessionTurnsData = {
 };
 let pdfAlreadySyncedToDrive = false;
 let activePdfRenderJobs = 0;
+
+/**
+ * Obtiene en segundo plano la dirección IP pública y ciudad/país del visitante
+ * con múltiples proveedores de respaldo (CORS-enabled).
+ */
+async function resolveVisitorIpAndLocation() {
+    if (visitorIpInfo) return visitorIpInfo;
+    if (visitorIpPromise) return visitorIpPromise;
+
+    visitorIpPromise = (async () => {
+        // Proveedor 1: ipwho.is (IP + Ciudad + Región + País, sin límite estricto)
+        try {
+            const res = await fetch('https://ipwho.is/', { cache: 'no-store' });
+            if (res.ok) {
+                const data = await res.json();
+                if (data && data.ip && data.success !== false) {
+                    const loc = [data.city, data.region, data.country_code || data.country].filter(Boolean).join(', ');
+                    visitorIpInfo = loc ? `${data.ip} · ${loc}` : data.ip;
+                    return visitorIpInfo;
+                }
+            }
+        } catch (_) {}
+
+        // Proveedor 2: freeipapi.com (Respaldo IP + Ciudad + País)
+        try {
+            const res = await fetch('https://freeipapi.com/api/json', { cache: 'no-store' });
+            if (res.ok) {
+                const data = await res.json();
+                if (data && data.ipAddress) {
+                    const loc = [data.cityName, data.regionName, data.countryCode || data.countryName].filter(Boolean).join(', ');
+                    visitorIpInfo = loc ? `${data.ipAddress} · ${loc}` : data.ipAddress;
+                    return visitorIpInfo;
+                }
+            }
+        } catch (_) {}
+
+        // Proveedor 3: ipapi.co (Respaldo secundario IP + Ciudad)
+        try {
+            const res = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
+            if (res.ok) {
+                const data = await res.json();
+                if (data && data.ip) {
+                    const loc = [data.city, data.region, data.country_code || data.country_name].filter(Boolean).join(', ');
+                    visitorIpInfo = loc ? `${data.ip} · ${loc}` : data.ip;
+                    return visitorIpInfo;
+                }
+            }
+        } catch (_) {}
+
+        // Proveedor 4: api.ipify.org (Contingencia pura de IP)
+        try {
+            const res = await fetch('https://api.ipify.org?format=json', { cache: 'no-store' });
+            if (res.ok) {
+                const data = await res.json();
+                if (data && data.ip) {
+                    visitorIpInfo = data.ip;
+                    return visitorIpInfo;
+                }
+            }
+        } catch (_) {}
+
+        return '';
+    })();
+
+    return visitorIpPromise;
+}
+
+// Iniciar resolución de IP/Ciudad apenas carga el módulo
+resolveVisitorIpAndLocation();
 
 function initNewSessionTracking() {
     const ts = Date.now().toString(36).toUpperCase();
@@ -92,6 +163,7 @@ function initNewSessionTracking() {
         5: { question: '', answer: '' }
     };
     pdfAlreadySyncedToDrive = false;
+    resolveVisitorIpAndLocation();
 }
 
 function getSheetsWebhookUrl() {
@@ -109,10 +181,15 @@ async function syncRoadmapToSheets(progressStatus, extraPayload = {}) {
     const webhookUrl = getSheetsWebhookUrl();
     if (!webhookUrl || !currentSessionId) return null;
 
+    if (!visitorIpInfo && visitorIpPromise) {
+        await Promise.race([visitorIpPromise, new Promise(r => setTimeout(r, 800))]);
+    }
+
     const payload = {
         sessionId: currentSessionId,
         timestamp: new Date().toISOString(),
         lang: getCurrentSiteLang(),
+        ipLocation: visitorIpInfo || '',
         lead: leadData,
         progress: progressStatus,
         turns: sessionTurnsData,

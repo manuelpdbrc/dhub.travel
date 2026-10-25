@@ -3,57 +3,59 @@
  * DESTINATION HUB (dhub.travel) — BACKEND SERVERLESS EN GOOGLE APPS SCRIPT
  * ============================================================================
  * Registra en tiempo real todas las interacciones del sistema de Diagnóstico y
- * Hoja de Ruta en Google Sheets (incluyendo abandonos parciales turno a turno)
- * y aloja automáticamente el PDF editorial descargable en Google Drive.
+ * Hoja de Ruta en Google Sheets (incluyendo IP y Ciudad, y abandonos parciales
+ * turno a turno) y aloja automáticamente el PDF editorial en Google Drive.
  *
- * INSTRUCCIONES DE INSTALACIÓN (2 MINUTOS):
- * 1. Abre una planilla nueva en Google Sheets (ej. "DHub - Diagnósticos y Leads").
- * 2. En el menú superior ve a: Extensiones > Apps Script.
- * 3. Borra el código que venga por defecto y pega TODO este archivo.
- * 4. En la barra superior, selecciona la función "setupSheet" y haz clic en "Ejecutar"
- *    (otorga los permisos a tu cuenta de Google para Sheets y Drive).
- * 5. Haz clic en el botón azul "Implementar" > "Nueva implementación".
- * 6. En "Selecciona el tipo" elige "Aplicación web":
- *    - Ejecutar como: "Yo" (tu cuenta de administrador)
- *    - Quién tiene acceso: "Cualquier usuario" (Anyone)
- * 7. Haz clic en "Implementar", copia la "URL de la aplicación web" (termina en /exec)
- *    y pégala en la constante ROADMAP_SHEETS_WEBHOOK_URL al inicio de roadmap.js.
+ * INSTRUCCIONES DE ACTUALIZACIÓN EN GOOGLE APPS SCRIPT:
+ * 1. Abre tu planilla en Google Sheets > Extensiones > Apps Script.
+ * 2. Reemplaza todo el código con esta versión actualizada y guarda (Ctrl+S).
+ * 3. Haz clic en "Implementar" > "Gestionar implementaciones" > ícono del lápiz (Editar)
+ *    > en "Versión" elige "Nueva versión" > "Implementar"
+ *    (o "Implementar" > "Nueva implementación").
  */
 
 const DRIVE_FOLDER_NAME = "Destination Hub - Hojas de Ruta PDF";
+const TOTAL_COLUMNS = 22;
 
 /**
- * Inicializa los 21 encabezados de la tabla en Google Sheets con formato corporativo.
+ * Inicializa o migra automáticamente los 22 encabezados de la tabla en Google Sheets.
  */
 function setupSheet() {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   const headers = [
-    "ID Sesión",                  // Col 1  (A)
-    "Fecha y Hora Inicio",        // Col 2  (B)
-    "Última Actividad",           // Col 3  (C)
-    "Nombre",                     // Col 4  (D)
-    "Email",                      // Col 5  (E)
-    "Teléfono / WhatsApp",        // Col 6  (F)
-    "Idioma",                     // Col 7  (G)
-    "Estado / Progreso",          // Col 8  (H)
-    "P1 (Sistema) - Perfil",      // Col 9  (I)
-    "R1 (Usuario) - Perfil",      // Col 10 (J)
-    "P2 (Sistema) - Desafíos",    // Col 11 (K)
-    "R2 (Usuario) - Desafíos",    // Col 12 (L)
-    "P3 (Sistema) - Pilares",     // Col 13 (M)
-    "R3 (Usuario) - Pilares",     // Col 14 (N)
-    "P4 (Sistema) - Modelo",      // Col 15 (O)
-    "R4 (Usuario) - Modelo",      // Col 16 (P)
-    "P5 (Sistema) - Cierre",      // Col 17 (Q)
-    "R5 (Usuario) - Cierre",      // Col 18 (R)
-    "Proyecto Detectado",         // Col 19 (S)
-    "Diagnóstico Ejecutivo",      // Col 20 (T)
-    "Link PDF Hoja de Ruta"       // Col 21 (U)
+    "ID Sesión",                  // Col 1  (A) - idx 0
+    "Fecha y Hora Inicio",        // Col 2  (B) - idx 1
+    "Última Actividad",           // Col 3  (C) - idx 2
+    "Nombre",                     // Col 4  (D) - idx 3
+    "Email",                      // Col 5  (E) - idx 4
+    "Teléfono / WhatsApp",        // Col 6  (F) - idx 5
+    "Idioma",                     // Col 7  (G) - idx 6
+    "IP y Ciudad",                // Col 8  (H) - idx 7
+    "Estado / Progreso",          // Col 9  (I) - idx 8
+    "P1 (Sistema) - Perfil",      // Col 10 (J) - idx 9
+    "R1 (Usuario) - Perfil",      // Col 11 (K) - idx 10
+    "P2 (Sistema) - Desafíos",    // Col 12 (L) - idx 11
+    "R2 (Usuario) - Desafíos",    // Col 13 (M) - idx 12
+    "P3 (Sistema) - Pilares",     // Col 14 (N) - idx 13
+    "R3 (Usuario) - Pilares",     // Col 15 (O) - idx 14
+    "P4 (Sistema) - Modelo",      // Col 16 (P) - idx 15
+    "R4 (Usuario) - Modelo",      // Col 17 (Q) - idx 16
+    "P5 (Sistema) - Cierre",      // Col 18 (R) - idx 17
+    "R5 (Usuario) - Cierre",      // Col 19 (S) - idx 18
+    "Proyecto Detectado",         // Col 20 (T) - idx 19
+    "Diagnóstico Ejecutivo",      // Col 21 (U) - idx 20
+    "Link PDF Hoja de Ruta"       // Col 22 (V) - idx 21
   ];
 
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(headers);
   } else {
+    // Si la hoja tenía el esquema anterior de 21 columnas (donde Col 8 era "Estado / Progreso"),
+    // insertar automáticamente la nueva columna 8 para no desalinear las filas ya registradas.
+    const currentCol8 = String(sheet.getRange(1, 8).getValue()).trim();
+    if (currentCol8 === "Estado / Progreso") {
+      sheet.insertColumnBefore(8);
+    }
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
   }
 
@@ -82,7 +84,8 @@ function doPost(e) {
     const data = JSON.parse(e.postData.contents);
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
-    if (sheet.getLastRow() === 0) {
+    // Inicializar o migrar columna "IP y Ciudad" automáticamente si hace falta
+    if (sheet.getLastRow() === 0 || String(sheet.getRange(1, 8).getValue()).trim() === "Estado / Progreso") {
       setupSheet();
     }
 
@@ -103,17 +106,17 @@ function doPost(e) {
       }
     }
 
-    // 2. Obtener valores actuales de la fila o inicializar una nueva de 21 columnas
+    // 2. Obtener valores actuales de la fila o inicializar una nueva de 22 columnas
     let rowValues;
     if (rowIndex === -1) {
-      rowValues = new Array(21).fill("");
+      rowValues = new Array(TOTAL_COLUMNS).fill("");
       rowValues[0] = sessionId;
       rowValues[1] = now; // Fecha y Hora Inicio
     } else {
-      rowValues = sheet.getRange(rowIndex, 1, 1, 21).getValues()[0];
+      rowValues = sheet.getRange(rowIndex, 1, 1, TOTAL_COLUMNS).getValues()[0];
     }
 
-    // 3. Actualizar metadatos y datos de contacto (Bloque A)
+    // 3. Actualizar metadatos, contacto e IP/Ciudad (Bloque A: Cols A a I)
     rowValues[2] = now; // Última Actividad
     if (data.lead) {
       if (data.lead.name) rowValues[3] = data.lead.name;
@@ -123,17 +126,20 @@ function doPost(e) {
     if (data.lang) {
       rowValues[6] = String(data.lang).toUpperCase();
     }
+    if (data.ipLocation) {
+      rowValues[7] = data.ipLocation;
+    }
     if (data.progress) {
-      rowValues[7] = data.progress;
+      rowValues[8] = data.progress;
     }
 
-    // 4. Actualizar las 5 Preguntas del Sistema y 5 Respuestas del Usuario (Bloque B: Cols I a R)
+    // 4. Actualizar las 5 Preguntas del Sistema y 5 Respuestas del Usuario (Bloque B: Cols J a S)
     if (data.turns) {
       for (let t = 1; t <= 5; t++) {
         const turnObj = data.turns[t] || data.turns[String(t)];
         if (turnObj) {
-          const qIdx = 8 + (t - 1) * 2; // Índices 8, 10, 12, 14, 16 (Cols 9, 11, 13, 15, 17)
-          const aIdx = qIdx + 1;        // Índices 9, 11, 13, 15, 17 (Cols 10, 12, 14, 16, 18)
+          const qIdx = 9 + (t - 1) * 2; // Índices 9, 11, 13, 15, 17 (Cols 10, 12, 14, 16, 18)
+          const aIdx = qIdx + 1;        // Índices 10, 12, 14, 16, 18 (Cols 11, 13, 15, 17, 19)
           if (turnObj.question) rowValues[qIdx] = turnObj.question;
           if (turnObj.answer) rowValues[aIdx] = turnObj.answer;
         }
@@ -142,21 +148,21 @@ function doPost(e) {
 
     // Soporte adicional para envío individual por turno
     if (data.turn && data.turn >= 1 && data.turn <= 5) {
-      const qIdx = 8 + (data.turn - 1) * 2;
+      const qIdx = 9 + (data.turn - 1) * 2;
       const aIdx = qIdx + 1;
       if (data.questionText) rowValues[qIdx] = data.questionText;
       if (data.answerText) rowValues[aIdx] = data.answerText;
     }
 
-    // 5. Actualizar Proyecto, Diagnóstico Ejecutivo y Archivo PDF en Drive (Bloque C: Cols S a U)
+    // 5. Actualizar Proyecto, Diagnóstico Ejecutivo y Archivo PDF en Drive (Bloque C: Cols T a V)
     if (data.projectName) {
-      rowValues[18] = data.projectName;
+      rowValues[19] = data.projectName;
     }
     if (data.executiveSummary) {
-      rowValues[19] = data.executiveSummary;
+      rowValues[20] = data.executiveSummary;
     }
 
-    let pdfUrl = rowValues[20] || "";
+    let pdfUrl = rowValues[21] || "";
     if (data.pdfBase64) {
       const folder = getOrCreateFolder();
       const safeProject = (data.projectName || "Proyecto").replace(/[^a-zA-Z0-9_-]/g, "_");
@@ -169,7 +175,7 @@ function doPost(e) {
       pdfFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
       pdfUrl = pdfFile.getUrl();
 
-      rowValues[20] = pdfUrl;
+      rowValues[21] = pdfUrl;
     }
 
     // 6. Guardar toda la fila en una sola operación atómica
@@ -177,7 +183,7 @@ function doPost(e) {
       sheet.appendRow(rowValues);
       rowIndex = sheet.getLastRow();
     } else {
-      sheet.getRange(rowIndex, 1, 1, 21).setValues([rowValues]);
+      sheet.getRange(rowIndex, 1, 1, TOTAL_COLUMNS).setValues([rowValues]);
     }
 
     return ContentService.createTextOutput(JSON.stringify({

@@ -1167,10 +1167,17 @@
     background-color: #FFFFFF;
     color: #183028;
     width: 710px;
-    margin: 0 auto;
+    margin: 0 !important;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
+}
+
+.html2pdf__container {
+    left: 0 !important;
+    right: auto !important;
+    top: 0 !important;
+    margin: 0 !important;
 }
 
 #pdf-export-canvas * {
@@ -3357,6 +3364,8 @@ DEBES devolver OBLIGATORIAMENTE un JSON válido (sin texto adicional fuera del J
             scale: 2, 
             useCORS: true, 
             logging: false,
+            x: 0,
+            y: 0,
             scrollX: 0,
             scrollY: 0,
             windowWidth: 720

@@ -1348,6 +1348,8 @@ function preparePdfCanvasAndOptions(data) {
             scale: 2, 
             useCORS: true, 
             logging: false,
+            x: 0,
+            y: 0,
             scrollX: 0,
             scrollY: 0,
             windowWidth: 720

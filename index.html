@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es-AR" data-lang="es" data-font="cormorant" class="is-intro-locked" prefix="og: https://ogp.me/ns#">
+<html lang="es-AR" data-lang="es" data-font="instrument" class="is-intro-locked" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,10 +101,61 @@
         </style>
     </noscript>
 
-    <!-- Google Fonts: Carga Prioritaria de la Tipografía Principal (Cormorant Garamond, Plus Jakarta Sans, JetBrains Mono) -->
+    <!-- Google Fonts: Editorial Contemporary Typography (Instrument Serif, Cormorant Garamond, Plus Jakarta Sans, Outfit, JetBrains Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS Modern Engine & Custom Editorial Design Tokens -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        canvas: {
+                            DEFAULT: '#FAF8F5',
+                            warm: '#F5F2EB',
+                        },
+                        stone: {
+                            50: '#FAF8F5',
+                            100: '#F5F2EB',
+                            200: '#EFECE6',
+                            300: '#E0DDD6',
+                        },
+                        carbon: {
+                            DEFAULT: '#1C1E1B',
+                            muted: '#2C302E',
+                        },
+                        taupe: {
+                            DEFAULT: '#5E635B',
+                            light: '#7A8077',
+                        },
+                        forest: {
+                            DEFAULT: '#111A16',
+                            dark: '#0E1713',
+                            card: '#15221C',
+                        },
+                        terracota: {
+                            DEFAULT: '#B85C38',
+                            hover: '#A04826',
+                            light: '#FBF2EE',
+                        },
+                        gold: {
+                            DEFAULT: '#C29F68',
+                            muted: '#B38E54',
+                            light: '#FAF6EE',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Instrument Serif"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', '"Outfit"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
 
     <!-- Pure Lightweight Stylesheet -->
     <link rel="stylesheet" href="styles.css">
@@ -338,7 +389,7 @@
     <!-- =====================================================================
          HEADER MINIMALISTA CON SELECTOR MULTILINGÜE (ES · EN · PT)
     ====================================================================== -->
-    <header class="site-header">
+    <header id="site-header" class="site-header">
         <div class="container header-inner">
             
             <!-- Brand Lockup with Isotipo C (Brújula de Ciclo Regenerativo) -->
@@ -439,24 +490,25 @@
 
     <main id="contenido-principal">
         <!-- =================================================================
-             1. HERO + CLIENTES + 3 DIFERENCIALES
+             1. HERO SECTION (EDITORIAL ASYMMETRIC SPLIT + FLOATING METRIC GLASS)
         ================================================================== -->
         <section id="inicio" class="hero" aria-label="Presentación de Destination Hub Patagonia">
             <div class="container">
                 
                 <div class="hero-grid">
-                    <!-- Left Column: Airy Editorial Message -->
+                    <!-- Left Column: Airy Editorial Message & Value Prop -->
                     <div data-reveal="up">
-                        <span class="hero-kicker" data-i18n="hero_kicker">
-                            Consultora Estratégica & Comercial · Patagonia
-                        </span>
+                        <div class="hero-kicker">
+                            <span class="hero-pulse-dot" aria-hidden="true"></span>
+                            <span data-i18n="hero_kicker">DESTINATION HUB · PATAGONIA</span>
+                        </div>
 
                         <h1 class="h1-display" data-i18n-html="hero_h1">
                             Transformamos el potencial del territorio en negocios y destinos <em>regenerativos.</em>
                         </h1>
 
                         <p class="lead" style="margin-top: 1.75rem;" data-i18n-html="hero_lead">
-                            Actuamos como una <strong>extensión directa de tu equipo</strong> para diseñar y ejecutar planes de negocio, comercialización, inteligencia de datos y sustentabilidad. A la carta o llave en mano.
+                            Actuamos como una <strong>extensión directa de tu equipo</strong> para diseñar y ejecutar planes de negocio, comercialización B2B, inteligencia de datos y sustentabilidad. A la carta o llave en mano.
                         </p>
 
                         <div class="hero-actions">
@@ -473,12 +525,12 @@
                         <div class="hero-eval-banner">
                             <button type="button" class="hero-eval-pill" onclick="openRoadmapModal()">
                                 <span class="hero-eval-sparkle">✦</span>
-                                <span data-i18n="hero_eval_pill">Definí cómo podemos co-ejecutar en tu proyecto (diagnóstico interactivo en 3 min) →</span>
+                                <span data-i18n="hero_eval_pill">Diagnóstico estratégico de co-ejecución en 3 min →</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Right Column: Editorial Photo Diptych + Rotating Compass Seal -->
+                    <!-- Right Column: Curated Photographic Composition + Floating Metric Glass -->
                     <div class="hero-composition">
                         
                         <!-- Rotating Compass Seal (Isotipo C) -->
@@ -487,34 +539,41 @@
                                 <defs>
                                     <path id="sealCircle" d="M 60, 60 m -46, 0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"/>
                                 </defs>
-                                <text fill="#183028" font-family="JetBrains Mono, monospace" font-size="7.2" letter-spacing="2.3">
+                                <text fill="#1C1E1B" font-family="JetBrains Mono, monospace" font-size="7.2" letter-spacing="2.3">
                                     <textPath href="#sealCircle">DESTINATION HUB · PATAGONIA ·</textPath>
                                 </text>
                             </svg>
                             <svg class="compass-seal-core" viewBox="0 0 200 200" fill="none">
-                                <path d="M100 28 A72 72 0 0 1 172 100" stroke="#183028" stroke-width="8" stroke-linecap="round"/>
+                                <path d="M100 28 A72 72 0 0 1 172 100" stroke="#1C1E1B" stroke-width="8" stroke-linecap="round"/>
                                 <path d="M156 112 A58 58 0 0 1 88 158" stroke="#2B5B6C" stroke-width="7.5" stroke-linecap="round"/>
-                                <path d="M76 148 A52 52 0 0 1 46 84" stroke="#C8A97E" stroke-width="7" stroke-linecap="round"/>
-                                <polygon points="152,48 108,104 96,92" fill="#C85A32"/>
-                                <polygon points="58,142 108,104 96,92" fill="#183028"/>
-                                <circle cx="100" cy="100" r="9" fill="#F6F5F0" stroke="#183028" stroke-width="4"/>
+                                <path d="M76 148 A52 52 0 0 1 46 84" stroke="#C29F68" stroke-width="7" stroke-linecap="round"/>
+                                <polygon points="152,48 108,104 96,92" fill="#B85C38"/>
+                                <polygon points="58,142 108,104 96,92" fill="#1C1E1B"/>
+                                <circle cx="100" cy="100" r="9" fill="#FAF8F5" stroke="#1C1E1B" stroke-width="4"/>
                             </svg>
                         </div>
 
-                        <!-- Main Landscape Photo -->
+                        <!-- Main Portrait 4:5 Photo Frame -->
                         <div class="media-frame hero-main-photo" data-reveal="image" data-caption="PATAGONIA · 41°08'S 71°18'W" data-i18n-caption="caption_hero_main">
                             <img src="img/web/hero-patagonia.jpg" width="1600" height="1067" data-parallax="16" alt="Lago glaciar y cordillera en Patagonia enmarcados por bosque nativo" data-i18n-alt="alt_hero_main" fetchpriority="high" decoding="async">
                         </div>
 
-                        <!-- Overlapping Portrait Inset Photo -->
-                        <div class="media-frame hero-inset-photo" data-reveal="image" data-caption="LAGO MASCARDI · AGUAS GLACIARES" data-i18n-caption="caption_hero_inset" style="--delay: 0.2s;">
-                            <img src="img/web/emerald-lake.jpg" width="1067" height="1600" data-parallax="-12" alt="Aguas cristalinas de deshielo en Lago Mascardi, Patagonia" data-i18n-alt="alt_hero_inset" decoding="async">
+                        <!-- Overlapping Floating Metric Card with Glassmorphism -->
+                        <div class="hero-metric-float" data-reveal="up" style="--delay: 0.25s;">
+                            <div class="hero-metric-float-val">
+                                <span data-counter="100">+100</span> <em data-i18n="metric_1_unit">años</em>
+                            </div>
+                            <p class="hero-metric-float-desc" data-i18n="metric_1_sub">Visión ejecutiva senior liderando negocios y destinos desde adentro.</p>
+                            <div class="hero-metric-float-badge">
+                                <span>✦</span>
+                                <span>Yield sobre volumen</span>
+                            </div>
                         </div>
 
                     </div>
                 </div>
 
-                <!-- Minimal Target Clients Bar ("Para quiénes trabajamos") -->
+                <!-- Minimal Target Clients Bar ("Acompañamos a") -->
                 <div class="clients-bar" data-reveal="up" style="--delay: 0.1s;">
                     <span class="clients-label" data-i18n="clients_label">Acompañamos a</span>
                     <ul class="clients-list">
@@ -526,7 +585,7 @@
                     </ul>
                 </div>
 
-                <!-- 3 Core Differentials (Light & Concise) -->
+                <!-- 3 Core Differentials Strip (Airy & Metric-Driven) -->
                 <div class="metrics-strip">
                     <div class="metric-item" data-reveal="up" style="--delay: 0.1s;">
                         <div class="metric-value"><span data-counter="100">+100</span> <em data-i18n="metric_1_unit">años</em></div>
@@ -637,16 +696,16 @@
                     </p>
                 </div>
 
-                <!-- 3 Visual & Airy Columns (with Interactive Spotlight Hover) -->
+                <!-- 3 Visual & Airy Columns (Modular Large-Format Cards) -->
                 <div class="practices-columns">
                     
                     <!-- Practice 01 -->
-                    <article class="practice-card" data-reveal="up" style="--delay: 0.05s;">
+                    <article class="practice-card group" data-reveal="up" style="--delay: 0.05s;">
                         <div class="media-frame practice-photo" data-reveal="image" data-caption="PRÁCTICA 01 · DATOS & ROI" data-i18n-caption="caption_p1">
                             <img src="img/web/lodge-territory.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Lodge de montaña integrado en el bosque y lago patagónico" data-i18n-alt="alt_p1">
                         </div>
                         <div class="practice-top-row">
-                            <span class="practice-idx" data-i18n="p1_idx">Práctica 01</span>
+                            <span class="practice-idx" data-i18n="p1_idx">01</span>
                             <span class="section-index" data-i18n="p1_badge">Datos & ROI</span>
                         </div>
                         <h3 class="practice-title" data-i18n="p1_title">Estrategia, Datos & Planes de Negocio</h3>
@@ -665,12 +724,12 @@
                     </article>
 
                     <!-- Practice 02 -->
-                    <article class="practice-card" data-reveal="up" style="--delay: 0.15s;">
+                    <article class="practice-card group" data-reveal="up" style="--delay: 0.15s;">
                         <div class="media-frame practice-photo" data-reveal="image" data-caption="PRÁCTICA 02 · MERCADOS B2B" data-i18n-caption="caption_p2" style="--delay: 0.1s;">
                             <img src="img/web/kayak-golden.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Experiencia de kayak al atardecer en aguas patagónicas" data-i18n-alt="alt_p2">
                         </div>
                         <div class="practice-top-row">
-                            <span class="practice-idx" data-i18n="p2_idx">Práctica 02</span>
+                            <span class="practice-idx" data-i18n="p2_idx">02</span>
                             <span class="section-index" data-i18n="p2_badge">B2B & Marca</span>
                         </div>
                         <h3 class="practice-title" data-i18n="p2_title">Marketing & Representación Comercial</h3>
@@ -689,12 +748,12 @@
                     </article>
 
                     <!-- Practice 03 -->
-                    <article class="practice-card" data-reveal="up" style="--delay: 0.25s;">
+                    <article class="practice-card group" data-reveal="up" style="--delay: 0.25s;">
                         <div class="media-frame practice-photo" data-reveal="image" data-caption="PRÁCTICA 03 · GESTIÓN & EQUIPOS" data-i18n-caption="caption_p3" style="--delay: 0.2s;">
                             <img src="img/web/cultura-hospitalidad.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Terraza de madera con hospitalidad frente al lago en Patagonia" data-i18n-alt="alt_p3">
                         </div>
                         <div class="practice-top-row">
-                            <span class="practice-idx" data-i18n="p3_idx">Práctica 03</span>
+                            <span class="practice-idx" data-i18n="p3_idx">03</span>
                             <span class="section-index" data-i18n="p3_badge">Cultura & Gestión</span>
                         </div>
                         <h3 class="practice-title" data-i18n="p3_title">Sustentabilidad & Capacitación</h3>
@@ -718,22 +777,151 @@
         </section>
 
         <!-- =================================================================
-             2.1 INVITACIÓN EDITORIAL: EVALUACIÓN DE PROYECTO & HOJA DE RUTA
+             2.1 CONSOLA INTERACTIVA: EVALUACIÓN DE PROYECTO & HOJA DE RUTA
         ================================================================== -->
-        <section class="roadmap-invite-section" aria-label="Evaluación de Proyecto y Hoja de Ruta de Co-Ejecución">
+        <section id="diagnostico" class="roadmap-invite-section" aria-label="Evaluación de Proyecto y Hoja de Ruta de Co-Ejecución">
             <div class="container">
-                <div class="roadmap-invite-card" data-reveal="up">
-                    <div class="roadmap-invite-badge">
-                        <span class="roadmap-invite-dot"></span>
-                        <span data-i18n="eval_sec_badge">Evaluación Estratégica en Línea · Destination Hub</span>
+                
+                <div class="roadmap-console-card" data-reveal="up">
+                    
+                    <!-- Header Editorial de la Consola -->
+                    <div class="text-center max-w-3xl mx-auto mb-10">
+                        <div class="roadmap-invite-badge">
+                            <span class="roadmap-invite-dot"></span>
+                            <span data-i18n="eval_sec_badge">Consola Estratégica en Línea · Destination Hub</span>
+                        </div>
+                        <h2 class="h2-editorial" data-i18n-html="eval_sec_title" style="margin-bottom: 0.85rem;">
+                            ¿Cómo podemos <em>co-ejecutar</em> en tu proyecto?
+                        </h2>
+                        <p class="lead mx-auto" data-i18n-html="eval_sec_desc" style="max-width: 62ch; font-size: 0.98rem;">
+                            Definí en 3 minutos una <strong>hoja de ruta de co-ejecución personalizada</strong>. A partir de tus respuestas sobre territorio, desafíos de Yield y visión regenerativa, estructuraremos las tareas clave, entregables y KPIs con un reporte ejecutivo confidencial en PDF.
+                        </p>
                     </div>
-                    <h2 class="roadmap-invite-title" data-i18n-html="eval_sec_title">
-                        ¿Cómo podemos <em>trabajar juntos</em> en tu proyecto?
-                    </h2>
-                    <p class="roadmap-invite-desc" data-i18n-html="eval_sec_desc">
-                        Realizá una evaluación inicial y definí en minutos una <strong>hoja de ruta de co-ejecución personalizada</strong>. A partir de tus respuestas sobre territorio, desafíos de Yield y visión regenerativa, estructuraremos las tareas clave, entregables y KPIs junto a Destination Hub, con un informe descargable en PDF.
-                    </p>
-                    <div class="roadmap-invite-actions">
+
+                    <!-- Stepper Visual de 4 Fases Claras -->
+                    <div class="console-stepper-grid">
+                        <div class="console-step-item is-active">
+                            <span class="console-step-num">01</span>
+                            <div>
+                                <span class="console-step-label">Fase 01</span>
+                                <div class="console-step-title">Territorio & Perfil</div>
+                            </div>
+                        </div>
+                        <div class="console-step-item">
+                            <span class="console-step-num">02</span>
+                            <div>
+                                <span class="console-step-label">Fase 02</span>
+                                <div class="console-step-title">Desafío de Yield</div>
+                            </div>
+                        </div>
+                        <div class="console-step-item">
+                            <span class="console-step-num">03</span>
+                            <div>
+                                <span class="console-step-label">Fase 03</span>
+                                <div class="console-step-title">Modelo Regenerativo</div>
+                            </div>
+                        </div>
+                        <div class="console-step-item">
+                            <span class="console-step-num">04</span>
+                            <div>
+                                <span class="console-step-label">Fase 04</span>
+                                <div class="console-step-title">Hoja de Ruta PDF</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preview Editorial Interactivo: Simulación 1ra Página Entregable -->
+                    <div class="console-preview-sheet">
+                        <div class="console-stamp-badge">
+                            <span>✦</span>
+                            <span>Confidencial · Co-Ejecución</span>
+                        </div>
+
+                        <div class="console-sheet-header">
+                            <img src="destination-hub-isotipo-c.svg" width="36" height="36" alt="Isotipo Destination Hub" style="width: 36px; height: 36px;">
+                            <div>
+                                <div class="font-serif" style="font-size: 1.15rem; font-weight: 500; color: var(--color-carbon); line-height: 1.15;">
+                                    Destination Hub · Hoja de Ruta Estratégica & Co-Ejecución
+                                </div>
+                                <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-taupe); letter-spacing: 0.1em; text-transform: uppercase;">
+                                    Reporte Ejecutivo Confidencial · Patagonia (Argentina & Chile)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="console-sheet-grid">
+                            <div class="console-sheet-box">
+                                <div style="font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-gold); font-weight: 600; margin-bottom: 0.35rem;">
+                                    ✦ Co-Ejecución & Alianza Estratégica
+                                </div>
+                                <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--color-carbon); margin-bottom: 0.25rem;">
+                                    Integración directa sin burocracia
+                                </h4>
+                                <p style="font-size: 0.82rem; color: var(--color-taupe); line-height: 1.55;">
+                                    Actuamos como un socio operativo en tu territorio: planes de negocio, articulación comercial B2B y revenue enfocado en Yield neto sobre volumen.
+                                </p>
+                            </div>
+
+                            <div class="console-sheet-box">
+                                <div style="font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-terracota); font-weight: 600; margin-bottom: 0.35rem;">
+                                    ✦ Modelo DSO Patagonia
+                                </div>
+                                <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--color-carbon); margin-bottom: 0.25rem;">
+                                    Valor sobre volumen (Yield)
+                                </h4>
+                                <p style="font-size: 0.82rem; color: var(--color-taupe); line-height: 1.55;">
+                                    Priorizamos el gasto medio, estancias prolongadas y desestacionalización frente a la promoción masiva desgastante del turismo tradicional.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Flujograma de 4 Nodos Preview -->
+                        <div class="console-sheet-box" style="padding: 1.15rem;">
+                            <div style="font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-taupe); font-weight: 600; margin-bottom: 0.75rem;">
+                                Flujograma de Decisiones & Arquitectura de Proyecto
+                            </div>
+                            <div class="console-flow-nodes">
+                                <div class="console-node-item">
+                                    <span class="console-node-step">Paso 01</span>
+                                    <span class="console-node-text">Territorio & Vocación</span>
+                                </div>
+                                <div class="console-node-item">
+                                    <span class="console-node-step">Paso 02</span>
+                                    <span class="console-node-text">Estrategia Yield & ROI</span>
+                                </div>
+                                <div class="console-node-item">
+                                    <span class="console-node-step">Paso 03</span>
+                                    <span class="console-node-text">Conexión B2B Global</span>
+                                </div>
+                                <div class="console-node-item">
+                                    <span class="console-node-step">Paso 04</span>
+                                    <span class="console-node-text">Impacto Regenerativo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Badges de Garantía y Botón de Activación Táctil -->
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; padding-top: 0.5rem;">
+                        <div class="roadmap-invite-meta">
+                            <span class="roadmap-meta-item">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span data-i18n="eval_meta_1">Diagnóstico en 4 pasos</span>
+                            </span>
+                            <span class="roadmap-meta-item">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span data-i18n="eval_meta_2">Matriz de co-ejecución</span>
+                            </span>
+                            <span class="roadmap-meta-item">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span data-i18n="eval_meta_3">Descarga PDF inmediata</span>
+                            </span>
+                            <span class="roadmap-meta-item">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span data-i18n="eval_meta_4">Sin costo</span>
+                            </span>
+                        </div>
+
                         <button type="button" class="btn-roadmap-launch" onclick="openRoadmapModal()">
                             <span data-i18n="eval_sec_btn">Evaluar mi Proyecto & Diseñar Hoja de Ruta</span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -741,16 +929,15 @@
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
                         </button>
-                        <div class="roadmap-invite-meta">
-                            <span class="roadmap-meta-item" data-i18n="eval_meta_1">Diagnóstico en 4 consultas</span>
-                            <span class="roadmap-meta-item" data-i18n="eval_meta_2">Matriz de 4 fases</span>
-                            <span class="roadmap-meta-item" data-i18n="eval_meta_3">Descarga en PDF editorial</span>
-                            <span class="roadmap-meta-item" data-i18n="eval_meta_4">Sin costo</span>
-                        </div>
                     </div>
+
                 </div>
+
             </div>
         </section>
+        <!-- =================================================================
+             3. ARQUITECTURA DEL PRODUCTO REGENERATIVO (DEEP NATURE #0E1713)
+        ================================================================== -->
         <section id="arquitectura" class="section section-dusk" aria-labelledby="heading-arquitectura">
             <div class="container">
                 
@@ -761,7 +948,7 @@
 
                 <div class="arch-header" data-reveal="up">
                     <h2 id="heading-arquitectura" class="h2-editorial" data-i18n-html="arch_h2">
-                        La arquitectura de una propuesta <em>de alto valor.</em>
+                        La arquitectura de una propuesta de alto <em>valor.</em>
                     </h2>
                     <p class="lead" style="margin-top: 1.25rem;" data-i18n="arch_lead">
                         Estructuramos cada experiencia sobre tres pilares de identidad patagónica, sostenidos por la comunidad local como cimiento de autenticidad.
@@ -774,9 +961,10 @@
                     <span class="serif arch-banner-title" data-i18n="arch_roof_title">Experiencias Transformadoras de Alto Valor (Yield)</span>
                 </div>
 
-                <!-- 3 Visual Pillars -->
+                <!-- 3 Visual Totems -->
                 <div class="arch-triptych">
                     
+                    <!-- Totem 01 -->
                     <div class="arch-pillar-card" data-reveal="up" style="--delay: 0.05s;">
                         <div class="media-frame arch-item-photo" data-reveal="image" data-caption="PILAR 01 · AGROECOLOGÍA" data-i18n-caption="caption_arch_1">
                             <img src="img/web/agroecologia.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Gastronomía patagónica con hongos morillas e ingredientes de la tierra" data-i18n-alt="alt_arch_1">
@@ -790,6 +978,7 @@
                         </p>
                     </div>
 
+                    <!-- Totem 02 -->
                     <div class="arch-pillar-card" data-reveal="up" style="--delay: 0.15s;">
                         <div class="media-frame arch-item-photo" data-reveal="image" data-caption="PILAR 02 · CULTURA VIVA" data-i18n-caption="caption_arch_2" style="--delay: 0.1s;">
                             <img src="img/web/cultura-viva.jpg" width="1400" height="942" loading="lazy" decoding="async" alt="Anfitriones y caminantes recorriendo senderos del bosque patagónico" data-i18n-alt="alt_arch_2">
@@ -803,6 +992,7 @@
                         </p>
                     </div>
 
+                    <!-- Totem 03 -->
                     <div class="arch-pillar-card" data-reveal="up" style="--delay: 0.25s;">
                         <div class="media-frame arch-item-photo" data-reveal="image" data-caption="PILAR 03 · NATURALEZA" data-i18n-caption="caption_arch_3" style="--delay: 0.2s;">
                             <img src="img/web/naturaleza-bosque.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Arroyo cristalino en medio del bosque nativo patagónico" data-i18n-alt="alt_arch_3">
@@ -828,7 +1018,7 @@
         </section>
 
         <!-- =================================================================
-             5. PREGUNTAS FRECUENTES (FAQ EDITORIAL PARA DEO / AEO / RICH SNIPPETS)
+             4. PREGUNTAS FRECUENTES (FAQ EDITORIAL PARA DEO / AEO / RICH SNIPPETS)
         ================================================================== -->
         <section id="preguntas" class="section" aria-labelledby="heading-preguntas">
             <div class="container">
@@ -841,7 +1031,7 @@
                 <div class="faq-layout">
                     <div data-reveal="up">
                         <h2 id="heading-preguntas" class="h2-editorial" data-i18n-html="faq_h2">
-                            Respuestas claras para <em>decisiones ágiles.</em>
+                            Respuestas claras para decisiones <em>ágiles.</em>
                         </h2>
                         <p class="lead" style="margin-top: 1.25rem; font-size: 0.95rem;" data-i18n="faq_lead">
                             Cómo nos integramos con hoteles, operadores, inversores y destinos en Patagonia para acelerar su posicionamiento y retorno.
@@ -897,7 +1087,7 @@
         <div class="container"><div class="hairline-divider"></div></div>
 
         <!-- =================================================================
-             6. MANIFIESTO PANORÁMICO (SCROLL TEXT SCRUBBING) & CONTACTO DIRECTO
+             5. MANIFIESTO PANORÁMICO & CONTACTO DIRECTO
         ================================================================== -->
         <section id="manifiesto" class="section" aria-labelledby="heading-contacto">
             <div class="container">
@@ -919,114 +1109,117 @@
 
                 <div class="manifesto-divider" aria-hidden="true"></div>
 
-                <!-- Direct Contact Channels -->
+                <!-- Direct Contact Channels & Quick Brief (2 Columns Layout) -->
                 <div id="contacto" class="contact-grid" data-reveal="up" style="--delay: 0.1s;">
                     
+                    <!-- Left Column: Direct Channels -->
                     <div>
-                        <h2 id="heading-contacto" class="h2-editorial" style="font-size: clamp(1.5rem, 2.4vw, 2.1rem);" data-i18n="contacto_h2">
-                            Iniciemos una conversación.
+                        <h2 id="heading-contacto" class="h2-editorial" style="font-size: clamp(1.8rem, 2.6vw, 2.4rem);" data-i18n="contacto_h2">
+                            Iniciemos una <em>conversación.</em>
                         </h2>
                         <p class="lead" style="margin-top: 0.85rem; font-size: 0.95rem;" data-i18n="contacto_lead">
                             Respondemos con la misma agilidad con la que implementamos. Escribinos directo o agendá una llamada exploratoria.
                         </p>
-                    </div>
 
-                    <div class="contact-channels">
-                        
-                        <a href="https://wa.me/5492944000000" data-contact="whatsapp" data-track-channel="whatsapp" target="_blank" rel="noopener noreferrer" class="channel-row">
-                            <div>
-                                <span class="channel-label" data-i18n="ch_wa_label">WhatsApp Directo</span>
-                                <span class="channel-value" data-i18n="ch_wa_val">Escribir a un Socio Director</span>
-                            </div>
-                            <span class="channel-action">
-                                <span data-i18n="ch_wa_act">Iniciar chat</span>
-                                <span aria-hidden="true">↗</span>
-                            </span>
-                        </a>
-
-                        <a href="https://calendly.com/dhub-travel" data-contact="calendar" data-track-channel="calendar" target="_blank" rel="noopener noreferrer" class="channel-row">
-                            <div>
-                                <span class="channel-label" data-i18n="ch_cal_label">Reunión Online · 30 min</span>
-                                <span class="channel-value" data-i18n="ch_cal_val">Agendar Videollamada de Diagnóstico</span>
-                            </div>
-                            <span class="channel-action">
-                                <span data-i18n="ch_cal_act">Ver agenda</span>
-                                <span aria-hidden="true">↗</span>
-                            </span>
-                        </a>
-
-                        <a href="mailto:hola@dhub.travel" data-contact="email" data-track-channel="email" class="channel-row">
-                            <div>
-                                <span class="channel-label" data-i18n="ch_mail_label">Correo Electrónico</span>
-                                <span class="channel-value">hola@dhub.travel</span>
-                            </div>
-                            <span class="channel-action">
-                                <span data-i18n="ch_mail_act">Enviar email</span>
-                                <span aria-hidden="true">→</span>
-                            </span>
-                        </a>
-
-                    </div>
-
-                </div>
-
-                <!-- Interactive Quick Brief / Lead Qualification Tool -->
-                <div class="brief-box" data-reveal="up" style="--delay: 0.18s;">
-                    <div class="brief-header">
-                        <h3 class="brief-title" data-i18n="brief_title">Brief rápido de proyecto</h3>
-                        <span class="brief-sub" data-i18n="brief_sub">Diagnóstico personalizado · Respuesta en &lt; 24 hs</span>
-                    </div>
-
-                    <form id="lead-brief-form" novalidate>
-                        <div class="brief-grid">
-                            <div>
-                                <label for="brief-name" class="brief-label" data-i18n="brief_lbl_name">Nombre y Organización *</label>
-                                <input type="text" id="brief-name" name="name" class="brief-input" required placeholder="Ej. Martín Gómez · Lodge Patagonia" data-i18n-placeholder="brief_ph_name" autocomplete="name">
-                            </div>
-
-                            <div>
-                                <label for="brief-profile" class="brief-label" data-i18n="brief_lbl_profile">Perfil de Organización</label>
-                                <select id="brief-profile" name="profile" class="brief-select">
-                                    <option value="profile_hotel" data-i18n="brief_opt_prof_1">Hotel / Lodge / Estancia</option>
-                                    <option value="profile_dmc" data-i18n="brief_opt_prof_2">Operador / DMC / Experiencias</option>
-                                    <option value="profile_investor" data-i18n="brief_opt_prof_3">Inversor / Nuevo Proyecto</option>
-                                    <option value="profile_conservation" data-i18n="brief_opt_prof_4">Conservación / Área Natural</option>
-                                    <option value="profile_destination" data-i18n="brief_opt_prof_5">Destino / Municipio / Cámara</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="brief-practice" class="brief-label" data-i18n="brief_lbl_practice">Área de Interés Principal</label>
-                                <select id="brief-practice" name="practice" class="brief-select">
-                                    <option value="all" data-i18n="brief_opt_prac_all">Proyecto Integral (Llave en Mano)</option>
-                                    <option value="p1" data-i18n="brief_opt_prac_1">Estrategia, Datos & Planes de Negocio</option>
-                                    <option value="p2" data-i18n="brief_opt_prac_2">Marketing & Representación Comercial B2B</option>
-                                    <option value="p3" data-i18n="brief_opt_prac_3">Sustentabilidad, Regeneración & Capacitación</option>
-                                </select>
-                            </div>
-
-                            <div class="brief-field-wide">
-                                <label for="brief-goal" class="brief-label" data-i18n="brief_lbl_goal">Desafío u Objetivo en Patagonia (Opcional)</label>
-                                <input type="text" id="brief-goal" name="goal" class="brief-input" placeholder="Contanos en una línea qué buscás destrabar, posicionar o desarrollar..." data-i18n-placeholder="brief_ph_goal">
-                            </div>
-                        </div>
-
-                        <div class="brief-footer">
-                            <span class="brief-note" data-i18n="brief_note">Enviá tu consulta estructurada directo por WhatsApp o Correo Corporativo.</span>
-                            <div style="display: flex; flex-wrap: wrap; gap: 0.65rem;">
-                                <button type="submit" data-submit-channel="whatsapp" class="btn btn-primary" style="padding: 0.7rem 1.35rem; font-size: 0.82rem;">
-                                    <span data-i18n="brief_btn_wa">Enviar Brief por WhatsApp</span>
+                        <div class="contact-channels" style="margin-top: 2rem;">
+                            
+                            <a href="https://wa.me/5492944000000" data-contact="whatsapp" data-track-channel="whatsapp" target="_blank" rel="noopener noreferrer" class="channel-row">
+                                <div>
+                                    <span class="channel-label" data-i18n="ch_wa_label">WhatsApp Directo</span>
+                                    <span class="channel-value" data-i18n="ch_wa_val">Escribir a un Socio Director</span>
+                                </div>
+                                <span class="channel-action">
+                                    <span data-i18n="ch_wa_act">Iniciar chat</span>
                                     <span aria-hidden="true">↗</span>
-                                </button>
-                                <button type="submit" data-submit-channel="email" class="btn btn-ghost" style="padding: 0.7rem 1.35rem; font-size: 0.82rem;">
-                                    <span data-i18n="brief_btn_mail">Enviar por Email</span>
+                                </span>
+                            </a>
+
+                            <a href="https://calendly.com/dhub-travel" data-contact="calendar" data-track-channel="calendar" target="_blank" rel="noopener noreferrer" class="channel-row">
+                                <div>
+                                    <span class="channel-label" data-i18n="ch_cal_label">Reunión Online · 30 min</span>
+                                    <span class="channel-value" data-i18n="ch_cal_val">Agendar Videollamada de Diagnóstico</span>
+                                </div>
+                                <span class="channel-action">
+                                    <span data-i18n="ch_cal_act">Ver agenda</span>
+                                    <span aria-hidden="true">↗</span>
+                                </span>
+                            </a>
+
+                            <a href="mailto:hola@dhub.travel" data-contact="email" data-track-channel="email" class="channel-row">
+                                <div>
+                                    <span class="channel-label" data-i18n="ch_mail_label">Correo Electrónico</span>
+                                    <span class="channel-value">hola@dhub.travel</span>
+                                </div>
+                                <span class="channel-action">
+                                    <span data-i18n="ch_mail_act">Enviar email</span>
                                     <span aria-hidden="true">→</span>
-                                </button>
+                                </span>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Interactive Quick Brief Card -->
+                    <div class="brief-box">
+                        <div class="brief-header">
+                            <div>
+                                <h3 class="brief-title" data-i18n="brief_title">Brief rápido de proyecto</h3>
+                                <span class="brief-sub" data-i18n="brief_sub">Diagnóstico personalizado · Respuesta en &lt; 24 hs</span>
                             </div>
                         </div>
 
-                        <div id="brief-feedback" class="brief-feedback" role="status" aria-live="polite"></div>
-                    </form>
+                        <form id="lead-brief-form" novalidate>
+                            <div class="brief-grid">
+                                <div>
+                                    <label for="brief-name" class="brief-label" data-i18n="brief_lbl_name">Nombre y Organización *</label>
+                                    <input type="text" id="brief-name" name="name" class="brief-input" required placeholder="Ej. Martín Gómez · Lodge Patagonia" data-i18n-placeholder="brief_ph_name" autocomplete="name">
+                                </div>
+
+                                <div>
+                                    <label for="brief-profile" class="brief-label" data-i18n="brief_lbl_profile">Perfil de Organización</label>
+                                    <select id="brief-profile" name="profile" class="brief-select">
+                                        <option value="profile_hotel" data-i18n="brief_opt_prof_1">Hotel / Lodge / Estancia</option>
+                                        <option value="profile_dmc" data-i18n="brief_opt_prof_2">Operador / DMC / Experiencias</option>
+                                        <option value="profile_investor" data-i18n="brief_opt_prof_3">Inversor / Nuevo Proyecto</option>
+                                        <option value="profile_conservation" data-i18n="brief_opt_prof_4">Conservación / Área Natural</option>
+                                        <option value="profile_destination" data-i18n="brief_opt_prof_5">Destino / Municipio / Cámara</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="brief-practice" class="brief-label" data-i18n="brief_lbl_practice">Área de Interés Principal</label>
+                                    <select id="brief-practice" name="practice" class="brief-select">
+                                        <option value="all" data-i18n="brief_opt_prac_all">Proyecto Integral (Llave en Mano)</option>
+                                        <option value="p1" data-i18n="brief_opt_prac_1">Estrategia, Datos & Planes de Negocio</option>
+                                        <option value="p2" data-i18n="brief_opt_prac_2">Marketing & Representación Comercial B2B</option>
+                                        <option value="p3" data-i18n="brief_opt_prac_3">Sustentabilidad, Regeneración & Capacitación</option>
+                                    </select>
+                                </div>
+
+                                <div class="brief-field-wide">
+                                    <label for="brief-goal" class="brief-label" data-i18n="brief_lbl_goal">Desafío u Objetivo en Patagonia (Opcional)</label>
+                                    <input type="text" id="brief-goal" name="goal" class="brief-input" placeholder="Contanos en una línea qué buscás destrabar, posicionar o desarrollar..." data-i18n-placeholder="brief_ph_goal">
+                                </div>
+                            </div>
+
+                            <div class="brief-footer">
+                                <span class="brief-note" data-i18n="brief_note">Enviá tu consulta estructurada directo por WhatsApp o Correo Corporativo.</span>
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.65rem;">
+                                    <button type="submit" data-submit-channel="whatsapp" class="btn btn-primary" style="padding: 0.75rem 1.45rem; font-size: 0.82rem;">
+                                        <span data-i18n="brief_btn_wa">Enviar Brief por WhatsApp</span>
+                                        <span aria-hidden="true">↗</span>
+                                    </button>
+                                    <button type="submit" data-submit-channel="email" class="btn btn-ghost" style="padding: 0.75rem 1.45rem; font-size: 0.82rem;">
+                                        <span data-i18n="brief_btn_mail">Enviar por Email</span>
+                                        <span aria-hidden="true">→</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="brief-feedback" class="brief-feedback" role="status" aria-live="polite"></div>
+                        </form>
+                    </div>
+
                 </div>
 
             </div>
@@ -1065,12 +1258,12 @@
             <button type="button" class="font-switcher-toggle" id="font-switcher-minimize" title="Minimizar selector">—</button>
         </div>
         <div class="font-switcher-options" id="font-switcher-options">
-            <button type="button" class="font-opt is-active" data-font="cormorant">
+            <button type="button" class="font-opt" data-font="cormorant">
                 <span class="font-opt-num">01</span>
                 <span class="font-opt-name" style="font-family: 'Cormorant Garamond', serif; font-size: 1.05rem;">Cormorant Garamond</span>
                 <span class="font-opt-tag">Luxury Editorial</span>
             </button>
-            <button type="button" class="font-opt" data-font="instrument">
+            <button type="button" class="font-opt is-active" data-font="instrument">
                 <span class="font-opt-num">02</span>
                 <span class="font-opt-name" style="font-family: 'Instrument Serif', serif; font-size: 1.05rem;">Instrument Serif</span>
                 <span class="font-opt-tag">Moderna & Esbelta</span>

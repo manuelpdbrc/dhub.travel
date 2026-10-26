@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en" data-font="cormorant" class="is-intro-locked" prefix="og: https://ogp.me/ns#">
+<html lang="en" data-lang="en" data-font="instrument" class="is-intro-locked" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,10 +101,55 @@
         </style>
     </noscript>
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Editorial Contemporary Typography (Instrument Serif, Cormorant Garamond, Plus Jakarta Sans, Outfit, JetBrains Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS Modern Engine & Custom Theme Configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        canvas: {
+                            DEFAULT: '#FAF8F5',
+                            warm: '#F5F2EB',
+                        },
+                        stone: {
+                            50: '#FAF8F5',
+                            100: '#F5F2EB',
+                            200: '#EFECE6',
+                            300: '#E0DDD6',
+                        },
+                        carbon: '#1C1E1B',
+                        taupe: '#5E635B',
+                        forest: {
+                            DEFAULT: '#111A16',
+                            dark: '#0E1713',
+                            card: '#15221C',
+                        },
+                        terracota: {
+                            DEFAULT: '#B85C38',
+                            hover: '#A04826',
+                            light: '#FBF2EE',
+                        },
+                        gold: {
+                            DEFAULT: '#C29F68',
+                            muted: '#B38E54',
+                            light: '#FAF6EE',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Instrument Serif"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', '"Outfit"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
 
     <!-- Pure Lightweight Stylesheet -->
     <link rel="stylesheet" href="../styles.css">
@@ -243,7 +288,7 @@
     <div class="grain-overlay" aria-hidden="true"></div>
 
     <!-- HEADER -->
-    <header class="site-header">
+    <header id="site-header" class="site-header">
         <div class="container header-inner">
             <a href="#inicio" class="brand-lockup" aria-label="Destination Hub — Home">
                 <svg class="brand-isotipo is-waiting-intro" id="header-isotipo" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -341,12 +386,13 @@
             <div class="container">
                 <div class="hero-grid">
                     <div data-reveal="up">
-                        <span class="hero-kicker" data-i18n="hero_kicker">
-                            Strategic & Commercial Consulting · Patagonia
-                        </span>
+                        <div class="hero-kicker">
+                            <span class="hero-pulse-dot" aria-hidden="true"></span>
+                            <span data-i18n="hero_kicker">DESTINATION HUB · PATAGONIA</span>
+                        </div>
 
                         <h1 class="h1-display" data-i18n-html="hero_h1">
-                            Transforming territorial potential into <em>regenerative</em> businesses and destinations.
+                            Transforming territorial potential into businesses and <em>regenerative</em> destinations.
                         </h1>
 
                         <p class="lead" style="margin-top: 1.75rem;" data-i18n-html="hero_lead">
@@ -367,7 +413,7 @@
                         <div class="hero-eval-banner">
                             <button type="button" class="hero-eval-pill" onclick="openRoadmapModal()">
                                 <span class="hero-eval-sparkle">✦</span>
-                                <span data-i18n="hero_eval_pill">Explore how we can co-execute your project (interactive 3-min assessment) →</span>
+                                <span data-i18n="hero_eval_pill">Strategic co-execution diagnostic in 3 min →</span>
                             </button>
                         </div>
                     </div>
@@ -378,26 +424,35 @@
                                 <defs>
                                     <path id="sealCircle" d="M 60, 60 m -46, 0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"/>
                                 </defs>
-                                <text fill="#183028" font-family="JetBrains Mono, monospace" font-size="7.2" letter-spacing="2.3">
+                                <text fill="#1C1E1B" font-family="JetBrains Mono, monospace" font-size="7.2" letter-spacing="2.3">
                                     <textPath href="#sealCircle">DESTINATION HUB · PATAGONIA ·</textPath>
                                 </text>
                             </svg>
                             <svg class="compass-seal-core" viewBox="0 0 200 200" fill="none">
-                                <path d="M100 28 A72 72 0 0 1 172 100" stroke="#183028" stroke-width="8" stroke-linecap="round"/>
+                                <path d="M100 28 A72 72 0 0 1 172 100" stroke="#1C1E1B" stroke-width="8" stroke-linecap="round"/>
                                 <path d="M156 112 A58 58 0 0 1 88 158" stroke="#2B5B6C" stroke-width="7.5" stroke-linecap="round"/>
-                                <path d="M76 148 A52 52 0 0 1 46 84" stroke="#C8A97E" stroke-width="7" stroke-linecap="round"/>
-                                <polygon points="152,48 108,104 96,92" fill="#C85A32"/>
-                                <polygon points="58,142 108,104 96,92" fill="#183028"/>
-                                <circle cx="100" cy="100" r="9" fill="#F6F5F0" stroke="#183028" stroke-width="4"/>
+                                <path d="M76 148 A52 52 0 0 1 46 84" stroke="#C29F68" stroke-width="7" stroke-linecap="round"/>
+                                <polygon points="152,48 108,104 96,92" fill="#B85C38"/>
+                                <polygon points="58,142 108,104 96,92" fill="#1C1E1B"/>
+                                <circle cx="100" cy="100" r="9" fill="#FAF8F5" stroke="#1C1E1B" stroke-width="4"/>
                             </svg>
                         </div>
 
+                        <!-- Main Portrait 4:5 Photo Frame -->
                         <div class="media-frame hero-main-photo" data-reveal="image" data-caption="PATAGONIA · 41°08'S 71°18'W" data-i18n-caption="caption_hero_main">
                             <img src="../img/web/hero-patagonia.jpg" width="1600" height="1067" data-parallax="16" alt="Glacial lake and mountain range in Patagonia framed by native forest" data-i18n-alt="alt_hero_main" fetchpriority="high" decoding="async">
                         </div>
 
-                        <div class="media-frame hero-inset-photo" data-reveal="image" data-caption="LAKE MASCARDI · GLACIAL WATERS" data-i18n-caption="caption_hero_inset" style="--delay: 0.2s;">
-                            <img src="../img/web/emerald-lake.jpg" width="1067" height="1600" data-parallax="-12" alt="Crystal-clear glacial meltwaters in Lake Mascardi, Patagonia" data-i18n-alt="alt_hero_inset" decoding="async">
+                        <!-- Overlapping Floating Metric Card with Glassmorphism -->
+                        <div class="hero-metric-float" data-reveal="up" style="--delay: 0.25s;">
+                            <div class="hero-metric-float-val">
+                                <span data-counter="100">+100</span> <em data-i18n="metric_1_unit">years</em>
+                            </div>
+                            <p class="hero-metric-float-desc" data-i18n="metric_1_sub">Senior executive vision leading hospitality businesses and destinations from within.</p>
+                            <div class="hero-metric-float-badge">
+                                <span>✦</span>
+                                <span>Yield over volume</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -510,12 +565,12 @@
                 </div>
 
                 <div class="practices-columns">
-                    <article class="practice-card" data-reveal="up" style="--delay: 0.05s;">
+                    <article class="practice-card group" data-reveal="up" style="--delay: 0.05s;">
                         <div class="media-frame practice-photo" data-reveal="image" data-caption="PRACTICE 01 · DATA & ROI" data-i18n-caption="caption_p1">
                             <img src="../img/web/lodge-territory.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Mountain lodge integrated into the Patagonian forest and lake" data-i18n-alt="alt_p1">
                         </div>
                         <div class="practice-top-row">
-                            <span class="practice-idx" data-i18n="p1_idx">Practice 01</span>
+                            <span class="practice-idx" data-i18n="p1_idx">01</span>
                             <span class="section-index" data-i18n="p1_badge">Data & ROI</span>
                         </div>
                         <h3 class="practice-title" data-i18n="p1_title">Strategy, Data & Business Plans</h3>
@@ -533,12 +588,12 @@
                         </a>
                     </article>
 
-                    <article class="practice-card" data-reveal="up" style="--delay: 0.15s;">
+                    <article class="practice-card group" data-reveal="up" style="--delay: 0.15s;">
                         <div class="media-frame practice-photo" data-reveal="image" data-caption="PRACTICE 02 · B2B MARKETS" data-i18n-caption="caption_p2" style="--delay: 0.1s;">
                             <img src="../img/web/kayak-golden.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Sunset kayaking experience on Patagonian waters" data-i18n-alt="alt_p2">
                         </div>
                         <div class="practice-top-row">
-                            <span class="practice-idx" data-i18n="p2_idx">Practice 02</span>
+                            <span class="practice-idx" data-i18n="p2_idx">02</span>
                             <span class="section-index" data-i18n="p2_badge">B2B & Brand</span>
                         </div>
                         <h3 class="practice-title" data-i18n="p2_title">Marketing & Commercial Representation</h3>
@@ -556,12 +611,12 @@
                         </a>
                     </article>
 
-                    <article class="practice-card" data-reveal="up" style="--delay: 0.25s;">
+                    <article class="practice-card group" data-reveal="up" style="--delay: 0.25s;">
                         <div class="media-frame practice-photo" data-reveal="image" data-caption="PRACTICE 03 · TEAMS & CULTURE" data-i18n-caption="caption_p3" style="--delay: 0.2s;">
                             <img src="../img/web/cultura-hospitalidad.jpg" width="1600" height="1068" loading="lazy" decoding="async" alt="Wooden terrace with lakefront hospitality in Patagonia" data-i18n-alt="alt_p3">
                         </div>
                         <div class="practice-top-row">
-                            <span class="practice-idx" data-i18n="p3_idx">Practice 03</span>
+                            <span class="practice-idx" data-i18n="p3_idx">03</span>
                             <span class="section-index" data-i18n="p3_badge">Culture & Stewardship</span>
                         </div>
                         <h3 class="practice-title" data-i18n="p3_title">Sustainability & Team Training</h3>
@@ -583,22 +638,151 @@
         </section>
 
         <!-- =================================================================
-             2.1 EDITORIAL INVITATION: PROJECT ASSESSMENT & CO-EXECUTION ROADMAP
+             2.1 INTERACTIVE CONSOLE: PROJECT ASSESSMENT & CO-EXECUTION ROADMAP
         ================================================================== -->
-        <section class="roadmap-invite-section" aria-label="Project Assessment & Co-Execution Roadmap">
+        <section id="diagnostico" class="roadmap-invite-section" aria-label="Project Assessment & Co-Execution Roadmap">
             <div class="container">
-                <div class="roadmap-invite-card" data-reveal="up">
-                    <div class="roadmap-invite-badge">
-                        <span class="roadmap-invite-dot"></span>
-                        <span data-i18n="eval_sec_badge">Online Strategic Assessment · Destination Hub</span>
+                
+                <div class="roadmap-console-card" data-reveal="up">
+                    
+                    <!-- Header Editorial of the Console -->
+                    <div class="text-center max-w-3xl mx-auto mb-10">
+                        <div class="roadmap-invite-badge">
+                            <span class="roadmap-invite-dot"></span>
+                            <span data-i18n="eval_sec_badge">Online Strategic Assessment · Destination Hub</span>
+                        </div>
+                        <h2 class="h2-editorial" data-i18n-html="eval_sec_title" style="margin-bottom: 0.85rem;">
+                            How can we <em>co-execute</em> on your project?
+                        </h2>
+                        <p class="lead mx-auto" data-i18n-html="eval_sec_desc" style="max-width: 62ch; font-size: 0.98rem;">
+                            Define a <strong>tailored co-execution roadmap</strong> in 3 minutes. Based on your inputs on territory, Yield challenges, and regenerative vision, we structure key tasks, deliverables, and KPIs into a confidential executive PDF report.
+                        </p>
                     </div>
-                    <h2 class="roadmap-invite-title" data-i18n-html="eval_sec_title">
-                        How can we <em>work together</em> on your project?
-                    </h2>
-                    <p class="roadmap-invite-desc" data-i18n-html="eval_sec_desc">
-                        Complete an initial assessment and establish a <strong>tailored co-execution roadmap</strong> in minutes. Based on your insights regarding territory, Yield challenges, and regenerative vision, we structure key tasks, deliverables, and KPIs alongside Destination Hub, complete with an editorial PDF report.
-                    </p>
-                    <div class="roadmap-invite-actions">
+
+                    <!-- Visual Stepper: 4 Phases -->
+                    <div class="console-stepper-grid">
+                        <div class="console-step-item is-active">
+                            <span class="console-step-num">01</span>
+                            <div>
+                                <span class="console-step-label">Phase 01</span>
+                                <div class="console-step-title">Territory & Profile</div>
+                            </div>
+                        </div>
+                        <div class="console-step-item">
+                            <span class="console-step-num">02</span>
+                            <div>
+                                <span class="console-step-label">Phase 02</span>
+                                <div class="console-step-title">Yield Challenge</div>
+                            </div>
+                        </div>
+                        <div class="console-step-item">
+                            <span class="console-step-num">03</span>
+                            <div>
+                                <span class="console-step-label">Phase 03</span>
+                                <div class="console-step-title">Regenerative Model</div>
+                            </div>
+                        </div>
+                        <div class="console-step-item">
+                            <span class="console-step-num">04</span>
+                            <div>
+                                <span class="console-step-label">Phase 04</span>
+                                <div class="console-step-title">Roadmap PDF</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Editorial Preview: Simulated Confidential Executive Sheet -->
+                    <div class="console-preview-sheet">
+                        <div class="console-stamp-badge">
+                            <span>✦</span>
+                            <span>Confidential · Co-Execution</span>
+                        </div>
+
+                        <div class="console-sheet-header">
+                            <img src="../destination-hub-isotipo-c.svg" width="36" height="36" alt="Destination Hub Logo Mark" style="width: 36px; height: 36px;">
+                            <div>
+                                <div class="font-serif" style="font-size: 1.15rem; font-weight: 500; color: var(--color-carbon); line-height: 1.15;">
+                                    Destination Hub · Strategic Roadmap & Co-Execution
+                                </div>
+                                <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-taupe); letter-spacing: 0.1em; text-transform: uppercase;">
+                                    Confidential Executive Report · Patagonia (Argentina & Chile)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="console-sheet-grid">
+                            <div class="console-sheet-box">
+                                <div style="font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-gold); font-weight: 600; margin-bottom: 0.35rem;">
+                                    ✦ Co-Execution & Strategic Alliance
+                                </div>
+                                <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--color-carbon); margin-bottom: 0.25rem;">
+                                    Direct integration without bureaucracy
+                                </h4>
+                                <p style="font-size: 0.82rem; color: var(--color-taupe); line-height: 1.55;">
+                                    We act as an operating partner on the ground: business plans, B2B commercial articulation, and revenue focused on net Yield over volume.
+                                </p>
+                            </div>
+
+                            <div class="console-sheet-box">
+                                <div style="font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-terracota); font-weight: 600; margin-bottom: 0.35rem;">
+                                    ✦ Patagonia DSO Model
+                                </div>
+                                <h4 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--color-carbon); margin-bottom: 0.25rem;">
+                                    Value over volume (Yield)
+                                </h4>
+                                <p style="font-size: 0.82rem; color: var(--color-taupe); line-height: 1.55;">
+                                    We prioritize average spend, extended length of stay, and deseasonalization over the wearing mass tourism of traditional models.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 4-Node Flow Preview -->
+                        <div class="console-sheet-box" style="padding: 1.15rem;">
+                            <div style="font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-taupe); font-weight: 600; margin-bottom: 0.75rem;">
+                                Decision Flow & Project Architecture
+                            </div>
+                            <div class="console-flow-nodes">
+                                <div class="console-node-item">
+                                    <span class="console-node-step">Step 01</span>
+                                    <span class="console-node-text">Territory & Calling</span>
+                                </div>
+                                <div class="console-node-item">
+                                    <span class="console-node-step">Step 02</span>
+                                    <span class="console-node-text">Yield Strategy & ROI</span>
+                                </div>
+                                <div class="console-node-item">
+                                    <span class="console-node-step">Step 03</span>
+                                    <span class="console-node-text">Global B2B Reach</span>
+                                </div>
+                                <div class="console-node-item">
+                                    <span class="console-node-step">Step 04</span>
+                                    <span class="console-node-text">Regenerative Impact</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Guarantee Badges & Tactile Action Button -->
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; padding-top: 0.5rem;">
+                        <div class="roadmap-invite-meta">
+                            <span class="roadmap-meta-item">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span data-i18n="eval_meta_1">4-step strategic inquiry</span>
+                            </span>
+                            <span class="roadmap-meta-item">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span data-i18n="eval_meta_2">Co-execution matrix</span>
+                            </span>
+                            <span class="roadmap-meta-item">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span data-i18n="eval_meta_3">Instant PDF download</span>
+                            </span>
+                            <span class="roadmap-meta-item">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span data-i18n="eval_meta_4">Complimentary</span>
+                            </span>
+                        </div>
+
                         <button type="button" class="btn-roadmap-launch" onclick="openRoadmapModal()">
                             <span data-i18n="eval_sec_btn">Evaluate My Project & Design Roadmap</span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -606,14 +790,10 @@
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
                         </button>
-                        <div class="roadmap-invite-meta">
-                            <span class="roadmap-meta-item" data-i18n="eval_meta_1">4-step strategic inquiry</span>
-                            <span class="roadmap-meta-item" data-i18n="eval_meta_2">4-phase matrix</span>
-                            <span class="roadmap-meta-item" data-i18n="eval_meta_3">Editorial PDF export</span>
-                            <span class="roadmap-meta-item" data-i18n="eval_meta_4">Complimentary</span>
-                        </div>
                     </div>
+
                 </div>
+
             </div>
         </section>
 
@@ -770,109 +950,115 @@
 
                 <div class="manifesto-divider" aria-hidden="true"></div>
 
+                <!-- Direct Contact Channels & Quick Brief (2 Columns Layout) -->
                 <div id="contacto" class="contact-grid" data-reveal="up" style="--delay: 0.1s;">
+                    
+                    <!-- Left Column: Direct Channels -->
                     <div>
-                        <h2 id="heading-contacto" class="h2-editorial" style="font-size: clamp(1.5rem, 2.4vw, 2.1rem);" data-i18n="contacto_h2">
-                            Let’s start a conversation.
+                        <h2 id="heading-contacto" class="h2-editorial" style="font-size: clamp(1.8rem, 2.6vw, 2.4rem);" data-i18n="contacto_h2">
+                            Let’s start a <em>conversation.</em>
                         </h2>
                         <p class="lead" style="margin-top: 0.85rem; font-size: 0.95rem;" data-i18n="contacto_lead">
                             We respond with the same agility with which we implement. Message us directly or schedule an exploratory call.
                         </p>
-                    </div>
 
-                    <div class="contact-channels">
-                        <a href="https://wa.me/5492944000000" data-contact="whatsapp" data-track-channel="whatsapp" target="_blank" rel="noopener noreferrer" class="channel-row">
-                            <div>
-                                <span class="channel-label" data-i18n="ch_wa_label">Direct WhatsApp</span>
-                                <span class="channel-value" data-i18n="ch_wa_val">Message a Managing Partner</span>
-                            </div>
-                            <span class="channel-action">
-                                <span data-i18n="ch_wa_act">Start chat</span>
-                                <span aria-hidden="true">↗</span>
-                            </span>
-                        </a>
-
-                        <a href="https://calendly.com/dhub-travel" data-contact="calendar" data-track-channel="calendar" target="_blank" rel="noopener noreferrer" class="channel-row">
-                            <div>
-                                <span class="channel-label" data-i18n="ch_cal_label">Online Meeting · 30 min</span>
-                                <span class="channel-value" data-i18n="ch_cal_val">Book a Diagnostic Video Call</span>
-                            </div>
-                            <span class="channel-action">
-                                <span data-i18n="ch_cal_act">View calendar</span>
-                                <span aria-hidden="true">↗</span>
-                            </span>
-                        </a>
-
-                        <a href="mailto:hola@dhub.travel" data-contact="email" data-track-channel="email" class="channel-row">
-                            <div>
-                                <span class="channel-label" data-i18n="ch_mail_label">Corporate Email</span>
-                                <span class="channel-value">hola@dhub.travel</span>
-                            </div>
-                            <span class="channel-action">
-                                <span data-i18n="ch_mail_act">Send email</span>
-                                <span aria-hidden="true">→</span>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Interactive Quick Brief -->
-                <div class="brief-box" data-reveal="up" style="--delay: 0.18s;">
-                    <div class="brief-header">
-                        <h3 class="brief-title" data-i18n="brief_title">Quick project brief</h3>
-                        <span class="brief-sub" data-i18n="brief_sub">Tailored diagnostic · Response in &lt; 24h</span>
-                    </div>
-
-                    <form id="lead-brief-form" novalidate>
-                        <div class="brief-grid">
-                            <div>
-                                <label for="brief-name" class="brief-label" data-i18n="brief_lbl_name">Name & Organization *</label>
-                                <input type="text" id="brief-name" name="name" class="brief-input" required placeholder="E.g. Martin Gomez · Patagonia Lodge" data-i18n-placeholder="brief_ph_name" autocomplete="name">
-                            </div>
-
-                            <div>
-                                <label for="brief-profile" class="brief-label" data-i18n="brief_lbl_profile">Organization Profile</label>
-                                <select id="brief-profile" name="profile" class="brief-select">
-                                    <option value="profile_hotel" data-i18n="brief_opt_prof_1">Hotel / Lodge / Estancia</option>
-                                    <option value="profile_dmc" data-i18n="brief_opt_prof_2">Tour Operator / DMC / Experiences</option>
-                                    <option value="profile_investor" data-i18n="brief_opt_prof_3">Investor / New Project</option>
-                                    <option value="profile_conservation" data-i18n="brief_opt_prof_4">Conservation / Natural Area</option>
-                                    <option value="profile_destination" data-i18n="brief_opt_prof_5">Destination / Municipality / Board</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="brief-practice" class="brief-label" data-i18n="brief_lbl_practice">Primary Area of Interest</label>
-                                <select id="brief-practice" name="practice" class="brief-select">
-                                    <option value="all" data-i18n="brief_opt_prac_all">Full Turnkey Project</option>
-                                    <option value="p1" data-i18n="brief_opt_prac_1">Strategy, Data & Business Plans</option>
-                                    <option value="p2" data-i18n="brief_opt_prac_2">Marketing & B2B Representation</option>
-                                    <option value="p3" data-i18n="brief_opt_prac_3">Sustainability, Regeneration & Training</option>
-                                </select>
-                            </div>
-
-                            <div class="brief-field-wide">
-                                <label for="brief-goal" class="brief-label" data-i18n="brief_lbl_goal">Challenge or Goal in Patagonia (Optional)</label>
-                                <input type="text" id="brief-goal" name="goal" class="brief-input" placeholder="Tell us in one line what you are looking to unlock, position, or develop..." data-i18n-placeholder="brief_ph_goal">
-                            </div>
-                        </div>
-
-                        <div class="brief-footer">
-                            <span class="brief-note" data-i18n="brief_note">Send your structured inquiry directly via WhatsApp or Corporate Email.</span>
-                            <div style="display: flex; flex-wrap: wrap; gap: 0.65rem;">
-                                <button type="submit" data-submit-channel="whatsapp" class="btn btn-primary" style="padding: 0.7rem 1.35rem; font-size: 0.82rem;">
-                                    <span data-i18n="brief_btn_wa">Send Brief via WhatsApp</span>
+                        <div class="contact-channels" style="margin-top: 2rem;">
+                            <a href="https://wa.me/5492944000000" data-contact="whatsapp" data-track-channel="whatsapp" target="_blank" rel="noopener noreferrer" class="channel-row">
+                                <div>
+                                    <span class="channel-label" data-i18n="ch_wa_label">Direct WhatsApp</span>
+                                    <span class="channel-value" data-i18n="ch_wa_val">Message a Managing Partner</span>
+                                </div>
+                                <span class="channel-action">
+                                    <span data-i18n="ch_wa_act">Start chat</span>
                                     <span aria-hidden="true">↗</span>
-                                </button>
-                                <button type="submit" data-submit-channel="email" class="btn btn-ghost" style="padding: 0.7rem 1.35rem; font-size: 0.82rem;">
-                                    <span data-i18n="brief_btn_mail">Send via Email</span>
+                                </span>
+                            </a>
+
+                            <a href="https://calendly.com/dhub-travel" data-contact="calendar" data-track-channel="calendar" target="_blank" rel="noopener noreferrer" class="channel-row">
+                                <div>
+                                    <span class="channel-label" data-i18n="ch_cal_label">Online Meeting · 30 min</span>
+                                    <span class="channel-value" data-i18n="ch_cal_val">Book a Diagnostic Video Call</span>
+                                </div>
+                                <span class="channel-action">
+                                    <span data-i18n="ch_cal_act">View calendar</span>
+                                    <span aria-hidden="true">↗</span>
+                                </span>
+                            </a>
+
+                            <a href="mailto:hola@dhub.travel" data-contact="email" data-track-channel="email" class="channel-row">
+                                <div>
+                                    <span class="channel-label" data-i18n="ch_mail_label">Corporate Email</span>
+                                    <span class="channel-value">hola@dhub.travel</span>
+                                </div>
+                                <span class="channel-action">
+                                    <span data-i18n="ch_mail_act">Send email</span>
                                     <span aria-hidden="true">→</span>
-                                </button>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Interactive Quick Brief Card -->
+                    <div class="brief-box">
+                        <div class="brief-header">
+                            <div>
+                                <h3 class="brief-title" data-i18n="brief_title">Quick project brief</h3>
+                                <span class="brief-sub" data-i18n="brief_sub">Tailored diagnostic · Response in &lt; 24h</span>
                             </div>
                         </div>
 
-                        <div id="brief-feedback" class="brief-feedback" role="status" aria-live="polite"></div>
-                    </form>
+                        <form id="lead-brief-form" novalidate>
+                            <div class="brief-grid">
+                                <div>
+                                    <label for="brief-name" class="brief-label" data-i18n="brief_lbl_name">Name & Organization *</label>
+                                    <input type="text" id="brief-name" name="name" class="brief-input" required placeholder="E.g. Martin Gomez · Patagonia Lodge" data-i18n-placeholder="brief_ph_name" autocomplete="name">
+                                </div>
+
+                                <div>
+                                    <label for="brief-profile" class="brief-label" data-i18n="brief_lbl_profile">Organization Profile</label>
+                                    <select id="brief-profile" name="profile" class="brief-select">
+                                        <option value="profile_hotel" data-i18n="brief_opt_prof_1">Hotel / Lodge / Estancia</option>
+                                        <option value="profile_dmc" data-i18n="brief_opt_prof_2">Tour Operator / DMC / Experiences</option>
+                                        <option value="profile_investor" data-i18n="brief_opt_prof_3">Investor / New Project</option>
+                                        <option value="profile_conservation" data-i18n="brief_opt_prof_4">Conservation / Natural Area</option>
+                                        <option value="profile_destination" data-i18n="brief_opt_prof_5">Destination / Municipality / Board</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="brief-practice" class="brief-label" data-i18n="brief_lbl_practice">Primary Area of Interest</label>
+                                    <select id="brief-practice" name="practice" class="brief-select">
+                                        <option value="all" data-i18n="brief_opt_prac_all">Full Turnkey Project</option>
+                                        <option value="p1" data-i18n="brief_opt_prac_1">Strategy, Data & Business Plans</option>
+                                        <option value="p2" data-i18n="brief_opt_prac_2">Marketing & B2B Representation</option>
+                                        <option value="p3" data-i18n="brief_opt_prac_3">Sustainability, Regeneration & Training</option>
+                                    </select>
+                                </div>
+
+                                <div class="brief-field-wide">
+                                    <label for="brief-goal" class="brief-label" data-i18n="brief_lbl_goal">Challenge or Goal in Patagonia (Optional)</label>
+                                    <input type="text" id="brief-goal" name="goal" class="brief-input" placeholder="Tell us in one line what you are looking to unlock, position, or develop..." data-i18n-placeholder="brief_ph_goal">
+                                </div>
+                            </div>
+
+                            <div class="brief-footer">
+                                <span class="brief-note" data-i18n="brief_note">Send your structured inquiry directly via WhatsApp or Corporate Email.</span>
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.65rem;">
+                                    <button type="submit" data-submit-channel="whatsapp" class="btn btn-primary" style="padding: 0.75rem 1.45rem; font-size: 0.82rem;">
+                                        <span data-i18n="brief_btn_wa">Send Brief via WhatsApp</span>
+                                        <span aria-hidden="true">↗</span>
+                                    </button>
+                                    <button type="submit" data-submit-channel="email" class="btn btn-ghost" style="padding: 0.75rem 1.45rem; font-size: 0.82rem;">
+                                        <span data-i18n="brief_btn_mail">Send via Email</span>
+                                        <span aria-hidden="true">→</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="brief-feedback" class="brief-feedback" role="status" aria-live="polite"></div>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </section>

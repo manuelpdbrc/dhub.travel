@@ -65,6 +65,7 @@ const I18N_DICTIONARY = {
         alt_hero_main: 'Lago glaciar y cordillera en Patagonia enmarcados por bosque nativo',
         caption_hero_inset: 'LAGO MASCARDI · AGUAS GLACIARES',
         alt_hero_inset: 'Aguas cristalinas de deshielo en Lago Mascardi, Patagonia',
+        hero_scroll: 'Explorar',
         clients_label: 'Acompañamos a',
         client_1: 'Hoteles & Lodges',
         client_2: 'Operadores & DMCs',
@@ -264,6 +265,7 @@ const I18N_DICTIONARY = {
         alt_hero_main: 'Glacial lake and mountain range in Patagonia framed by native forest',
         caption_hero_inset: 'LAKE MASCARDI · GLACIAL WATERS',
         alt_hero_inset: 'Crystal-clear glacial meltwaters in Lake Mascardi, Patagonia',
+        hero_scroll: 'Explore',
         clients_label: 'We partner with',
         client_1: 'Hotels & Lodges',
         client_2: 'Tour Operators & DMCs',
@@ -463,6 +465,7 @@ const I18N_DICTIONARY = {
         alt_hero_main: 'Lago glacial e cordilheira na Patagônia emoldurados por floresta nativa',
         caption_hero_inset: 'LAGO MASCARDI · ÁGUAS GLACIAIS',
         alt_hero_inset: 'Águas cristalinas de degelo no Lago Mascardi, Patagônia',
+        hero_scroll: 'Explorar',
         clients_label: 'Acompanhamos',
         client_1: 'Hotéis & Lodges',
         client_2: 'Operadores & DMCs',
@@ -1183,6 +1186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
     const parallaxImages = document.querySelectorAll('[data-parallax]');
     const scrollProgressEl = document.getElementById('scroll-progress');
+    const heroScrollCueWrap = document.querySelector('.hero-scroll-cue-wrap');
     const reachedScrollMilestones = new Set();
 
     rebuildScrubBlocks();
@@ -1194,6 +1198,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
         const docHeight = Math.max(document.documentElement.scrollHeight - vh, 1);
         const progress = Math.min(Math.max(scrollTop / docHeight, 0), 1);
+
+        if (heroScrollCueWrap) {
+            heroScrollCueWrap.classList.toggle('is-scrolled', scrollTop > 50);
+        }
 
         if (scrollProgressEl) {
             scrollProgressEl.style.transform = `scaleX(${progress.toFixed(4)})`;

@@ -761,9 +761,98 @@ h1, h2, h3, h4, .serif {
     }
 }
 
+/* Editorial Hairline Scroll Cue (Explorar) */
+.hero-scroll-cue-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: clamp(2rem, 3.5vw, 3.25rem);
+    margin-bottom: 0.5rem;
+    transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-scroll-cue {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    color: var(--color-taupe);
+    padding: 0.4rem 0.9rem;
+    border-radius: 9999px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.hero-scroll-cue:hover {
+    color: var(--color-carbon);
+    transform: translateY(2px);
+}
+
+.hero-scroll-cue:focus-visible {
+    outline: 2px solid var(--color-terracota);
+    outline-offset: 4px;
+}
+
+.hero-scroll-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+.hero-scroll-cue:hover .hero-scroll-label {
+    color: var(--color-carbon);
+}
+
+.hero-scroll-track {
+    position: relative;
+    width: 1px;
+    height: 32px;
+    background-color: rgba(28, 30, 27, 0.14);
+    overflow: hidden;
+}
+
+.hero-scroll-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(180deg, rgba(184, 92, 56, 0.1) 0%, #B85C38 100%);
+    animation: scrollTrackGlide 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes scrollTrackGlide {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(300%);
+        opacity: 0;
+    }
+}
+
+/* Fade out gracefully when user scrolls down */
+.hero-scroll-cue-wrap.is-scrolled {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+}
+
 /* Minimal Client Strip ("Para quiénes trabajamos") */
 .clients-bar {
-    margin-top: clamp(4rem, 7vw, 6.5rem);
+    margin-top: clamp(2rem, 3.5vw, 3rem);
     padding-block: 1.5rem;
     border-top: 1px solid var(--line-subtle);
     border-bottom: 1px solid var(--line-subtle);

@@ -41,9 +41,11 @@
     --h-tracking: -0.02em;
     --h1-scale: 1.1;
 
-    /* Espaciado Amplio y Aireado */
+    /* Espaciado Amplio y Calibrado */
     --container-max: 1280px;
-    --section-py: clamp(5rem, 8vw, 8rem);
+    --section-pt: clamp(1.5rem, 2.6vw, 2.25rem);
+    --section-pb: clamp(3.5rem, 5.5vw, 5rem);
+    --section-py: var(--section-pb);
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -57,7 +59,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 4.25rem;
     font-size: 16px;
     max-width: 100%;
     overflow-x: clip;
@@ -66,7 +68,7 @@ html {
 
 @media (max-width: 768px) {
     html {
-        scroll-padding-top: 4.5rem;
+        scroll-padding-top: 4.25rem;
     }
 }
 
@@ -112,8 +114,8 @@ ul {
 }
 
 .section {
-    padding-top: var(--section-py);
-    padding-bottom: var(--section-py);
+    padding-top: var(--section-pt);
+    padding-bottom: var(--section-pb);
     position: relative;
 }
 
@@ -950,7 +952,7 @@ h1, h2, h3, h4, .serif {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    margin-bottom: clamp(3rem, 5vw, 4.5rem);
+    margin-bottom: clamp(1.75rem, 3.2vw, 2.5rem);
 }
 
 @media (min-width: 860px) {
@@ -1125,7 +1127,7 @@ h1, h2, h3, h4, .serif {
 
 .arch-header {
     max-width: 680px;
-    margin-bottom: clamp(3rem, 5vw, 4.5rem);
+    margin-bottom: clamp(1.75rem, 3.2vw, 2.5rem);
 }
 
 .arch-roof-banner,
@@ -1260,7 +1262,7 @@ h1, h2, h3, h4, .serif {
 }
 
 .contact-section-block {
-    scroll-margin-top: 5.5rem;
+    scroll-margin-top: 1.75rem;
 }
 
 .contact-grid {
